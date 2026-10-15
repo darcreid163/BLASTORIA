@@ -44,18 +44,21 @@ jobs:
         run: |
           set -euo pipefail
           godot --headless --editor --path . --import 2>&1 | tee godot-import.log
+          if grep -E 'SCRIPT ERROR:|Parse Error:|ERROR: Failed to load script' godot-import.log; then exit 1; fi
 
       - name: All regression tests
         shell: bash
         run: |
           set -euo pipefail
-          godot --headless --path . --script res://tests/run_tests.gd 2>&1 | tee godot-tests.log
+          timeout 180s godot --headless --path . --script res://tests/run_tests.gd 2>&1 | tee godot-tests.log
+          if grep -E 'SCRIPT ERROR:|Parse Error:|ERROR: FAIL:' godot-tests.log; then exit 1; fi
 
       - name: Menu navigation smoke
         shell: bash
         run: |
           set -euo pipefail
-          godot --headless --path . --script res://tools/menu_smoke.gd 2>&1 | tee godot-menu-smoke.log
+          timeout 90s godot --headless --path . --script res://tools/menu_smoke.gd 2>&1 | tee godot-menu-smoke.log
+          if grep -E 'SCRIPT ERROR:|Parse Error:|ERROR: FAIL:' godot-menu-smoke.log; then exit 1; fi
 
       - name: Create portable Godot source ZIP
         shell: bash
