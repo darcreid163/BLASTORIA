@@ -94,13 +94,14 @@ func build(state: GameState) -> void:
 	var wall_colors := ["53736c", "90ac8c"]
 	var crate_colors := ["ae7950", "e3b575"]
 	if state.mode == "classic" and state.level < 10:
-		var palette := [
+		var palettes: Array = [
 			["34544e", "53736c", "ae7950"], ["375568", "678b9c", "b58d67"],
 			["595341", "877955", "c69b68"], ["3b5b59", "648b73", "ba8857"],
 			["595346", "867f61", "b17b58"], ["425160", "687d92", "c29a61"],
 			["465750", "789577", "b48a64"], ["4b4f66", "78819a", "ac8b64"],
 			["54505f", "887d9b", "b88e73"], ["3e4f57", "73939b", "d19b67"]
-		][state.level]
+		]
+		var palette: Array = palettes[state.level]
 		floor_colors = [palette[0], palette[0]]
 		wall_colors = [palette[1], "9eb5a9"]
 		crate_colors = [palette[2], "e8c68a"]
