@@ -5,7 +5,7 @@ on:
     branches:
       - codex/classic-100-rulebook-0.5.4
     paths:
-      - '.github/workflows/blastoria-053-test.yml'
+      - '.github/workflows/blastoria-054-test.yml'
       - 'scripts/**'
       - 'resources/**'
       - 'scenes/**'
