@@ -103,6 +103,12 @@ func show_menu(title: String, buttons: Array, details: String = "") -> void:
 func update_state(state: GameState, arcade: ArcadeRun = null, classic_lives: int = 1) -> void:
 	var actor: Dictionary = state.actors[0]
 	status.text = "%s  |  %s %d  |  %s %d  |  B %d / R %d" % ["BLASTORIA", tr(state.mode.to_upper()), state.level + 1, tr("ENEMIES"), state.alive_enemies(), actor.capacity, actor.radius]
+	if state.mode == "classic" and not state.stage_profile.is_empty():
+		var chapter_title: String = str(state.stage_profile.get("title", ""))
+		if TranslationServer.get_locale().begins_with("en"):
+			chapter_title = str(state.stage_profile.get("title_en", chapter_title))
+		if not chapter_title.is_empty():
+			status.text += "  |  " + chapter_title
 	metrics.text = ""
 	if state.mode == "arcade" and arcade != null:
 		metrics.text = tr("ARCADE_METRICS") % [arcade.live_score(state), ArcadeRun.format_time(arcade.live_ticks(state))]
