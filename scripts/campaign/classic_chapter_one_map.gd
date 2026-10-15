@@ -114,7 +114,7 @@ static func validate() -> bool:
 		if area < previous_area:
 			return false
 		previous_area = area
-		var signature := "\n".join(data.rows)
+		var signature := "\n".join(PackedStringArray(data.rows))
 		if fingerprints.has(signature):
 			return false
 		fingerprints[signature] = true
