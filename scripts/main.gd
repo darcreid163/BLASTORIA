@@ -283,6 +283,7 @@ func on_finished(result: String) -> void:
 	screen = "result"
 	var buttons: Array = [["RESTART_RUN" if state.mode == "arcade" else "RETRY", "retry"], ["MENU", "menu"]]
 	var details := ""
+	var classic_save_warning := ""
 	if state.mode == "arcade":
 		var accepted := arcade.accept_stage(state)
 		details = tr("RUN_RESULT") % [arcade.score, ArcadeRun.format_time(arcade.elapsed_ticks), state.time_bonus]
@@ -307,16 +308,17 @@ func on_finished(result: String) -> void:
 		if result in ["LEVEL_CLEAR", "CLASSIC_DONE"]:
 			var clear_error := classic_progress.record_clear(state.level + 1, state.actors[0], state.score)
 			if clear_error != OK:
-				details += "\nНе удалось сохранить классическую кампанию."
+				classic_save_warning = "\nНе удалось сохранить классическую кампанию."
 			elif result == "LEVEL_CLEAR":
 				buttons.push_front(["NEXT", "next"])
 		elif result == "DEFEAT":
 			if classic_progress.record_loss(state.actors[0]) != OK:
-				details += "\nНе удалось сохранить потерянную жизнь."
+				classic_save_warning = "\nНе удалось сохранить потерянную жизнь."
 	if state.mode in ["classic", "adventure"]:
 		details = tr("SOLO_RESULT") % state.score
 		if state.mode == "classic":
 			details += "\nЖизней: %d · этап: %d/100" % [classic_progress.lives, state.level + 1]
+			details += classic_save_warning
 		if state.secrets.awarded:
 			details += "\n" + tr("COMPASS_REWARD")
 	if save_error:
