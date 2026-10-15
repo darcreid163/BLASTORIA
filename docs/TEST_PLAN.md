@@ -22,3 +22,11 @@ Manual Windows gate (all pending):
 8. Test two physical controllers, independent D-pads/A and Start pause; check menu focus.
 9. Play at least ten rounds; capture crashes, visual overlaps or unfair AI behaviors.
 10. Only then mark runtime/visual/gamepad gates Verified; FPS needs a measured profile.
+
+
+Arcade acceptance (0.2.1): open its menu, verify rules/records, play a run and check that pausing
+freezes the displayed clock. Destroy a crate, kill an enemy with your bomb and collect an item;
+check +10/+100/+25. Next level must preserve totals. Retry starts from level 1 with zero totals.
+On defeat only score may improve; fastest time requires all levels. Relaunch to verify records
+persist and old campaign progress remains. Check lowered walls, especially bottom-row hazards.
+Automated new suite: tests/test_arcade.gd; includes v1 migration and actual three-stage UI flow.

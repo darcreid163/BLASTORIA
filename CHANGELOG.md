@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.1-dev — 2026-10-15
+
+- Added solo Arcade with three fixed levels, one life, cumulative score and active-time clock.
+- Added player-owned destruction credit, bounded time bonuses and exactly-once results.
+- Added score record and independent fastest complete run, separated by rules version.
+- Added profile v1 → v2 migration, record validation and future-schema write protection.
+- Added localized rules/results screens and Arcade HUD.
+- Lowered walls and front border after reviewing owner screenshots of 0.2.
+- 83 automated checks including 36 new scoring, timing, persistence and Arcade integration cases.
+
 ## 0.2.0-dev — 2026-10-15
 
 - Preserved original approved master prompt and unmodified prototype 0.1 in Git history.

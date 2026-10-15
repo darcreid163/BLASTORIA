@@ -17,3 +17,13 @@ extends Resource
 @export var campaign_seeds: Array[int] = [731, 1559, 2801]
 @export var enemy_counts: Array[int] = [1, 2, 3]
 @export var crate_density: float = 0.37
+
+# Changing scoring, maps or pacing requires a new arcade_rules_id.
+@export var arcade_rules_id: String = "arcade_v1"
+@export var arcade_seeds: Array[int] = [4103, 6721, 9011]
+@export var score_crate: int = 10
+@export var score_enemy: int = 100
+@export var score_pickup: int = 25
+@export var score_stage_clear: int = 500
+@export var arcade_par_seconds: int = 180
+@export var score_per_second: int = 5

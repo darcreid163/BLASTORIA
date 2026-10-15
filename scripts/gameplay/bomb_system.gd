@@ -3,6 +3,7 @@ extends RefCounted
 
 var bombs: Dictionary = {} # Stable numeric ID -> logical bomb; no scene references.
 var fire: Dictionary = {} # Cell -> last hazardous simulation tick (exclusive).
+var fire_owners: Dictionary = {} # Cell -> {owner ID: exclusive expiry tick}.
 var next_id: int = 1
 
 func at(cell: Vector2i) -> int:
@@ -28,6 +29,12 @@ func advance(now: int, board: GridBoard, fire_duration: int) -> Array[Vector2i]:
 	for cell in fire.keys():
 		if fire[cell] <= now:
 			fire.erase(cell)
+	for cell in fire_owners.keys():
+		for owner in fire_owners[cell].keys():
+			if fire_owners[cell][owner] <= now:
+				fire_owners[cell].erase(owner)
+		if fire_owners[cell].is_empty():
+			fire_owners.erase(cell)
 	var queue: Array[int] = []
 	for id in bombs:
 		if bombs[id].due <= now or fire.has(bombs[id].cell):
@@ -47,6 +54,9 @@ func advance(now: int, board: GridBoard, fire_duration: int) -> Array[Vector2i]:
 		bombs.erase(id)
 		for cell in board.blast(b.cell, b.radius):
 			fire[cell] = now + fire_duration
+			if not fire_owners.has(cell):
+				fire_owners[cell] = {}
+			fire_owners[cell][b.owner] = now + fire_duration
 			if board.kind(cell) == GridBoard.Cell.CRATE and not destroyed.has(cell):
 				destroyed.append(cell)
 			var chained := at(cell)
@@ -62,3 +72,6 @@ func danger(board: GridBoard) -> Dictionary:
 		for cell in board.blast(b.cell, b.radius):
 			result[cell] = true
 	return result
+
+func credited(cell: Vector2i, owner: int) -> bool:
+	return fire_owners.has(cell) and fire_owners[cell].has(owner)

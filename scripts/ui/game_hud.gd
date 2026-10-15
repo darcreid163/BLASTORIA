@@ -4,6 +4,7 @@ extends CanvasLayer
 signal action_requested(action: String)
 var status: Label
 var hint: Label
+var metrics: Label
 var toast: Label
 var overlay: ColorRect
 var column: VBoxContainer
@@ -24,7 +25,11 @@ func _ready() -> void:
 	status = Label.new()
 	status.add_theme_font_size_override("font_size", 24)
 	status.add_theme_color_override("font_color", Color("ffda8b"))
+	status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	layout.add_child(status)
+	metrics = Label.new()
+	metrics.add_theme_font_size_override("font_size", 22)
+	layout.add_child(metrics)
 	toast = Label.new()
 	toast.add_theme_font_size_override("font_size", 20)
 	layout.add_child(toast)
@@ -48,7 +53,7 @@ func _ready() -> void:
 	column.add_theme_constant_override("separation", 10)
 	center.add_child(column)
 
-func show_menu(title: String, buttons: Array) -> void:
+func show_menu(title: String, buttons: Array, details: String = "") -> void:
 	for child in column.get_children():
 		column.remove_child(child)
 		child.queue_free()
@@ -59,9 +64,17 @@ func show_menu(title: String, buttons: Array) -> void:
 	heading.add_theme_color_override("font_color", Color("ffda8b"))
 	column.add_child(heading)
 	var subtitle := Label.new()
-	subtitle.text = "BLASTORIA  •  Worlds of Chaos  •  0.2"
+	subtitle.text = "BLASTORIA  •  Worlds of Chaos  •  " + str(ProjectSettings.get_setting("application/config/version"))
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	column.add_child(subtitle)
+	if not details.is_empty():
+		var description := Label.new()
+		description.text = details
+		description.custom_minimum_size.x = 460
+		description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		description.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		description.add_theme_font_size_override("font_size", 18)
+		column.add_child(description)
 	for item in buttons:
 		var button := Button.new()
 		button.text = tr(item[0])
@@ -71,14 +84,19 @@ func show_menu(title: String, buttons: Array) -> void:
 		button.pressed.connect(func(): action_requested.emit(action))
 		column.add_child(button)
 	overlay.show()
-	if column.get_child_count() > 2:
-		column.get_child(2).grab_focus()
+	for child in column.get_children():
+		if child is Button:
+			child.grab_focus()
+			break
 
-func update_state(state: GameState) -> void:
+func update_state(state: GameState, arcade: ArcadeRun = null) -> void:
 	var actor: Dictionary = state.actors[0]
 	status.text = "%s  |  %s %d  |  %s %d  |  B %d / R %d" % ["BLASTORIA", tr(state.mode.to_upper()), state.level + 1, tr("ENEMIES"), state.alive_enemies(), actor.capacity, actor.radius]
-	hint.text = tr("CONTROLS")
-	if state.mode == "campaign":
+	metrics.text = ""
+	if state.mode == "arcade" and arcade != null:
+		metrics.text = tr("ARCADE_METRICS") % [arcade.live_score(state), ArcadeRun.format_time(arcade.live_ticks(state))]
+	hint.text = tr("ARCADE_CONTROLS") if state.mode == "arcade" else tr("CONTROLS")
+	if state.mode != "arena":
 		hint.text += "\n" + tr("GOAL")
 
 func notify_pickup(kind: String) -> void:

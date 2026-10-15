@@ -15,6 +15,8 @@ var level: int = 0
 var seed_value: int = 0
 var result: String = ""
 var paused: bool = false
+var score: int = 0
+var time_bonus: int = 0
 
 func start(settings: GameConfig, new_mode: String, level_index: int, map_seed: int) -> void:
 	config = settings
@@ -23,6 +25,8 @@ func start(settings: GameConfig, new_mode: String, level_index: int, map_seed: i
 	seed_value = map_seed
 	rng.seed = map_seed
 	tick = 0
+	score = 0
+	time_bonus = 0
 	result = ""
 	paused = false
 	actors.clear()
@@ -58,6 +62,8 @@ func advance(commands: Dictionary = {}) -> void:
 	# Resolve hazards before movement so stepping away at the detonation tick cannot dodge damage.
 	var destroyed := bombs.advance(tick, board, config.fire_ticks)
 	for cell in destroyed:
+		if mode == "arcade" and bombs.credited(cell, 0):
+			score += config.score_crate
 		if rng.randf() < config.drop_chance:
 			powerups[cell] = ["capacity", "range", "speed"][rng.randi_range(0, 2)]
 	apply_damage()
@@ -89,22 +95,32 @@ func apply_damage() -> void:
 	for actor in actors:
 		if actor.alive and bombs.fire.has(actor.cell):
 			actor.alive = false
+			if mode == "arcade" and actor.enemy and bombs.credited(actor.cell, 0):
+				score += config.score_enemy
 
 func collect(actor: Dictionary, kind: String) -> void:
 	match kind:
 		"capacity": actor.capacity = mini(actor.capacity + 1, config.max_capacity)
 		"range": actor.radius = mini(actor.radius + 1, config.max_range)
 		"speed": actor.step = maxi(actor.step - 1, config.min_step_ticks)
+	if mode == "arcade" and not actor.enemy:
+		score += config.score_pickup
 	pickup.emit(actor.id, kind)
 
 func check_end() -> void:
 	if not result.is_empty():
 		return
-	if mode == "campaign":
+	if mode != "arena":
 		if not actors[0].alive:
 			result = "DEFEAT"
 		elif alive_enemies() == 0 and actors[0].cell == board.exit_cell:
-			result = "CAMPAIGN_DONE" if level + 1 == config.campaign_seeds.size() else "LEVEL_CLEAR"
+			if mode == "arcade":
+				var seconds_used := ceili(float(tick) / config.tick_rate)
+				time_bonus = maxi(0, config.arcade_par_seconds - seconds_used) * config.score_per_second
+				score += config.score_stage_clear + time_bonus
+				result = "ARCADE_DONE" if level + 1 == config.arcade_seeds.size() else "LEVEL_CLEAR"
+			else:
+				result = "CAMPAIGN_DONE" if level + 1 == config.campaign_seeds.size() else "LEVEL_CLEAR"
 	else:
 		var living: Array[int] = []
 		for actor in actors:
@@ -125,4 +141,5 @@ func alive_enemies() -> int:
 func snapshot() -> Dictionary:
 	return {"tick": tick, "actors": actors.duplicate(true), "bombs": bombs.bombs.duplicate(true),
 		"fire": bombs.fire.duplicate(), "cells": board.cells.duplicate(), "powerups": powerups.duplicate(),
-		"result": result, "rng_state": rng.state}
+		"result": result, "rng_state": rng.state, "score": score, "time_bonus": time_bonus,
+		"fire_owners": bombs.fire_owners.duplicate(true)}

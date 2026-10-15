@@ -47,4 +47,40 @@ PASS: 10 restarts keep one world and camera/light/environment
 PASS: return to menu works
 PASS: Russian localization loaded
 PASS: English localization loaded
-RESULT: 47 passed, 0 failed
+PASS: arcade: overlapping player/enemy rays score one crate once
+PASS: arcade: destroyed crate never scores again
+PASS: arcade: enemy destruction does not earn player points
+PASS: arcade: enemy kill scores once across damage passes
+PASS: arcade: enemy suicide yields no kill points
+PASS: arcade: collected item scores once
+PASS: arcade: expired player flame does not retain credit when enemy fire extends cell
+PASS: arcade: 60 active ticks equal one second
+PASS: arcade: pause stops score and timer
+PASS: arcade: clear at 100 seconds awards 500 plus 400 time bonus
+PASS: arcade: repeated victory check cannot duplicate clear points
+PASS: arcade: stage results accepted exactly once
+PASS: arcade: cumulative result transfers to next stage
+PASS: arcade: slow completion never incurs negative time bonus
+PASS: arcade: defeat preserves earned points and accumulated active time
+PASS: arcade: finalized run cannot accept more results
+PASS: arcade: three completed stages end a full timed run
+PASS: arcade: result HUD does not double count final stage
+PASS: arcade: failed run can set score but never best completion time
+PASS: arcade: fastest completion independent of high score
+PASS: arcade: equal score prefers shorter active time
+PASS: arcade: slower completion cannot overwrite time record
+PASS: arcade: records separated by rules version
+PASS: arcade: records survive save and reload
+PASS: save v1 migrates without losing campaign or language
+PASS: save migration writes v2 on next save
+PASS: save migration retains original v1 backup
+PASS: future save schema is never overwritten
+PASS: malformed records ignored without discarding valid campaign data
+PASS: arcade menu shows rules and records before run
+PASS: arcade starts with exactly one human player
+PASS: arcade pause UI freezes active clock
+PASS: arcade retry resets whole run and repeats identical first map
+PASS: arcade actual scene completes all stages and saves fastest run
+PASS: arcade completion never unlocks campaign levels
+PASS: abandoned run is not recorded
+RESULT: 83 passed, 0 failed

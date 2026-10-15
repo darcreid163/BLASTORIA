@@ -1,6 +1,6 @@
 # BLASTORIA development
 
-Read docs/MASTER_PROMPT_RU.md, docs/TECHNICAL_DESIGN.md and docs/QA_REPORT.md before changes.
+Read docs/MASTER_PROMPT_RU.md, docs/ARCADE_ADDENDUM_RU.md, docs/TECHNICAL_DESIGN.md and docs/QA_REPORT.md before changes.
 The master prompt is the approved product specification, not a claim of implemented features.
 Keep its original bytes unchanged. Record scope decisions in other docs.
 Use actual tools and evidence; do not claim Windows runtime or visual QA from headless tests.

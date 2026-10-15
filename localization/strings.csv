@@ -27,3 +27,16 @@ PICKUP_CAPACITY,Extra bomb capacity!,Увеличен запас бомб!
 PICKUP_RANGE,Blast range increased!,Увеличен радиус взрыва!
 PICKUP_SPEED,Movement speed increased!,Увеличена скорость!
 SAVE_ERROR,Could not save progress. Check disk permissions.,Не удалось сохранить прогресс. Проверь доступ к диску.
+ARCADE,Arcade · solo score attack,Аркада · одиночный рекорд
+START_RUN,Start run,Начать забег
+RESTART_RUN,Restart whole run · R,Заново весь забег · R
+ARCADE_RESTART_NOTE,Restart resets points and time. Menu abandons this run.,Повтор сбрасывает очки и время. Выход в меню завершает забег без записи рекорда.
+ARCADE_RULES,"%d fixed levels. Crate +%d / enemy +%d / pickup +%d. Clear +%d. Finish before %d s: +%d per second remaining. One life; pause stops the timer. Only your blasts earn destruction points.","%d фиксированных уровня. Ящик +%d / враг +%d / бонус +%d. Прохождение +%d. Быстрее %d с: +%d за оставшуюся секунду. Одна жизнь; пауза останавливает таймер. Очки за разрушения — только от твоих взрывов."
+RECORDS,Best score: %d | Fastest full run: %s,Рекорд очков: %d | Лучшее полное прохождение: %s
+NO_RECORD,—,—
+RUN_RESULT,Total score: %d | Time: %s | Stage time bonus: +%d,Всего очков: %d | Время: %s | Бонус времени уровня: +%d
+NEW_SCORE_RECORD,New score record!,Новый рекорд очков!
+NEW_TIME_RECORD,New full-run time record!,Новый рекорд времени полного забега!
+ARCADE_DONE,Arcade completed!,Аркада пройдена!
+ARCADE_METRICS,Score: %d  |  Run time: %s,Очки: %d  |  Время забега: %s
+ARCADE_CONTROLS,WASD + Space | Esc: pause | Pad: D-pad + A | One life for the whole run,WASD + Пробел | Esc: пауза | Геймпад: крестовина + A | Одна жизнь на весь забег

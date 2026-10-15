@@ -216,5 +216,6 @@ func run() -> void:
 	check(TranslationServer.translate("PAUSED") == "Paused", "English localization loaded")
 	scene.queue_free()
 	await process_frame
+	await preload("res://tests/test_arcade.gd").new().run(self)
 	print("RESULT: %d passed, %d failed" % [passed, failed])
 	quit(1 if failed > 0 else 0)

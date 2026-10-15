@@ -91,8 +91,9 @@ func build(state: GameState) -> void:
 		box(world, pos(cell) + Vector3(0, -0.13, 0), Vector3(0.98, 0.2, 0.98), color)
 		match state.board.kind(cell):
 			GridBoard.Cell.WALL:
-				box(world, pos(cell) + Vector3(0, 0.4, 0), Vector3(0.94, 0.95, 0.94), "53736c")
-				box(world, pos(cell) + Vector3(0, 0.9, 0), Vector3(0.96, 0.1, 0.96), "90ac8c")
+				var wall_height := 0.24 if cell.y == config.height - 1 else 0.55
+				box(world, pos(cell) + Vector3(0, wall_height * 0.5, 0), Vector3(0.94, wall_height, 0.94), "53736c")
+				box(world, pos(cell) + Vector3(0, wall_height + 0.04, 0), Vector3(0.96, 0.08, 0.96), "90ac8c")
 			GridBoard.Cell.CRATE:
 				var node := Node3D.new()
 				world.add_child(node)
@@ -111,7 +112,7 @@ func build(state: GameState) -> void:
 		box(root, Vector3(0, 0.82, 0), Vector3(0.16, 0.16, 0.16), "efffdb", true)
 		box(root, Vector3(0, 0.52, 0.28), Vector3(0.34, 0.12, 0.07), "16303c")
 		actors[actor.id] = root
-	if state.mode == "campaign":
+	if state.mode != "arena":
 		exit_mesh = box(world, pos(state.board.exit_cell) + Vector3(0, 0.02, 0), Vector3(0.8, 0.08, 0.8), "77775a")
 
 func sync(state: GameState, delta: float) -> void:
