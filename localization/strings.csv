@@ -1,0 +1,29 @@
+keys,en,ru
+TITLE,Choose your expedition,Выбери экспедицию
+CONTINUE,Continue campaign,Продолжить кампанию
+NEW_CAMPAIGN,Campaign from level 1,Кампания с первого уровня
+CAMPAIGN,Level,Уровень
+ARENA,Local arena · 2 players,Локальная арена · 2 игрока
+LANGUAGE,Language: English / Русский,Язык: Русский / English
+FULLSCREEN,Toggle fullscreen · F11,Полный экран · F11
+QUIT,Exit game,Выйти из игры
+QUIT_CONFIRM,Exit BLASTORIA?,Выйти из BLASTORIA?
+YES_QUIT,Yes — exit,Да — выйти
+MENU,Main menu,Главное меню
+PAUSED,Paused,Пауза
+RESUME,Resume,Продолжить
+RETRY,Restart · R,Повторить · R
+NEXT,Next level,Следующий уровень
+DEFEAT,Defeat — try another route,Поражение — попробуй другой путь
+DRAW,Draw!,Ничья!
+P1_WINS,Player 1 wins!,Победил игрок 1!
+P2_WINS,Player 2 wins!,Победил игрок 2!
+LEVEL_CLEAR,Level complete!,Уровень пройден!
+CAMPAIGN_DONE,Three expeditions complete!,Три экспедиции пройдены!
+ENEMIES,Enemies,Врагов
+CONTROLS,P1: WASD + Space  |  P2: Arrows + Enter  |  Esc: pause  |  Pads: D-pad + A,И1: WASD + Пробел  |  И2: Стрелки + Enter  |  Esc: пауза  |  Геймпады: крестовина + A
+GOAL,Defeat all enemies then reach the green exit. +B bombs / +R range / +S speed.,Уничтожь врагов и дойди до зелёного выхода. +B бомбы / +R радиус / +S скорость.
+PICKUP_CAPACITY,Extra bomb capacity!,Увеличен запас бомб!
+PICKUP_RANGE,Blast range increased!,Увеличен радиус взрыва!
+PICKUP_SPEED,Movement speed increased!,Увеличена скорость!
+SAVE_ERROR,Could not save progress. Check disk permissions.,Не удалось сохранить прогресс. Проверь доступ к диску.

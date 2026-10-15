@@ -1,0 +1,50 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+PASS: outside grid is solid
+PASS: walls stop explosions
+PASS: crate included and stops ray
+PASS: first bomb accepted
+PASS: owner capacity enforced
+PASS: duplicate cell rejected
+PASS: fuse does not detonate early
+PASS: fuse detonates at tick 150 and destroys crate
+PASS: destroyed crate blocks same explosion
+PASS: fire stays through tick 179
+PASS: fire expires exactly at tick 180
+PASS: capacity released after explosion
+PASS: three-bomb chain resolves in one tick
+PASS: repeat resolve does not destroy twice
+PASS: simultaneous rays share terrain snapshot and deduplicate destruction
+PASS: player cannot enter wall
+PASS: two players move independently and owner leaves bomb
+PASS: owner cannot reenter bomb
+PASS: pause freezes entire simulation
+PASS: same-tick deaths draw; movement cannot dodge expired fuse
+PASS: finished round cannot advance
+PASS: restart resets timers bombs fire and result
+PASS: exit locked while enemies live
+PASS: campaign exit wins after enemies defeated
+PASS: campaign player death loses
+PASS: final level ends campaign
+PASS: pickup applies once and disappears
+PASS: all powerup limits enforced
+PASS: 100 seeds: reachable destroyable topology and safe spawn exits
+PASS: 100 seeds: arena rotational symmetry
+PASS: AI danger map respects blockers
+PASS: AI finds a route from impending blast
+PASS: same seed and 1200 command ticks replay identically
+PASS: 25 seeded simulations: actors never occupy terrain blockers
+PASS: profile writes successfully
+PASS: profile reloads progress
+PASS: corrupt profile recovers previous backup
+PASS: recovered profile can save again
+PASS: recovery save preserves valid backup instead of corrupt primary
+PASS: main scene opens menu with paused world
+PASS: menu starts local arena
+PASS: pause UI freezes live scene
+PASS: resume restores gameplay
+PASS: 10 restarts keep one world and camera/light/environment
+PASS: return to menu works
+PASS: Russian localization loaded
+PASS: English localization loaded
+RESULT: 47 passed, 0 failed
