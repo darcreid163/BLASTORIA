@@ -51,9 +51,14 @@ func _ready() -> void:
 	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	overlay.color = Color(0.025, 0.065, 0.09, 0.94)
 	add_child(overlay)
+	var scroll := ScrollContainer.new()
+	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	scroll.follow_focus = true
+	overlay.add_child(scroll)
 	var center := CenterContainer.new()
-	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	overlay.add_child(center)
+	center.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	center.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.add_child(center)
 	column = VBoxContainer.new()
 	column.custom_minimum_size.x = 460
 	column.add_theme_constant_override("separation", 10)
@@ -114,10 +119,13 @@ func update_state(state: GameState, arcade: ArcadeRun = null) -> void:
 			active.append(tr("POWER_INVULNERABILITY") + " %ds" % ceili(float(actor.invulnerable_until - state.tick) / state.config.tick_rate))
 		if not active.is_empty():
 			metrics.text += "\n" + " • ".join(active)
+	if not state.map_data.is_empty():
+		metrics.text = "%d очков · %s · %s" % [state.score, ArcadeRun.format_time(state.level_ticks), state.map_data.title]
+		if state.config.level_seconds > 0: metrics.text += " · осталось %d с" % state.remaining_seconds()
 	if map_view.visible:
 		map_view.queue_redraw()
 	hint.text = tr("DYNAMIC_CONTROLS") % InputRouter.player_hint(1)
-	if state.mode == "arena":
+	if state.mode in ["arena", "custom_arena"]:
 		hint.text += " | " + tr("PLAYER_TWO_KEYS") % InputRouter.player_hint(2)
 	if state.mode == "tutorial":
 		hint.text += "\n" + tr(state.tutorial_hint())
@@ -128,6 +136,8 @@ func update_state(state: GameState, arcade: ArcadeRun = null) -> void:
 			hint.text += " | " + tr("MAP_KEY")
 		if state.completion_walk:
 			hint.text = tr("COMPASS_RETURN")
+	elif not state.map_data.is_empty():
+		hint.text += "\nУничтожьте обязательных врагов — выход не требуется." if state.mode != "custom_arena" else "\nПобеждает последний оставшийся игрок."
 	elif state.mode != "arena":
 		hint.text += "\n" + tr("GOAL")
 

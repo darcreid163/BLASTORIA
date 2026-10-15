@@ -1,3 +1,14 @@
+# 0.5.0-dev — 2026-10-15
+
+- Adopt consolidated Master Prompt 2.3; archive exact 2.0/2.3 attachments.
+- Add three authored official Arcade stages, ten-theme/100-slot registry, sequential unlocks,
+  per-stage rules fingerprints, no-exit victory and fixed planned secret registry.
+- Add base Workshop generator/editor, local map library, strict .blastmap import/export,
+  shared-simulation playtests and isolated custom records/duels.
+- Default player one to arrows; migrate unchanged defaults while preserving custom keys.
+- Fix JSON integer/float fingerprint mismatch found by file roundtrip tests.
+- Planned levels, official secrets and Steam Workshop remain explicitly incomplete.
+
 # Changelog
 
 ## 0.4.0-dev — 2026-10-15

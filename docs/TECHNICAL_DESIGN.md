@@ -1,4 +1,6 @@
-# Technical Design — 0.4.0
+# Technical Design — 0.5.0
+
+The retained 0.4 systems are described first; active 0.5 architecture is in the additions section.
 
 Status: Implemented; behavioral verification described in QA_REPORT.md.
 Pinned engine: Godot 4.5.1 Standard, GL Compatibility. Target Windows x86_64.
@@ -96,3 +98,32 @@ extended with two free remote keys; JSON floats are normalized before duplicate 
 codes are rejected. Future-version write protection and backup recovery remain in place.
 Classic carries permanent powers between stages, resets temporary immunity, and rolls retry score
 back to stage entry. No mid-stage saves or classic profile progression are implemented yet.
+
+## 0.5 additions — active architecture
+
+MASTER_SPEC.md is now the consolidated 2.3 specification; the earlier text above describes
+retained 0.4 behavior. Official Arcade/custom maps use GameState.start_map and GridBoard.load_map,
+not procedural GridBoard.generate. BombSystem, EnemyAI, damage and pickup handling remain shared.
+The map loader validates before changing the current state. Only explicitly stored bonuses spawn.
+No exit mesh is built for these modes. Solo completion counts required enemies; timer and score stop
+at terminal result. Custom duel shares the arena outcome rules and times out as a draw.
+
+ArcadeLevelRegistry reads bundled JSON definitions and refuses planned slots. ArcadeProgressionManager
+owns only official availability/results and checks the loaded definition fingerprint before accepting
+completion. SaveManager is reused with a separate path and 64-KiB limit, leaving legacy profile v4
+and its record namespace compatible. Custom records use a third file, capped at 200 versions.
+
+CustomMapGenerator performs seeded Fisher-Yates placement on connected pillar terrain; it never
+retries indefinitely. Exact requested counts/types are placed or configuration is rejected.
+MapValidationService validates a strict data schema and graph reachability, not arbitrary Godot resources.
+CustomMapLibrary bounds file size before JSON parsing, rejects unknown fields/types and path-like IDs,
+writes temporary files then renames, and gives imports new local IDs. The editor supplies filesystem
+paths only through the user's file chooser; map data cannot designate a destination path.
+Fingerprinting recursively normalizes integral JSON floats and sorts dictionary keys before SHA-256.
+
+CustomMapDocument owns bounded undo/redo snapshots and cell transactions. MapPreviewRenderer owns
+2D rendering and cursor input. CustomMapEditor owns GUI/configuration/file dialogs, library operations
+and playtest requests. main.gd owns transitioning to the common simulation and returning to the unchanged
+editor document. No unimplemented Steam adapter or secret manager stub is advertised as working.
+Future sharing adapters will call the same validated serialization boundary; no Steam-specific data is
+required for a .blastmap file. Format 1 rejects secret payloads until their runtime is implemented.

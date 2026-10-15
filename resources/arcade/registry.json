@@ -1,0 +1,688 @@
+{
+  "version": 1,
+  "rules_id": "official_23_v1",
+  "themes": [
+    {
+      "id": "green_maze",
+      "title": "Зелёный лабиринт",
+      "design": "wood, stone, loops; warm moss green",
+      "first": 1,
+      "last": 10,
+      "status": "first_three"
+    },
+    {
+      "id": "flooded_ruins",
+      "title": "Затопленные руины",
+      "design": "water channels, bridges; cyan stone",
+      "first": 11,
+      "last": 20,
+      "status": "planned"
+    },
+    {
+      "id": "sand_citadel",
+      "title": "Песчаная цитадель",
+      "design": "sliding walls and doors; sandstone amber",
+      "first": 21,
+      "last": 30,
+      "status": "planned"
+    },
+    {
+      "id": "fire_mines",
+      "title": "Огненные шахты",
+      "design": "lava and timed fire; basalt orange",
+      "first": 31,
+      "last": 40,
+      "status": "planned"
+    },
+    {
+      "id": "ice_palace",
+      "title": "Ледяной дворец",
+      "design": "sliding and freezing; pale blue",
+      "first": 41,
+      "last": 50,
+      "status": "planned"
+    },
+    {
+      "id": "mechanical_factory",
+      "title": "Механический завод",
+      "design": "conveyors and presses; steel copper",
+      "first": 51,
+      "last": 60,
+      "status": "planned"
+    },
+    {
+      "id": "ghost_catacombs",
+      "title": "Призрачные катакомбы",
+      "design": "illusions and hidden switches; violet",
+      "first": 61,
+      "last": 70,
+      "status": "planned"
+    },
+    {
+      "id": "electric_city",
+      "title": "Электрический город",
+      "design": "circuits and lasers; blue gold",
+      "first": 71,
+      "last": 80,
+      "status": "planned"
+    },
+    {
+      "id": "crystal_maze",
+      "title": "Кристальный лабиринт",
+      "design": "teleports and reflectors; teal magenta",
+      "first": 81,
+      "last": 90,
+      "status": "planned"
+    },
+    {
+      "id": "heart_blastoria",
+      "title": "Сердце Бластории",
+      "design": "combined mechanics and elites; black gold",
+      "first": 91,
+      "last": 100,
+      "status": "planned"
+    }
+  ],
+  "levels": [
+    {
+      "number": 1,
+      "map_id": "green_maze",
+      "status": "playable",
+      "path": "res://resources/arcade/stage_001.json"
+    },
+    {
+      "number": 2,
+      "map_id": "green_maze",
+      "status": "playable",
+      "path": "res://resources/arcade/stage_002.json"
+    },
+    {
+      "number": 3,
+      "map_id": "green_maze",
+      "status": "playable",
+      "path": "res://resources/arcade/stage_003.json"
+    },
+    {
+      "number": 4,
+      "map_id": "green_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 5,
+      "map_id": "green_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 6,
+      "map_id": "green_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 7,
+      "map_id": "green_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 8,
+      "map_id": "green_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 9,
+      "map_id": "green_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 10,
+      "map_id": "green_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 11,
+      "map_id": "flooded_ruins",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 12,
+      "map_id": "flooded_ruins",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 13,
+      "map_id": "flooded_ruins",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 14,
+      "map_id": "flooded_ruins",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 15,
+      "map_id": "flooded_ruins",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 16,
+      "map_id": "flooded_ruins",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 17,
+      "map_id": "flooded_ruins",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 18,
+      "map_id": "flooded_ruins",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 19,
+      "map_id": "flooded_ruins",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 20,
+      "map_id": "flooded_ruins",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 21,
+      "map_id": "sand_citadel",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 22,
+      "map_id": "sand_citadel",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 23,
+      "map_id": "sand_citadel",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 24,
+      "map_id": "sand_citadel",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 25,
+      "map_id": "sand_citadel",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 26,
+      "map_id": "sand_citadel",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 27,
+      "map_id": "sand_citadel",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 28,
+      "map_id": "sand_citadel",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 29,
+      "map_id": "sand_citadel",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 30,
+      "map_id": "sand_citadel",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 31,
+      "map_id": "fire_mines",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 32,
+      "map_id": "fire_mines",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 33,
+      "map_id": "fire_mines",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 34,
+      "map_id": "fire_mines",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 35,
+      "map_id": "fire_mines",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 36,
+      "map_id": "fire_mines",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 37,
+      "map_id": "fire_mines",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 38,
+      "map_id": "fire_mines",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 39,
+      "map_id": "fire_mines",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 40,
+      "map_id": "fire_mines",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 41,
+      "map_id": "ice_palace",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 42,
+      "map_id": "ice_palace",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 43,
+      "map_id": "ice_palace",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 44,
+      "map_id": "ice_palace",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 45,
+      "map_id": "ice_palace",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 46,
+      "map_id": "ice_palace",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 47,
+      "map_id": "ice_palace",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 48,
+      "map_id": "ice_palace",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 49,
+      "map_id": "ice_palace",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 50,
+      "map_id": "ice_palace",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 51,
+      "map_id": "mechanical_factory",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 52,
+      "map_id": "mechanical_factory",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 53,
+      "map_id": "mechanical_factory",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 54,
+      "map_id": "mechanical_factory",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 55,
+      "map_id": "mechanical_factory",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 56,
+      "map_id": "mechanical_factory",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 57,
+      "map_id": "mechanical_factory",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 58,
+      "map_id": "mechanical_factory",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 59,
+      "map_id": "mechanical_factory",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 60,
+      "map_id": "mechanical_factory",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 61,
+      "map_id": "ghost_catacombs",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 62,
+      "map_id": "ghost_catacombs",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 63,
+      "map_id": "ghost_catacombs",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 64,
+      "map_id": "ghost_catacombs",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 65,
+      "map_id": "ghost_catacombs",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 66,
+      "map_id": "ghost_catacombs",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 67,
+      "map_id": "ghost_catacombs",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 68,
+      "map_id": "ghost_catacombs",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 69,
+      "map_id": "ghost_catacombs",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 70,
+      "map_id": "ghost_catacombs",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 71,
+      "map_id": "electric_city",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 72,
+      "map_id": "electric_city",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 73,
+      "map_id": "electric_city",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 74,
+      "map_id": "electric_city",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 75,
+      "map_id": "electric_city",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 76,
+      "map_id": "electric_city",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 77,
+      "map_id": "electric_city",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 78,
+      "map_id": "electric_city",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 79,
+      "map_id": "electric_city",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 80,
+      "map_id": "electric_city",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 81,
+      "map_id": "crystal_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 82,
+      "map_id": "crystal_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 83,
+      "map_id": "crystal_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 84,
+      "map_id": "crystal_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 85,
+      "map_id": "crystal_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 86,
+      "map_id": "crystal_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 87,
+      "map_id": "crystal_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 88,
+      "map_id": "crystal_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 89,
+      "map_id": "crystal_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 90,
+      "map_id": "crystal_maze",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 91,
+      "map_id": "heart_blastoria",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 92,
+      "map_id": "heart_blastoria",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 93,
+      "map_id": "heart_blastoria",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 94,
+      "map_id": "heart_blastoria",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 95,
+      "map_id": "heart_blastoria",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 96,
+      "map_id": "heart_blastoria",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 97,
+      "map_id": "heart_blastoria",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 98,
+      "map_id": "heart_blastoria",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 99,
+      "map_id": "heart_blastoria",
+      "status": "planned",
+      "path": ""
+    },
+    {
+      "number": 100,
+      "map_id": "heart_blastoria",
+      "status": "planned",
+      "path": ""
+    }
+  ]
+}

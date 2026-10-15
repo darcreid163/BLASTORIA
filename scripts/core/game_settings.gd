@@ -2,8 +2,8 @@ class_name GameSettings
 extends RefCounted
 
 const DEFAULT_KEYS := {
-	"p1_up": KEY_W, "p1_down": KEY_S, "p1_left": KEY_A, "p1_right": KEY_D, "p1_bomb": KEY_SPACE,
-	"p2_up": KEY_UP, "p2_down": KEY_DOWN, "p2_left": KEY_LEFT, "p2_right": KEY_RIGHT, "p2_bomb": KEY_ENTER, "p1_detonate": KEY_E, "p2_detonate": KEY_P}
+	"p1_up": KEY_UP, "p1_down": KEY_DOWN, "p1_left": KEY_LEFT, "p1_right": KEY_RIGHT, "p1_bomb": KEY_SPACE,
+	"p2_up": KEY_W, "p2_down": KEY_S, "p2_left": KEY_A, "p2_right": KEY_D, "p2_bomb": KEY_ENTER, "p1_detonate": KEY_E, "p2_detonate": KEY_P}
 const RESERVED := [KEY_ESCAPE, KEY_F11, KEY_R, KEY_TAB]
 var master: float = 0.8
 var sfx: float = 0.8
@@ -43,6 +43,10 @@ func read_data(data: Variant) -> void:
 				break
 			seen[int(key)] = true
 		if valid:
+			var legacy := DEFAULT_KEYS.duplicate()
+			legacy.merge({"p1_up": KEY_W, "p1_down": KEY_S, "p1_left": KEY_A, "p1_right": KEY_D, "p2_up": KEY_UP, "p2_down": KEY_DOWN, "p2_left": KEY_LEFT, "p2_right": KEY_RIGHT}, true)
+			if candidate == legacy:
+				candidate = DEFAULT_KEYS.duplicate()
 			for action in DEFAULT_KEYS:
 				bindings[action] = int(candidate[action])
 

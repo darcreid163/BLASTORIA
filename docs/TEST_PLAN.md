@@ -74,3 +74,16 @@ Windows manual acceptance, still pending:
 9. Save/relaunch with old profile; inspect settings/records. Report Windows/CPU/GPU/driver and failures.
 
 No full 60 FPS claim without a measured graphical run. No tests for nine unimplemented secrets are claimed.
+
+## Acceptance 0.5
+
+1. Import fresh source, run automated suite and exported-mode smoke.
+2. On Windows play all three official stages organically: verify difficulty, camera, readability,
+   last-enemy victory, stopped timer, unlock, replay and preserved record after relaunch.
+3. Workshop: generate, place/erase/fill, undo/redo, pan/zoom, change rules, save/rename/copy/delete;
+   playtest then return without loss. Try independent solo and two-controller duel.
+4. Export, import on another machine, compare instance and repeat play. Reject malformed JSON,
+   future formats, invalid paths/types/sizes and unreachable objectives.
+5. Use physical controller/Steam Deck for all basic create/play flows; verify focus, scrolling,
+   parameter buttons and file chooser. Headless input events do not satisfy this acceptance.
+6. Verify imported/custom/playtest results do not affect official records, campaign or artifacts.

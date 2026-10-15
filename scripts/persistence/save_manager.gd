@@ -2,6 +2,7 @@ class_name SaveManager
 extends RefCounted
 
 const VERSION := 4
+var max_bytes: int = 16384
 var path: String = "user://profile.json"
 var unlocked: int = 0
 var language: String = "ru"
@@ -19,7 +20,7 @@ func read_profile(last_level: int) -> void:
 		if not FileAccess.file_exists(candidate):
 			continue
 		var file := FileAccess.open(candidate, FileAccess.READ)
-		if file == null or file.get_length() > 16384:
+		if file == null or file.get_length() > max_bytes:
 			continue
 		var parser := JSON.new()
 		if parser.parse(file.get_as_text()) != OK:

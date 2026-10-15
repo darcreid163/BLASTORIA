@@ -132,12 +132,15 @@ func build(state: GameState) -> void:
 		camera.size = maxf(19, config.height * 1.3)
 		camera.position = FollowCamera.OFFSET
 		camera.look_at(Vector3.ZERO)
-	if state.mode != "arena":
+	if state.mode != "arena" and state.map_data.is_empty():
 		exit_mesh = box(world, pos(state.board.exit_cell) + Vector3(0, 0.02, 0), Vector3(0.8, 0.08, 0.8), "77775a")
 		exit_mesh.visible = state.exit_revealed
 
+	if not state.map_data.is_empty() and state.mode != "custom_arena":
+		follow.update(camera, pos(state.actors[0].cell), config.width, config.height, 0, true)
+
 func sync(state: GameState, delta: float) -> void:
-	if state.mode == "adventure":
+	if state.mode == "adventure" or (not state.map_data.is_empty() and state.mode != "custom_arena"):
 		follow.update(camera, pos(state.actors[0].cell), config.width, config.height, delta)
 		if is_instance_valid(compass):
 			compass.visible = state.secrets.revealed and not state.secrets.awarded
