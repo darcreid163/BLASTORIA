@@ -17,7 +17,7 @@ func run(test: SceneTree) -> void:
 			continue
 		var prize := ClassicChapterOneMap.point(data.prize)
 		var exit_cell := ClassicChapterOneMap.point(data.exit)
-		var fingerprint: String = "\n".join(data.rows)
+		var fingerprint: String = "\n".join(PackedStringArray(data.rows))
 		consistent = consistent and not signatures.has(fingerprint)
 		signatures[fingerprint] = true
 		consistent = consistent and state.result.is_empty()
