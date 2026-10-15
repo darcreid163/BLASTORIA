@@ -71,10 +71,16 @@ func start(settings: GameConfig, new_mode: String, level_index: int, map_seed: i
 			push_error("Invalid authored tutorial")
 			result = "INVALID_LEVEL"
 			return
+	elif mode == "classic" and level_index < ClassicChapterOneMap.COUNT:
+		if not ClassicChapterOneMap.apply(board, level_index + 1):
+			push_error("Chapter one map invalid: %d" % (level_index + 1))
+			result = "INVALID_LEVEL"
+			return
 	else:
 		board.generate(config, rng, mode == "arena")
 	if mode == "classic" and not stage_profile.is_empty():
-		sealed_prize_cell = ClassicStagePlan.PRIZE_CELL
+		var authored := ClassicChapterOneMap.stage(level_index + 1)
+		sealed_prize_cell = ClassicChapterOneMap.point(authored.prize) if not authored.is_empty() else ClassicStagePlan.PRIZE_CELL
 		board.cells[sealed_prize_cell] = GridBoard.Cell.CRATE
 		board.guaranteed_drops = {sealed_prize_cell: stage_profile.sealed_prize}
 	hidden_powerups = board.guaranteed_drops.duplicate()
@@ -116,7 +122,15 @@ func start(settings: GameConfig, new_mode: String, level_index: int, map_seed: i
 			actors[-1].role = "chaser"
 
 func spawn_classic_enemies(amount: int) -> void:
-	# Sorted coordinates guarantee reproducible positions even when Dictionary iteration varies.
+	var authored := ClassicChapterOneMap.stage(level + 1)
+	if not authored.is_empty():
+		for i in range(mini(amount, authored.enemy_spawns.size())):
+			var at := ClassicChapterOneMap.point(authored.enemy_spawns[i])
+			add_actor(at, true)
+			actors[-1].role = "patrol" if level < 3 else ("chaser" if i % 2 == 1 else "patrol")
+			actors[-1].step = maxi(9, int(stage_profile.enemy_step_ticks) + (i % 3) * 3)
+		return
+	# Later chapters use fixed seeds until their own authored layouts are ready.
 	var choices: Array[Vector2i] = []
 	var origin: Vector2i = actors[0].cell
 	for p in board.cells:
