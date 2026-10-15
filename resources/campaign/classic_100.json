@@ -389,7 +389,7 @@
     {
       "number": 26,
       "chapter": 3,
-      "world": 2,
+      "world": 1,
       "title": "Храм джунглей · 6",
       "seed": 715894,
       "width": 31,
@@ -404,7 +404,7 @@
     {
       "number": 27,
       "chapter": 3,
-      "world": 2,
+      "world": 1,
       "title": "Храм джунглей · 7",
       "seed": 723813,
       "width": 31,
@@ -419,7 +419,7 @@
     {
       "number": 28,
       "chapter": 3,
-      "world": 2,
+      "world": 1,
       "title": "Храм джунглей · 8",
       "seed": 731732,
       "width": 31,
@@ -434,7 +434,7 @@
     {
       "number": 29,
       "chapter": 3,
-      "world": 2,
+      "world": 1,
       "title": "Храм джунглей · 9",
       "seed": 739651,
       "width": 31,
@@ -449,7 +449,7 @@
     {
       "number": 30,
       "chapter": 3,
-      "world": 2,
+      "world": 1,
       "title": "Храм джунглей · 10",
       "seed": 747570,
       "width": 31,
@@ -1064,7 +1064,7 @@
     {
       "number": 71,
       "chapter": 8,
-      "world": 3,
+      "world": 4,
       "title": "Киберквартал · 1",
       "seed": 1072249,
       "width": 51,
@@ -1079,7 +1079,7 @@
     {
       "number": 72,
       "chapter": 8,
-      "world": 3,
+      "world": 4,
       "title": "Киберквартал · 2",
       "seed": 1080168,
       "width": 51,
@@ -1094,7 +1094,7 @@
     {
       "number": 73,
       "chapter": 8,
-      "world": 3,
+      "world": 4,
       "title": "Киберквартал · 3",
       "seed": 1088087,
       "width": 51,
@@ -1109,7 +1109,7 @@
     {
       "number": 74,
       "chapter": 8,
-      "world": 3,
+      "world": 4,
       "title": "Киберквартал · 4",
       "seed": 1096006,
       "width": 51,
@@ -1124,7 +1124,7 @@
     {
       "number": 75,
       "chapter": 8,
-      "world": 3,
+      "world": 4,
       "title": "Киберквартал · 5",
       "seed": 1103925,
       "width": 51,
