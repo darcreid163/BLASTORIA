@@ -79,7 +79,7 @@ func start_game(mode: String, level: int) -> void:
 	hud.toast.text = ""
 	hud.overlay.hide()
 	screen = "playing"
-	hud.update_state(state, arcade)
+	hud.update_state(state, arcade, classic_progress.lives)
 
 func start_classic_campaign(reset: bool) -> void:
 	if reset:
@@ -106,7 +106,7 @@ func _physics_process(_delta: float) -> void:
 	if screen != "playing":
 		return
 	state.advance(InputRouter.commands())
-	hud.update_state(state, arcade)
+	hud.update_state(state, arcade, classic_progress.lives)
 
 func _process(delta: float) -> void:
 	if view != null and state.board != null:
@@ -475,7 +475,7 @@ func show_loaded_map() -> void:
 	hud.toast.text = ""
 	hud.overlay.hide()
 	screen = "playing"
-	hud.update_state(state, arcade)
+	hud.update_state(state, arcade, classic_progress.lives)
 
 func show_workshop() -> void:
 	audio_manager.stop_effects()
