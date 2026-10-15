@@ -1,0 +1,71 @@
+keys,en,ru
+TITLE,Choose your expedition,Выбери экспедицию
+CONTINUE,Continue campaign,Продолжить кампанию
+NEW_CAMPAIGN,Campaign from level 1,Кампания с первого уровня
+CAMPAIGN,Level,Уровень
+ARENA,Local arena · 2 players,Локальная арена · 2 игрока
+LANGUAGE,Language: English / Русский,Язык: Русский / English
+FULLSCREEN,Toggle fullscreen · F11,Полный экран · F11
+QUIT,Exit game,Выйти из игры
+QUIT_CONFIRM,Exit BLASTORIA?,Выйти из BLASTORIA?
+YES_QUIT,Yes — exit,Да — выйти
+MENU,Main menu,Главное меню
+PAUSED,Paused,Пауза
+RESUME,Resume,Продолжить
+RETRY,Restart · R,Повторить · R
+NEXT,Next level,Следующий уровень
+DEFEAT,Defeat — try another route,Поражение — попробуй другой путь
+DRAW,Draw!,Ничья!
+P1_WINS,Player 1 wins!,Победил игрок 1!
+P2_WINS,Player 2 wins!,Победил игрок 2!
+LEVEL_CLEAR,Level complete!,Уровень пройден!
+CAMPAIGN_DONE,Three expeditions complete!,Три экспедиции пройдены!
+ENEMIES,Enemies,Врагов
+CONTROLS,P1: WASD + Space  |  P2: Arrows + Enter  |  Esc: pause  |  Pads: D-pad + A,И1: WASD + Пробел  |  И2: Стрелки + Enter  |  Esc: пауза  |  Геймпады: крестовина + A
+GOAL,Defeat all enemies then reach the green exit. +B bombs / +R range / +S speed.,Уничтожь врагов и дойди до зелёного выхода. +B бомбы / +R радиус / +S скорость.
+PICKUP_CAPACITY,Extra bomb capacity!,Увеличен запас бомб!
+PICKUP_RANGE,Blast range increased!,Увеличен радиус взрыва!
+PICKUP_SPEED,Movement speed increased!,Увеличена скорость!
+SAVE_ERROR,Could not save progress. Check disk permissions.,Не удалось сохранить прогресс. Проверь доступ к диску.
+ARCADE,Arcade · solo score attack,Аркада · одиночный рекорд
+START_RUN,Start run,Начать забег
+RESTART_RUN,Restart whole run · R,Заново весь забег · R
+ARCADE_RESTART_NOTE,Restart resets points and time. Menu abandons this run.,Повтор сбрасывает очки и время. Выход в меню завершает забег без записи рекорда.
+ARCADE_RULES,"%d fixed levels. Crate +%d / enemy +%d / pickup +%d. Clear +%d. Finish before %d s: +%d per second remaining. One life; pause stops the timer. Only your blasts earn destruction points.","%d фиксированных уровня. Ящик +%d / враг +%d / бонус +%d. Прохождение +%d. Быстрее %d с: +%d за оставшуюся секунду. Одна жизнь; пауза останавливает таймер. Очки за разрушения — только от твоих взрывов."
+RECORDS,Best score: %d | Fastest full run: %s,Рекорд очков: %d | Лучшее полное прохождение: %s
+NO_RECORD,—,—
+RUN_RESULT,Total score: %d | Time: %s | Stage time bonus: +%d,Всего очков: %d | Время: %s | Бонус времени уровня: +%d
+NEW_SCORE_RECORD,New score record!,Новый рекорд очков!
+NEW_TIME_RECORD,New full-run time record!,Новый рекорд времени полного забега!
+ARCADE_DONE,Arcade completed!,Аркада пройдена!
+ARCADE_METRICS,Score: %d  |  Run time: %s,Очки: %d  |  Время забега: %s
+ARCADE_CONTROLS,WASD + Space | Esc: pause | Pad: D-pad + A | One life for the whole run,WASD + Пробел | Esc: пауза | Геймпад: крестовина + A | Одна жизнь на весь забег
+TUTORIAL,Training · first steps,Обучение · первые шаги
+TUTORIAL_DONE,Training complete!,Обучение завершено!
+TUT_MOVE,1/4 Walk onto the blue floor marker.,1/4 Дойди до синей отметки на полу.
+TUT_BOMB,2/4 Place a bomb next to the wooden crate and retreat at least 3 cells along the corridor.,2/4 Поставь бомбу рядом с ящиком и отступи минимум на 3 клетки по коридору.
+TUT_PICKUP,3/4 Wait for the fire to disappear then collect the +R upgrade.,3/4 Дождись исчезновения огня и подбери усиление +R.
+TUT_EXIT,4/4 Walk through the opened passage to the green exit.,4/4 Пройди через открытый проход к зелёному выходу.
+SETTINGS,Settings,Настройки
+SETTINGS_HINT,Volumes apply immediately. Use Back and save to keep changes.,Громкость меняется сразу. Нажми «Назад и сохранить» для записи настроек.
+VOLUME_MASTER,Master volume,Общая громкость
+VOLUME_SFX,Game effects,Звуки игры
+VOLUME_UI,Menu sounds,Звуки меню
+KEYS_P1,Player 1 keyboard,Клавиши игрока 1
+KEYS_P2,Player 2 keyboard,Клавиши игрока 2
+KEY_UP,Up,Вверх
+KEY_DOWN,Down,Вниз
+KEY_LEFT,Left,Влево
+KEY_RIGHT,Right,Вправо
+KEY_BOMB,Place bomb,Поставить бомбу
+PRESS_KEY,Press a new key,Нажми новую клавишу
+BIND_HELP,Letters / digits / arrows / Space / Enter. Esc cancels. R and F11 are reserved.,Буквы / цифры / стрелки / Пробел / Enter. Esc отменяет. R и F11 зарезервированы.
+KEY_RESERVED,This key or modifier combination is reserved or unsupported.,Эта клавиша или сочетание с модификатором недоступны.
+KEY_IN_USE,This key is already assigned. Choose another.,Эта клавиша уже назначена. Выбери другую.
+KEY_SAVED,Binding changed. Use Back and save in Settings.,Клавиша изменена. Нажми «Назад и сохранить» в настройках.
+RESET_KEYS,Reset keys for both players,Сбросить клавиши обоих игроков
+BACK,Back,Назад
+BACK_SAVE,Back and save,Назад и сохранить
+CANCEL,Cancel,Отмена
+DYNAMIC_CONTROLS,P1: %s | Esc: pause | Pad: D-pad + A,И1: %s | Esc: пауза | Геймпад: крестовина + A
+PLAYER_TWO_KEYS,P2: %s,И2: %s

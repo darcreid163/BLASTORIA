@@ -1,0 +1,74 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+[   0% ] first_scan_filesystem | Started Project initialization (5 steps)
+[   0% ] first_scan_filesystem | Scanning file structure...
+[  16% ] first_scan_filesystem | Loading global class names...
+[  33% ] first_scan_filesystem | Verifying GDExtensions...
+[  50% ] first_scan_filesystem | Creating autoload scripts...
+[  66% ] first_scan_filesystem | Initializing plugins...
+[  83% ] first_scan_filesystem | Starting file scan...
+[ DONE ] first_scan_filesystem
+
+[   0% ] savepack | Started Packing (102 steps)
+[   1% ] savepack | Storing File: res://.godot/imported/crate.wav-f4d30286ea9adf8fe6c0428ec35c2112.sample
+[   1% ] savepack | Storing File: res://assets/audio/crate.wav.import
+[   4% ] savepack | Storing File: res://.godot/imported/death.wav-021a45cab225299ddf24ec88f548f45a.sample
+[   4% ] savepack | Storing File: res://assets/audio/death.wav.import
+[   7% ] savepack | Storing File: res://.godot/imported/defeat.wav-2c373cdad262b5fb9203b05423989caa.sample
+[   7% ] savepack | Storing File: res://assets/audio/defeat.wav.import
+[  11% ] savepack | Storing File: res://.godot/imported/explosion.wav-4dcccbd27187cfdac205309f792899a7.sample
+[  11% ] savepack | Storing File: res://assets/audio/explosion.wav.import
+[  14% ] savepack | Storing File: res://.godot/imported/fuse.wav-b9790af80676bac48ffe86857a7e7490.sample
+[  14% ] savepack | Storing File: res://assets/audio/fuse.wav.import
+[  17% ] savepack | Storing File: res://.godot/imported/pickup.wav-005c0482069dd16ebcd4cedd7f327134.sample
+[  17% ] savepack | Storing File: res://assets/audio/pickup.wav.import
+[  21% ] savepack | Storing File: res://.godot/imported/place.wav-1edabb5558d5fd30aa083ae98cd39bf2.sample
+[  21% ] savepack | Storing File: res://assets/audio/place.wav.import
+[  24% ] savepack | Storing File: res://.godot/imported/step.wav-7c1afa4d3561f9fd67ecf320728c68cf.sample
+[  24% ] savepack | Storing File: res://assets/audio/step.wav.import
+[  27% ] savepack | Storing File: res://.godot/imported/ui.wav-d54e8bc37b8ccee18240932350cecc18.sample
+[  27% ] savepack | Storing File: res://assets/audio/ui.wav.import
+[  31% ] savepack | Storing File: res://.godot/imported/victory.wav-d893d32ad919f27e15cf04d35e288b78.sample
+[  31% ] savepack | Storing File: res://assets/audio/victory.wav.import
+[  33% ] savepack | Storing File: res://localization/strings.csv.import
+[  36% ] savepack | Storing File: res://localization/strings.en.translation
+[  40% ] savepack | Storing File: res://localization/strings.ru.translation
+[  43% ] savepack | Storing File: res://.godot/exported/133200997/export-363207e6b24e484a8e8c5a201dd6a8d2-default.res
+[  46% ] savepack | Storing File: res://.godot/exported/133200997/export-2d0b1b536bb11cfbe13b1a1f0c08a033-tutorial.res
+[  50% ] savepack | Storing File: res://.godot/exported/133200997/export-3ad5c15c4f3250da0cc7c1af1770d85f-main.scn
+[  53% ] savepack | Storing File: res://scripts/audio/audio_manager.gdc
+[  56% ] savepack | Storing File: res://scripts/core/arcade_run.gdc
+[  60% ] savepack | Storing File: res://scripts/core/game_config.gdc
+[  63% ] savepack | Storing File: res://scripts/core/game_settings.gdc
+[  66% ] savepack | Storing File: res://scripts/core/game_state.gdc
+[  69% ] savepack | Storing File: res://scripts/gameplay/bomb_system.gdc
+[  72% ] savepack | Storing File: res://scripts/gameplay/enemy_ai.gdc
+[  75% ] savepack | Storing File: res://scripts/gameplay/grid_board.gdc
+[  79% ] savepack | Storing File: res://scripts/levels/level_definition.gdc
+[  82% ] savepack | Storing File: res://scripts/persistence/save_manager.gdc
+[  85% ] savepack | Storing File: res://scripts/ui/game_hud.gdc
+[  89% ] savepack | Storing File: res://scripts/ui/input_router.gdc
+[  92% ] savepack | Storing File: res://scripts/view/board_view.gdc
+[  95% ] savepack | Storing File: res://scripts/main.gdc
+[  95% ] savepack | Storing File: res://resources/configurations/default.tres.remap
+[  95% ] savepack | Storing File: res://resources/levels/tutorial.tres.remap
+[  95% ] savepack | Storing File: res://scenes/main.tscn.remap
+[  95% ] savepack | Storing File: res://scripts/audio/audio_manager.gd.remap
+[  95% ] savepack | Storing File: res://scripts/core/arcade_run.gd.remap
+[  95% ] savepack | Storing File: res://scripts/core/game_config.gd.remap
+[  95% ] savepack | Storing File: res://scripts/core/game_settings.gd.remap
+[  95% ] savepack | Storing File: res://scripts/core/game_state.gd.remap
+[  95% ] savepack | Storing File: res://scripts/gameplay/bomb_system.gd.remap
+[  95% ] savepack | Storing File: res://scripts/gameplay/enemy_ai.gd.remap
+[  95% ] savepack | Storing File: res://scripts/gameplay/grid_board.gd.remap
+[  95% ] savepack | Storing File: res://scripts/levels/level_definition.gd.remap
+[  95% ] savepack | Storing File: res://scripts/persistence/save_manager.gd.remap
+[  95% ] savepack | Storing File: res://scripts/ui/game_hud.gd.remap
+[  95% ] savepack | Storing File: res://scripts/ui/input_router.gd.remap
+[  95% ] savepack | Storing File: res://scripts/view/board_view.gd.remap
+[  95% ] savepack | Storing File: res://scripts/main.gd.remap
+[  95% ] savepack | Storing File: res://.godot/global_script_class_cache.cfg
+[  95% ] savepack | Storing File: res://.godot/uid_cache.bin
+[  95% ] savepack | Storing File: res://project.binary
+[ DONE ] savepack
+
