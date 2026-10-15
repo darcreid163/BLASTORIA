@@ -79,7 +79,7 @@ func show_main_menu() -> void:
 	if is_instance_valid(workshop): workshop.hide()
 	hud.map_view.hide()
 	screen = "menu"
-	hud.show_menu("TITLE", [["TUTORIAL", "tutorial"], ["CONTINUE", "continue"], ["ADVENTURE", "adventure_menu"], ["CLASSIC", "classic_menu"], ["ARCADE", "official_menu"], ["Мастерская карт", "workshop"], ["ARENA", "arena"], ["COLLECTION", "collection"], ["SETTINGS", "settings"], ["QUIT", "quit"]], tr("SAVE_ERROR") if save_error else "")
+	hud.show_menu("TITLE", [["TUTORIAL", "tutorial"], ["CAMPAIGN_MENU", "campaign_menu"], ["ADVENTURE", "adventure_menu"], ["CLASSIC", "classic_menu"], ["ARCADE", "official_menu"], ["WORKSHOP", "workshop"], ["ARENA", "arena"], ["COLLECTION", "collection"], ["SETTINGS", "settings"], ["QUIT", "quit"]], tr("SAVE_ERROR") if save_error else "")
 
 func _physics_process(_delta: float) -> void:
 	if screen != "playing":
@@ -146,6 +146,11 @@ func handle_action(action: String) -> void:
 		return
 	match action:
 		"tutorial": start_game("tutorial", 0)
+		"campaign_menu":
+			state.paused = true
+			screen = "campaign_menu"
+			hud.show_menu("CAMPAIGN_MENU", [["CONTINUE", "campaign_continue"], ["NEW_CAMPAIGN", "campaign"], ["MENU", "menu"]])
+		"campaign_continue": start_game("campaign", profile.unlocked)
 		"adventure_menu":
 			screen = "adventure_menu"
 			hud.show_menu("ADVENTURE", [["ENTER_RUINS", "adventure"], ["LEGACY_CAMPAIGN", "legacy_continue"], ["MENU", "menu"]], tr("ADVENTURE_RULES"))
