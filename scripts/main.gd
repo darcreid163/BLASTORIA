@@ -6,6 +6,7 @@ const ADVENTURE = preload("res://resources/game_rules/adventure.tres")
 var state := GameState.new()
 var classic_carry: Dictionary = {}
 var classic_score: int = 0
+var classic_progress := ClassicCampaignProgress.new()
 var map_mode: int = 0
 var view: BoardView
 var hud: GameHUD
@@ -25,6 +26,7 @@ var custom_record_result: bool = false
 
 func _ready() -> void:
 	profile.read_profile(CONFIG.campaign_seeds.size() - 1)
+	classic_progress.load_profile()
 	official.read_progress()
 	custom_records.path = "user://custom_records.json"
 	custom_records.max_bytes = 65536
@@ -54,9 +56,15 @@ func _ready() -> void:
 
 func start_game(mode: String, level: int) -> void:
 	audio_manager.stop_effects()
-	var map_seed: int = arena_seed if mode == "arena" else CONFIG.campaign_seeds[level]
+	var map_seed: int = arena_seed if mode == "arena" else CONFIG.campaign_seeds[mini(level, CONFIG.campaign_seeds.size() - 1)]
 	if mode == "arcade":
 		map_seed = CONFIG.arcade_seeds[level]
+	elif mode == "classic":
+		var stage_data := ClassicStagePlan.stage(level + 1)
+		if stage_data.is_empty():
+			push_error("Unknown Classic Campaign stage: %d" % (level + 1))
+			return
+		map_seed = int(stage_data.seed)
 	var rules: GameConfig = CLASSIC if mode == "classic" else (ADVENTURE if mode == "adventure" else CONFIG)
 	state.start(rules, mode, level, map_seed)
 	if mode == "classic":
@@ -72,6 +80,19 @@ func start_game(mode: String, level: int) -> void:
 	hud.overlay.hide()
 	screen = "playing"
 	hud.update_state(state, arcade)
+
+func start_classic_campaign(reset: bool) -> void:
+	if reset:
+		var error := classic_progress.reset_run()
+		if error != OK:
+			push_warning("Classic profile save failed: %s" % error_string(error))
+	if classic_progress.completed or classic_progress.lives <= 0:
+		show_main_menu()
+		return
+	classic_carry = classic_progress.carry.duplicate(true)
+	classic_score = classic_progress.score
+	start_game("classic", classic_progress.stage - 1)
+
 
 func show_main_menu() -> void:
 	audio_manager.stop_effects()
@@ -150,7 +171,7 @@ func handle_action(action: String) -> void:
 			state.paused = true
 			screen = "campaign_menu"
 			hud.show_menu("CAMPAIGN_MENU", [["CONTINUE", "campaign_continue"], ["NEW_CAMPAIGN", "campaign"], ["MENU", "menu"]])
-		"campaign_continue": start_game("campaign", profile.unlocked)
+		"campaign_continue": start_classic_campaign(false)
 		"adventure_menu":
 			screen = "adventure_menu"
 			hud.show_menu("ADVENTURE", [["ENTER_RUINS", "adventure"], ["LEGACY_CAMPAIGN", "legacy_continue"], ["MENU", "menu"]], tr("ADVENTURE_RULES"))
@@ -159,10 +180,7 @@ func handle_action(action: String) -> void:
 		"classic_menu":
 			screen = "classic_menu"
 			hud.show_menu("CLASSIC", [["START_CLASSIC", "classic_start"], ["MENU", "menu"]], tr("CLASSIC_RULES"))
-		"classic_start":
-			classic_carry.clear()
-			classic_score = 0
-			start_game("classic", 0)
+		"classic_start": start_classic_campaign(true)
 		"collection": show_collection_menu()
 		"discoveries": show_discoveries()
 		"secret_hall": show_secret_hall()
@@ -187,7 +205,7 @@ func handle_action(action: String) -> void:
 			profile.settings.reset_keys()
 			InputRouter.install(profile.settings.bindings)
 			show_controls(controls_player)
-		"campaign": start_game("campaign", 0)
+		"campaign": start_classic_campaign(true)
 		"continue": start_game("adventure", 0)
 		"arcade_menu": show_arcade_menu()
 		"arcade_start":
@@ -199,6 +217,14 @@ func handle_action(action: String) -> void:
 		"retry":
 			if state.mode == "official_arcade":
 				start_official(state.level + 1)
+			elif state.mode == "classic":
+				if classic_progress.lives <= 0:
+					start_classic_campaign(true)
+				else:
+					# Manual restart keeps range/capacity only, without granting extra lives.
+					classic_carry = {"capacity": state.actors[0].capacity, "radius": state.actors[0].radius}
+					classic_score = classic_progress.score
+					start_game("classic", classic_progress.stage - 1)
 			elif state.mode in ["custom", "custom_arena"]:
 				start_custom(state.map_data, custom_record_result)
 			elif state.mode == "arcade":
@@ -214,11 +240,9 @@ func handle_action(action: String) -> void:
 			elif state.mode == "arcade" and not arcade.ended:
 				start_game("arcade", arcade.next_stage)
 			elif state.mode == "classic":
-				classic_carry.clear()
-				for key in ["capacity", "radius", "step", "remote", "wall_pass", "bomb_pass", "flame_pass"]:
-					classic_carry[key] = state.actors[0][key]
-				classic_score = state.score
-				start_game("classic", mini(state.level + 1, CLASSIC.campaign_seeds.size() - 1))
+				classic_carry = classic_progress.carry.duplicate(true)
+				classic_score = classic_progress.score
+				start_game("classic", classic_progress.stage - 1)
 			elif state.mode == "campaign":
 				start_game("campaign", mini(state.level + 1, CONFIG.campaign_seeds.size() - 1))
 		"resume":
@@ -279,10 +303,20 @@ func on_finished(result: String) -> void:
 		profile.unlocked = maxi(profile.unlocked, state.level + 1)
 		save_profile()
 		buttons.push_front(["NEXT", "next"])
-	if state.mode == "classic" and result == "LEVEL_CLEAR":
-		buttons.push_front(["NEXT", "next"])
+	if state.mode == "classic":
+		if result in ["LEVEL_CLEAR", "CLASSIC_DONE"]:
+			var clear_error := classic_progress.record_clear(state.level + 1, state.actors[0], state.score)
+			if clear_error != OK:
+				details += "\nНе удалось сохранить классическую кампанию."
+			elif result == "LEVEL_CLEAR":
+				buttons.push_front(["NEXT", "next"])
+		elif result == "DEFEAT":
+			if classic_progress.record_loss() != OK:
+				details += "\nНе удалось сохранить потерянную жизнь."
 	if state.mode in ["classic", "adventure"]:
 		details = tr("SOLO_RESULT") % state.score
+		if state.mode == "classic":
+			details += "\nЖизней: %d · этап: %d/100" % [classic_progress.lives, state.level + 1]
 		if state.secrets.awarded:
 			details += "\n" + tr("COMPASS_REWARD")
 	if save_error:
