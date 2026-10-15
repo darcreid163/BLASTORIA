@@ -90,21 +90,36 @@ func build(state: GameState) -> void:
 	exit_mesh = null
 	static_batches.clear()
 	compass = null
+	var floor_colors := ["34544e", "2d4946"]
+	var wall_colors := ["53736c", "90ac8c"]
+	var crate_colors := ["ae7950", "e3b575"]
+	if state.mode == "classic" and state.level < 10:
+		var palettes: Array = [
+			["34544e", "53736c", "ae7950"], ["375568", "678b9c", "b58d67"],
+			["595341", "877955", "c69b68"], ["3b5b59", "648b73", "ba8857"],
+			["595346", "867f61", "b17b58"], ["425160", "687d92", "c29a61"],
+			["465750", "789577", "b48a64"], ["4b4f66", "78819a", "ac8b64"],
+			["54505f", "887d9b", "b88e73"], ["3e4f57", "73939b", "d19b67"]
+		]
+		var palette: Array = palettes[state.level]
+		floor_colors = [palette[0], palette[0]]
+		wall_colors = [palette[1], "9eb5a9"]
+		crate_colors = [palette[2], "e8c68a"]
 	box(world, Vector3(0, -0.5, 0), Vector3(config.width + 0.6, 0.6, config.height + 0.6), "182e33")
 	for cell in state.board.cells:
-		var color := "34544e" if (cell.x + cell.y) % 2 == 0 else "2d4946"
+		var color: String = floor_colors[(cell.x + cell.y) % 2]
 		static_box(pos(cell) + Vector3(0, -0.13, 0), Vector3(0.98, 0.2, 0.98), color)
 		match state.board.kind(cell):
 			GridBoard.Cell.WALL:
 				var wall_height := 0.24 if cell.y == config.height - 1 else 0.55
-				static_box(pos(cell) + Vector3(0, wall_height * 0.5, 0), Vector3(0.94, wall_height, 0.94), "53736c")
-				static_box(pos(cell) + Vector3(0, wall_height + 0.04, 0), Vector3(0.96, 0.08, 0.96), "90ac8c")
+				static_box(pos(cell) + Vector3(0, wall_height * 0.5, 0), Vector3(0.94, wall_height, 0.94), wall_colors[0])
+				static_box(pos(cell) + Vector3(0, wall_height + 0.04, 0), Vector3(0.96, 0.08, 0.96), wall_colors[1])
 			GridBoard.Cell.CRATE:
 				var node := Node3D.new()
 				world.add_child(node)
 				node.position = pos(cell)
-				box(node, Vector3(0, 0.3, 0), Vector3(0.79, 0.65, 0.79), "ae7950")
-				box(node, Vector3(0, 0.65, 0), Vector3(0.84, 0.08, 0.84), "e3b575")
+				box(node, Vector3(0, 0.3, 0), Vector3(0.79, 0.65, 0.79), crate_colors[0])
+				box(node, Vector3(0, 0.65, 0), Vector3(0.84, 0.08, 0.84), crate_colors[1])
 				crates[cell] = node
 	if state.mode == "tutorial":
 		box(world, pos(state.TUTORIAL.checkpoint) + Vector3(0, 0.015, 0), Vector3(0.75, 0.07, 0.75), "6cbaff", true)
@@ -136,11 +151,11 @@ func build(state: GameState) -> void:
 		exit_mesh = box(world, pos(state.board.exit_cell) + Vector3(0, 0.02, 0), Vector3(0.8, 0.08, 0.8), "77775a")
 		exit_mesh.visible = state.exit_revealed
 
-	if not state.map_data.is_empty() and state.mode != "custom_arena":
+	if state.mode == "classic" or (not state.map_data.is_empty() and state.mode != "custom_arena"):
 		follow.update(camera, pos(state.actors[0].cell), config.width, config.height, 0, true)
 
 func sync(state: GameState, delta: float) -> void:
-	if state.mode == "adventure" or (not state.map_data.is_empty() and state.mode != "custom_arena"):
+	if state.mode in ["adventure", "classic"] or (not state.map_data.is_empty() and state.mode != "custom_arena"):
 		follow.update(camera, pos(state.actors[0].cell), config.width, config.height, delta)
 		if is_instance_valid(compass):
 			compass.visible = state.secrets.revealed and not state.secrets.awarded

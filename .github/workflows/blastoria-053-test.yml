@@ -1,11 +1,13 @@
-name: BLASTORIA 0.5.3 / Godot isolated QA
+name: BLASTORIA 0.5.4 / Godot isolated QA
 
 on:
   push:
     branches:
       - codex/classic-100-rulebook-0.5.3
+      - codex/chapter-one-authored-0.5.4
     paths:
       - '.github/workflows/blastoria-053-test.yml'
+      - '.github/workflows/blastoria-054-test.yml'
       - 'scripts/**'
       - 'resources/**'
       - 'scenes/**'
@@ -44,35 +46,38 @@ jobs:
         run: |
           set -euo pipefail
           godot --headless --editor --path . --import 2>&1 | tee godot-import.log
+          if grep -E 'SCRIPT ERROR:|Parse Error:|ERROR: Failed to load script' godot-import.log; then exit 1; fi
 
       - name: All regression tests
         shell: bash
         run: |
           set -euo pipefail
-          godot --headless --path . --script res://tests/run_tests.gd 2>&1 | tee godot-tests.log
+          timeout 180s godot --headless --path . --script res://tests/run_tests.gd 2>&1 | tee godot-tests.log
+          if grep -E 'SCRIPT ERROR:|Parse Error:|ERROR: FAIL:' godot-tests.log; then exit 1; fi
 
       - name: Menu navigation smoke
         shell: bash
         run: |
           set -euo pipefail
-          godot --headless --path . --script res://tools/menu_smoke.gd 2>&1 | tee godot-menu-smoke.log
+          timeout 90s godot --headless --path . --script res://tools/menu_smoke.gd 2>&1 | tee godot-menu-smoke.log
+          if grep -E 'SCRIPT ERROR:|Parse Error:|ERROR: FAIL:' godot-menu-smoke.log; then exit 1; fi
 
       - name: Create portable Godot source ZIP
         shell: bash
         run: |
           set -euo pipefail
-          zip -q -r BLASTORIA_0_5_3_Godot_Source.zip . \
-            -x '.git/*' '.godot/*' 'builds/*' 'godot-*.log' 'BLASTORIA_0_5_3_Godot_Source.zip'
-          unzip -t BLASTORIA_0_5_3_Godot_Source.zip | tail -2
-          sha256sum BLASTORIA_0_5_3_Godot_Source.zip > SOURCE_SHA256.txt
+          zip -q -r BLASTORIA_0_5_4_Godot_Source.zip . \
+            -x '.git/*' '.godot/*' 'builds/*' 'godot-*.log' 'BLASTORIA_0_5_4_Godot_Source.zip'
+          unzip -t BLASTORIA_0_5_4_Godot_Source.zip | tail -2
+          sha256sum BLASTORIA_0_5_4_Godot_Source.zip > SOURCE_SHA256.txt
 
       - name: Upload Godot project
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: BLASTORIA-0.5.3-Godot-Source
+          name: BLASTORIA-0.5.4-Godot-Source
           path: |
-            BLASTORIA_0_5_3_Godot_Source.zip
+            BLASTORIA_0_5_4_Godot_Source.zip
             SOURCE_SHA256.txt
           if-no-files-found: error
           retention-days: 30
