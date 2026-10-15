@@ -1,0 +1,525 @@
+{
+  "schema_version": 1,
+  "source_spec": "Master Prompt 2.4",
+  "note": "Design-only catalog. Do not claim Steam unlocks are integrated.",
+  "entries": [
+    {
+      "id": "ACH_FIRST_BLAST",
+      "category": "campaign",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "First blast",
+        "ru": "Первый взрыв"
+      },
+      "description": {
+        "en": "Detonate your first bomb",
+        "ru": "Взорвать первую бомбу"
+      }
+    },
+    {
+      "id": "ACH_FIRST_VICTORY",
+      "category": "campaign",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "First step",
+        "ru": "Первый шаг"
+      },
+      "description": {
+        "en": "Complete the first campaign stage",
+        "ru": "Завершить первый этап кампании"
+      }
+    },
+    {
+      "id": "ACH_MAZE_EXPLORER",
+      "category": "campaign",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Maze explorer",
+        "ru": "Исследователь"
+      },
+      "description": {
+        "en": "Explore 90 percent of one large level",
+        "ru": "Исследовать 90% одного большого уровня"
+      }
+    },
+    {
+      "id": "ACH_JUNGLE_MASTER",
+      "category": "campaign",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Jungle master",
+        "ru": "Повелитель джунглей"
+      },
+      "description": {
+        "en": "Finish the first world",
+        "ru": "Завершить первый мир"
+      }
+    },
+    {
+      "id": "ACH_ICE_MASTER",
+      "category": "campaign",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Frozen heart",
+        "ru": "Ледяное сердце"
+      },
+      "description": {
+        "en": "Finish the second world",
+        "ru": "Завершить второй мир"
+      }
+    },
+    {
+      "id": "ACH_LAVA_MASTER",
+      "category": "campaign",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Through the fire",
+        "ru": "Сквозь огонь"
+      },
+      "description": {
+        "en": "Finish the third world",
+        "ru": "Завершить третий мир"
+      }
+    },
+    {
+      "id": "ACH_CYBER_MASTER",
+      "category": "campaign",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Cyber master",
+        "ru": "Властелин технологий"
+      },
+      "description": {
+        "en": "Finish the fourth world",
+        "ru": "Завершить четвёртый мир"
+      }
+    },
+    {
+      "id": "ACH_CAMPAIGN_FINISH",
+      "category": "campaign",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Hero of Blastoria",
+        "ru": "Герой Бластории"
+      },
+      "description": {
+        "en": "Finish the campaign",
+        "ru": "Полностью пройти кампанию"
+      }
+    },
+    {
+      "id": "ACH_ARCADE_10",
+      "category": "arcade",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "First ten",
+        "ru": "Первые десять"
+      },
+      "description": {
+        "en": "Clear ten official stages",
+        "ru": "Пройти десять официальных этапов"
+      }
+    },
+    {
+      "id": "ACH_ARCADE_25",
+      "category": "arcade",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Veteran bomber",
+        "ru": "Опытный подрывник"
+      },
+      "description": {
+        "en": "Clear 25 official stages",
+        "ru": "Пройти 25 этапов"
+      }
+    },
+    {
+      "id": "ACH_ARCADE_50",
+      "category": "arcade",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Halfway there",
+        "ru": "Полпути"
+      },
+      "description": {
+        "en": "Clear 50 official stages",
+        "ru": "Пройти 50 этапов"
+      }
+    },
+    {
+      "id": "ACH_ARCADE_75",
+      "category": "arcade",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Almost legendary",
+        "ru": "Почти легенда"
+      },
+      "description": {
+        "en": "Clear 75 official stages",
+        "ru": "Пройти 75 этапов"
+      }
+    },
+    {
+      "id": "ACH_ARCADE_100",
+      "category": "arcade",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Conqueror of a hundred",
+        "ru": "Покоритель сотни"
+      },
+      "description": {
+        "en": "Clear all 100 official stages",
+        "ru": "Пройти все 100 этапов"
+      }
+    },
+    {
+      "id": "ACH_ARCADE_SPEED",
+      "category": "arcade",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Lightning",
+        "ru": "Молниеносный"
+      },
+      "description": {
+        "en": "Beat an official par time",
+        "ru": "Побить официальный временной норматив"
+      }
+    },
+    {
+      "id": "ACH_ARCADE_PERFECT",
+      "category": "arcade",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Flawless",
+        "ru": "Без единой ошибки"
+      },
+      "description": {
+        "en": "Clear ten stages in a row without losing a life",
+        "ru": "Пройти десять этапов подряд без потери жизни"
+      }
+    },
+    {
+      "id": "ACH_ARCADE_SCORE",
+      "category": "arcade",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Millionaire",
+        "ru": "Миллионер"
+      },
+      "description": {
+        "en": "Score one million official Arcade points",
+        "ru": "Набрать миллион очков в официальной Аркаде"
+      }
+    },
+    {
+      "id": "ACH_CHAIN_5",
+      "category": "mastery",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Chain reaction",
+        "ru": "Цепная реакция"
+      },
+      "description": {
+        "en": "Chain five bombs",
+        "ru": "Взорвать цепочкой пять бомб"
+      }
+    },
+    {
+      "id": "ACH_CHAIN_10",
+      "category": "mastery",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Big blast",
+        "ru": "Большой взрыв"
+      },
+      "description": {
+        "en": "Chain ten bombs",
+        "ru": "Взорвать цепочкой десять бомб"
+      }
+    },
+    {
+      "id": "ACH_CHAIN_20",
+      "category": "mastery",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Lord of chaos",
+        "ru": "Повелитель хаоса"
+      },
+      "description": {
+        "en": "Chain twenty bombs",
+        "ru": "Взорвать цепочкой двадцать бомб"
+      }
+    },
+    {
+      "id": "ACH_ENEMIES_100",
+      "category": "mastery",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Hunter",
+        "ru": "Охотник"
+      },
+      "description": {
+        "en": "Defeat 100 enemies",
+        "ru": "Уничтожить 100 врагов"
+      }
+    },
+    {
+      "id": "ACH_ENEMIES_1000",
+      "category": "mastery",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Maze terror",
+        "ru": "Гроза лабиринтов"
+      },
+      "description": {
+        "en": "Defeat 1000 enemies",
+        "ru": "Уничтожить 1000 врагов"
+      }
+    },
+    {
+      "id": "ACH_BLOCKS_1000",
+      "category": "mastery",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Destroyer",
+        "ru": "Разрушитель"
+      },
+      "description": {
+        "en": "Destroy 1000 blocks",
+        "ru": "Разрушить 1000 блоков"
+      }
+    },
+    {
+      "id": "ACH_POWERUP_MASTER",
+      "category": "mastery",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Full arsenal",
+        "ru": "Полный арсенал"
+      },
+      "description": {
+        "en": "Find every primary powerup category",
+        "ru": "Получить все основные категории усилений"
+      }
+    },
+    {
+      "id": "ACH_ARENA_FIRST",
+      "category": "arena",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "First duel",
+        "ru": "Первая дуэль"
+      },
+      "description": {
+        "en": "Finish a qualifying arena match",
+        "ru": "Завершить квалифицируемый матч"
+      }
+    },
+    {
+      "id": "ACH_ARENA_WIN",
+      "category": "arena",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Arena victor",
+        "ru": "Победитель арены"
+      },
+      "description": {
+        "en": "Win a qualifying arena match",
+        "ru": "Выиграть квалифицируемый матч"
+      }
+    },
+    {
+      "id": "ACH_ARENA_10",
+      "category": "arena",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Duel veteran",
+        "ru": "Опытный дуэлянт"
+      },
+      "description": {
+        "en": "Win ten qualifying arena matches",
+        "ru": "Победить в десяти квалифицируемых матчах"
+      }
+    },
+    {
+      "id": "ACH_ARENA_50",
+      "category": "arena",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Arena legend",
+        "ru": "Легенда арены"
+      },
+      "description": {
+        "en": "Win fifty qualifying arena matches",
+        "ru": "Победить в пятидесяти квалифицируемых матчах"
+      }
+    },
+    {
+      "id": "ACH_ARENA_TEAM",
+      "category": "arena",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Teamwork",
+        "ru": "Командная работа"
+      },
+      "description": {
+        "en": "Win a team match",
+        "ru": "Выиграть командный матч"
+      }
+    },
+    {
+      "id": "ACH_EDITOR_FIRST",
+      "category": "workshop",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Architect",
+        "ru": "Архитектор"
+      },
+      "description": {
+        "en": "Save the first custom map",
+        "ru": "Сохранить первую пользовательскую карту"
+      }
+    },
+    {
+      "id": "ACH_EDITOR_PLAY",
+      "category": "workshop",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Self challenge",
+        "ru": "Собственное испытание"
+      },
+      "description": {
+        "en": "Clear a validated custom map",
+        "ru": "Пройти проверенную пользовательскую карту"
+      }
+    },
+    {
+      "id": "ACH_EDITOR_10",
+      "category": "workshop",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Cartographer",
+        "ru": "Картограф"
+      },
+      "description": {
+        "en": "Create ten distinct valid maps",
+        "ru": "Создать десять разных корректных карт"
+      }
+    },
+    {
+      "id": "ACH_EDITOR_SHARE",
+      "category": "workshop",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Share the world",
+        "ru": "Поделиться миром"
+      },
+      "description": {
+        "en": "Export a map to share with another player",
+        "ru": "Экспортировать карту для передачи другому игроку"
+      }
+    },
+    {
+      "id": "ACH_EDITOR_IMPORT",
+      "category": "workshop",
+      "hidden": false,
+      "status": "planned",
+      "title": {
+        "en": "Visiting explorer",
+        "ru": "Гость другого мира"
+      },
+      "description": {
+        "en": "Import and clear a compatible custom map",
+        "ru": "Импортировать и пройти совместимую карту"
+      }
+    },
+    {
+      "id": "ACH_SECRET_FIRST",
+      "category": "secret",
+      "hidden": true,
+      "status": "planned",
+      "title": {
+        "en": "A secret uncovered",
+        "ru": "Тайна раскрыта"
+      },
+      "description": {
+        "en": "Discover an official secret",
+        "ru": "Найти официальную пасхалку"
+      }
+    },
+    {
+      "id": "ACH_SECRET_THREE",
+      "category": "secret",
+      "hidden": true,
+      "status": "planned",
+      "title": {
+        "en": "Trailblazer",
+        "ru": "Следопыт"
+      },
+      "description": {
+        "en": "Discover three distinct official artifacts",
+        "ru": "Найти три разных официальных артефакта"
+      }
+    },
+    {
+      "id": "ACH_SECRET_DISCOVERER",
+      "category": "secret",
+      "hidden": true,
+      "status": "planned",
+      "title": {
+        "en": "First in the world",
+        "ru": "Первый в мире"
+      },
+      "description": {
+        "en": "Receive verified server recognition as first discoverer",
+        "ru": "Получить серверное подтверждение мирового первенства"
+      }
+    },
+    {
+      "id": "ACH_SECRET_ULTIMATE",
+      "category": "secret",
+      "hidden": true,
+      "status": "planned",
+      "title": {
+        "en": "Deeper mystery",
+        "ru": "Глубже тайны"
+      },
+      "description": {
+        "en": "Discover the final secret artifact",
+        "ru": "Найти финальный секретный артефакт"
+      }
+    }
+  ]
+}

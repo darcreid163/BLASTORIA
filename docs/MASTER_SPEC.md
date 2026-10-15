@@ -2606,3 +2606,17 @@ https://github.com/darcreid163/BLASTORIA
 Объедини его с версиями 2.0–2.2, устрани противоречия и сохрани единую полную спецификацию в `docs/MASTER_SPEC.md`.
 
 Приступай к реальной разработке первых официальных карт Аркады и пользовательской Мастерской карт.
+
+
+
+### Update 2.4 — records and discoveries (2026-10-15)
+
+This update supersedes conflicting earlier sections only for leaderboards/discovery/achievements, preserving all gameplay, camera, art, map, input, mode and console plans and the current main-menu order.
+
+- **Official Arcade records:** separate local best score and fastest successful time for each playable authored level; friends/world rankings are planned integrations only. Result comparisons must be rules-/map-version scoped; user maps and playtests never enter official rankings.
+- **Personal discoveries:** display only actually discovered artifacts; never display hidden placeholders, `found/total` counters, percentage completion or unrevealed names.
+- **Worldwide hall:** show an artifact only after the first independently verified global claim. Exactly one first discoverer per artifact, assigned by an atomic server transaction. No offline retroactive world-first, no client-authoritative first-discovery, no invented rankings when offline.
+- **Steam Achievements:** 37 specifically designed definitions in `resources/achievements/registry.json` (8 campaign, 8 Arcade, 7 mastery, 5 arena, 5 workshop, 4 hidden secret). These are planned definitions until unlocked by real events and Steamworks. Hidden entries do not appear in in-game UI before unlock, though Steam metadata cannot promise absolute secrecy.
+- **Verification:** full Godot tests/Windows and Steam Deck runtime checks remain mandatory. No server or Steam capability may be claimed before actual integration/verification.
+
+Development status, known exclusions and next steps: `docs/V24_PROGRESS.md`.
