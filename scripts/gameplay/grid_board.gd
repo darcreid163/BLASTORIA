@@ -102,3 +102,15 @@ func load_authored(definition: LevelDefinition) -> bool:
 		for x in range(width):
 			cells[Vector2i(x, y)] = {"#": Cell.WALL, ".": Cell.FLOOR, "C": Cell.CRATE}[definition.rows[y][x]]
 	return reachable(definition.spawn, true).has(exit_cell)
+
+# Call only after MapValidationService validates, or from that validator after terrain checks.
+func load_map(data: Dictionary) -> void:
+	width = int(data.width)
+	height = int(data.height)
+	exit_cell = Vector2i(-1, -1)
+	cells.clear()
+	landmarks.clear()
+	guaranteed_drops.clear()
+	for y in range(height):
+		for x in range(width):
+			cells[Vector2i(x, y)] = {".": Cell.FLOOR, "#": Cell.WALL, "C": Cell.CRATE}[data.rows[y][x]]

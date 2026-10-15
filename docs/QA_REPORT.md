@@ -1,40 +1,42 @@
-# BLASTORIA 0.4 development report
+# BLASTORIA 0.5 — отчёт разработки
 
-Date: 2026-10-15. Stage: prototype, first Classic Core / Large Worlds slice under master prompt 2.0.
-Engine: Godot 4.5.1.stable.official.f62fdbde1, Linux x86_64, headless.
+Дата: 15.10.2026. Godot 4.5.1.stable.official.f62fdbde1, Linux x86_64, headless.
+Срез Master Prompt 2.3: первые официальные карты и базовая Мастерская.
 
-| Check | Actual result | Evidence |
+| Проверка | Результат | Свидетельство |
 | --- | --- | --- |
-| New MASTER_SPEC.md attachment bytes | Exact match | qa/spec_sha256.txt |
-| Previous MASTER_PROMPT_RU.md | Preserved unchanged, exact original attachment match | qa/spec_sha256.txt |
-| Source import and test parser | PASS | qa/import.txt, qa/parse_tests.txt |
-| Behavioral/integration tests | 182 passed / 0 failed | qa/tests.txt |
-| Main scene startup | PASS, 120 frames headless | qa/smoke.txt |
-| Fresh source import without .godot | PASS | qa/clean_import.txt |
-| Windows x86_64 release export | PASS; PE32+ GUI executable | qa/export_windows.txt, qa/binary_sha256.txt |
-| Linux release export and startup | PASS | qa/export_linux.txt, qa/exported_linux_smoke.txt |
-| Exported Adventure/Classic/Training/Arcade entry and dynamic actors | PASS, external QA script, headless | qa/exported_modes.txt |
-| Native Windows 0.4 run | NOT TESTED | No Windows/Wine runtime |
-| Rendered camera/layout/art and audible sound | NOT TESTED | No graphical desktop or listening validation |
-| Physical controllers / hardware FPS | NOT TESTED / NOT MEASURED | Headless tests do not substitute hardware |
+| Архивные промпты 1 / 2.0 / 2.3 | Побайтно совпадают с вложениями | qa/spec_sha256.txt |
+| Импорт и синтаксис тестов | PASS | qa/import.txt, qa/parse_tests.txt |
+| Поведенческие и интеграционные проверки | **243 passed / 0 failed** | qa/tests.txt |
+| Главная сцена, 120 кадров | PASS | qa/smoke.txt |
+| Чистый импорт без .godot | PASS | qa/clean_import.txt |
+| Windows x86_64 release export | PASS | qa/export_windows.txt, qa/binary_sha256.txt |
+| Linux release export и запуск | PASS | qa/export_linux.txt, qa/exported_linux_smoke.txt |
+| Экспорт: прежние режимы + официальная карта + редактор и playtest | PASS | qa/exported_modes.txt |
+| Нативный запуск Windows | НЕ ПРОВЕРЕН | Нет Windows/Wine |
+| Графическое качество, слышимый звук, удобство игры | НЕ ПРОВЕРЕНЫ | Нет графической сессии/прослушивания |
+| Физический геймпад, Steam Deck/Steam Machine/SteamOS | НЕ ПРОВЕРЕНЫ | Синтетические UI-события не заменяют устройство |
 
-59 new checks cover Classic rules/abilities, 40 large-map seeds, off-screen simulation, fog,
-camera projection constraints, compass conditions and developer completion fixture, profile v4
-migration and live-scene UI/mode transitions. The previous 123 Arcade/tutorial/save/core checks remain.
-The secret integration fixture supplies exploration history to test transitions; it is not an organic
-human playthrough of the full secret. Audio playback is disabled in headless mode; asset/event/bus
-validation remains separate from hearing. Camera math and actual Camera3D movement are checked,
-but image composition and edge occlusion need Windows visual acceptance.
+Сохранены 182 регрессионные проверки прежних версий. 61 новая проверка охватывает:
+реестр 100 слотов/10 тем с честными статусами, три отличающиеся авторские геометрии,
+фиксированные данные и повтор, победу без выхода, заморозку времени/однократный бонус,
+обязательных и необязательных врагов, проигрыш/таймер/дуэль, 40 seed генератора,
+точные ограничения объектов и отказы несовместимых конфигураций, 15 вариантов повреждённых
+данных, размер файла, обход каталога, импорт, совпадение отпечатка после JSON roundtrip,
+undo/redo, ввод мыши/клавиатуры/синтетических кнопок геймпада, сохранение прогресса,
+отделение пользовательских результатов, возврат из playtest и сохранность редактора.
 
-Fixed during this iteration: legacy JSON float key codes could collide with new integer default keys
-and cause custom bindings to reset; normalization and validation now preserve the old layout.
-Classic retry now rolls score back to stage entry to prevent repeated-stage score farming.
-A contact/immunity test initially put the enemy in lethal fire; the fixture was corrected to isolate
-contact semantics. Test-script naming collision was caught by parser preflight before execution.
+Найдено и исправлено: JSON загружает числа как float, поэтому прямое хеширование давало
+другой идентификатор той же карты. Нормализация целочисленных значений сохраняет совпадение
+после экспорта/импорта. Синтаксические ошибки вывода типов найдены до запуска тестов.
+Стандартная схема клавиш переведена на стрелки с сохранением личных переназначений.
 
-Implemented: three Classic stages, eight power mechanics, hidden exits/contact/timer/penalty,
-one 41×31 Adventure, smooth camera, fog/maps, first secret/collection, compatible settings saves.
-Not implemented: 50 Classic stages/bonus rounds, 40 authored Adventure levels/bosses, nine other
-secrets, final art/music/quality profiles, four-player/co-op/online, Steam integration.
-Previous archives and branch history remain available. No main merge or Steam publication.
-Next: owner Windows acceptance → observed fixes → Graphics Alpha and first-world authored content.
+Проверки победы на официальных этапах используют контролируемые состояния модели,
+а не органическое прохождение человеком. Связность и стартовое укрытие проверены;
+тактическая решаемость/баланс каждого уровня должны быть приняты при ручной игре.
+Не заявлены: 100 готовых уровней, десять реализованных официальных секретов, полноценный
+редактор всех будущих механик, Steam Workshop или коммерческая готовность.
+
+Сборка содержит три официальных этапа и все файлы JSON загрузчика. Экспорт проверен
+отдельным скриптом из фактического Linux-исполняемого файла; QA-скрипт не включён в PCK.
+Изменения в отдельной ветке и draft PR поверх 0.4; main не изменяется.

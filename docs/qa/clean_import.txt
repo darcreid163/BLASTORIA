@@ -9,32 +9,41 @@ Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
 [  83% ] first_scan_filesystem | Starting file scan...
 [ DONE ] first_scan_filesystem
 
-[   0% ] update_scripts_classes | Started Registering global classes... (25 steps)
+[   0% ] update_scripts_classes | Started Registering global classes... (34 steps)
 [   0% ] update_scripts_classes | AudioManager
-[   3% ] update_scripts_classes | ArcadeRun
-[   7% ] update_scripts_classes | GameConfig
-[  11% ] update_scripts_classes | GameSettings
-[  15% ] update_scripts_classes | GameState
-[  19% ] update_scripts_classes | BombSystem
-[  23% ] update_scripts_classes | EnemyAI
-[  26% ] update_scripts_classes | Exploration
-[  30% ] update_scripts_classes | GridBoard
-[  34% ] update_scripts_classes | LevelDefinition
-[  38% ] update_scripts_classes | SaveManager
-[  42% ] update_scripts_classes | SecretDefinition
-[  46% ] update_scripts_classes | SecretManager
-[  50% ] update_scripts_classes | CompassBadge
-[  53% ] update_scripts_classes | ExplorationMap
-[  57% ] update_scripts_classes | GameHUD
-[  61% ] update_scripts_classes | InputRouter
-[  65% ] update_scripts_classes | BoardView
-[  69% ] update_scripts_classes | FollowCamera
-[  73% ] update_scripts_classes | 
-[  76% ] update_scripts_classes | 
-[  80% ] update_scripts_classes | 
-[  84% ] update_scripts_classes | 
-[  88% ] update_scripts_classes | 
-[  92% ] update_scripts_classes | 
+[   2% ] update_scripts_classes | ArcadeRun
+[   5% ] update_scripts_classes | GameConfig
+[   8% ] update_scripts_classes | GameSettings
+[  11% ] update_scripts_classes | GameState
+[  14% ] update_scripts_classes | BombSystem
+[  17% ] update_scripts_classes | EnemyAI
+[  20% ] update_scripts_classes | Exploration
+[  22% ] update_scripts_classes | GridBoard
+[  25% ] update_scripts_classes | LevelDefinition
+[  28% ] update_scripts_classes | ArcadeLevelRegistry
+[  31% ] update_scripts_classes | ArcadeProgressionManager
+[  34% ] update_scripts_classes | CustomMapDocument
+[  37% ] update_scripts_classes | CustomMapGenerator
+[  40% ] update_scripts_classes | CustomMapLibrary
+[  42% ] update_scripts_classes | MapValidationService
+[  45% ] update_scripts_classes | SaveManager
+[  48% ] update_scripts_classes | SecretDefinition
+[  51% ] update_scripts_classes | SecretManager
+[  54% ] update_scripts_classes | CompassBadge
+[  57% ] update_scripts_classes | CustomMapEditor
+[  60% ] update_scripts_classes | ExplorationMap
+[  62% ] update_scripts_classes | GameHUD
+[  65% ] update_scripts_classes | InputRouter
+[  68% ] update_scripts_classes | MapPreviewRenderer
+[  71% ] update_scripts_classes | BoardView
+[  74% ] update_scripts_classes | FollowCamera
+[  77% ] update_scripts_classes |
+[  80% ] update_scripts_classes |
+[  82% ] update_scripts_classes |
+[  85% ] update_scripts_classes |
+[  88% ] update_scripts_classes |
+[  91% ] update_scripts_classes |
+[  94% ] update_scripts_classes |
 [ DONE ] update_scripts_classes
 
 [   0% ] _update_scan_actions | Started Scanning actions... (11 steps)

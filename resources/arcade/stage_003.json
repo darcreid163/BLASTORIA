@@ -1,0 +1,122 @@
+{
+  "format": 1,
+  "id": "arcade_003",
+  "revision": 1,
+  "title": "03 · Цепной сад",
+  "author": "BLASTORIA",
+  "description": "Авторский этап Зелёного лабиринта",
+  "created": "2026-10-15",
+  "modified": "2026-10-15",
+  "mode": "solo",
+  "theme": "green_maze",
+  "width": 25,
+  "height": 17,
+  "seed": 23003,
+  "generator_version": 0,
+  "rows": [
+    "#########################",
+    "#.......................#",
+    "#.......................#",
+    "#...####...####...####..#",
+    "#..C....C...............#",
+    "#.......CCC.............#",
+    "#...####...####...####..#",
+    "#..C......C....C........#",
+    "#..............CCC......#",
+    "#.......................#",
+    "#...####...####..C####..#",
+    "#.......CCC.............#",
+    "#..............CCC......#",
+    "#...####...####...####..#",
+    "#.......................#",
+    "#.......................#",
+    "#########################"
+  ],
+  "spawns": [
+    [
+      1,
+      1
+    ]
+  ],
+  "enemies": [
+    {
+      "cell": [
+        9,
+        8
+      ],
+      "kind": "patrol",
+      "step": 42,
+      "required": true
+    },
+    {
+      "cell": [
+        16,
+        4
+      ],
+      "kind": "patrol",
+      "step": 48,
+      "required": true
+    },
+    {
+      "cell": [
+        22,
+        12
+      ],
+      "kind": "chaser",
+      "step": 54,
+      "required": true
+    }
+  ],
+  "powerups": [
+    {
+      "cell": [
+        3,
+        4
+      ],
+      "kind": "capacity",
+      "hidden": true
+    },
+    {
+      "cell": [
+        3,
+        7
+      ],
+      "kind": "capacity",
+      "hidden": true
+    },
+    {
+      "cell": [
+        10,
+        7
+      ],
+      "kind": "range",
+      "hidden": true
+    },
+    {
+      "cell": [
+        17,
+        10
+      ],
+      "kind": "remote",
+      "hidden": true
+    },
+    {
+      "cell": [
+        22,
+        14
+      ],
+      "kind": "speed",
+      "hidden": false
+    }
+  ],
+  "secrets": [],
+  "rules": {
+    "capacity": 1,
+    "range": 2,
+    "fuse_ticks": 150,
+    "remote": false,
+    "time_limit": 0,
+    "goal": "eliminate"
+  },
+  "generation": {}
+}

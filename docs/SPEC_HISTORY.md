@@ -1,12 +1,9 @@
-# Specification history
+# История спецификации
 
-Active: MASTER_SPEC.md — owner-approved Master Development Prompt 2.0, received 2026-10-15.
-SHA-256: `d61d7a595874fd48169347f37164c45936876477654de30021c891ca8a2ca122`. Exact attachment bytes, including CRLF.
+Активна единая MASTER_SPEC.md (2.3). Архивы исходных вложений не редактируются.
 
-MASTER_PROMPT_RU.md remains the unmodified earlier specification for audit/history.
-Where they differ, MASTER_SPEC.md takes precedence. ARCADE_ADDENDUM_RU.md remains the
-implemented arcade_v1 preset; v2 expands future modes without silently changing old records.
+- MASTER_PROMPT_2_0_RU.md: SHA-256 `d61d7a595874fd48169347f37164c45936876477654de30021c891ca8a2ca122`
+- MASTER_PROMPT_2_3_RU.md: SHA-256 `36b950d6c48b848893e777d3843153ca225bde18bad07e902d09b27d2ea228a9`
 
-0.4 implements the first Classic Core / Large Worlds slice and compass secret.
-The 50-level classic series, 40 authored adventure levels, bosses, full art and nine other
-secret scenarios remain planned; their specification is not a completion claim.
+2.1/2.2 отдельно не получены; явно повторённые требования включены из 2.3.
+0.5: первые авторские этапы и базовая Мастерская; 100 готовых уровней не заявлены.

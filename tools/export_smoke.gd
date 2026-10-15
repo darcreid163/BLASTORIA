@@ -25,6 +25,17 @@ func run() -> void:
 	valid = valid and scene.state.board.kind(scene.state.TUTORIAL.lesson_crate) == GridBoard.Cell.CRATE
 	scene.handle_action("arcade_start")
 	valid = valid and scene.state.mode == "arcade" and scene.state.score == 0
+	scene.official.save.unlocked = 0
+	scene.start_official(1)
+	valid = valid and scene.state.mode == "official_arcade" and scene.view.exit_mesh == null and scene.state.board.width == 25
+	scene.show_workshop()
+	await process_frame
+	valid = valid and scene.workshop.visible and not scene.workshop.document.data.is_empty()
+	var rows: Array = scene.workshop.document.data.rows.duplicate()
+	scene.workshop.play(false)
+	valid = valid and scene.state.mode == "custom" and scene.state.map_data.rows == rows
+	scene.show_workshop()
+	valid = valid and scene.workshop.document.data.rows == rows
 	scene.queue_free()
 	await process_frame
 	if not valid:

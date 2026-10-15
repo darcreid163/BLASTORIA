@@ -72,7 +72,7 @@ func run(test) -> void:
 	test.check(copy.master == 1 and copy.sfx == 0 and copy.bindings.p1_up == KEY_Q, "settings: malformed values bounded and incomplete bindings rejected")
 	settings.reset_keys()
 	InputRouter.install(settings.bindings)
-	test.check(InputRouter.key_label("p1_up") == "W", "bindings: reset restores defaults")
+	test.check(settings.bindings.p1_up == KEY_UP, "bindings: reset restores defaults")
 
 	var path := "user://qa_polish_profile.json"
 	cleanup(path)

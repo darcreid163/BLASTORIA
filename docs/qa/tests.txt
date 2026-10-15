@@ -182,4 +182,65 @@ PASS: UI: classic retry rolls score back to stage entry, preventing retry farmin
 PASS: UI: classic retry retains Bomb/Fire Up and resets special powers
 PASS: UI: reinforcement actors receive real 3D views
 PASS: UI: expanded main menu fits base viewport height
-RESULT: 182 passed, 0 failed
+PASS: official: ten themes and one hundred explicitly statused slots
+PASS: official: only three authored playable stages; planned stages cannot start
+PASS: official: stage 1 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 1 reconstructs identical instance
+PASS: official: stage 1 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 2 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 2 reconstructs identical instance
+PASS: official: stage 2 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 3 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 3 reconstructs identical instance
+PASS: official: stage 3 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: three different authored topologies, not just enemy counts
+PASS: secrets: fixed ten-stage distribution and final prerequisite; implementation honestly planned
+PASS: generator: requested configuration succeeds
+PASS: generator: same seed and version produce exact same data
+PASS: generator: different seeds produce different geometry
+PASS: generator: forty seeds honor exact enemy/bonus counts, types and reachability
+PASS: generator: excluded crates and bonuses never appear
+PASS: generator: incompatible hidden bonuses rejected instead of changing requested rules
+PASS: generator: unsupported mechanism rejected explicitly
+PASS: generator: impossible object density returns bounded failure
+PASS: generator: fractional counts rejected instead of silently rounded
+PASS: generator: maximum map and enemy count validate
+PASS: custom versus: common simulation loads two players without AI
+PASS: custom versus: last surviving player wins
+PASS: custom: optional enemies do not block clear
+PASS: map rules: simultaneous player death takes precedence over clear
+PASS: custom timer: time limit fails match without campaign reinforcements
+PASS: import validation: fifteen malformed/version/type/path/bounds/spawn cases rejected
+PASS: editor: rectangle fill changes all selected cells
+PASS: editor: undo restores complete instance
+PASS: editor: redo restores edit
+PASS: editor: typed bonus placement and eyedropper preserve hidden state
+PASS: library: save full instance and export standalone file
+PASS: library: file roundtrip retains exact gameplay fingerprint
+PASS: library: import creates fresh ID without changing gameplay or overwriting original
+PASS: library: imported entry immediately visible
+PASS: library: delete path traversal rejected
+PASS: import: corrupted JSON rejected
+PASS: import: oversized input rejected before parse
+PASS: progress: sequential level lock
+PASS: progress: winning official stage persists unlock and record
+PASS: progress: records and unlocked stages survive reload
+PASS: progress: custom results cannot update official records
+PASS: controls: untouched legacy defaults migrate to arrows for player one
+PASS: controls: custom binding is not overridden by default migration
+PASS: UI: official Arcade selection opens
+PASS: UI: official stage renders with no exit
+PASS: UI: Workshop opens with generated editable preview
+PASS: UI: grid action applies selected palette object
+PASS: UI: undo restores pre-edit map
+PASS: UI: keyboard event moves editing cursor
+PASS: UI: gamepad Y event cycles palette without text input
+PASS: UI: mouse event paints selected cell
+PASS: UI: playtest loads shared simulation and hides editor
+PASS: UI: playtest clear opens result
+PASS: UI: return to editor preserves authored geometry
+PASS: UI: playtest changes neither campaign, artifacts, legacy records nor official Arcade progress
+RESULT: 243 passed, 0 failed
