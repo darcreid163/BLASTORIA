@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.4.0-dev — 2026-10-15
+
+- Adopted verbatim owner Master Development Prompt 2.0, preserved prior spec and builds.
+- Added Classic preset: three stages, range 1, concealed exit, contacts, 200-second timer and Wardens.
+- Added all eight power mechanics, remote controls, carry/death policy and score rollback on retry.
+- Added 41×31 Adventure with seeded sector spines, six enemies and instanced static geometry.
+- Added clamped smooth camera, explored-area minimap/expanded map and off-screen simulation checks.
+- Added Ghost Compass conditions, return-to-niche phase, original model, cosmetic badge and collection.
+- Added profile v4 migration; fixed numeric key collision handling for old JSON profiles.
+- Original Arcade rules/records remain separate; old technical campaign remains accessible.
+- Nine other secrets, full campaign, 50 Classic stages, bonus rounds and final art remain planned.
+
 ## 0.3.0-dev — 2026-10-15
 
 - Added authored tutorial with safe bomb lesson, guaranteed pickup and gated exit.

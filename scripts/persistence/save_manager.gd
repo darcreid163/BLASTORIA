@@ -1,7 +1,7 @@
 class_name SaveManager
 extends RefCounted
 
-const VERSION := 3
+const VERSION := 4
 var path: String = "user://profile.json"
 var unlocked: int = 0
 var language: String = "ru"
@@ -9,6 +9,7 @@ var recovered_from_backup: bool = false
 var arcade_records: Dictionary = {}
 var writable: bool = true
 var settings := GameSettings.new()
+var artifacts: Array[String] = []
 
 static func valid_int(value: Variant, low: int, high: int) -> bool:
 	return (value is int or value is float) and is_finite(float(value)) and value == floor(value) and value >= low and value <= high
@@ -35,7 +36,7 @@ func read_profile(last_level: int) -> void:
 		unlocked = int(data.unlocked)
 		language = "en" if data.get("language") == "en" else "ru"
 		arcade_records.clear()
-		# v1 has no arcade data. Migrate in memory and write v2 only on the next save.
+		# v1 has no arcade data. Migrate in memory and write current schema only on the next save.
 		if version >= 2 and data.get("arcade_records") is Dictionary:
 			for key in data.arcade_records:
 				var record = data.arcade_records[key]
@@ -43,6 +44,11 @@ func read_profile(last_level: int) -> void:
 					arcade_records[key] = {"score": int(record.score), "score_ticks": int(record.score_ticks), "best_ticks": int(record.best_ticks)}
 		if version >= 3:
 			settings.read_data(data.get("settings"))
+		artifacts.clear()
+		if version >= 4 and data.get("artifacts") is Array:
+			for id in data.artifacts:
+				if id == "ghost_compass" and not artifacts.has(id):
+					artifacts.append(id)
 		recovered_from_backup = candidate.ends_with(".bak")
 		return
 
@@ -79,7 +85,7 @@ func write_profile() -> Error:
 	var file := FileAccess.open(temporary, FileAccess.WRITE)
 	if file == null:
 		return FileAccess.get_open_error()
-	file.store_string(JSON.stringify({"version": VERSION, "unlocked": unlocked, "language": language, "arcade_records": arcade_records, "settings": settings.to_data()}))
+	file.store_string(JSON.stringify({"version": VERSION, "unlocked": unlocked, "language": language, "arcade_records": arcade_records, "settings": settings.to_data(), "artifacts": artifacts}))
 	file.flush()
 	var error := file.get_error()
 	file.close()
@@ -97,3 +103,9 @@ func write_profile() -> Error:
 	if error == OK:
 		recovered_from_backup = false
 	return error
+
+func record_secret(id: String) -> bool:
+	if not writable or id != "ghost_compass" or artifacts.has(id):
+		return false
+	artifacts.append(id)
+	return true

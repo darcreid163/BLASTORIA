@@ -9,24 +9,32 @@ Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
 [  83% ] first_scan_filesystem | Starting file scan...
 [ DONE ] first_scan_filesystem
 
-[   0% ] update_scripts_classes | Started Registering global classes... (17 steps)
+[   0% ] update_scripts_classes | Started Registering global classes... (25 steps)
 [   0% ] update_scripts_classes | AudioManager
-[   5% ] update_scripts_classes | ArcadeRun
-[  11% ] update_scripts_classes | GameConfig
-[  16% ] update_scripts_classes | GameSettings
-[  22% ] update_scripts_classes | GameState
-[  27% ] update_scripts_classes | BombSystem
-[  33% ] update_scripts_classes | EnemyAI
-[  38% ] update_scripts_classes | GridBoard
-[  44% ] update_scripts_classes | LevelDefinition
-[  50% ] update_scripts_classes | SaveManager
-[  55% ] update_scripts_classes | GameHUD
+[   3% ] update_scripts_classes | ArcadeRun
+[   7% ] update_scripts_classes | GameConfig
+[  11% ] update_scripts_classes | GameSettings
+[  15% ] update_scripts_classes | GameState
+[  19% ] update_scripts_classes | BombSystem
+[  23% ] update_scripts_classes | EnemyAI
+[  26% ] update_scripts_classes | Exploration
+[  30% ] update_scripts_classes | GridBoard
+[  34% ] update_scripts_classes | LevelDefinition
+[  38% ] update_scripts_classes | SaveManager
+[  42% ] update_scripts_classes | SecretDefinition
+[  46% ] update_scripts_classes | SecretManager
+[  50% ] update_scripts_classes | CompassBadge
+[  53% ] update_scripts_classes | ExplorationMap
+[  57% ] update_scripts_classes | GameHUD
 [  61% ] update_scripts_classes | InputRouter
-[  66% ] update_scripts_classes | BoardView
-[  72% ] update_scripts_classes | 
-[  77% ] update_scripts_classes | 
-[  83% ] update_scripts_classes | 
+[  65% ] update_scripts_classes | BoardView
+[  69% ] update_scripts_classes | FollowCamera
+[  73% ] update_scripts_classes | 
+[  76% ] update_scripts_classes | 
+[  80% ] update_scripts_classes | 
+[  84% ] update_scripts_classes | 
 [  88% ] update_scripts_classes | 
+[  92% ] update_scripts_classes | 
 [ DONE ] update_scripts_classes
 
 [   0% ] _update_scan_actions | Started Scanning actions... (11 steps)

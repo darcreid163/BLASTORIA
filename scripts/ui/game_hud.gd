@@ -3,6 +3,7 @@ extends CanvasLayer
 
 signal action_requested(action: String)
 signal volume_changed(bus: String, value: float)
+var map_view: ExplorationMap
 var status: Label
 var hint: Label
 var metrics: Label
@@ -42,6 +43,10 @@ func _ready() -> void:
 	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	hint.add_theme_font_size_override("font_size", 16)
 	layout.add_child(hint)
+	map_view = ExplorationMap.new()
+	map_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	map_view.hide()
+	add_child(map_view)
 	overlay = ColorRect.new()
 	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	overlay.color = Color(0.025, 0.065, 0.09, 0.94)
@@ -96,11 +101,33 @@ func update_state(state: GameState, arcade: ArcadeRun = null) -> void:
 	metrics.text = ""
 	if state.mode == "arcade" and arcade != null:
 		metrics.text = tr("ARCADE_METRICS") % [arcade.live_score(state), ArcadeRun.format_time(arcade.live_ticks(state))]
+	if state.mode in ["classic", "adventure"]:
+		metrics.text = tr("SOLO_METRICS") % [state.score, str(state.remaining_seconds()) if state.config.level_seconds > 0 else "∞"]
+		metrics.text += "  |  " + tr("LIVES") + ": " + str(1 if actor.alive else 0)
+		if state.penalty_phase:
+			metrics.text += "  |  " + tr("PENALTY_PHASE")
+		var active: Array[String] = []
+		for power in ["remote", "wall_pass", "bomb_pass", "flame_pass"]:
+			if actor[power]:
+				active.append(tr("POWER_" + power.to_upper()))
+		if state.tick < actor.invulnerable_until:
+			active.append(tr("POWER_INVULNERABILITY") + " %ds" % ceili(float(actor.invulnerable_until - state.tick) / state.config.tick_rate))
+		if not active.is_empty():
+			metrics.text += "\n" + " • ".join(active)
+	if map_view.visible:
+		map_view.queue_redraw()
 	hint.text = tr("DYNAMIC_CONTROLS") % InputRouter.player_hint(1)
 	if state.mode == "arena":
 		hint.text += " | " + tr("PLAYER_TWO_KEYS") % InputRouter.player_hint(2)
 	if state.mode == "tutorial":
 		hint.text += "\n" + tr(state.tutorial_hint())
+	elif state.mode in ["classic", "adventure"]:
+		hint.text += " | " + tr("REMOTE_KEY") % InputRouter.key_label("p1_detonate")
+		hint.text += "\n" + tr("HIDDEN_GOAL")
+		if state.mode == "adventure":
+			hint.text += " | " + tr("MAP_KEY")
+		if state.completion_walk:
+			hint.text = tr("COMPASS_RETURN")
 	elif state.mode != "arena":
 		hint.text += "\n" + tr("GOAL")
 
@@ -141,3 +168,28 @@ func add_volume_sliders(settings: GameSettings) -> void:
 		column.add_child(row)
 		column.move_child(row, position_index)
 		position_index += 1
+
+func set_map(state: GameState, mode: int) -> void:
+	map_view.state = state
+	map_view.expanded = mode == 2
+	map_view.visible = mode > 0 and state.mode == "adventure"
+	if mode == 2:
+		map_view.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		map_view.anchor_left = 0.12
+		map_view.anchor_right = 0.88
+		map_view.anchor_top = 0.17
+		map_view.anchor_bottom = 0.88
+	else:
+		map_view.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+		map_view.offset_left = -284
+		map_view.offset_right = -24
+		map_view.offset_top = 140
+		map_view.offset_bottom = 360
+	map_view.queue_redraw()
+
+func add_compass_badge() -> void:
+	var badge := CompassBadge.new()
+	badge.custom_minimum_size.y = 64
+	badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	column.add_child(badge)
+	column.move_child(badge, 2)

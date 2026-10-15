@@ -1,24 +1,23 @@
-# Roadmap
+# Roadmap — master prompt 2.0
 
-| Milestone | Status | Exit criterion |
+| Stage | Actual status | Next acceptance |
 | --- | --- | --- |
-| Import 0.1 + preserve master prompt | Verified | GitHub commits and original-byte match |
-| 0.2 deterministic modular prototype | Tested | Import + 47 behavioral/integration checks + scene start |
-| 0.2 Windows export | Implemented | EXE export succeeds; Windows play acceptance pending |
-| 0.2 initial Windows rendering | Verified from owner screenshots | Menu and game board visible; full playthrough still pending |
-| 0.2.1 Arcade | Tested | 83 total automated checks; updated Windows export |
-| 0.2.1 visual/input acceptance | Pending | Windows playthrough + real gamepads |
-| 0.3 gameplay polish | Implemented / 123 tests | Authored tutorial, sound, settings/rebinding; Windows/audio/controller acceptance pending |
-| Alpha | Planned | 10 authored levels, multiple enemy types, balanced progression |
-| Vertical Slice | Planned | One finished world, original art/audio and first boss |
-| Beta / Steam Demo | Planned | Windows regression, store materials, performance evidence |
-| Full RC | Planned | Four worlds, forty levels, four bosses and approved final scope |
-| Steam publication | Planned | Owner permission, release checklist and review passed |
+| Preserve prototype 0.1 and earlier master prompt | Complete in history | Keep archives |
+| 0.2 modular core / 0.2.1 Arcade / 0.3 tutorial + settings | Implemented, regression covered | Windows acceptance remains pending |
+| Adopt MASTER_SPEC.md 2.0 | Exact attachment preserved; active specification | Follow scope without overwriting original |
+| 1 — Classic Core, 0.4 slice | Three stages, eight powers, hidden exit, timer, contacts, score | Human playthrough; future 50 stages/bonus rounds |
+| 2 — Large Worlds, 0.4 slice | 41×31, follow camera, fog/minimap, off-screen logic, connected seeds | Windows camera/layout/readability and level enjoyment |
+| First secret, 0.4 slice | Ghost Compass + collection + scenarios | Organic discovery and save/reload acceptance |
+| 3 — Graphics Alpha | Planned | Original hero, improved environment/VFX, quality profiles |
+| 4 — Campaign Alpha | Planned | First world, ten authored levels, boss, progression |
+| 5 — Secrets expansion | 1 of 10 implemented; all 10 designs approved | Next chain-heart and crown, then remaining seven |
+| 6 — Multiplayer Alpha | Two-player prototype exists | 2–4 players, device assignment, selection and round series |
+| 7 — Full Campaign | Planned | Four worlds, forty levels, four bosses, all secrets |
+| 8 — Steam Demo | Planned | Finished art/content subset and verified Windows performance |
+| 9 — Release Candidate | Planned | Regression, localization, licensing, Steam requirements and owner approval |
 
-Next actions: (1) Windows/audio/visual acceptance of 0.3, (2) fix observed P0/P1,
-(3) controller assignment and real-device QA, (4) enemy profiles and authored campaign expansion.
-
-Roles from the master prompt are sequential review perspectives used by one assistant.
-No separate human developers or parallel agents were involved.
-Repository visibility was already public when assigned; it was not changed.
-Branch protection is not configured by this work; feature branch/PR preserves the imported main.
+Next: Windows acceptance of 0.4 → fix observed blockers → Graphics Alpha and authored
+room design for the first world. In parallel conceptually (not delegated agents), continue Classic
+historical preset verification and plan 50 stages/bonus rounds. No full-release completion claimed.
+Functional specialist roles are sequential review perspectives, not a claim of a separate team.
+No paid services, access grants, visibility changes, merge to main or Steam publication.

@@ -11,6 +11,9 @@ var fire: Dictionary = {}
 var drops: Dictionary = {}
 var exit_mesh: MeshInstance3D
 var materials: Dictionary = {}
+var follow := FollowCamera.new()
+var compass: Node3D
+var static_batches: Dictionary = {}
 
 func _ready() -> void:
 	camera = Camera3D.new()
@@ -85,15 +88,17 @@ func build(state: GameState) -> void:
 	fire.clear()
 	drops.clear()
 	exit_mesh = null
+	static_batches.clear()
+	compass = null
 	box(world, Vector3(0, -0.5, 0), Vector3(config.width + 0.6, 0.6, config.height + 0.6), "182e33")
 	for cell in state.board.cells:
 		var color := "34544e" if (cell.x + cell.y) % 2 == 0 else "2d4946"
-		box(world, pos(cell) + Vector3(0, -0.13, 0), Vector3(0.98, 0.2, 0.98), color)
+		static_box(pos(cell) + Vector3(0, -0.13, 0), Vector3(0.98, 0.2, 0.98), color)
 		match state.board.kind(cell):
 			GridBoard.Cell.WALL:
 				var wall_height := 0.24 if cell.y == config.height - 1 else 0.55
-				box(world, pos(cell) + Vector3(0, wall_height * 0.5, 0), Vector3(0.94, wall_height, 0.94), "53736c")
-				box(world, pos(cell) + Vector3(0, wall_height + 0.04, 0), Vector3(0.96, 0.08, 0.96), "90ac8c")
+				static_box(pos(cell) + Vector3(0, wall_height * 0.5, 0), Vector3(0.94, wall_height, 0.94), "53736c")
+				static_box(pos(cell) + Vector3(0, wall_height + 0.04, 0), Vector3(0.96, 0.08, 0.96), "90ac8c")
 			GridBoard.Cell.CRATE:
 				var node := Node3D.new()
 				world.add_child(node)
@@ -103,26 +108,47 @@ func build(state: GameState) -> void:
 				crates[cell] = node
 	if state.mode == "tutorial":
 		box(world, pos(state.TUTORIAL.checkpoint) + Vector3(0, 0.015, 0), Vector3(0.75, 0.07, 0.75), "6cbaff", true)
+	flush_static_batches()
 	for actor in state.actors:
-		var root := Node3D.new()
-		world.add_child(root)
-		root.position = pos(actor.cell)
-		var color := "ef806c" if actor.enemy else ("59e4c7" if actor.id == 0 else "ffd269")
-		# Temporary original crystal scouts; explicit geometric silhouettes.
-		var body := box(root, Vector3(0, 0.45, 0), Vector3(0.51, 0.62, 0.51), color)
-		body.rotation_degrees.y = 45
-		box(root, Vector3(0, 0.82, 0), Vector3(0.16, 0.16, 0.16), "efffdb", true)
-		box(root, Vector3(0, 0.52, 0.28), Vector3(0.34, 0.12, 0.07), "16303c")
-		actors[actor.id] = root
+		add_actor_view(actor)
+	if state.mode == "adventure":
+		for i in range(state.board.landmarks.size()):
+			var cell: Vector2i = state.board.landmarks[i]
+			# Original rune columns with one/two/three inlays hint at an ordering.
+			for n in range(i + 1):
+				box(world, pos(cell) + Vector3(-0.22 + n * 0.22, 0.05, 0), Vector3(0.12, 0.1, 0.5), "bfa9d5", true)
+		compass = Node3D.new()
+		world.add_child(compass)
+		compass.position = pos(SecretManager.COMPASS.niche) + Vector3(0, 0.4, 0)
+		for i in range(8):
+			var angle := i * TAU / 8
+			var piece := box(compass, Vector3(cos(angle), 0, sin(angle)) * 0.35, Vector3(0.16, 0.08, 0.16), "89ebed", true)
+			piece.rotation.y = angle
+		var needle := box(compass, Vector3(0, 0.07, 0), Vector3(0.12, 0.12, 0.55), "ffe395", true)
+		needle.rotation.y = PI * 0.25
+		compass.hide()
+		follow.update(camera, pos(state.actors[0].cell), config.width, config.height, 0, true)
+	else:
+		camera.size = maxf(19, config.height * 1.3)
+		camera.position = FollowCamera.OFFSET
+		camera.look_at(Vector3.ZERO)
 	if state.mode != "arena":
 		exit_mesh = box(world, pos(state.board.exit_cell) + Vector3(0, 0.02, 0), Vector3(0.8, 0.08, 0.8), "77775a")
+		exit_mesh.visible = state.exit_revealed
 
 func sync(state: GameState, delta: float) -> void:
+	if state.mode == "adventure":
+		follow.update(camera, pos(state.actors[0].cell), config.width, config.height, delta)
+		if is_instance_valid(compass):
+			compass.visible = state.secrets.revealed and not state.secrets.awarded
+			compass.rotation.y += delta * 0.7
 	for cell in crates.keys():
 		if state.board.kind(cell) != GridBoard.Cell.CRATE:
 			crates[cell].queue_free()
 			crates.erase(cell)
 	for actor in state.actors:
+		if not actors.has(actor.id):
+			add_actor_view(actor)
 		var root: Node3D = actors[actor.id]
 		root.visible = actor.alive
 		root.position = root.position.move_toward(pos(actor.cell), delta * 12.0)
@@ -160,13 +186,13 @@ func sync(state: GameState, delta: float) -> void:
 			drops.erase(cell)
 	for cell in state.powerups:
 		if not drops.has(cell):
-			var color: String = {"capacity": "6cbaff", "range": "ff9e65", "speed": "c6a1ff"}[state.powerups[cell]]
+			var color: String = {"capacity": "6cbaff", "range": "ff9e65", "speed": "c6a1ff"}.get(state.powerups[cell], "7debba")
 			var root := Node3D.new()
 			world.add_child(root)
 			root.position = pos(cell)
 			box(root, Vector3(0, 0.25, 0), Vector3(0.35, 0.35, 0.35), color, true)
 			var label := Label3D.new()
-			label.text = {"capacity": "+B", "range": "+R", "speed": "+S"}[state.powerups[cell]]
+			label.text = {"capacity": "+B", "range": "+R", "speed": "+S", "remote": "RC", "wall_pass": "WP", "bomb_pass": "BP", "flame_pass": "FP", "invulnerability": "IV"}[state.powerups[cell]]
 			label.position.y = 0.6
 			label.font_size = 32
 			label.pixel_size = 0.01
@@ -175,4 +201,39 @@ func sync(state: GameState, delta: float) -> void:
 			drops[cell] = root
 		drops[cell].visible = not state.bombs.fire.has(cell)
 	if is_instance_valid(exit_mesh):
+		exit_mesh.visible = state.exit_revealed
 		exit_mesh.material_override = material("58e3ba" if state.exit_open() else "77775a", true)
+
+func add_actor_view(actor: Dictionary) -> void:
+	var root := Node3D.new()
+	world.add_child(root)
+	root.position = pos(actor.cell)
+	var color := ("c78aff" if actor.role == "warden" else "ef806c") if actor.enemy else ("59e4c7" if actor.id == 0 else "ffd269")
+	# Temporary original crystal scouts; explicit geometric silhouettes.
+	var body := box(root, Vector3(0, 0.45, 0), Vector3(0.51, 0.62, 0.51), color)
+	body.rotation_degrees.y = 45
+	box(root, Vector3(0, 0.82, 0), Vector3(0.16, 0.16, 0.16), "efffdb", true)
+	box(root, Vector3(0, 0.52, 0.28), Vector3(0.34, 0.12, 0.07), "16303c")
+	actors[actor.id] = root
+
+func static_box(at: Vector3, dimensions: Vector3, color: String) -> void:
+	var key := color + str(dimensions)
+	if not static_batches.has(key):
+		static_batches[key] = {"size": dimensions, "color": color, "points": []}
+	static_batches[key].points.append(at)
+
+func flush_static_batches() -> void:
+	for batch in static_batches.values():
+		var mesh := BoxMesh.new()
+		mesh.size = batch.size
+		mesh.material = material(batch.color)
+		var instances := MultiMesh.new()
+		instances.transform_format = MultiMesh.TRANSFORM_3D
+		instances.mesh = mesh
+		instances.instance_count = batch.points.size()
+		for i in range(batch.points.size()):
+			instances.set_instance_transform(i, Transform3D(Basis.IDENTITY, batch.points[i]))
+		var node := MultiMeshInstance3D.new()
+		node.multimesh = instances
+		world.add_child(node)
+	static_batches.clear()
