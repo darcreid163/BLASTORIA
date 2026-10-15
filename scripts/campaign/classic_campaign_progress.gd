@@ -131,10 +131,14 @@ func record_clear(number: int, actor: Dictionary, new_score: int) -> Error:
 		stage = number + 1
 	return write_profile()
 
-func record_loss() -> Error:
+func record_loss(actor: Dictionary = {}) -> Error:
 	if not writable or lives <= 0:
 		return ERR_INVALID_DATA
 	lives -= 1
+	# Real defeat may preserve range/capacity acquired during this stage.
+	for key in ["capacity", "radius"]:
+		if actor.has(key) and SaveManager.valid_int(actor[key], 1, 100):
+			carry[key] = int(actor[key])
 	# Classic retry: bomb capacity and fire range persist; temporary/special abilities are lost.
 	for key in carry.keys():
 		if key not in ["capacity", "radius"]:
