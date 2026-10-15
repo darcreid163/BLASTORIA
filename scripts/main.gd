@@ -163,12 +163,11 @@ func handle_action(action: String) -> void:
 			classic_carry.clear()
 			classic_score = 0
 			start_game("classic", 0)
-		"collection":
-			screen = "collection"
-			var details := tr("COLLECTION_FOUND") if profile.artifacts.has("ghost_compass") else tr("COLLECTION_EMPTY")
-			hud.show_menu("COLLECTION", [["MENU", "menu"]], details + "\nКоллекция прототипа Приключения. Официальные секреты Аркады будут отдельными.")
-			if profile.artifacts.has("ghost_compass"):
-				hud.add_compass_badge()
+		"collection": show_collection_menu()
+		"discoveries": show_discoveries()
+		"secret_hall": show_secret_hall()
+		"achievements": show_achievements()
+		"records": show_official_records()
 		"settings":
 			settings_return = "pause" if screen == "pause" else "menu"
 			show_settings()
@@ -350,6 +349,65 @@ func toggle_map() -> void:
 		state.secrets.map_used = true
 	hud.set_map(state, map_mode)
 
+func show_collection_menu() -> void:
+	state.paused = true
+	screen = "collection"
+	var details := "Личные открытия появляются только после находки. Число неизвестных артефактов не раскрывается." if profile.language == "ru" else "Discoveries appear only after you find them. Unknown artifacts are never listed."
+	hud.show_menu("COLLECTION", [
+		["Мои находки" if profile.language == "ru" else "My discoveries", "discoveries"],
+		["Зал первооткрывателей" if profile.language == "ru" else "First discoverers hall", "secret_hall"],
+		["Достижения" if profile.language == "ru" else "Achievements", "achievements"],
+		["MENU", "menu"]], details)
+
+
+func show_discoveries() -> void:
+	state.paused = true
+	screen = "discoveries"
+	var details := tr("COLLECTION_FOUND") if profile.artifacts.has("ghost_compass") else tr("COLLECTION_EMPTY")
+	# Only owned artifacts are shown. Do not reveal the hidden registry, count or placeholders.
+	hud.show_menu("Мои находки" if profile.language == "ru" else "My discoveries",
+		[["COLLECTION", "collection"], ["MENU", "menu"]], details)
+	if profile.artifacts.has("ghost_compass"):
+		hud.add_compass_badge()
+
+
+func show_secret_hall() -> void:
+	state.paused = true
+	screen = "secret_hall"
+	# Do not fabricate global discoveries: a verified server and Steam identity are required.
+	var details := "Мировой реестр пока не подключён. Подтверждённые первооткрыватели появятся здесь после запуска защищённого сервиса." if profile.language == "ru" else "The verified global registry is not connected yet. First discoverers will appear here after the secure service is launched."
+	hud.show_menu("Зал первооткрывателей" if profile.language == "ru" else "First discoverers hall",
+		[["COLLECTION", "collection"], ["MENU", "menu"]], details)
+
+
+func show_achievements() -> void:
+	state.paused = true
+	screen = "achievements"
+	var details := "Каталог достижений подготовлен. Выдача достижений Steam ещё не подключена." if profile.language == "ru" else "The achievement catalog has been prepared. Steam achievement unlocks are not yet connected."
+	hud.show_menu("Достижения" if profile.language == "ru" else "Achievements",
+		[["COLLECTION", "collection"], ["MENU", "menu"]], details)
+
+
+func show_official_records() -> void:
+	state.paused = true
+	screen = "records"
+	var lines: Array[String] = []
+	for number in range(1, ArcadeLevelRegistry.playable_count() + 1):
+		var data := ArcadeLevelRegistry.load_stage(number)
+		if data.is_empty():
+			continue
+		var record := official.save.record_for(official.key_for(data))
+		var score_text := tr("NO_RECORD") if int(record.score) == 0 else str(record.score)
+		var time_text := tr("NO_RECORD") if int(record.best_ticks) == 0 else ArcadeRun.format_time(int(record.best_ticks))
+		lines.append("%s | %s: %s | %s: %s" % [data.title,
+			"Очки" if profile.language == "ru" else "Score", score_text,
+			"Время" if profile.language == "ru" else "Time", time_text])
+	if lines.is_empty():
+		lines.append(tr("NO_RECORD"))
+	hud.show_menu("Рекорды уровней" if profile.language == "ru" else "Stage records",
+		[["ARCADE", "official_menu"], ["MENU", "menu"]], "\n".join(lines))
+
+
 func show_official_menu() -> void:
 	state.paused = true
 	screen = "official_menu"
@@ -359,6 +417,7 @@ func show_official_menu() -> void:
 		if official.available(number):
 			var record := official.save.record_for(official.key_for(data))
 			buttons.append(["%s · %d очк." % [data.title, record.score], "official:%d" % number])
+	buttons.append(["Рекорды уровней" if profile.language == "ru" else "Stage records", "records"])
 	buttons.append(["Аркада v1 — архив прототипа", "arcade_menu"])
 	buttons.append(["MENU", "menu"])
 	hud.show_menu("ARCADE", buttons, "Официальная Аркада 2.3 · готовы 3 из 100 этапов.\nЦель: уничтожить обязательных врагов. Выход не нужен.\nСледующий этап открывается после победы; повторы сохраняют карту.")
