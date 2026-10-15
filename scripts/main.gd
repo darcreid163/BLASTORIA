@@ -100,7 +100,7 @@ func show_main_menu() -> void:
 	if is_instance_valid(workshop): workshop.hide()
 	hud.map_view.hide()
 	screen = "menu"
-	hud.show_menu("TITLE", [["TUTORIAL", "tutorial"], ["CAMPAIGN_MENU", "campaign_menu"], ["ADVENTURE", "adventure_menu"], ["CLASSIC", "classic_menu"], ["ARCADE", "official_menu"], ["WORKSHOP", "workshop"], ["ARENA", "arena"], ["COLLECTION", "collection"], ["SETTINGS", "settings"], ["QUIT", "quit"]], tr("SAVE_ERROR") if save_error else "")
+	hud.show_menu("TITLE", [["TUTORIAL", "tutorial"], ["CAMPAIGN_MENU", "campaign_menu"], ["ADVENTURE", "adventure_menu"], ["ARCADE", "official_menu"], ["WORKSHOP", "workshop"], ["ARENA", "arena"], ["COLLECTION", "collection"], ["SETTINGS", "settings"], ["QUIT", "quit"]], tr("SAVE_ERROR") if save_error else "")
 
 func _physics_process(_delta: float) -> void:
 	if screen != "playing":
@@ -222,7 +222,7 @@ func handle_action(action: String) -> void:
 					start_classic_campaign(true)
 				else:
 					# Manual restart keeps range/capacity only, without granting extra lives.
-					classic_carry = {"capacity": state.actors[0].capacity, "radius": state.actors[0].radius}
+					classic_carry = {"capacity": classic_progress.carry.get("capacity", CLASSIC.initial_capacity), "radius": classic_progress.carry.get("radius", CLASSIC.initial_range)}
 					classic_score = classic_progress.score
 					start_game("classic", classic_progress.stage - 1)
 			elif state.mode in ["custom", "custom_arena"]:
