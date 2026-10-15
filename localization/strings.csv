@@ -3,10 +3,10 @@ TITLE,Choose your expedition,Выбери экспедицию
 CONTINUE,Continue campaign,Продолжить кампанию
 NEW_CAMPAIGN,Campaign from level 1,Кампания с первого уровня
 CAMPAIGN,Level,Уровень
-ARENA,Local arena · 2 players,Локальная арена · 2 игрока
+ARENA,Arena,Арена
 LANGUAGE,Language: English / Русский,Язык: Русский / English
 FULLSCREEN,Toggle fullscreen · F11,Полный экран · F11
-QUIT,Exit game,Выйти из игры
+QUIT,Exit,Выйти
 QUIT_CONFIRM,Exit BLASTORIA?,Выйти из BLASTORIA?
 YES_QUIT,Yes — exit,Да — выйти
 MENU,Main menu,Главное меню
@@ -27,11 +27,11 @@ PICKUP_CAPACITY,Extra bomb capacity!,Увеличен запас бомб!
 PICKUP_RANGE,Blast range increased!,Увеличен радиус взрыва!
 PICKUP_SPEED,Movement speed increased!,Увеличена скорость!
 SAVE_ERROR,Could not save progress. Check disk permissions.,Не удалось сохранить прогресс. Проверь доступ к диску.
-ARCADE,Arcade · solo score attack,Аркада · одиночный рекорд
+ARCADE,Arcade,Аркада
 START_RUN,Start run,Начать забег
 RESTART_RUN,Restart whole run · R,Заново весь забег · R
 ARCADE_RESTART_NOTE,Restart resets points and time. Menu abandons this run.,Повтор сбрасывает очки и время. Выход в меню завершает забег без записи рекорда.
-ARCADE_RULES,"%d fixed levels. Crate +%d / enemy +%d / pickup +%d. Clear +%d. Finish before %d s: +%d per second remaining. One life; pause stops the timer. Only your blasts earn destruction points.","%d фиксированных уровня. Ящик +%d / враг +%d / бонус +%d. Прохождение +%d. Быстрее %d с: +%d за оставшуюся секунду. Одна жизнь; пауза останавливает таймер. Очки за разрушения — только от твоих взрывов."
+ARCADE_RULES,%d fixed levels. Crate +%d / enemy +%d / pickup +%d. Clear +%d. Finish before %d s: +%d per second remaining. One life; pause stops the timer. Only your blasts earn destruction points.,%d фиксированных уровня. Ящик +%d / враг +%d / бонус +%d. Прохождение +%d. Быстрее %d с: +%d за оставшуюся секунду. Одна жизнь; пауза останавливает таймер. Очки за разрушения — только от твоих взрывов.
 RECORDS,Best score: %d | Fastest full run: %s,Рекорд очков: %d | Лучшее полное прохождение: %s
 NO_RECORD,—,—
 RUN_RESULT,Total score: %d | Time: %s | Stage time bonus: +%d,Всего очков: %d | Время: %s | Бонус времени уровня: +%d
@@ -40,7 +40,7 @@ NEW_TIME_RECORD,New full-run time record!,Новый рекорд времени
 ARCADE_DONE,Arcade completed!,Аркада пройдена!
 ARCADE_METRICS,Score: %d  |  Run time: %s,Очки: %d  |  Время забега: %s
 ARCADE_CONTROLS,WASD + Space | Esc: pause | Pad: D-pad + A | One life for the whole run,WASD + Пробел | Esc: пауза | Геймпад: крестовина + A | Одна жизнь на весь забег
-TUTORIAL,Training · first steps,Обучение · первые шаги
+TUTORIAL,Training,Обучение
 TUTORIAL_DONE,Training complete!,Обучение завершено!
 TUT_MOVE,1/4 Walk onto the blue floor marker.,1/4 Дойди до синей отметки на полу.
 TUT_BOMB,2/4 Place a bomb next to the wooden crate and retreat at least 3 cells along the corridor.,2/4 Поставь бомбу рядом с ящиком и отступи минимум на 3 клетки по коридору.
@@ -69,40 +69,42 @@ BACK_SAVE,Back and save,Назад и сохранить
 CANCEL,Cancel,Отмена
 DYNAMIC_CONTROLS,P1: %s | Esc: pause | Pad: D-pad + A,И1: %s | Esc: пауза | Геймпад: крестовина + A
 PLAYER_TWO_KEYS,P2: %s,И2: %s
-CLASSIC,Классика,Classic
-ADVENTURE,Приключение,Adventure
-ENTER_RUINS,Войти в древние руины,Enter the ancient ruins
-LEGACY_CAMPAIGN,Продолжить тестовую кампанию 0.3,Continue 0.3 test campaign
-START_CLASSIC,Начать классическую серию,Start classic series
-CLASSIC_DONE,Классическая серия пройдена,Classic series complete
-ADVENTURE_DONE,Руины исследованы,Ruins cleared
-CLASSIC_RULES,"Три тестовых уровня. Одна бомба, радиус 1. Найдите выход под блоком и победите всех врагов. Контакт с врагом опасен. 200 игровых секунд; затем появятся Стражи. Взрыв по открытому выходу вызывает подкрепление.","Three test stages. One bomb, range 1. Uncover the exit and defeat every enemy. Contact is dangerous. After 200 game seconds, Wardens arrive. Bombing an exposed exit summons reinforcements."
-ADVENTURE_RULES,"Древние руины: большой лабиринт 41×31, шесть противников и скрытый выход. Исследуйте ответвления и необычные узоры. Tab переключает карту: скрыта / мини / большая. Время не ограничено. Продолжение начинает уровень заново.","Ancient ruins: a 41×31 maze, six enemies and a hidden exit. Explore side paths and unusual markings. Tab cycles map: hidden / mini / large. No time limit. Continue restarts the level."
-COLLECTION,Коллекция секретов,Secret collection
-COLLECTION_EMPTY,Артефакты ещё не найдены. Древние руины хранят следы забытых путешественников.,No artifacts found yet. Ancient ruins hold traces of forgotten travelers.
-COLLECTION_FOUND,"Призрачный компас
-Легендарный артефакт. Его стрелка помнит путь исследователя.
-Найдено: 1 / 10. Остальные артефакты появятся в будущих мирах.","Ghost Compass
+CLASSIC,Classic,Классика
+ADVENTURE,Adventure,Приключение
+ENTER_RUINS,Enter the ancient ruins,Войти в древние руины
+LEGACY_CAMPAIGN,Continue 0.3 test campaign,Продолжить тестовую кампанию 0.3
+START_CLASSIC,Start classic series,Начать классическую серию
+CLASSIC_DONE,Classic series complete,Классическая серия пройдена
+ADVENTURE_DONE,Ruins cleared,Руины исследованы
+CLASSIC_RULES,"Three test stages. One bomb, range 1. Uncover the exit and defeat every enemy. Contact is dangerous. After 200 game seconds, Wardens arrive. Bombing an exposed exit summons reinforcements.","Три тестовых уровня. Одна бомба, радиус 1. Найдите выход под блоком и победите всех врагов. Контакт с врагом опасен. 200 игровых секунд; затем появятся Стражи. Взрыв по открытому выходу вызывает подкрепление."
+ADVENTURE_RULES,"Ancient ruins: a 41×31 maze, six enemies and a hidden exit. Explore side paths and unusual markings. Tab cycles map: hidden / mini / large. No time limit. Continue restarts the level.","Древние руины: большой лабиринт 41×31, шесть противников и скрытый выход. Исследуйте ответвления и необычные узоры. Tab переключает карту: скрыта / мини / большая. Время не ограничено. Продолжение начинает уровень заново."
+COLLECTION,Secret collection,Коллекция секретов
+COLLECTION_EMPTY,No artifacts found yet. Ancient ruins hold traces of forgotten travelers.,Артефакты ещё не найдены. Древние руины хранят следы забытых путешественников.
+COLLECTION_FOUND,"Ghost Compass
 Legendary artifact. Its needle remembers the explorer’s path.
-Found: 1 / 10. Other artifacts will arrive with future worlds."
-MAP_TITLE,Исследовано: %d%%,Explored: %d%%
-MAP_KEY,Tab / Select — карта,Tab / Select — map
-HIDDEN_GOAL,Найдите выход под блоком и уничтожьте всех противников.,Find the exit under a block and defeat all enemies.
-SOLO_METRICS,Очки: %d  |  Время: %s,Score: %d  |  Time: %s
-SOLO_RESULT,Итоговый счёт: %d,Final score: %d
-PENALTY_PHASE,Время вышло! Стражи в лабиринте,Time is up! Wardens are in the maze
-REMOTE_KEY,%s / B — подрыв при наличии RC,%s / B — detonate with RC
-KEY_DETONATE,Дистанционный подрыв,Remote detonation
-COMPASS_RETURN,"Руины затихли. В стартовой нише что-то светится… Вернитесь за находкой или снова войдите в выход, чтобы завершить уровень.","The ruins fall silent. Something glows in the starting alcove… Return for it, or re-enter the exit to finish."
-COMPASS_REWARD,✦ Призрачный компас найден! +50 000 очков. Артефакт добавлен в коллекцию.,"✦ Ghost Compass found! +50,000 points. Artifact added to the collection."
-PICKUP_REMOTE,Дистанционный подрыв получено,Remote detonator acquired
-POWER_REMOTE,Дистанционный подрыв,Remote detonator
-PICKUP_WALL_PASS,Проход сквозь блоки получено,Wall pass acquired
-POWER_WALL_PASS,Проход сквозь блоки,Wall pass
-PICKUP_BOMB_PASS,Проход сквозь бомбы получено,Bomb pass acquired
-POWER_BOMB_PASS,Проход сквозь бомбы,Bomb pass
-PICKUP_FLAME_PASS,Защита от огня получено,Flame pass acquired
-POWER_FLAME_PASS,Защита от огня,Flame pass
-PICKUP_INVULNERABILITY,Неуязвимость получено,Invulnerability acquired
-POWER_INVULNERABILITY,Неуязвимость,Invulnerability
-LIVES,Жизни,Lives
+Found: 1 / 10. Other artifacts will arrive with future worlds.","Призрачный компас
+Легендарный артефакт. Его стрелка помнит путь исследователя.
+Найдено: 1 / 10. Остальные артефакты появятся в будущих мирах."
+MAP_TITLE,Explored: %d%%,Исследовано: %d%%
+MAP_KEY,Tab / Select — map,Tab / Select — карта
+HIDDEN_GOAL,Find the exit under a block and defeat all enemies.,Найдите выход под блоком и уничтожьте всех противников.
+SOLO_METRICS,Score: %d  |  Time: %s,Очки: %d  |  Время: %s
+SOLO_RESULT,Final score: %d,Итоговый счёт: %d
+PENALTY_PHASE,Time is up! Wardens are in the maze,Время вышло! Стражи в лабиринте
+REMOTE_KEY,%s / B — detonate with RC,%s / B — подрыв при наличии RC
+KEY_DETONATE,Remote detonation,Дистанционный подрыв
+COMPASS_RETURN,"The ruins fall silent. Something glows in the starting alcove… Return for it, or re-enter the exit to finish.","Руины затихли. В стартовой нише что-то светится… Вернитесь за находкой или снова войдите в выход, чтобы завершить уровень."
+COMPASS_REWARD,"✦ Ghost Compass found! +50,000 points. Artifact added to the collection.",✦ Призрачный компас найден! +50 000 очков. Артефакт добавлен в коллекцию.
+PICKUP_REMOTE,Remote detonator acquired,Дистанционный подрыв получено
+POWER_REMOTE,Remote detonator,Дистанционный подрыв
+PICKUP_WALL_PASS,Wall pass acquired,Проход сквозь блоки получено
+POWER_WALL_PASS,Wall pass,Проход сквозь блоки
+PICKUP_BOMB_PASS,Bomb pass acquired,Проход сквозь бомбы получено
+POWER_BOMB_PASS,Bomb pass,Проход сквозь бомбы
+PICKUP_FLAME_PASS,Flame pass acquired,Защита от огня получено
+POWER_FLAME_PASS,Flame pass,Защита от огня
+PICKUP_INVULNERABILITY,Invulnerability acquired,Неуязвимость получено
+POWER_INVULNERABILITY,Invulnerability,Неуязвимость
+LIVES,Lives,Жизни
+CAMPAIGN_MENU,Campaign,Кампания
+WORKSHOP,Workshop,Мастерская

@@ -1,0 +1,18 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+PASS: Russian menu labels and order: Обучение / Кампания / Приключение / Классика / Аркада / Мастерская / Арена / Коллекция секретов / Настройки / Выйти
+PASS: Training opens tutorial
+PASS: Campaign opens its submenu
+PASS: Continue resumes unlocked campaign stage
+PASS: New campaign starts first stage
+PASS: Adventure heading translated
+PASS: Classic heading translated
+PASS: Arcade opens official stage selection
+PASS: Workshop opens editor
+PASS: Arena starts local match
+PASS: Secret collection heading translated
+PASS: Settings opens
+PASS: Exit opens confirmation
+PASS: English columns no longer reversed
+PASS: Ten menu entries fit base viewport height
+MENU SMOKE: PASS

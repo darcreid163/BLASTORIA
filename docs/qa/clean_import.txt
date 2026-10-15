@@ -9,38 +9,39 @@ Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
 [  83% ] first_scan_filesystem | Starting file scan...
 [ DONE ] first_scan_filesystem
 
-[   0% ] update_scripts_classes | Started Registering global classes... (34 steps)
+[   0% ] update_scripts_classes | Started Registering global classes... (35 steps)
 [   0% ] update_scripts_classes | AudioManager
 [   2% ] update_scripts_classes | ArcadeRun
 [   5% ] update_scripts_classes | GameConfig
 [   8% ] update_scripts_classes | GameSettings
 [  11% ] update_scripts_classes | GameState
-[  14% ] update_scripts_classes | BombSystem
-[  17% ] update_scripts_classes | EnemyAI
-[  20% ] update_scripts_classes | Exploration
+[  13% ] update_scripts_classes | BombSystem
+[  16% ] update_scripts_classes | EnemyAI
+[  19% ] update_scripts_classes | Exploration
 [  22% ] update_scripts_classes | GridBoard
 [  25% ] update_scripts_classes | LevelDefinition
-[  28% ] update_scripts_classes | ArcadeLevelRegistry
-[  31% ] update_scripts_classes | ArcadeProgressionManager
-[  34% ] update_scripts_classes | CustomMapDocument
-[  37% ] update_scripts_classes | CustomMapGenerator
-[  40% ] update_scripts_classes | CustomMapLibrary
-[  42% ] update_scripts_classes | MapValidationService
-[  45% ] update_scripts_classes | SaveManager
-[  48% ] update_scripts_classes | SecretDefinition
-[  51% ] update_scripts_classes | SecretManager
-[  54% ] update_scripts_classes | CompassBadge
-[  57% ] update_scripts_classes | CustomMapEditor
-[  60% ] update_scripts_classes | ExplorationMap
-[  62% ] update_scripts_classes | GameHUD
-[  65% ] update_scripts_classes | InputRouter
-[  68% ] update_scripts_classes | MapPreviewRenderer
-[  71% ] update_scripts_classes | BoardView
-[  74% ] update_scripts_classes | FollowCamera
+[  27% ] update_scripts_classes | ArcadeLevelRegistry
+[  30% ] update_scripts_classes | ArcadeProgressionManager
+[  33% ] update_scripts_classes | CustomMapDocument
+[  36% ] update_scripts_classes | CustomMapGenerator
+[  38% ] update_scripts_classes | CustomMapLibrary
+[  41% ] update_scripts_classes | MapValidationService
+[  44% ] update_scripts_classes | SaveManager
+[  47% ] update_scripts_classes | SecretDefinition
+[  50% ] update_scripts_classes | SecretManager
+[  52% ] update_scripts_classes | CompassBadge
+[  55% ] update_scripts_classes | CustomMapEditor
+[  58% ] update_scripts_classes | ExplorationMap
+[  61% ] update_scripts_classes | GameHUD
+[  63% ] update_scripts_classes | InputRouter
+[  66% ] update_scripts_classes | MapPreviewRenderer
+[  69% ] update_scripts_classes | BoardView
+[  72% ] update_scripts_classes | FollowCamera
+[  75% ] update_scripts_classes |
 [  77% ] update_scripts_classes |
 [  80% ] update_scripts_classes |
-[  82% ] update_scripts_classes |
-[  85% ] update_scripts_classes |
+[  83% ] update_scripts_classes |
+[  86% ] update_scripts_classes |
 [  88% ] update_scripts_classes |
 [  91% ] update_scripts_classes |
 [  94% ] update_scripts_classes |
