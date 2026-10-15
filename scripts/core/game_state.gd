@@ -165,7 +165,7 @@ func advance(commands: Dictionary = {}) -> void:
 				if enemy.enemy and enemy.alive:
 					enemy.role = "warden"
 					enemy.wall_pass = true
-					enemy.step = maxi(6, int(enemy.step) / 2)
+					enemy.step = maxi(6, int(float(enemy.step) / 2.0))
 		feedback.emit("defeat")
 	# Remote input is resolved before the tick's hazards, with the same damage priority.
 	for actor in actors:
@@ -303,7 +303,7 @@ func check_end() -> void:
 					result = "ADVENTURE_DONE"
 			elif mode == "classic":
 				score += config.score_stage_clear
-				result = "CLASSIC_DONE" if level + 1 == config.campaign_seeds.size() else "LEVEL_CLEAR"
+				result = "CLASSIC_DONE" if level + 1 == ClassicStagePlan.MAX_STAGES else "LEVEL_CLEAR"
 			else:
 				result = "CAMPAIGN_DONE" if level + 1 == config.campaign_seeds.size() else "LEVEL_CLEAR"
 	else:
