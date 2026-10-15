@@ -311,7 +311,7 @@ func on_finished(result: String) -> void:
 			elif result == "LEVEL_CLEAR":
 				buttons.push_front(["NEXT", "next"])
 		elif result == "DEFEAT":
-			if classic_progress.record_loss() != OK:
+			if classic_progress.record_loss(state.actors[0]) != OK:
 				details += "\nНе удалось сохранить потерянную жизнь."
 	if state.mode in ["classic", "adventure"]:
 		details = tr("SOLO_RESULT") % state.score
