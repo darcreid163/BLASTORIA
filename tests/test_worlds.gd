@@ -124,17 +124,16 @@ func run(test: SceneTree) -> void:
 	test.check(state.result == "DEFEAT", "powerups: temporary invulnerability expires exactly at boundary")
 
 	state = fresh()
-	for cell in state.hidden_powerups:
-		state.board.cells[cell + Vector2i.UP] = GridBoard.Cell.FLOOR
-		state.bombs.place(cell + Vector2i.UP, 0, 1, 8, 0, 1)
+	test.check(state.hidden_powerups.size() == 1 and state.hidden_powerups.get(ClassicStagePlan.PRIZE_CELL) == "range", "classic100: stage one has exactly one sealed Fire Up prize")
+	var prize := ClassicStagePlan.PRIZE_CELL
+	state.board.cells[prize + Vector2i.UP] = GridBoard.Cell.FLOOR
+	state.bombs.place(prize + Vector2i.UP, 0, 1, 1, 0, 1)
 	state.advance()
-	test.check(state.powerups.size() == 8 and state.hidden_powerups.is_empty(), "powerups: all eight guaranteed drops are revealed by actual destruction")
+	test.check(state.powerups.size() == 1 and state.powerups.has(prize) and state.hidden_powerups.is_empty(), "classic100: blast exposes exactly one stage-specific prize")
 	state.bombs = BombSystem.new()
-	for cell in state.powerups.keys():
-		state.actors[0].cell = cell
-		state.advance()
-	var powered_hero: Dictionary = state.actors[0]
-	test.check(powered_hero.capacity == 2 and powered_hero.radius == 2 and powered_hero.step == 8 and powered_hero.remote and powered_hero.wall_pass and powered_hero.bomb_pass and powered_hero.flame_pass and powered_hero.invulnerable_until > state.tick, "powerups: all eight effects coexist after real pickup collection")
+	state.actors[0].cell = prize
+	state.advance()
+	test.check(state.actors[0].radius == 2 and state.actors[0].capacity == 1 and state.powerups.is_empty(), "classic100: collectible Fire Up changes only blast radius")
 
 	var maps_ok := true
 	var abilities_ok := true

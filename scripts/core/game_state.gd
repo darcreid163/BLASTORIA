@@ -31,14 +31,18 @@ var secrets := SecretManager.new()
 var completion_walk: bool = false
 var left_completion_exit: bool = false
 var hidden_powerups: Dictionary = {}
+var sealed_prize_cell := Vector2i(-1, -1)
+var stage_profile: Dictionary = {}
 var map_data: Dictionary = {}
 
 
 func start(settings: GameConfig, new_mode: String, level_index: int, map_seed: int, definition: Dictionary = {}) -> void:
 	map_data = definition.duplicate(true)
-	config = settings
+	stage_profile = ClassicStagePlan.stage(level_index + 1) if new_mode == "classic" else {}
+	config = ClassicStagePlan.rules_for(settings, level_index + 1) if not stage_profile.is_empty() else settings
 	mode = new_mode
 	level = level_index
+	sealed_prize_cell = Vector2i(-1, -1)
 	seed_value = map_seed
 	rng.seed = map_seed
 	tick = 0
@@ -69,6 +73,10 @@ func start(settings: GameConfig, new_mode: String, level_index: int, map_seed: i
 			return
 	else:
 		board.generate(config, rng, mode == "arena")
+	if mode == "classic" and not stage_profile.is_empty():
+		sealed_prize_cell = ClassicStagePlan.PRIZE_CELL
+		board.cells[sealed_prize_cell] = GridBoard.Cell.CRATE
+		board.guaranteed_drops = {sealed_prize_cell: stage_profile.sealed_prize}
 	hidden_powerups = board.guaranteed_drops.duplicate()
 	exploration.setup(board)
 	exploration.reveal(board, Vector2i(1, 1))
@@ -93,6 +101,8 @@ func start(settings: GameConfig, new_mode: String, level_index: int, map_seed: i
 	add_actor(TUTORIAL.spawn if mode == "tutorial" else Vector2i(1, 1), false)
 	if mode == "arena":
 		add_actor(board.exit_cell, false)
+	elif mode == "classic" and not stage_profile.is_empty():
+		spawn_classic_enemies(int(stage_profile.enemy_count))
 	elif mode != "tutorial":
 		var starts: Array[Vector2i] = [Vector2i(config.width - 2, 1), Vector2i(1, config.height - 2), Vector2i(config.width - 4, config.height - 4)]
 		for i in range(config.enemy_counts[level]):
@@ -104,6 +114,27 @@ func start(settings: GameConfig, new_mode: String, level_index: int, map_seed: i
 			board.cells[cell] = GridBoard.Cell.FLOOR
 			add_actor(cell, true)
 			actors[-1].role = "chaser"
+
+func spawn_classic_enemies(amount: int) -> void:
+	# Sorted coordinates guarantee reproducible positions even when Dictionary iteration varies.
+	var choices: Array[Vector2i] = []
+	var origin: Vector2i = actors[0].cell
+	for p in board.cells:
+		if board.kind(p) != GridBoard.Cell.FLOOR or p == board.exit_cell:
+			continue
+		if absi(p.x - origin.x) + absi(p.y - origin.y) < 6:
+			continue
+		choices.append(p)
+	choices.sort_custom(func(a: Vector2i, b: Vector2i) -> bool:
+		return a.y * board.width + a.x < b.y * board.width + b.x)
+	for i in range(mini(amount, choices.size())):
+		var at: Vector2i = choices[rng.randi_range(0, choices.size() - 1)]
+		choices.erase(at)
+		add_actor(at, true)
+		actors[-1].role = "patrol" if level < 10 else ("chaser" if i % 3 != 2 else "warden")
+		actors[-1].step = maxi(9, int(stage_profile.enemy_step_ticks) + (i % 3) * 3)
+		actors[-1].wall_pass = actors[-1].role == "warden"
+
 
 func add_actor(cell: Vector2i, enemy: bool) -> void:
 	actors.append({"id": actors.size(), "cell": cell, "enemy": enemy, "alive": true,
@@ -129,19 +160,25 @@ func advance(commands: Dictionary = {}) -> void:
 	if map_data.is_empty() and config.level_seconds > 0 and remaining_seconds() == 0 and not penalty_phase:
 		penalty_phase = true
 		pending_penalty += config.timeout_enemies
+		if mode == "classic":
+			for enemy in actors:
+				if enemy.enemy and enemy.alive:
+					enemy.role = "warden"
+					enemy.wall_pass = true
+					enemy.step = maxi(6, int(float(enemy.step) / 2.0))
 		feedback.emit("defeat")
 	# Remote input is resolved before the tick's hazards, with the same damage priority.
 	for actor in actors:
 		if actor.alive and actor.remote and commands.get(actor.id, {}).get("detonate", false):
 			bombs.trigger(actor.id, tick)
 	var was_revealed := exit_revealed
+	var exposed_prize := mode == "classic" and powerups.has(sealed_prize_cell)
 	# Resolve hazards before movement so stepping away at the detonation tick cannot dodge damage.
 	var destroyed := bombs.advance(tick, board, config.fire_ticks)
 	if config.hidden_exit and board.kind(board.exit_cell) == GridBoard.Cell.FLOOR:
 		exit_revealed = true
 	if mode == "classic" and was_revealed and bombs.hit_cells.has(board.exit_cell):
 		pending_penalty = mini(32, pending_penalty + config.exit_penalty_enemies)
-	spawn_penalties()
 	if bombs.detonations_this_tick > 0:
 		feedback.emit("explosion")
 	if not destroyed.is_empty():
@@ -160,6 +197,11 @@ func advance(commands: Dictionary = {}) -> void:
 			hidden_powerups.erase(cell)
 		elif cell != board.exit_cell and rng.randf() < config.drop_chance:
 			powerups[cell] = ["capacity", "range", "speed"][rng.randi_range(0, 2)]
+	# Only a subsequent detonation hitting an already uncovered, uncollected prize is punished.
+	if exposed_prize and bombs.hit_cells.has(sealed_prize_cell):
+		powerups.erase(sealed_prize_cell)
+		pending_penalty = mini(32, pending_penalty + config.exit_penalty_enemies)
+	spawn_penalties()
 	apply_damage()
 	for actor in actors:
 		if not actor.alive:
@@ -261,7 +303,7 @@ func check_end() -> void:
 					result = "ADVENTURE_DONE"
 			elif mode == "classic":
 				score += config.score_stage_clear
-				result = "CLASSIC_DONE" if level + 1 == config.campaign_seeds.size() else "LEVEL_CLEAR"
+				result = "CLASSIC_DONE" if level + 1 == ClassicStagePlan.MAX_STAGES else "LEVEL_CLEAR"
 			else:
 				result = "CAMPAIGN_DONE" if level + 1 == config.campaign_seeds.size() else "LEVEL_CLEAR"
 	else:
@@ -290,6 +332,7 @@ func snapshot() -> Dictionary:
 		"result": result, "rng_state": rng.state, "score": score, "time_bonus": time_bonus,
 		"fire_owners": bombs.fire_owners.duplicate(true), "level_ticks": level_ticks,
 		"exit_revealed": exit_revealed, "pending_penalty": pending_penalty,
+		"sealed_prize_cell": sealed_prize_cell, "penalty_phase": penalty_phase,
 		"explored": exploration.known.duplicate(), "completion_walk": completion_walk,
 		"secret": [secrets.map_used, secrets.damaged, secrets.visited.duplicate(), secrets.failed_order, secrets.revealed, secrets.awarded]}
 

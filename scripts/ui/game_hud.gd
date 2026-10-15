@@ -100,7 +100,7 @@ func show_menu(title: String, buttons: Array, details: String = "") -> void:
 			child.grab_focus()
 			break
 
-func update_state(state: GameState, arcade: ArcadeRun = null) -> void:
+func update_state(state: GameState, arcade: ArcadeRun = null, classic_lives: int = 1) -> void:
 	var actor: Dictionary = state.actors[0]
 	status.text = "%s  |  %s %d  |  %s %d  |  B %d / R %d" % ["BLASTORIA", tr(state.mode.to_upper()), state.level + 1, tr("ENEMIES"), state.alive_enemies(), actor.capacity, actor.radius]
 	metrics.text = ""
@@ -108,7 +108,7 @@ func update_state(state: GameState, arcade: ArcadeRun = null) -> void:
 		metrics.text = tr("ARCADE_METRICS") % [arcade.live_score(state), ArcadeRun.format_time(arcade.live_ticks(state))]
 	if state.mode in ["classic", "adventure"]:
 		metrics.text = tr("SOLO_METRICS") % [state.score, str(state.remaining_seconds()) if state.config.level_seconds > 0 else "∞"]
-		metrics.text += "  |  " + tr("LIVES") + ": " + str(1 if actor.alive else 0)
+		metrics.text += "  |  " + tr("LIVES") + ": " + str(classic_lives if state.mode == "classic" else (1 if actor.alive else 0))
 		if state.penalty_phase:
 			metrics.text += "  |  " + tr("PENALTY_PHASE")
 		var active: Array[String] = []
