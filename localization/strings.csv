@@ -40,3 +40,32 @@ NEW_TIME_RECORD,New full-run time record!,Новый рекорд времени
 ARCADE_DONE,Arcade completed!,Аркада пройдена!
 ARCADE_METRICS,Score: %d  |  Run time: %s,Очки: %d  |  Время забега: %s
 ARCADE_CONTROLS,WASD + Space | Esc: pause | Pad: D-pad + A | One life for the whole run,WASD + Пробел | Esc: пауза | Геймпад: крестовина + A | Одна жизнь на весь забег
+TUTORIAL,Training · first steps,Обучение · первые шаги
+TUTORIAL_DONE,Training complete!,Обучение завершено!
+TUT_MOVE,1/4 Walk onto the blue floor marker.,1/4 Дойди до синей отметки на полу.
+TUT_BOMB,2/4 Place a bomb next to the wooden crate and retreat at least 3 cells along the corridor.,2/4 Поставь бомбу рядом с ящиком и отступи минимум на 3 клетки по коридору.
+TUT_PICKUP,3/4 Wait for the fire to disappear then collect the +R upgrade.,3/4 Дождись исчезновения огня и подбери усиление +R.
+TUT_EXIT,4/4 Walk through the opened passage to the green exit.,4/4 Пройди через открытый проход к зелёному выходу.
+SETTINGS,Settings,Настройки
+SETTINGS_HINT,Volumes apply immediately. Use Back and save to keep changes.,Громкость меняется сразу. Нажми «Назад и сохранить» для записи настроек.
+VOLUME_MASTER,Master volume,Общая громкость
+VOLUME_SFX,Game effects,Звуки игры
+VOLUME_UI,Menu sounds,Звуки меню
+KEYS_P1,Player 1 keyboard,Клавиши игрока 1
+KEYS_P2,Player 2 keyboard,Клавиши игрока 2
+KEY_UP,Up,Вверх
+KEY_DOWN,Down,Вниз
+KEY_LEFT,Left,Влево
+KEY_RIGHT,Right,Вправо
+KEY_BOMB,Place bomb,Поставить бомбу
+PRESS_KEY,Press a new key,Нажми новую клавишу
+BIND_HELP,Letters / digits / arrows / Space / Enter. Esc cancels. R and F11 are reserved.,Буквы / цифры / стрелки / Пробел / Enter. Esc отменяет. R и F11 зарезервированы.
+KEY_RESERVED,This key or modifier combination is reserved or unsupported.,Эта клавиша или сочетание с модификатором недоступны.
+KEY_IN_USE,This key is already assigned. Choose another.,Эта клавиша уже назначена. Выбери другую.
+KEY_SAVED,Binding changed. Use Back and save in Settings.,Клавиша изменена. Нажми «Назад и сохранить» в настройках.
+RESET_KEYS,Reset keys for both players,Сбросить клавиши обоих игроков
+BACK,Back,Назад
+BACK_SAVE,Back and save,Назад и сохранить
+CANCEL,Cancel,Отмена
+DYNAMIC_CONTROLS,P1: %s | Esc: pause | Pad: D-pad + A,И1: %s | Esc: пауза | Геймпад: крестовина + A
+PLAYER_TWO_KEYS,P2: %s,И2: %s

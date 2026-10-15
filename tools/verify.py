@@ -14,6 +14,7 @@ logs = root / 'docs' / 'qa'
 logs.mkdir(exist_ok=True)
 stages = [
     ('import', ['--editor', '--quit']),
+    ('parse_tests', ['--check-only', '--script', 'tests/run_tests.gd']),
     ('tests', ['--script', 'tests/run_tests.gd']),
     ('smoke', ['--quit-after', '120']),
 ]

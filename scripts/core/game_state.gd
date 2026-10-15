@@ -3,6 +3,8 @@ extends RefCounted
 
 signal finished(result: String)
 signal pickup(actor_id: int, kind: String)
+signal feedback(kind: String)
+const TUTORIAL = preload("res://resources/levels/tutorial.tres")
 var config: GameConfig
 var board: GridBoard
 var bombs: BombSystem
@@ -17,6 +19,8 @@ var result: String = ""
 var paused: bool = false
 var score: int = 0
 var time_bonus: int = 0
+var tutorial_moved: bool = false
+var tutorial_picked: bool = false
 
 func start(settings: GameConfig, new_mode: String, level_index: int, map_seed: int) -> void:
 	config = settings
@@ -27,17 +31,25 @@ func start(settings: GameConfig, new_mode: String, level_index: int, map_seed: i
 	tick = 0
 	score = 0
 	time_bonus = 0
+	tutorial_moved = false
+	tutorial_picked = false
 	result = ""
 	paused = false
 	actors.clear()
 	powerups.clear()
 	board = GridBoard.new()
-	board.generate(config, rng, mode == "arena")
+	if mode == "tutorial":
+		if not board.load_authored(TUTORIAL):
+			push_error("Invalid authored tutorial")
+			result = "INVALID_LEVEL"
+			return
+	else:
+		board.generate(config, rng, mode == "arena")
 	bombs = BombSystem.new()
-	add_actor(Vector2i(1, 1), false)
+	add_actor(TUTORIAL.spawn if mode == "tutorial" else Vector2i(1, 1), false)
 	if mode == "arena":
 		add_actor(board.exit_cell, false)
-	else:
+	elif mode != "tutorial":
 		var starts: Array[Vector2i] = [Vector2i(config.width - 2, 1), Vector2i(1, config.height - 2), Vector2i(config.width - 4, config.height - 4)]
 		for i in range(config.enemy_counts[level]):
 			add_actor(starts[i], true)
@@ -61,10 +73,20 @@ func advance(commands: Dictionary = {}) -> void:
 	tick += 1
 	# Resolve hazards before movement so stepping away at the detonation tick cannot dodge damage.
 	var destroyed := bombs.advance(tick, board, config.fire_ticks)
+	if bombs.detonations_this_tick > 0:
+		feedback.emit("explosion")
+	if not destroyed.is_empty():
+		feedback.emit("crate")
+	for bomb in bombs.bombs.values():
+		if bomb.due - tick in [60, 30]:
+			feedback.emit("fuse")
+			break
 	for cell in destroyed:
 		if mode == "arcade" and bombs.credited(cell, 0):
 			score += config.score_crate
-		if rng.randf() < config.drop_chance:
+		if mode == "tutorial" and cell == TUTORIAL.lesson_crate:
+			powerups[cell] = "range"
+		elif rng.randf() < config.drop_chance:
 			powerups[cell] = ["capacity", "range", "speed"][rng.randi_range(0, 2)]
 	apply_damage()
 	for actor in actors:
@@ -75,12 +97,15 @@ func advance(commands: Dictionary = {}) -> void:
 			command = EnemyAI.command(actor, self) if tick >= actor.ready else {}
 		# Placement precedes movement, consistently for human and AI commands.
 		if command.get("bomb", false):
-			bombs.place(actor.cell, actor.id, actor.radius, actor.capacity, tick, config.fuse_ticks)
+			if bombs.place(actor.cell, actor.id, actor.radius, actor.capacity, tick, config.fuse_ticks):
+				feedback.emit("place")
 		var direction: Vector2i = command.get("move", Vector2i.ZERO)
 		if GridBoard.DIRS.has(direction) and tick >= actor.ready:
 			var next: Vector2i = actor.cell + direction
 			if walkable(next):
 				actor.cell = next
+				if not actor.enemy:
+					feedback.emit("step")
 			actor.ready = tick + actor.step
 		elif actor.enemy and tick >= actor.ready:
 			actor.ready = tick + actor.step
@@ -89,12 +114,15 @@ func advance(commands: Dictionary = {}) -> void:
 		if actor.alive and not actor.enemy and powerups.has(actor.cell) and not bombs.fire.has(actor.cell):
 			collect(actor, powerups[actor.cell])
 			powerups.erase(actor.cell)
+	if mode == "tutorial" and actors[0].cell == TUTORIAL.checkpoint:
+		tutorial_moved = true
 	check_end()
 
 func apply_damage() -> void:
 	for actor in actors:
 		if actor.alive and bombs.fire.has(actor.cell):
 			actor.alive = false
+			feedback.emit("death")
 			if mode == "arcade" and actor.enemy and bombs.credited(actor.cell, 0):
 				score += config.score_enemy
 
@@ -105,6 +133,9 @@ func collect(actor: Dictionary, kind: String) -> void:
 		"speed": actor.step = maxi(actor.step - 1, config.min_step_ticks)
 	if mode == "arcade" and not actor.enemy:
 		score += config.score_pickup
+	if mode == "tutorial":
+		tutorial_picked = true
+	feedback.emit("pickup")
 	pickup.emit(actor.id, kind)
 
 func check_end() -> void:
@@ -113,8 +144,10 @@ func check_end() -> void:
 	if mode != "arena":
 		if not actors[0].alive:
 			result = "DEFEAT"
-		elif alive_enemies() == 0 and actors[0].cell == board.exit_cell:
-			if mode == "arcade":
+		elif exit_open() and actors[0].cell == board.exit_cell:
+			if mode == "tutorial":
+				result = "TUTORIAL_DONE"
+			elif mode == "arcade":
 				var seconds_used := ceili(float(tick) / config.tick_rate)
 				time_bonus = maxi(0, config.arcade_par_seconds - seconds_used) * config.score_per_second
 				score += config.score_stage_clear + time_bonus
@@ -129,6 +162,7 @@ func check_end() -> void:
 		if living.size() <= 1:
 			result = "DRAW" if living.is_empty() else "P%d_WINS" % (living[0] + 1)
 	if not result.is_empty():
+		feedback.emit("defeat" if result in ["DEFEAT", "DRAW"] else "victory")
 		finished.emit(result)
 
 func alive_enemies() -> int:
@@ -143,3 +177,17 @@ func snapshot() -> Dictionary:
 		"fire": bombs.fire.duplicate(), "cells": board.cells.duplicate(), "powerups": powerups.duplicate(),
 		"result": result, "rng_state": rng.state, "score": score, "time_bonus": time_bonus,
 		"fire_owners": bombs.fire_owners.duplicate(true)}
+
+func exit_open() -> bool:
+	if mode == "tutorial":
+		return tutorial_moved and tutorial_picked and board.kind(TUTORIAL.lesson_crate) == GridBoard.Cell.FLOOR
+	return alive_enemies() == 0
+
+func tutorial_hint() -> String:
+	if not tutorial_moved:
+		return "TUT_MOVE"
+	if board.kind(TUTORIAL.lesson_crate) == GridBoard.Cell.CRATE:
+		return "TUT_BOMB"
+	if not tutorial_picked:
+		return "TUT_PICKUP"
+	return "TUT_EXIT"

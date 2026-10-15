@@ -1,7 +1,7 @@
 # Test plan
 
 Automated: `python tools/verify.py --godot <Godot 4.5.1>`.
-This runs the importer, actual GDScript behavioral tests and a 120-frame scene startup.
+This runs the importer, test-script parse preflight, actual GDScript behavioral tests and a 120-frame scene startup.
 Fail on nonzero process exit, engine SCRIPT ERROR/ERROR/FAIL output or missing test summary.
 
 Coverage: walls/crates, blast reach, fuse/fire boundaries, duplicate placement, owner capacity,
@@ -30,3 +30,17 @@ check +10/+100/+25. Next level must preserve totals. Retry starts from level 1 w
 On defeat only score may improve; fastest time requires all levels. Relaunch to verify records
 persist and old campaign progress remains. Check lowered walls, especially bottom-row hazards.
 Automated new suite: tests/test_arcade.gd; includes v1 migration and actual three-stage UI flow.
+
+
+0.3 acceptance (all manual checks pending):
+1. Finish Training: blue checkpoint, bomb beside the gateway crate, safe retreat, pickup, exit.
+2. Listen for movement, placement/fuse/explosion, crate, pickup, death, victory/defeat and UI.
+   Confirm no clipping or stuck sound on pause/retry/menu, and acceptable simultaneous explosions.
+3. Adjust all three sliders; zero Master must silence everything, zero SFX must leave menu audio.
+4. Rebind both players; reject duplicate/reserved keys, cancel with Esc, reset defaults.
+   Back and Save, restart EXE, confirm volumes, keys, fullscreen and old records/progress persist.
+5. Open settings from pause near a bomb; spend ten seconds there and resume with no time advance.
+6. Inspect every menu at 1280×800 and 1920×1080, RU/EN, keyboard/mouse and physical controllers.
+Automated tests/test_polish.gd adds 40 checks for actual tutorial commands, audio dispatch/assets,
+validated settings, v2 migration and the actual scene's pause/settings/rebinding lifecycle.
+Headless tests do not play sound or certify graphical layout.

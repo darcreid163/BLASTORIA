@@ -136,7 +136,7 @@ func run(test) -> void:
 	loaded.write_profile()
 	var parser := JSON.new()
 	parser.parse(FileAccess.get_file_as_string(profile.path))
-	test.check(parser.data.version == 2 and parser.data.unlocked == 2, "save migration writes v2 on next save")
+	test.check(parser.data.version == SaveManager.VERSION and parser.data.unlocked == 2, "save migration writes current schema on next save")
 	parser.parse(FileAccess.get_file_as_string(profile.path + ".bak"))
 	test.check(parser.data.version == 1, "save migration retains original v1 backup")
 	write_json(profile.path, {"version": 99, "unlocked": 2})

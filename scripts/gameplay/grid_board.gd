@@ -67,3 +67,15 @@ func reachable(start: Vector2i, crates_breakable: bool = false) -> Dictionary:
 			visited[next] = true
 			queue.append(next)
 	return visited
+
+func load_authored(definition: LevelDefinition) -> bool:
+	if not definition.valid():
+		return false
+	width = 15
+	height = 11
+	exit_cell = definition.exit_cell
+	cells.clear()
+	for y in range(height):
+		for x in range(width):
+			cells[Vector2i(x, y)] = {"#": Cell.WALL, ".": Cell.FLOOR, "C": Cell.CRATE}[definition.rows[y][x]]
+	return reachable(definition.spawn, true).has(exit_cell)

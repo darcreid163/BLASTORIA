@@ -5,6 +5,7 @@ var bombs: Dictionary = {} # Stable numeric ID -> logical bomb; no scene referen
 var fire: Dictionary = {} # Cell -> last hazardous simulation tick (exclusive).
 var fire_owners: Dictionary = {} # Cell -> {owner ID: exclusive expiry tick}.
 var next_id: int = 1
+var detonations_this_tick: int = 0
 
 func at(cell: Vector2i) -> int:
 	for id in bombs:
@@ -26,6 +27,7 @@ func place(cell: Vector2i, owner: int, radius: int, capacity: int, now: int, fus
 	return true
 
 func advance(now: int, board: GridBoard, fire_duration: int) -> Array[Vector2i]:
+	detonations_this_tick = 0
 	for cell in fire.keys():
 		if fire[cell] <= now:
 			fire.erase(cell)
@@ -50,6 +52,7 @@ func advance(now: int, board: GridBoard, fire_duration: int) -> Array[Vector2i]:
 		if processed.has(id) or not bombs.has(id):
 			continue
 		processed[id] = true
+		detonations_this_tick += 1
 		var b: Dictionary = bombs[id]
 		bombs.erase(id)
 		for cell in board.blast(b.cell, b.radius):

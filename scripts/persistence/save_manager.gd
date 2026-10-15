@@ -1,13 +1,14 @@
 class_name SaveManager
 extends RefCounted
 
-const VERSION := 2
+const VERSION := 3
 var path: String = "user://profile.json"
 var unlocked: int = 0
 var language: String = "ru"
 var recovered_from_backup: bool = false
 var arcade_records: Dictionary = {}
 var writable: bool = true
+var settings := GameSettings.new()
 
 static func valid_int(value: Variant, low: int, high: int) -> bool:
 	return (value is int or value is float) and is_finite(float(value)) and value == floor(value) and value >= low and value <= high
@@ -35,11 +36,13 @@ func read_profile(last_level: int) -> void:
 		language = "en" if data.get("language") == "en" else "ru"
 		arcade_records.clear()
 		# v1 has no arcade data. Migrate in memory and write v2 only on the next save.
-		if version == 2 and data.get("arcade_records") is Dictionary:
+		if version >= 2 and data.get("arcade_records") is Dictionary:
 			for key in data.arcade_records:
 				var record = data.arcade_records[key]
 				if key is String and key.length() <= 64 and valid_record(record):
 					arcade_records[key] = {"score": int(record.score), "score_ticks": int(record.score_ticks), "best_ticks": int(record.best_ticks)}
+		if version >= 3:
+			settings.read_data(data.get("settings"))
 		recovered_from_backup = candidate.ends_with(".bak")
 		return
 
@@ -76,7 +79,7 @@ func write_profile() -> Error:
 	var file := FileAccess.open(temporary, FileAccess.WRITE)
 	if file == null:
 		return FileAccess.get_open_error()
-	file.store_string(JSON.stringify({"version": VERSION, "unlocked": unlocked, "language": language, "arcade_records": arcade_records}))
+	file.store_string(JSON.stringify({"version": VERSION, "unlocked": unlocked, "language": language, "arcade_records": arcade_records, "settings": settings.to_data()}))
 	file.flush()
 	var error := file.get_error()
 	file.close()

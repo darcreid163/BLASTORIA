@@ -72,7 +72,7 @@ PASS: arcade: slower completion cannot overwrite time record
 PASS: arcade: records separated by rules version
 PASS: arcade: records survive save and reload
 PASS: save v1 migrates without losing campaign or language
-PASS: save migration writes v2 on next save
+PASS: save migration writes current schema on next save
 PASS: save migration retains original v1 backup
 PASS: future save schema is never overwritten
 PASS: malformed records ignored without discarding valid campaign data
@@ -83,4 +83,44 @@ PASS: arcade retry resets whole run and repeats identical first map
 PASS: arcade actual scene completes all stages and saves fastest run
 PASS: arcade completion never unlocks campaign levels
 PASS: abandoned run is not recorded
-RESULT: 83 passed, 0 failed
+PASS: tutorial: valid authored map with one player and no enemies
+PASS: tutorial: crate blocks route to exit
+PASS: tutorial: destruction opens a connected route
+PASS: tutorial: exit locked and movement instruction shown
+PASS: tutorial: stepping on marker advances instruction
+PASS: audio: accepted bomb emits one placement event
+PASS: audio: rejected duplicate bomb is silent
+PASS: tutorial: real movement/placement/retreat safely destroys crate
+PASS: audio: detonation destruction and two fuse warnings dispatched
+PASS: tutorial: guaranteed upgrade and next instruction
+PASS: tutorial: pickup unlocks exit and increases range
+PASS: audio: pickup and successful steps dispatched
+PASS: tutorial: complete command-driven playthrough reaches victory
+PASS: audio: terminal state cannot replay victory
+PASS: tutorial: restart restores lesson objectives and crate
+PASS: tutorial: standing next to bomb causes real loss and audio events
+PASS: authored map validator rejects malformed data
+PASS: bindings: free key accepted
+PASS: bindings: conflicts across players rejected
+PASS: bindings: navigation escape and fullscreen protected
+PASS: bindings: reinstall does not duplicate keyboard/gamepad events
+PASS: bindings: HUD hint resolves current binding
+PASS: settings: custom bindings survive serialization
+PASS: settings: malformed values bounded and incomplete bindings rejected
+PASS: bindings: reset restores defaults
+PASS: save v2 to v3: campaign language and arcade records retained
+PASS: save v3: volume fullscreen and bindings reload
+PASS: audio: all 10 WAV effects import with expected durations
+PASS: audio: bounded pool and named bus layout
+PASS: audio: zero master volume mutes bus
+PASS: audio: raising volume restores bus
+PASS: UI: training starts from menu
+PASS: UI: settings from pause keeps gameplay stopped
+PASS: UI: settings time excluded from simulation
+PASS: UI: slider changes audio setting
+PASS: UI: key capture applies requested physical key
+PASS: UI: Escape cancels key capture without changing binding
+PASS: UI: settings persist and return to pause
+PASS: UI: resume uses new controls and updated HUD hint
+PASS: UI: settings content fits base 800px viewport height
+RESULT: 123 passed, 0 failed

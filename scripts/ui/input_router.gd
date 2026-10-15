@@ -1,13 +1,11 @@
 class_name InputRouter
 extends RefCounted
 
-static func install() -> void:
-	var bindings := {
-		"p1_up": KEY_W, "p1_down": KEY_S, "p1_left": KEY_A, "p1_right": KEY_D, "p1_bomb": KEY_SPACE,
-		"p2_up": KEY_UP, "p2_down": KEY_DOWN, "p2_left": KEY_LEFT, "p2_right": KEY_RIGHT, "p2_bomb": KEY_ENTER}
+static func install(bindings: Dictionary = GameSettings.DEFAULT_KEYS) -> void:
 	for action in bindings:
 		if not InputMap.has_action(action):
 			InputMap.add_action(action)
+		InputMap.action_erase_events(action)
 		var event := InputEventKey.new()
 		event.physical_keycode = bindings[action]
 		InputMap.action_add_event(action, event)
@@ -31,3 +29,16 @@ static func commands() -> Dictionary:
 				break
 		result[player] = {"move": direction, "bomb": Input.is_action_just_pressed(prefix + "bomb")}
 	return result
+
+static func key_label(action: String) -> String:
+	for event in InputMap.action_get_events(action):
+		if event is InputEventKey:
+			return OS.get_keycode_string(event.physical_keycode)
+	return "?"
+
+static func player_hint(player: int) -> String:
+	var prefix := "p%d_" % player
+	var parts: Array[String] = []
+	for action in ["up", "left", "down", "right"]:
+		parts.append(key_label(prefix + action))
+	return "/".join(parts) + " + " + key_label(prefix + "bomb")

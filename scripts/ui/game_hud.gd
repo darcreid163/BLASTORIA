@@ -2,6 +2,7 @@ class_name GameHUD
 extends CanvasLayer
 
 signal action_requested(action: String)
+signal volume_changed(bus: String, value: float)
 var status: Label
 var hint: Label
 var metrics: Label
@@ -95,8 +96,12 @@ func update_state(state: GameState, arcade: ArcadeRun = null) -> void:
 	metrics.text = ""
 	if state.mode == "arcade" and arcade != null:
 		metrics.text = tr("ARCADE_METRICS") % [arcade.live_score(state), ArcadeRun.format_time(arcade.live_ticks(state))]
-	hint.text = tr("ARCADE_CONTROLS") if state.mode == "arcade" else tr("CONTROLS")
-	if state.mode != "arena":
+	hint.text = tr("DYNAMIC_CONTROLS") % InputRouter.player_hint(1)
+	if state.mode == "arena":
+		hint.text += " | " + tr("PLAYER_TWO_KEYS") % InputRouter.player_hint(2)
+	if state.mode == "tutorial":
+		hint.text += "\n" + tr(state.tutorial_hint())
+	elif state.mode != "arena":
 		hint.text += "\n" + tr("GOAL")
 
 func notify_pickup(kind: String) -> void:
@@ -108,3 +113,31 @@ func _process(delta: float) -> void:
 		toast_time -= delta
 		if toast_time <= 0:
 			toast.text = ""
+
+func add_volume_sliders(settings: GameSettings) -> void:
+	var position_index := 2
+	for field in ["master", "sfx", "ui"]:
+		var row := HBoxContainer.new()
+		var label := Label.new()
+		label.text = tr("VOLUME_" + field.to_upper())
+		label.custom_minimum_size.x = 190
+		row.add_child(label)
+		var slider := HSlider.new()
+		slider.min_value = 0
+		slider.max_value = 100
+		slider.step = 5
+		slider.value = settings.get(field) * 100
+		slider.custom_minimum_size = Vector2(180, 36)
+		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row.add_child(slider)
+		var number := Label.new()
+		number.custom_minimum_size.x = 48
+		number.text = "%d%%" % slider.value
+		row.add_child(number)
+		var setting_name: String = field
+		slider.value_changed.connect(func(value: float):
+			number.text = "%d%%" % value
+			volume_changed.emit(setting_name, value / 100.0))
+		column.add_child(row)
+		column.move_child(row, position_index)
+		position_index += 1

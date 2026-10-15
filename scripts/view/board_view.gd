@@ -101,6 +101,8 @@ func build(state: GameState) -> void:
 				box(node, Vector3(0, 0.3, 0), Vector3(0.79, 0.65, 0.79), "ae7950")
 				box(node, Vector3(0, 0.65, 0), Vector3(0.84, 0.08, 0.84), "e3b575")
 				crates[cell] = node
+	if state.mode == "tutorial":
+		box(world, pos(state.TUTORIAL.checkpoint) + Vector3(0, 0.015, 0), Vector3(0.75, 0.07, 0.75), "6cbaff", true)
 	for actor in state.actors:
 		var root := Node3D.new()
 		world.add_child(root)
@@ -173,4 +175,4 @@ func sync(state: GameState, delta: float) -> void:
 			drops[cell] = root
 		drops[cell].visible = not state.bombs.fire.has(cell)
 	if is_instance_valid(exit_mesh):
-		exit_mesh.material_override = material("58e3ba" if state.alive_enemies() == 0 else "77775a", true)
+		exit_mesh.material_override = material("58e3ba" if state.exit_open() else "77775a", true)

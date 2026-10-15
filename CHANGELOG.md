@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0-dev — 2026-10-15
+
+- Added authored tutorial with safe bomb lesson, guaranteed pickup and gated exit.
+- Added ten original synthesized sound effects and pooled audio playback.
+- Added master/SFX/UI volume, saved fullscreen and keyboard rebinding for both players.
+- Added profile v3 migration preserving campaign progress and Arcade records.
+- Added localized settings/tutorial UI and controls reflected in the HUD.
+- 123 automated checks; headless execution validates assets/events, not audible output.
+- Windows runtime, hearing, rendered layout and physical gamepad acceptance remain pending.
+
 ## 0.2.1-dev — 2026-10-15
 
 - Added solo Arcade with three fixed levels, one life, cumulative score and active-time clock.

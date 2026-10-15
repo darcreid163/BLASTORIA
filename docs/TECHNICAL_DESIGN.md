@@ -1,4 +1,4 @@
-# Technical Design — 0.2.1
+# Technical Design — 0.3.0
 
 Status: Implemented; behavioral verification described in QA_REPORT.md.
 Pinned engine: Godot 4.5.1 Standard, GL Compatibility. Target Windows x86_64.
@@ -15,6 +15,9 @@ This is a reproducible baseline, not a latest-version claim.
 | InputRouter | Converts keyboard / device-specific gamepad input into commands |
 | GameHUD | Menus, status and pickup notification; signals semantic UI actions |
 | SaveManager | Versioned JSON, temp write, backup and bounded input reading |
+| GameSettings | Validated volumes, fullscreen and conflict-free physical key map |
+| LevelDefinition + tutorial.tres | Authored tutorial terrain, checkpoint, crate and exit |
+| AudioManager | Ten WAVs, eight playback voices, Master/SFX/UI buses |
 | main.gd | Scene composition and menu/game transitions |
 
 Simulation uses `_physics_process` at 60 ticks/s. Timers are integer ticks. Visual interpolation
@@ -44,8 +47,8 @@ Actor-ID collision priority is deterministic, but future competitive balance nee
 AI danger respects walls and crates. BFS is bounded by map cells and conservative fuse deadlines.
 It has no future-space-time simulation, no guaranteed survival, and no advanced enemy profiles yet.
 
-Save schema v2: version, unlocked (0..2), language (ru/en), records by arcade rules ID.
-v1 migrates in memory, preserving campaign/language. Reads at most 16 KiB; invalid primary
+Save schema v3: version, unlocked (0..2), language (ru/en), records by arcade rules ID, settings.
+v1/v2 migrate in memory, preserving campaign/language/records. Reads at most 16 KiB; invalid primary
 falls back to backup. Write temp → flush → backup valid prior primary → replace. After recovery,
 corrupt primary is never copied over the valid backup. This is recovery-oriented, not a proof
 against every OS/power failure. Unknown future versions block writes; invalid record entries are ignored.
@@ -53,5 +56,13 @@ ArcadeRun accepts each terminal stage once, accumulates active ticks/score and f
 Score records may come from defeat; fastest time requires complete success. Menu/pauses do not
 advance ticks. Exiting to menu abandons the run. See ARCADE_ADDENDUM_RU.md for exact rules.
 
-Next separation only as needed: typed ActorState, data-authored LevelDefinition, AudioManager,
-settings/rebinding. Do not add empty managers merely to match the long-term specification.
+Tutorial is a fixed Resource-authored board without enemies. Exit opens after checkpoint,
+lesson crate destruction and guaranteed range pickup; finishing does not unlock campaign progress.
+GameState emits feedback events, never plays audio itself. AudioManager routes effects to SFX,
+menu clicks to UI, and reserves empty Music/Ambience buses for future content. Low-priority
+step/fuse/crate sounds may drop under voice saturation. Headless mode disables playback;
+its tests check resources, events and buses. Audible playback requires graphical runtime QA.
+Settings clamp finite volumes and validate a complete unique key map. Reserved shortcuts cannot
+be rebound. InputRouter reinstalls events without duplicates; gamepads remain devices 0/1.
+Settings pause the game; saving uses the existing backup path. No custom gamepad assignment yet.
+Do not add empty managers merely to match the long-term specification.
