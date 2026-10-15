@@ -1,34 +1,21 @@
-# Game Design Document — Prototype 0.2
+# BLASTORIA — Prototype 0.4
 
-Vision: original tactical maze arcade, equal attention to campaign and local battles.
-Long-term target is BLASTORIA: Worlds of Chaos on Windows/Steam. Full scope remains in MASTER_PROMPT_RU.md.
+Active specification: MASTER_SPEC.md (Master Development Prompt 2.0), preserved verbatim.
+Original 2.5D tactical bomb arcade: cross-shaped explosions, destructible maze, safe retreat,
+enemies, powerups, concealed exits and exploration. Final character/world assets remain original-art work ahead.
 
-Core loop: read the maze → place a bomb → retreat → exploit opened paths / drops → eliminate threats.
-Controls must stay readable; blast footprint is a cross and walls stop it.
+| Mode | Implemented slice | Rules document |
+| --- | --- | --- |
+| Training | Authored tutorial, no enemies | TEST_PLAN.md |
+| Adventure | One 41×31 ruins maze, six enemies, discovery map, Ghost Compass | LEVEL_DESIGN.md / SECRET_DESIGN.md |
+| Classic | Three 21×15 stages, eight powerups, hidden exit, timed penalty | CLASSIC_RULES.md |
+| Arcade | Three legacy fixed stages, one life, score/time records | ARCADE_ADDENDUM_RU.md |
+| Arena | Two local players, symmetric generated board | TECHNICAL_DESIGN.md |
+| Legacy 0.3 campaign | Three technical 15×11 maps, old progress retained | Available inside Adventure menu |
 
-Current playable scope: three repeatable seeded expeditions, one local two-player arena generator.
-Campaign grows from 1 to 3 bomber enemies. Defeat every enemy and reach the exit.
-These are technical levels, not the promised 40-level authored campaign.
-Arena: last survivor wins; same-tick simultaneous death is a draw. Retry repeats the map;
-return to menu and reenter arena advances the map seed. No round scoreboard yet.
-
-| Parameter | Default / cap |
-| --- | --- |
-| Grid | 15 × 11 |
-| Bomb fuse | 2.5 s |
-| Fire lifetime | 0.5 s |
-| Range | 2 / 6 cells |
-| Capacity | 1 / 5 bombs |
-| Move period | 9 / minimum 5 simulation ticks |
-| Enemy move period | 25 ticks |
-| Crate drop probability | 30% |
-
-The three drops are +B capacity (blue), +R radius (orange), +S speed (violet).
-Labels provide a cue beyond color. They last until collected, survive fire and become visible when safe.
-Basic stats reset on each level/round; progression saves the highest unlocked level.
-
-Planned: first authored jungle level and tutorial, sound feedback, rebinding, device assignment,
-several distinct enemy profiles, 10-level Alpha; only then world art/boss vertical slice.
-Full campaign target: jungle, ice fortress, volcano and cybercity; 10 levels and one boss per world.
-No online, co-op, treasure hunt, alternate bomb types, Steam achievements or store monetization yet.
-No pay-to-win or ads. Price is a future product decision, not a commitment from this prototype.
+The main Continue button currently restarts the available Adventure level; it does not restore
+mid-level state. The legacy campaign has a separate Continue entry inside Adventure.
+Classic power carry/death policy and per-stage score rollback are explicit in CLASSIC_RULES.md.
+Four worlds × ten authored levels, four bosses, fifty Classic stages/bonus rounds, all ten secrets,
+four-player arena, co-op, final art/audio and Steam integration remain roadmap goals.
+No pay-to-win or secret purchases. Commercial pricing and publication require later review.

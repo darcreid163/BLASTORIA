@@ -3,7 +3,7 @@ extends RefCounted
 
 const DEFAULT_KEYS := {
 	"p1_up": KEY_W, "p1_down": KEY_S, "p1_left": KEY_A, "p1_right": KEY_D, "p1_bomb": KEY_SPACE,
-	"p2_up": KEY_UP, "p2_down": KEY_DOWN, "p2_left": KEY_LEFT, "p2_right": KEY_RIGHT, "p2_bomb": KEY_ENTER}
+	"p2_up": KEY_UP, "p2_down": KEY_DOWN, "p2_left": KEY_LEFT, "p2_right": KEY_RIGHT, "p2_bomb": KEY_ENTER, "p1_detonate": KEY_E, "p2_detonate": KEY_P}
 const RESERVED := [KEY_ESCAPE, KEY_F11, KEY_R, KEY_TAB]
 var master: float = 0.8
 var sfx: float = 0.8
@@ -21,12 +21,24 @@ func read_data(data: Variant) -> void:
 	if data.get("fullscreen") is bool:
 		fullscreen = data.fullscreen
 	if data.get("bindings") is Dictionary:
-		var candidate: Dictionary = data.bindings
+		var candidate: Dictionary = data.bindings.duplicate()
+		# JSON numbers are floats; normalize before Array.has collision checks.
+		for action in candidate:
+			var raw = candidate[action]
+			if (raw is int or raw is float) and is_finite(float(raw)) and raw == floor(raw):
+				candidate[action] = int(raw)
+		# v3 profiles have ten bindings. Add new actions using unoccupied keys.
+		if candidate.size() == 10 and not candidate.has("p1_detonate") and not candidate.has("p2_detonate"):
+			for action in ["p1_detonate", "p2_detonate"]:
+				for key in [DEFAULT_KEYS[action], KEY_E, KEY_P, KEY_Q, KEY_F, KEY_G, KEY_0, KEY_1, KEY_2]:
+					if not candidate.values().has(key):
+						candidate[action] = key
+						break
 		var seen: Dictionary = {}
 		var valid := candidate.size() == DEFAULT_KEYS.size()
 		for action in DEFAULT_KEYS:
 			var key = candidate.get(action)
-			if not (key is int or key is float) or key != floor(key) or not allowed_key(int(key)) or seen.has(int(key)):
+			if not (key is int or key is float) or not is_finite(float(key)) or key != floor(key) or not allowed_key(int(key)) or seen.has(int(key)):
 				valid = false
 				break
 			seen[int(key)] = true

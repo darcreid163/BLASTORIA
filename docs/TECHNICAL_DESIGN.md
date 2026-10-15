@@ -1,4 +1,4 @@
-# Technical Design — 0.3.0
+# Technical Design — 0.4.0
 
 Status: Implemented; behavioral verification described in QA_REPORT.md.
 Pinned engine: Godot 4.5.1 Standard, GL Compatibility. Target Windows x86_64.
@@ -37,7 +37,8 @@ for this prototype they are fireproof. Arcade awards score once per destroyed cr
 tracks an expiry per owner per cell; extending enemy fire cannot extend expired player credit.
 
 Arena tie is evaluated after all damage. Campaign death takes precedence over success.
-Exit requires no living enemies; three levels end in a terminal completion screen.
+Exit requires no living enemies. Classic/Adventure additionally require revealed exit and no pending
+reinforcements. Three Classic levels or one Adventure level end in a terminal completion screen.
 Restart reconstructs logical state and removes the old visual world. Pausing stops the model clock.
 
 RNG is seeded; same build, seed and command sequence produce equal snapshots in tests.
@@ -47,8 +48,8 @@ Actor-ID collision priority is deterministic, but future competitive balance nee
 AI danger respects walls and crates. BFS is bounded by map cells and conservative fuse deadlines.
 It has no future-space-time simulation, no guaranteed survival, and no advanced enemy profiles yet.
 
-Save schema v3: version, unlocked (0..2), language (ru/en), records by arcade rules ID, settings.
-v1/v2 migrate in memory, preserving campaign/language/records. Reads at most 16 KiB; invalid primary
+Save schema v4: version, unlocked (0..2), language (ru/en), records by arcade rules ID, settings, artifact IDs.
+v1/v2/v3 migrate in memory, preserving campaign/language/records. Reads at most 16 KiB; invalid primary
 falls back to backup. Write temp → flush → backup valid prior primary → replace. After recovery,
 corrupt primary is never copied over the valid backup. This is recovery-oriented, not a proof
 against every OS/power failure. Unknown future versions block writes; invalid record entries are ignored.
@@ -66,3 +67,32 @@ Settings clamp finite volumes and validate a complete unique key map. Reserved s
 be rebound. InputRouter reinstalls events without duplicates; gamepads remain devices 0/1.
 Settings pause the game; saving uses the existing backup path. No custom gamepad assignment yet.
 Do not add empty managers merely to match the long-term specification.
+
+## 0.4 additions
+
+GameConfig Resource presets separate Classic and Adventure from unchanged Arcade v1.
+Classic/Adventure enable lethal contact and eight abilities. BombSystem stores remote flag per bomb,
+oldest-owner detonation and per-tick hit_cells to distinguish a new blast from lingering fire.
+Each wave only punishes an exit already exposed before the wave. The timer uses level_ticks and
+configurable ticks_per_game_second. Wardens spawn deterministically on safe distant cells;
+queued reinforcement blocks victory. Enemy movement decisions run only when movement is due.
+Patrol, bounded 256-node pursuit and crate-crossing Wardens are original behavior profiles.
+
+Exploration owns last-observed terrain; radius-four BFS stops at walls/crates. Recompute on player
+cell change or destruction, not every render frame. SecretManager owns order/failure/reveal/award;
+threshold/order/reward/niche come from SecretDefinition Resource. State owns completion return phase;
+SaveManager persists collection only. No scene reference is needed to reproduce secret conditions.
+The completion epilogue clears hazards, disables bomb placement and freezes level_ticks; normal
+movement tick continues. Collection emits once. Existing profile ownership disables repeated rewards.
+
+FollowCamera applies exponential interpolation to an orthographic target and clamps the entire
+projected ground footprint; aspect ratio contributes to clamp. BoardView batches static geometry
+with MultiMesh and creates late-spawned actors on demand. ExplorationMap draws discovered tiles,
+observed runes, revealed exit and player; it never drives simulation. Canvas anchors adapt the map
+panels to the viewport. CompassBadge draws a rotating cosmetic needle in result/collection menus.
+
+Profile v4 preserves v3 settings and adds validated artifact IDs. Ten old keyboard bindings are
+extended with two free remote keys; JSON floats are normalized before duplicate checks. Non-finite
+codes are rejected. Future-version write protection and backup recovery remain in place.
+Classic carries permanent powers between stages, resets temporary immunity, and rolls retry score
+back to stage entry. No mid-stage saves or classic profile progression are implemented yet.

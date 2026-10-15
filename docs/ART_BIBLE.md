@@ -1,7 +1,7 @@
 # Art Bible — provisional
 
 Status: Planned visual direction; temporary geometric implementation exists.
-Style: stylized 3D viewed from a fixed elevated orthographic camera. One logical cell = one world unit.
+Style: stylized 3D viewed from a fixed-angle elevated orthographic camera with smooth position tracking in Adventure. One logical cell = one world unit.
 Palette for prototype jungle ruins: dark green floor, desaturated moss stone, warm wooden crates.
 Player 1 cyan crystal scout; player 2 golden scout; enemies coral. Geometric crystal silhouettes
 are temporary original placeholders, not approved final character models.
@@ -15,3 +15,7 @@ accessibility settings remain Planned. Do not market temporary meshes as final a
 
 Visual acceptance: inspect 1280×800 and 1920×1080; verify HUD fits, danger cells remain visible,
 actors can be distinguished, and wall occlusion never hides bombs. Not performed in this session.
+
+0.4: static floor/wall meshes use MultiMesh batches. Three inlaid rune motifs and an original
+eight-segment compass model are code-native geometry. Purple Wardens differ from coral enemies.
+The animated compass badge is UI vector drawing. No external character or item artwork copied.

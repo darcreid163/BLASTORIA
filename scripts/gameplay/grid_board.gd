@@ -7,12 +7,16 @@ var width: int
 var height: int
 var cells: Dictionary = {}
 var exit_cell: Vector2i
+var landmarks: Array[Vector2i] = []
+var guaranteed_drops: Dictionary = {}
 
 func generate(config: GameConfig, rng: RandomNumberGenerator, arena: bool) -> void:
 	width = config.width
 	height = config.height
 	exit_cell = Vector2i(width - 2, height - 2)
 	cells.clear()
+	landmarks.clear()
+	guaranteed_drops.clear()
 	var starts: Array[Vector2i] = [Vector2i(1, 1), exit_cell, Vector2i(width - 2, 1), Vector2i(1, height - 2), Vector2i(width - 4, height - 4)]
 	for y in range(height):
 		for x in range(width):
@@ -33,7 +37,26 @@ func generate(config: GameConfig, rng: RandomNumberGenerator, arena: bool) -> vo
 				var mirror := Vector2i(width - 1 - x, height - 1 - y)
 				if y * width + x < mirror.y * width + mirror.x:
 					cells[mirror] = cells[p]
-	cells[exit_cell] = Cell.FLOOR
+	if config.width >= 41:
+		# Authored sector spines plus seeded side alcoves, never a solid crate carpet.
+		for x in range(1, width - 1):
+			cells[Vector2i(x, 5)] = Cell.FLOOR
+			cells[Vector2i(x, height - 6)] = Cell.FLOOR
+		for y in range(1, height - 1):
+			cells[Vector2i(5, y)] = Cell.FLOOR
+			cells[Vector2i(width - 6, y)] = Cell.FLOOR
+		landmarks.assign([Vector2i(11, 5), Vector2i(width - 6, 15), Vector2i(11, height - 6)])
+		cells[SecretManager.COMPASS.niche] = Cell.FLOOR
+		cells[Vector2i(3, 2)] = Cell.FLOOR
+		cells[Vector2i(2, 3)] = Cell.FLOOR
+	if config.full_powerups:
+		# One guaranteed instance of every ability; random drops only supplement these.
+		var kinds := ["capacity", "range", "speed", "remote", "wall_pass", "bomb_pass", "flame_pass", "invulnerability"]
+		for i in range(kinds.size()):
+			var p := Vector2i(5 + i * 2, 3)
+			cells[p] = Cell.CRATE
+			guaranteed_drops[p] = kinds[i]
+	cells[exit_cell] = Cell.CRATE if config.hidden_exit else Cell.FLOOR
 
 func kind(p: Vector2i) -> int:
 	return cells.get(p, Cell.WALL)

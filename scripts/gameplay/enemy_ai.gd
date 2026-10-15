@@ -32,6 +32,8 @@ static func escape_direction(actor: Dictionary, state, extra_danger: Dictionary 
 	return Vector2i.ZERO
 
 static func command(actor: Dictionary, state) -> Dictionary:
+	if actor.get("role", "bomber") != "bomber":
+		return classic_command(actor, state)
 	var danger: Dictionary = state.bombs.danger(state.board)
 	if danger.has(actor.cell):
 		return {"move": escape_direction(actor, state), "bomb": false}
@@ -56,3 +58,34 @@ static func command(actor: Dictionary, state) -> Dictionary:
 	if useful and state.rng.randf() < 0.3 and escape_direction(actor, state, projected) != Vector2i.ZERO:
 		return {"move": Vector2i.ZERO, "bomb": true}
 	return {"move": direction, "bomb": false}
+
+static func classic_command(actor: Dictionary, state) -> Dictionary:
+	var danger: Dictionary = state.bombs.danger(state.board)
+	var choices: Array[Vector2i] = []
+	for d in GridBoard.DIRS:
+		if state.can_enter(actor, actor.cell + d) and (actor.role == "patrol" or not danger.has(actor.cell + d)):
+			choices.append(d)
+	if choices.is_empty():
+		return {}
+	var direction: Vector2i = choices[state.rng.randi_range(0, choices.size() - 1)]
+	if actor.role == "patrol" and choices.has(actor.direction):
+		direction = actor.direction
+	elif actor.role in ["chaser", "warden"]:
+		# Bounded pursuit, only when movement is ready. No render/camera dependency.
+		var target: Vector2i = state.actors[0].cell
+		var queue: Array[Vector2i] = [actor.cell]
+		var first := {actor.cell: Vector2i.ZERO}
+		var index := 0
+		while index < queue.size() and index < 256:
+			var cell := queue[index]
+			index += 1
+			if cell == target:
+				direction = first[cell]
+				break
+			for d in GridBoard.DIRS:
+				var next := cell + d
+				if not first.has(next) and state.can_enter(actor, next) and not danger.has(next):
+					first[next] = d if cell == actor.cell else first[cell]
+					queue.append(next)
+	actor.direction = direction
+	return {"move": direction}

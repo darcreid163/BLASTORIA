@@ -11,7 +11,7 @@ static func install(bindings: Dictionary = GameSettings.DEFAULT_KEYS) -> void:
 		InputMap.action_add_event(action, event)
 	for player in range(2):
 		var prefix := "p%d_" % (player + 1)
-		var buttons := {"up": JOY_BUTTON_DPAD_UP, "down": JOY_BUTTON_DPAD_DOWN, "left": JOY_BUTTON_DPAD_LEFT, "right": JOY_BUTTON_DPAD_RIGHT, "bomb": JOY_BUTTON_A}
+		var buttons := {"up": JOY_BUTTON_DPAD_UP, "down": JOY_BUTTON_DPAD_DOWN, "left": JOY_BUTTON_DPAD_LEFT, "right": JOY_BUTTON_DPAD_RIGHT, "bomb": JOY_BUTTON_A, "detonate": JOY_BUTTON_B}
 		for action in buttons:
 			var event := InputEventJoypadButton.new()
 			event.device = player
@@ -27,7 +27,7 @@ static func commands() -> Dictionary:
 			if Input.is_action_pressed(prefix + pair[0]):
 				direction = pair[1]
 				break
-		result[player] = {"move": direction, "bomb": Input.is_action_just_pressed(prefix + "bomb")}
+		result[player] = {"move": direction, "bomb": Input.is_action_just_pressed(prefix + "bomb"), "detonate": Input.is_action_just_pressed(prefix + "detonate")}
 	return result
 
 static func key_label(action: String) -> String:

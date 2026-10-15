@@ -1,57 +1,40 @@
-# BLASTORIA Development Report
+# BLASTORIA 0.4 development report
 
-Date: 2026-10-15. Version: 0.3.0-dev. Stage: Prototype.
-Test engine: Godot 4.5.1.stable.official.f62fdbde1, Linux x86_64, headless.
+Date: 2026-10-15. Stage: prototype, first Classic Core / Large Worlds slice under master prompt 2.0.
+Engine: Godot 4.5.1.stable.official.f62fdbde1, Linux x86_64, headless.
 
-| Check | Result | Evidence |
+| Check | Actual result | Evidence |
 | --- | --- | --- |
-| Original master prompt bytes | Verified exact match to attachment | Byte comparison during packaging |
-| Import existing working project | PASS | qa/import.txt |
-| Parse test runner before execution | PASS | qa/parse_tests.txt |
-| Import fresh source without .godot cache | PASS | qa/clean_import.txt |
-| Automated behavioral/integration suite | 123 passed / 0 failed | qa/tests.txt |
-| Main scene startup, 120 frames | PASS headless | qa/smoke.txt |
-| Windows x86_64 release export | PASS | qa/export_windows.txt |
-| Windows binary format | PE32+ GUI x86_64 | file inspection during export |
-| Linux QA release export | PASS | qa/export_linux.txt |
-| Exported Linux binary startup | PASS headless, no editor required | qa/exported_linux_smoke.txt |
-| Previous 0.2 Windows startup/rendering | CONFIRMED by owner screenshots | Menu and active game scene visible |
-| New 0.3.0 Windows startup and playthrough | NOT TESTED | No Windows / Wine runtime available |
-| Rendered 0.2 screenshots reviewed | Partial | Owner attachments: menu and board; lower-wall occlusion observed |
-| 0.3.0 visual/audio acceptance | NOT TESTED | No X display or audible playback; tests validate sound assets/events only |
-| Physical gamepads | NOT TESTED | No connected hardware |
-| FPS / hardware performance | NOT MEASURED | Headless execution is not rendering performance |
+| New MASTER_SPEC.md attachment bytes | Exact match | qa/spec_sha256.txt |
+| Previous MASTER_PROMPT_RU.md | Preserved unchanged, exact original attachment match | qa/spec_sha256.txt |
+| Source import and test parser | PASS | qa/import.txt, qa/parse_tests.txt |
+| Behavioral/integration tests | 182 passed / 0 failed | qa/tests.txt |
+| Main scene startup | PASS, 120 frames headless | qa/smoke.txt |
+| Fresh source import without .godot | PASS | qa/clean_import.txt |
+| Windows x86_64 release export | PASS; PE32+ GUI executable | qa/export_windows.txt, qa/binary_sha256.txt |
+| Linux release export and startup | PASS | qa/export_linux.txt, qa/exported_linux_smoke.txt |
+| Exported Adventure/Classic/Training/Arcade entry and dynamic actors | PASS, external QA script, headless | qa/exported_modes.txt |
+| Native Windows 0.4 run | NOT TESTED | No Windows/Wine runtime |
+| Rendered camera/layout/art and audible sound | NOT TESTED | No graphical desktop or listening validation |
+| Physical controllers / hardware FPS | NOT TESTED / NOT MEASURED | Headless tests do not substitute hardware |
 
-Automated scope: hazard boundaries, blast blockers, chain reactions, one-time crate destruction,
-limits, moves, independent actors, pause, defeat/victory/draw, finite campaign, pickups,
-100 seeded arena topologies, deterministic replay, 25 seeded simulations, saves/backup,
-actual menu scene and ten world restarts, translations.
-Arcade adds 36 checks: ownership/deduplication of score, timed bonuses, active-time accounting,
-three-stage totals, failed/completed records, v1 migration, invalid/future data, actual scene flow. 0.3 adds 40 checks: authored tutorial command-driven completion/failure/retry, settings/key validation,
-v2→v3 profile migration, audio assets/events/buses and actual scene pause/settings lifecycle.
-See TEST_PLAN.md for manual acceptance.
-Procedural reachability checks do not prove gameplay quality, controller usability or fair balance.
+59 new checks cover Classic rules/abilities, 40 large-map seeds, off-screen simulation, fog,
+camera projection constraints, compass conditions and developer completion fixture, profile v4
+migration and live-scene UI/mode transitions. The previous 123 Arcade/tutorial/save/core checks remain.
+The secret integration fixture supplies exploration history to test transitions; it is not an organic
+human playthrough of the full secret. Audio playback is disabled in headless mode; asset/event/bus
+validation remains separate from hearing. Camera math and actual Camera3D movement are checked,
+but image composition and edge occlusion need Windows visual acceptance.
 
-Fixed during this iteration: original frame-driven scheduling replaced; wall-blind AI danger
-replaced; recursive chain processing removed; terminal state and reset made explicit;
-backup corruption recovery preserves the valid backup on subsequent save. Initial export preset
-was missing a Linux include_filter key; fixed and import/export rerun successfully.
-Records loaded from JSON are normalized to integers after an initial round-trip test found
-a numeric-type mismatch; the corrected suite passes.
-No reproduced P0/P1 remains in executed scenarios. Windows validation remains a release blocker.
+Fixed during this iteration: legacy JSON float key codes could collide with new integer default keys
+and cause custom bindings to reset; normalization and validation now preserve the old layout.
+Classic retry now rolls score back to stage entry to prevent repeated-stage score farming.
+A contact/immunity test initially put the enemy in lethal fire; the fixture was corrected to isolate
+contact semantics. Test-script naming collision was caught by parser preflight before execution.
 
-Implemented: solo Arcade with cumulative points/time and local records; three-level technical campaign, two-player arena, three powerups, menu/pause/results,
-bounded AI escape search, RU/EN, basic D-pad/A input and profile recovery.
-0.3 implemented: authored tutorial, ten original synthesized WAV effects, Master/SFX/UI volume,
-keyboard rebinding for both players, persisted fullscreen and schema v3 migration.
-Not implemented: music, final art, authored full campaign, bosses, online, Steam SDK,
-gamepad assignment UI, expanded graphics settings and match-series scoring.
-
-Next: actual Windows/rendered/audio acceptance → fix observed defects → controller assignment,
-enemy profiles and authored campaign expansion. Full commercial readiness is not asserted.
-Owner involvement: run Windows archive and follow TEST_PLAN.md; no payment or account action needed.
-
-0.3 implementation corrections verified before packaging: loading the tutorial Resource is an explicit
-call (never an assert side effect, so release exports retain it). Test-runner parsing is checked before
-execution. Headless AudioManager skips playback to avoid dummy-driver lifetime leaks during rapid
-scene teardown; graphical runtime uses the normal eight-voice pool. Sound quality remains unverified.
+Implemented: three Classic stages, eight power mechanics, hidden exits/contact/timer/penalty,
+one 41×31 Adventure, smooth camera, fog/maps, first secret/collection, compatible settings saves.
+Not implemented: 50 Classic stages/bonus rounds, 40 authored Adventure levels/bosses, nine other
+secrets, final art/music/quality profiles, four-player/co-op/online, Steam integration.
+Previous archives and branch history remain available. No main merge or Steam publication.
+Next: owner Windows acceptance → observed fixes → Graphics Alpha and first-world authored content.

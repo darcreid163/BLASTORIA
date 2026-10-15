@@ -1,7 +1,12 @@
 extends Node3D
 
 const CONFIG = preload("res://resources/configurations/default.tres")
+const CLASSIC = preload("res://resources/game_rules/classic.tres")
+const ADVENTURE = preload("res://resources/game_rules/adventure.tres")
 var state := GameState.new()
+var classic_carry: Dictionary = {}
+var classic_score: int = 0
+var map_mode: int = 0
 var view: BoardView
 var hud: GameHUD
 var profile := SaveManager.new()
@@ -31,6 +36,9 @@ func _ready() -> void:
 		profile.settings.set(bus, value)
 		audio_manager.apply_settings(profile.settings))
 	state.feedback.connect(audio_manager.play)
+	state.secret_found.connect(func(id: String):
+		if profile.record_secret(id):
+			save_profile())
 	state.finished.connect(on_finished)
 	state.pickup.connect(func(_id: int, kind: String): hud.notify_pickup(kind))
 	start_game("campaign", 0)
@@ -41,7 +49,16 @@ func start_game(mode: String, level: int) -> void:
 	var map_seed: int = arena_seed if mode == "arena" else CONFIG.campaign_seeds[level]
 	if mode == "arcade":
 		map_seed = CONFIG.arcade_seeds[level]
-	state.start(CONFIG, mode, level, map_seed)
+	var rules: GameConfig = CLASSIC if mode == "classic" else (ADVENTURE if mode == "adventure" else CONFIG)
+	state.start(rules, mode, level, map_seed)
+	if mode == "classic":
+		for key in classic_carry:
+			state.actors[0][key] = classic_carry[key]
+		state.score = classic_score
+	if mode == "adventure" and profile.artifacts.has("ghost_compass"):
+		state.secrets.enabled = false
+	map_mode = 0
+	hud.set_map(state, 0)
 	view.build(state)
 	hud.toast.text = ""
 	hud.overlay.hide()
@@ -51,8 +68,9 @@ func start_game(mode: String, level: int) -> void:
 func show_main_menu() -> void:
 	audio_manager.stop_effects()
 	state.paused = true
+	hud.map_view.hide()
 	screen = "menu"
-	hud.show_menu("TITLE", [["TUTORIAL", "tutorial"], ["CONTINUE", "continue"], ["NEW_CAMPAIGN", "campaign"], ["ARCADE", "arcade_menu"], ["ARENA", "arena"], ["SETTINGS", "settings"], ["QUIT", "quit"]], tr("SAVE_ERROR") if save_error else "")
+	hud.show_menu("TITLE", [["TUTORIAL", "tutorial"], ["CONTINUE", "continue"], ["ADVENTURE", "adventure_menu"], ["CLASSIC", "classic_menu"], ["ARCADE", "arcade_menu"], ["ARENA", "arena"], ["COLLECTION", "collection"], ["SETTINGS", "settings"], ["QUIT", "quit"]], tr("SAVE_ERROR") if save_error else "")
 
 func _physics_process(_delta: float) -> void:
 	if screen != "playing":
@@ -72,11 +90,16 @@ func _unhandled_input(event: InputEvent) -> void:
 					pause_game()
 				elif screen == "pause":
 					handle_action("resume")
+			KEY_TAB:
+				if screen == "playing" and state.mode == "adventure":
+					toggle_map()
 			KEY_R:
 				if screen == "result" or screen == "pause":
 					handle_action("retry")
 			KEY_F11:
 				handle_action("fullscreen")
+	if event is InputEventJoypadButton and event.pressed and event.device == 0 and event.button_index == JOY_BUTTON_BACK and screen == "playing" and state.mode == "adventure":
+		toggle_map()
 	if event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_START:
 		if screen == "playing":
 			pause_game()
@@ -86,6 +109,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func pause_game() -> void:
 	audio_manager.stop_effects()
 	state.paused = true
+	hud.map_view.hide()
 	screen = "pause"
 	hud.show_menu("PAUSED", [["RESUME", "resume"], ["RESTART_RUN" if state.mode == "arcade" else "RETRY", "retry"], ["SETTINGS", "settings"], ["MENU", "menu"]], tr("ARCADE_RESTART_NOTE") if state.mode == "arcade" else "")
 
@@ -98,6 +122,24 @@ func handle_action(action: String) -> void:
 		return
 	match action:
 		"tutorial": start_game("tutorial", 0)
+		"adventure_menu":
+			screen = "adventure_menu"
+			hud.show_menu("ADVENTURE", [["ENTER_RUINS", "adventure"], ["LEGACY_CAMPAIGN", "legacy_continue"], ["MENU", "menu"]], tr("ADVENTURE_RULES"))
+		"adventure": start_game("adventure", 0)
+		"legacy_continue": start_game("campaign", profile.unlocked)
+		"classic_menu":
+			screen = "classic_menu"
+			hud.show_menu("CLASSIC", [["START_CLASSIC", "classic_start"], ["MENU", "menu"]], tr("CLASSIC_RULES"))
+		"classic_start":
+			classic_carry.clear()
+			classic_score = 0
+			start_game("classic", 0)
+		"collection":
+			screen = "collection"
+			var details := tr("COLLECTION_FOUND") if profile.artifacts.has("ghost_compass") else tr("COLLECTION_EMPTY")
+			hud.show_menu("COLLECTION", [["MENU", "menu"]], details)
+			if profile.artifacts.has("ghost_compass"):
+				hud.add_compass_badge()
 		"settings":
 			settings_return = "pause" if screen == "pause" else "menu"
 			show_settings()
@@ -118,7 +160,7 @@ func handle_action(action: String) -> void:
 			InputRouter.install(profile.settings.bindings)
 			show_controls(controls_player)
 		"campaign": start_game("campaign", 0)
-		"continue": start_game("campaign", profile.unlocked)
+		"continue": start_game("adventure", 0)
 		"arcade_menu": show_arcade_menu()
 		"arcade_start":
 			arcade = ArcadeRun.new()
@@ -130,16 +172,26 @@ func handle_action(action: String) -> void:
 			if state.mode == "arcade":
 				handle_action("arcade_start")
 			else:
+				if state.mode == "classic":
+					# Chosen classic death policy: keep capacity/range; reset other powers.
+					classic_carry = {"capacity": state.actors[0].capacity, "radius": state.actors[0].radius}
 				start_game(state.mode, state.level)
 		"next":
 			if state.mode == "arcade" and not arcade.ended:
 				start_game("arcade", arcade.next_stage)
+			elif state.mode == "classic":
+				classic_carry.clear()
+				for key in ["capacity", "radius", "step", "remote", "wall_pass", "bomb_pass", "flame_pass"]:
+					classic_carry[key] = state.actors[0][key]
+				classic_score = state.score
+				start_game("classic", mini(state.level + 1, CLASSIC.campaign_seeds.size() - 1))
 			elif state.mode == "campaign":
 				start_game("campaign", mini(state.level + 1, CONFIG.campaign_seeds.size() - 1))
 		"resume":
 			state.paused = false
 			screen = "playing"
 			hud.overlay.hide()
+			hud.set_map(state, map_mode)
 		"menu": show_main_menu()
 		"language":
 			profile.language = "en" if profile.language == "ru" else "ru"
@@ -185,14 +237,22 @@ func on_finished(result: String) -> void:
 				details += "\n" + tr("NEW_TIME_RECORD")
 		details += "\n\n" + record_text()
 	elif result == "TUTORIAL_DONE":
-		buttons.push_front(["NEW_CAMPAIGN", "campaign"])
-	elif result == "LEVEL_CLEAR":
+		buttons.push_front(["ADVENTURE", "adventure"])
+	elif result == "LEVEL_CLEAR" and state.mode == "campaign":
 		profile.unlocked = maxi(profile.unlocked, state.level + 1)
 		save_profile()
 		buttons.push_front(["NEXT", "next"])
+	if state.mode == "classic" and result == "LEVEL_CLEAR":
+		buttons.push_front(["NEXT", "next"])
+	if state.mode in ["classic", "adventure"]:
+		details = tr("SOLO_RESULT") % state.score
+		if state.secrets.awarded:
+			details += "\n" + tr("COMPASS_REWARD")
 	if save_error:
 		details += "\n" + tr("SAVE_ERROR")
 	hud.show_menu(result, buttons, details)
+	if state.secrets.awarded:
+		hud.add_compass_badge()
 
 func save_profile() -> void:
 	var error := profile.write_profile()
@@ -218,7 +278,7 @@ func show_controls(player: int, notice: String = "") -> void:
 	controls_player = player
 	screen = "controls"
 	var buttons: Array = []
-	for direction in ["up", "down", "left", "right", "bomb"]:
+	for direction in ["up", "down", "left", "right", "bomb", "detonate"]:
 		var action := "p%d_%s" % [player, direction]
 		buttons.append([tr("KEY_" + direction.to_upper()) + " : " + InputRouter.key_label(action), "bind:" + action])
 	buttons.append(["RESET_KEYS", "keys_reset"])
@@ -226,6 +286,10 @@ func show_controls(player: int, notice: String = "") -> void:
 	hud.show_menu("KEYS_P%d" % player, buttons, notice)
 
 func _input(event: InputEvent) -> void:
+	if screen == "playing" and state.mode == "adventure" and event is InputEventKey and event.pressed and not event.echo and (event.keycode == KEY_TAB or event.physical_keycode == KEY_TAB):
+		get_viewport().set_input_as_handled()
+		toggle_map()
+		return
 	if waiting_binding.is_empty() or not event is InputEventKey or not event.pressed or event.echo:
 		return
 	get_viewport().set_input_as_handled()
@@ -241,3 +305,9 @@ func _input(event: InputEvent) -> void:
 	waiting_binding = ""
 	InputRouter.install(profile.settings.bindings)
 	show_controls(controls_player, tr("KEY_SAVED"))
+
+func toggle_map() -> void:
+	map_mode = (map_mode + 1) % 3
+	if map_mode > 0:
+		state.secrets.map_used = true
+	hud.set_map(state, map_mode)

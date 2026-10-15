@@ -6,6 +6,7 @@ var fire: Dictionary = {} # Cell -> last hazardous simulation tick (exclusive).
 var fire_owners: Dictionary = {} # Cell -> {owner ID: exclusive expiry tick}.
 var next_id: int = 1
 var detonations_this_tick: int = 0
+var hit_cells: Dictionary = {}
 
 func at(cell: Vector2i) -> int:
 	for id in bombs:
@@ -13,7 +14,7 @@ func at(cell: Vector2i) -> int:
 			return id
 	return -1
 
-func place(cell: Vector2i, owner: int, radius: int, capacity: int, now: int, fuse: int) -> bool:
+func place(cell: Vector2i, owner: int, radius: int, capacity: int, now: int, fuse: int, remote: bool = false) -> bool:
 	if at(cell) != -1 or fire.has(cell):
 		return false
 	var owned := 0
@@ -22,12 +23,13 @@ func place(cell: Vector2i, owner: int, radius: int, capacity: int, now: int, fus
 			owned += 1
 	if owned >= capacity:
 		return false
-	bombs[next_id] = {"id": next_id, "cell": cell, "owner": owner, "radius": radius, "due": now + fuse}
+	bombs[next_id] = {"id": next_id, "cell": cell, "owner": owner, "radius": radius, "due": now + fuse, "remote": remote}
 	next_id += 1
 	return true
 
 func advance(now: int, board: GridBoard, fire_duration: int) -> Array[Vector2i]:
 	detonations_this_tick = 0
+	hit_cells.clear()
 	for cell in fire.keys():
 		if fire[cell] <= now:
 			fire.erase(cell)
@@ -39,7 +41,7 @@ func advance(now: int, board: GridBoard, fire_duration: int) -> Array[Vector2i]:
 			fire_owners.erase(cell)
 	var queue: Array[int] = []
 	for id in bombs:
-		if bombs[id].due <= now or fire.has(bombs[id].cell):
+		if (not bombs[id].get("remote", false) and bombs[id].due <= now) or fire.has(bombs[id].cell):
 			queue.append(id)
 	queue.sort()
 	var processed: Dictionary = {}
@@ -56,6 +58,7 @@ func advance(now: int, board: GridBoard, fire_duration: int) -> Array[Vector2i]:
 		var b: Dictionary = bombs[id]
 		bombs.erase(id)
 		for cell in board.blast(b.cell, b.radius):
+			hit_cells[cell] = true
 			fire[cell] = now + fire_duration
 			if not fire_owners.has(cell):
 				fire_owners[cell] = {}
@@ -78,3 +81,11 @@ func danger(board: GridBoard) -> Dictionary:
 
 func credited(cell: Vector2i, owner: int) -> bool:
 	return fire_owners.has(cell) and fire_owners[cell].has(owner)
+
+func trigger(owner: int, now: int) -> void:
+	# One command detonates the oldest owned remote bomb; a blast still chains all types.
+	for id in bombs:
+		if bombs[id].owner == owner and bombs[id].get("remote", false):
+			bombs[id].remote = false
+			bombs[id].due = now
+			return

@@ -27,3 +27,13 @@ extends Resource
 @export var score_stage_clear: int = 500
 @export var arcade_par_seconds: int = 180
 @export var score_per_second: int = 5
+
+# Explicit presets; legacy Arcade v1 keeps its existing parameters.
+@export var hidden_exit: bool = false
+@export var contact_damage: bool = false
+@export var level_seconds: int = 0
+@export var ticks_per_game_second: int = 60
+@export var timeout_enemies: int = 4
+@export var exit_penalty_enemies: int = 2
+@export var invulnerable_ticks: int = 1800
+@export var full_powerups: bool = false

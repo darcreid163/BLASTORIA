@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="GameConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/core/game_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+hidden_exit = true
+contact_damage = true
+full_powerups = true
+width = 41
+height = 31
+initial_range = 2
+level_seconds = 0
+crate_density = 0.12
+enemy_counts = Array[int]([3, 3, 3])

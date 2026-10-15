@@ -123,4 +123,63 @@ PASS: UI: Escape cancels key capture without changing binding
 PASS: UI: settings persist and return to pause
 PASS: UI: resume uses new controls and updated HUD hint
 PASS: UI: settings content fits base 800px viewport height
-RESULT: 123 passed, 0 failed
+PASS: classic: explicit one-bomb/range-one/200-second preset
+PASS: classic: exit starts concealed and locked
+PASS: classic: uncovering exit does not itself spawn punishment
+PASS: classic: fresh blast on uncovered exit summons configured reinforcements
+PASS: classic: lingering fire does not repeatedly spawn enemies
+PASS: classic: visible exit completes only after enemies and scores once
+PASS: classic: paused timer never enters punishment
+PASS: classic: zero time adds Wardens rather than unexplained instant death
+PASS: classic: timeout phase starts exactly once
+PASS: classic: player contact with enemy is lethal
+PASS: classic: pursuing enemy can enter player cell
+PASS: powerups: remote bomb waits beyond normal fuse
+PASS: powerups: remote input resolves bomb on simulation tick
+PASS: powerups: ordinary blast chains a remote bomb
+PASS: powerups: Wall Pass crosses crates but never solid walls
+PASS: powerups: no bomb can be hidden inside solid crate terrain
+PASS: powerups: Bomb Pass enters an occupied bomb cell
+PASS: powerups: Flame Pass protects against active fire
+PASS: powerups: Flame Pass does not protect against contact
+PASS: powerups: temporary invulnerability protects through last valid tick
+PASS: powerups: temporary invulnerability expires exactly at boundary
+PASS: powerups: all eight guaranteed drops are revealed by actual destruction
+PASS: powerups: all eight effects coexist after real pickup collection
+PASS: large worlds: 40 seeds connect all traversable cells, landmarks, niche and exit
+PASS: large worlds: eight powers guaranteed under crates; starting niche empty
+PASS: large worlds: off-screen bomb detonates without a camera
+PASS: large worlds: distant enemy continues moving without visual nodes
+PASS: large worlds: identical seed and commands replay deterministically
+PASS: map: initial fog conceals distant exit and most terrain
+PASS: map: remote destruction does not disclose unexplored terrain
+PASS: map: arriving discovers local terrain
+PASS: map: distant terrain retains last observed state
+PASS: camera: entire ground footprint stays inside 41x31 at four aspect ratios
+PASS: secret: exact exploration threshold and completion required
+PASS: secret: physical niche pickup awards 50000 exactly once
+PASS: secret: any map use disqualifies compass
+PASS: secret: damage disqualifies compass
+PASS: secret: wrong first-visit order cannot be repaired by revisiting
+PASS: secret: revisiting already found landmark is harmless
+PASS: secret: disabled modes never produce secret rewards
+PASS: secret integration: eligible completion opens a playable return to the niche
+PASS: secret integration: collection completes level, score includes reward, epilogue excludes timer
+PASS: secret integration: retry resets exploration and secret progress
+PASS: settings: non-finite key codes rejected without integer conversion
+PASS: save v4: old campaign, Arcade and custom keys survive migration with collision-free remote key
+PASS: save v4: collection rejects duplicate and unknown artifact
+PASS: save v4: collection writes with settings
+PASS: save v4: collection and migrated controls reload
+PASS: UI: Adventure starts large map; owned compass and hidden minimap respected
+PASS: UI: opening minimap records use
+PASS: UI: second map action opens expanded explored map
+PASS: UI: pause hides map over menus
+PASS: UI: resume restores chosen map view
+PASS: UI: real Camera3D follows smoothly rather than snapping to far corner
+PASS: UI: classic progression carries score and permanent powers
+PASS: UI: classic retry rolls score back to stage entry, preventing retry farming
+PASS: UI: classic retry retains Bomb/Fire Up and resets special powers
+PASS: UI: reinforcement actors receive real 3D views
+PASS: UI: expanded main menu fits base viewport height
+RESULT: 182 passed, 0 failed
