@@ -24,5 +24,5 @@ func complete(state: GameState) -> Error:
 	if original.is_empty() or MapValidationService.fingerprint(original) != MapValidationService.fingerprint(state.map_data):
 		return ERR_INVALID_DATA
 	save.record_arcade(key_for(original), state.score, state.level_ticks, true)
-	save.unlocked = maxi(save.unlocked, mini(99, state.level + 1))
+	save.unlocked = maxi(save.unlocked, mini(ReleasePlan.LAUNCH_STAGES - 1, state.level + 1))
 	return save.write_profile()

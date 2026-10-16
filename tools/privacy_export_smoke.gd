@@ -15,6 +15,7 @@ func run() -> void:
 	require(not FileAccess.file_exists("res://tools/private_content.json"), "plaintext content source absent from player package")
 	require(not FileAccess.file_exists("res://resources/secrets/ghost_compass.tres"), "old semantic resource filename absent")
 	require(not FileAccess.file_exists("res://docs/MASTER_SPEC.md"), "developer specification absent from player package")
+	require(not FileAccess.file_exists("res://docs/design/EASTER_EGGS_51_RU.md") and not FileAccess.file_exists("res://docs/design/RELEASE_51_AND_ART_RU.md") and not FileAccess.file_exists("res://docs/design/ART_CONCEPT_PROMPT.md"), "new spoiler and art documents absent from player package")
 	require(SecretDefinition.active().valid, "encrypted active content readable in actual export")
 	require(AchievementCatalog.validate(), "implemented public milestones readable in actual export")
 	require(not FileAccess.file_exists("res://resources/private/content.dat") and not FileAccess.file_exists("res://resources/private/milestones.dat"), "old separate containers absent")

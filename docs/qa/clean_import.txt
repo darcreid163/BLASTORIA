@@ -1,164 +1,165 @@
 Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
 
-[   0% ] first_scan_filesystem | Started Project initialization (5 steps)
-[   0% ] first_scan_filesystem | Scanning file structure...
-[  16% ] first_scan_filesystem | Loading global class names...
-[  33% ] first_scan_filesystem | Verifying GDExtensions...
-[  50% ] first_scan_filesystem | Creating autoload scripts...
-[  66% ] first_scan_filesystem | Initializing plugins...
-[  83% ] first_scan_filesystem | Starting file scan...
-[ DONE ] first_scan_filesystem
-
-[   0% ] update_scripts_classes | Started Registering global classes... (50 steps)
-[   0% ] update_scripts_classes | AchievementCatalog
-[   1% ] update_scripts_classes | AchievementManager
-[   3% ] update_scripts_classes | AudioManager
-[   5% ] update_scripts_classes | ClassicCampaignProgress
-[   7% ] update_scripts_classes | ClassicChapterOneMap
-[   9% ] update_scripts_classes | ClassicStagePlan
-[  11% ] update_scripts_classes | ArcadeRun
-[  13% ] update_scripts_classes | GameConfig
-[  15% ] update_scripts_classes | GameSettings
-[  17% ] update_scripts_classes | GameState
-[  19% ] update_scripts_classes | BombSystem
-[  21% ] update_scripts_classes | EnemyAI
-[  23% ] update_scripts_classes | Exploration
-[  25% ] update_scripts_classes | GridBoard
-[  27% ] update_scripts_classes | LevelDefinition
-[  29% ] update_scripts_classes | ArcadeLevelRegistry
-[  31% ] update_scripts_classes | ArcadeProgressionManager
-[  33% ] update_scripts_classes | CustomMapDocument
-[  35% ] update_scripts_classes | CustomMapGenerator
-[  37% ] update_scripts_classes | CustomMapLibrary
-[  39% ] update_scripts_classes | MapValidationService
-[  41% ] update_scripts_classes | RuntimeBundle
-[  43% ] update_scripts_classes | SaveManager
-[  45% ] update_scripts_classes | SealedData
-[  47% ] update_scripts_classes | SecretDefinition
-[  49% ] update_scripts_classes | SecretManager
-[  50% ] update_scripts_classes | CustomMapEditor
-[  52% ] update_scripts_classes | ExplorationMap
-[  54% ] update_scripts_classes | GameHUD
-[  56% ] update_scripts_classes | InputRouter
-[  58% ] update_scripts_classes | MapPreviewRenderer
-[  60% ] update_scripts_classes | RelicBadge
-[  62% ] update_scripts_classes | BoardView
-[  64% ] update_scripts_classes | FollowCamera
-[  66% ] update_scripts_classes |
-[  68% ] update_scripts_classes |
-[  70% ] update_scripts_classes |
-[  72% ] update_scripts_classes |
-[  74% ] update_scripts_classes |
-[  76% ] update_scripts_classes |
-[  78% ] update_scripts_classes |
-[  80% ] update_scripts_classes |
-[  82% ] update_scripts_classes |
-[  84% ] update_scripts_classes |
-[  86% ] update_scripts_classes |
-[  88% ] update_scripts_classes |
-[  90% ] update_scripts_classes |
-[  92% ] update_scripts_classes |
-[  94% ] update_scripts_classes |
-[  96% ] update_scripts_classes |
-[ DONE ] update_scripts_classes
-
-[   0% ] _update_scan_actions | Started Scanning actions... (28 steps)
-[   0% ] _update_scan_actions | crate.wav
-[   3% ] _update_scan_actions | death.wav
-[   6% ] _update_scan_actions | defeat.wav
-[  10% ] _update_scan_actions | explosion.wav
-[  13% ] _update_scan_actions | fuse.wav
-[  17% ] _update_scan_actions | pickup.wav
-[  20% ] _update_scan_actions | place.wav
-[  24% ] _update_scan_actions | step.wav
-[  27% ] _update_scan_actions | ui.wav
-[  31% ] _update_scan_actions | victory.wav
-[  34% ] _update_scan_actions | ach_arena_10.svg
-[  37% ] _update_scan_actions | ach_arena_50.svg
-[  41% ] _update_scan_actions | ach_arena_first.svg
-[  44% ] _update_scan_actions | ach_arena_win.svg
-[  48% ] _update_scan_actions | ach_blocks_1000.svg
-[  51% ] _update_scan_actions | ach_chain_5.svg
-[  55% ] _update_scan_actions | ach_editor_10.svg
-[  58% ] _update_scan_actions | ach_editor_first.svg
-[  62% ] _update_scan_actions | ach_editor_import.svg
-[  65% ] _update_scan_actions | ach_editor_play.svg
-[  68% ] _update_scan_actions | ach_editor_share.svg
-[  72% ] _update_scan_actions | ach_enemies_100.svg
-[  75% ] _update_scan_actions | ach_enemies_1000.svg
-[  79% ] _update_scan_actions | ach_first_blast.svg
-[  82% ] _update_scan_actions | ach_first_victory.svg
-[  86% ] _update_scan_actions | ach_maze_explorer.svg
-[  89% ] _update_scan_actions | ach_powerup_master.svg
-[  93% ] _update_scan_actions | strings.csv
-[ DONE ] _update_scan_actions
-
-[   0% ] reimport | Started (Re)Importing Assets (28 steps)
-[   0% ] reimport | Preparing files to reimport...
-[   3% ] reimport | Preparing files to reimport...
-[   6% ] reimport | Preparing files to reimport...
-[  10% ] reimport | Preparing files to reimport...
-[  13% ] reimport | Preparing files to reimport...
-[  17% ] reimport | Preparing files to reimport...
-[  20% ] reimport | Preparing files to reimport...
-[  24% ] reimport | Preparing files to reimport...
-[  27% ] reimport | Preparing files to reimport...
-[  31% ] reimport | Preparing files to reimport...
-[  34% ] reimport | Preparing files to reimport...
-[  37% ] reimport | Preparing files to reimport...
-[  41% ] reimport | Preparing files to reimport...
-[  44% ] reimport | Preparing files to reimport...
-[  48% ] reimport | Preparing files to reimport...
-[  51% ] reimport | Preparing files to reimport...
-[  55% ] reimport | Preparing files to reimport...
-[  58% ] reimport | Preparing files to reimport...
-[  62% ] reimport | Preparing files to reimport...
-[  65% ] reimport | Preparing files to reimport...
-[  68% ] reimport | Preparing files to reimport...
-[  72% ] reimport | Preparing files to reimport...
-[  75% ] reimport | Preparing files to reimport...
-[  79% ] reimport | Preparing files to reimport...
-[  82% ] reimport | Preparing files to reimport...
-[  86% ] reimport | Preparing files to reimport...
-[  89% ] reimport | Preparing files to reimport...
-[  93% ] reimport | Preparing files to reimport...
-[   0% ] reimport | Executing pre-reimport operations...
-[   0% ] reimport | strings.csv
-[   3% ] reimport | strings.csv
-[   6% ] reimport | ach_powerup_master.svg
-[  10% ] reimport | ach_maze_explorer.svg
-[  13% ] reimport | ach_first_victory.svg
-[  17% ] reimport | ach_first_blast.svg
-[  20% ] reimport | ach_enemies_1000.svg
-[  24% ] reimport | ach_enemies_100.svg
-[  27% ] reimport | ach_editor_share.svg
-[  31% ] reimport | ach_editor_play.svg
-[  34% ] reimport | ach_editor_import.svg
-[  37% ] reimport | ach_editor_first.svg
-[  41% ] reimport | ach_editor_10.svg
-[  44% ] reimport | ach_chain_5.svg
-[  48% ] reimport | ach_blocks_1000.svg
-[  51% ] reimport | ach_arena_win.svg
-[  55% ] reimport | ach_arena_first.svg
-[  58% ] reimport | ach_arena_50.svg
-[  62% ] reimport | strings.csv
-[  65% ] reimport | ach_powerup_master.svg
-[  68% ] reimport | ach_maze_explorer.svg
-[  72% ] reimport | ach_first_victory.svg
-[  75% ] reimport | ach_first_blast.svg
-[  79% ] reimport | ach_enemies_1000.svg
-[  82% ] reimport | ach_enemies_100.svg
-[  86% ] reimport | ach_editor_share.svg
-[  89% ] reimport | ach_editor_play.svg
-[  93% ] reimport | ach_editor_import.svg
-[  96% ] reimport | Finalizing Asset Import...
-[ DONE ] reimport
-
-[   0% ] reimport | Started (Re)Importing Assets (28 steps)
-[   0% ] reimport | Executing post-reimport operations...
-[ DONE ] reimport
-
-[   0% ] loading_editor_layout | Started Loading editor (5 steps)
-[   0% ] loading_editor_layout | Loading editor layout...
-[ DONE ] loading_editor_layout
-
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Registering global classes... (51 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | AchievementCatalog[39m[0m
+[   1% ] [90m[1mupdate_scripts_classes[22m | AchievementManager[39m[0m
+[   3% ] [90m[1mupdate_scripts_classes[22m | AudioManager[39m[0m
+[   5% ] [90m[1mupdate_scripts_classes[22m | ClassicCampaignProgress[39m[0m
+[   7% ] [90m[1mupdate_scripts_classes[22m | ClassicChapterOneMap[39m[0m
+[   9% ] [90m[1mupdate_scripts_classes[22m | ClassicStagePlan[39m[0m
+[  11% ] [90m[1mupdate_scripts_classes[22m | ArcadeRun[39m[0m
+[  13% ] [90m[1mupdate_scripts_classes[22m | GameConfig[39m[0m
+[  15% ] [90m[1mupdate_scripts_classes[22m | GameSettings[39m[0m
+[  17% ] [90m[1mupdate_scripts_classes[22m | GameState[39m[0m
+[  19% ] [90m[1mupdate_scripts_classes[22m | ReleasePlan[39m[0m
+[  21% ] [90m[1mupdate_scripts_classes[22m | BombSystem[39m[0m
+[  23% ] [90m[1mupdate_scripts_classes[22m | EnemyAI[39m[0m
+[  25% ] [90m[1mupdate_scripts_classes[22m | Exploration[39m[0m
+[  26% ] [90m[1mupdate_scripts_classes[22m | GridBoard[39m[0m
+[  28% ] [90m[1mupdate_scripts_classes[22m | LevelDefinition[39m[0m
+[  30% ] [90m[1mupdate_scripts_classes[22m | ArcadeLevelRegistry[39m[0m
+[  32% ] [90m[1mupdate_scripts_classes[22m | ArcadeProgressionManager[39m[0m
+[  34% ] [90m[1mupdate_scripts_classes[22m | CustomMapDocument[39m[0m
+[  36% ] [90m[1mupdate_scripts_classes[22m | CustomMapGenerator[39m[0m
+[  38% ] [90m[1mupdate_scripts_classes[22m | CustomMapLibrary[39m[0m
+[  40% ] [90m[1mupdate_scripts_classes[22m | MapValidationService[39m[0m
+[  42% ] [90m[1mupdate_scripts_classes[22m | RuntimeBundle[39m[0m
+[  44% ] [90m[1mupdate_scripts_classes[22m | SaveManager[39m[0m
+[  46% ] [90m[1mupdate_scripts_classes[22m | SealedData[39m[0m
+[  48% ] [90m[1mupdate_scripts_classes[22m | SecretDefinition[39m[0m
+[  50% ] [90m[1mupdate_scripts_classes[22m | SecretManager[39m[0m
+[  51% ] [90m[1mupdate_scripts_classes[22m | CustomMapEditor[39m[0m
+[  53% ] [90m[1mupdate_scripts_classes[22m | ExplorationMap[39m[0m
+[  55% ] [90m[1mupdate_scripts_classes[22m | GameHUD[39m[0m
+[  57% ] [90m[1mupdate_scripts_classes[22m | InputRouter[39m[0m
+[  59% ] [90m[1mupdate_scripts_classes[22m | MapPreviewRenderer[39m[0m
+[  61% ] [90m[1mupdate_scripts_classes[22m | RelicBadge[39m[0m
+[  63% ] [90m[1mupdate_scripts_classes[22m | BoardView[39m[0m
+[  65% ] [90m[1mupdate_scripts_classes[22m | FollowCamera[39m[0m
+[  67% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  69% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  73% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  75% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  76% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  78% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  80% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  82% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  84% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  86% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  88% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  90% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  92% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  94% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  96% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Started Scanning actions... (28 steps)[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | crate.wav[39m[0m
+[   3% ] [90m[1m_update_scan_actions[22m | death.wav[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | defeat.wav[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | explosion.wav[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | fuse.wav[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | pickup.wav[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | place.wav[39m[0m
+[  24% ] [90m[1m_update_scan_actions[22m | step.wav[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | ui.wav[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | victory.wav[39m[0m
+[  34% ] [90m[1m_update_scan_actions[22m | ach_arena_10.svg[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | ach_arena_50.svg[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | ach_arena_first.svg[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | ach_arena_win.svg[39m[0m
+[  48% ] [90m[1m_update_scan_actions[22m | ach_blocks_1000.svg[39m[0m
+[  51% ] [90m[1m_update_scan_actions[22m | ach_chain_5.svg[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | ach_editor_10.svg[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | ach_editor_first.svg[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | ach_editor_import.svg[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | ach_editor_play.svg[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | ach_editor_share.svg[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | ach_enemies_100.svg[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | ach_enemies_1000.svg[39m[0m
+[  79% ] [90m[1m_update_scan_actions[22m | ach_first_blast.svg[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | ach_first_victory.svg[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | ach_maze_explorer.svg[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | ach_powerup_master.svg[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | strings.csv[39m[0m
+[92m[ DONE ][39m [1m_update_scan_actions[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (28 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   3% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   6% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  10% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  13% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  17% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  20% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  24% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  27% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  31% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  34% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  37% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  41% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  44% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  48% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  51% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  55% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  58% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  62% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  65% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  68% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  72% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  75% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  79% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  82% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  86% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  89% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  93% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing pre-reimport operations...[39m[0m
+[   0% ] [90m[1mreimport[22m | strings.csv[39m[0m
+[   3% ] [90m[1mreimport[22m | strings.csv[39m[0m
+[   6% ] [90m[1mreimport[22m | ach_powerup_master.svg[39m[0m
+[  10% ] [90m[1mreimport[22m | ach_maze_explorer.svg[39m[0m
+[  13% ] [90m[1mreimport[22m | ach_first_victory.svg[39m[0m
+[  17% ] [90m[1mreimport[22m | ach_first_blast.svg[39m[0m
+[  20% ] [90m[1mreimport[22m | ach_enemies_1000.svg[39m[0m
+[  24% ] [90m[1mreimport[22m | ach_enemies_100.svg[39m[0m
+[  27% ] [90m[1mreimport[22m | ach_editor_share.svg[39m[0m
+[  31% ] [90m[1mreimport[22m | ach_editor_play.svg[39m[0m
+[  34% ] [90m[1mreimport[22m | ach_editor_import.svg[39m[0m
+[  37% ] [90m[1mreimport[22m | ach_editor_first.svg[39m[0m
+[  41% ] [90m[1mreimport[22m | ach_editor_10.svg[39m[0m
+[  44% ] [90m[1mreimport[22m | ach_chain_5.svg[39m[0m
+[  48% ] [90m[1mreimport[22m | ach_blocks_1000.svg[39m[0m
+[  51% ] [90m[1mreimport[22m | ach_arena_win.svg[39m[0m
+[  55% ] [90m[1mreimport[22m | ach_arena_first.svg[39m[0m
+[  58% ] [90m[1mreimport[22m | ach_arena_50.svg[39m[0m
+[  62% ] [90m[1mreimport[22m | strings.csv[39m[0m
+[  65% ] [90m[1mreimport[22m | ach_powerup_master.svg[39m[0m
+[  68% ] [90m[1mreimport[22m | ach_maze_explorer.svg[39m[0m
+[  72% ] [90m[1mreimport[22m | ach_first_victory.svg[39m[0m
+[  75% ] [90m[1mreimport[22m | ach_first_blast.svg[39m[0m
+[  79% ] [90m[1mreimport[22m | ach_enemies_1000.svg[39m[0m
+[  82% ] [90m[1mreimport[22m | ach_enemies_100.svg[39m[0m
+[  86% ] [90m[1mreimport[22m | ach_editor_share.svg[39m[0m
+[  89% ] [90m[1mreimport[22m | ach_editor_play.svg[39m[0m
+[  93% ] [90m[1mreimport[22m | ach_editor_import.svg[39m[0m
+[  96% ] [90m[1mreimport[22m | Finalizing Asset Import...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (28 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing post-reimport operations...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
