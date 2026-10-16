@@ -16,10 +16,10 @@ func update(camera: Camera3D, player: Vector3, width: int, height: int, delta: f
 	var viewport := camera.get_viewport().get_visible_rect().size
 	var aspect := viewport.x / maxf(1, viewport.y)
 	# Reduce coverage on ultra-wide screens so the entire footprint still fits the board.
-	camera.size = minf(18.0 if width < 20 else 16.0, minf((width + 4.0) / maxf(0.1, aspect), (height + 6.0) * OFFSET.y / OFFSET.length()))
-	var goal := target(player, width + 4, height + 6, camera.size, aspect)
+	camera.size = minf(18.0 if width < 20 else 16.0, minf((width + 4.0) / maxf(0.1, aspect), (height + 10.0) * OFFSET.y / OFFSET.length()))
+	var goal := target(player, width + 4, height + 10, camera.size, aspect)
 	center = goal if snap else center.lerp(goal, 1.0 - exp(-8.0 * delta))
 	# Resizing can shrink the allowed interval while the camera is moving.
-	center = target(center, width + 4, height + 6, camera.size, aspect)
+	center = target(center, width + 4, height + 10, camera.size, aspect)
 	camera.position = center + OFFSET
 	camera.look_at(center)

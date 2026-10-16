@@ -20,6 +20,7 @@ var result: String = ""
 var paused: bool = false
 var score: int = 0
 var time_bonus: int = 0
+var defeat_reason: String = ""
 var tutorial_moved: bool = false
 var tutorial_picked: bool = false
 var exit_revealed: bool = true
@@ -40,7 +41,7 @@ var activity: Dictionary = {}
 
 func start(settings: GameConfig, new_mode: String, level_index: int, map_seed: int, definition: Dictionary = {}) -> void:
 	attempt_id = Crypto.new().generate_random_bytes(16).hex_encode()
-	activity = {"bombs": 0, "detonations": 0, "kills": 0, "crates": 0, "max_chain": 0, "powers": [], "steps": [0, 0], "placements": [0, 0]}
+	activity = {"bombs": 0, "detonations": 0, "kills": 0, "crates": 0, "max_chain": 0, "pickups": 0, "powers": [], "steps": [0, 0], "placements": [0, 0]}
 	map_data = definition.duplicate(true)
 	stage_profile = ClassicStagePlan.stage(level_index + 1) if new_mode == "classic" else {}
 	config = ClassicStagePlan.rules_for(settings, level_index + 1) if not stage_profile.is_empty() else settings
@@ -52,6 +53,7 @@ func start(settings: GameConfig, new_mode: String, level_index: int, map_seed: i
 	tick = 0
 	score = 0
 	time_bonus = 0
+	defeat_reason = ""
 	tutorial_moved = false
 	tutorial_picked = false
 	exit_revealed = not config.hidden_exit
@@ -282,10 +284,12 @@ func apply_damage() -> void:
 				activity.kills += 1
 				if scoring_mode(): score += config.score_enemy
 			if not actor.enemy:
+				defeat_reason = "DEATH_BLAST"
 				secrets.damaged = true
 	apply_contact()
 
 func collect(actor: Dictionary, kind: String) -> void:
+	if not actor.enemy: activity.pickups += 1
 	if actor.id == 0 and not actor.enemy and MapValidationService.POWERS.has(kind) and not activity.powers.has(kind): activity.powers.append(kind)
 	match kind:
 		"capacity": actor.capacity = mini(actor.capacity + 1, config.max_capacity)
@@ -311,6 +315,7 @@ func check_end() -> void:
 			score += config.score_stage_clear + time_bonus
 			result = "MAP_CLEAR"
 		elif not map_data.is_empty() and config.level_seconds > 0 and remaining_seconds() == 0:
+			defeat_reason = "DEATH_TIMEOUT"
 			result = "DEFEAT"
 		elif completion_walk:
 			if secrets.awarded or (left_completion_exit and actors[0].cell == board.exit_cell):
@@ -360,7 +365,7 @@ func alive_enemies() -> int:
 func snapshot() -> Dictionary:
 	return {"activity": activity.duplicate(true), "tick": tick, "actors": actors.duplicate(true), "bombs": bombs.bombs.duplicate(true),
 		"fire": bombs.fire.duplicate(), "cells": board.cells.duplicate(), "powerups": powerups.duplicate(),
-		"result": result, "rng_state": rng.state, "score": score, "time_bonus": time_bonus,
+		"result": result, "defeat_reason": defeat_reason, "rng_state": rng.state, "score": score, "time_bonus": time_bonus,
 		"fire_owners": bombs.fire_owners.duplicate(true), "level_ticks": level_ticks,
 		"exit_revealed": exit_revealed, "pending_penalty": pending_penalty,
 		"sealed_prize_cell": sealed_prize_cell, "penalty_phase": penalty_phase,
@@ -406,6 +411,7 @@ func apply_contact() -> void:
 		for enemy in actors:
 			if enemy.enemy and enemy.alive and enemy.cell == actor.cell:
 				actor.alive = false
+				defeat_reason = "DEATH_CONTACT"
 				secrets.damaged = true
 				feedback.emit("death")
 				break

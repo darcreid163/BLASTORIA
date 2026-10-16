@@ -22,6 +22,8 @@ var waiting_binding: String = ""
 var controls_player: int = 1
 var achievements := AchievementManager.new()
 var achievement_page: int = 0
+var guide_return: String = "menu"
+var guide_page: int = 0
 var official := ArcadeProgressionManager.new()
 var workshop: CustomMapEditor
 var custom_records := SaveManager.new()
@@ -85,7 +87,7 @@ func start_game(mode: String, level: int) -> void:
 	map_mode = 0
 	hud.set_map(state, 0)
 	view.build(state)
-	hud.toast.text = ""
+	hud.clear_pickup()
 	hud.overlay.hide()
 	hud.set_playing_visible(true)
 	screen = "playing"
@@ -144,6 +146,9 @@ func _unhandled_input(event: InputEvent) -> void:
 					handle_action("retry")
 			KEY_F11:
 				handle_action("fullscreen")
+	if event is InputEventJoypadButton and event.pressed and event.device == 0 and event.button_index == JOY_BUTTON_X and screen == "result":
+		handle_action("retry")
+		return
 	if event is InputEventJoypadButton and event.pressed and event.device == 0 and event.button_index == JOY_BUTTON_BACK and screen == "playing" and state.mode == "adventure":
 		toggle_map()
 	if event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_START:
@@ -158,10 +163,10 @@ func pause_game() -> void:
 	state.paused = true
 	hud.map_view.hide()
 	screen = "pause"
-	hud.show_menu("PAUSED", [["RESUME", "resume"], ["RESTART_RUN" if state.mode == "arcade" else "RETRY", "retry"], ["SETTINGS", "settings"], ["MENU", "menu"]], tr("ARCADE_RESTART_NOTE") if state.mode == "arcade" else "")
+	hud.show_menu("PAUSED", [["RESUME", "resume"], ["RESTART_RUN" if state.mode == "arcade" else "RETRY", "retry"], ["GUIDE", "guide"], ["SETTINGS", "settings"], ["MENU", "menu"]], tr("ARCADE_RESTART_NOTE") if state.mode == "arcade" else "")
 
 	if state.mode in ["custom", "custom_coop", "custom_arena"]:
-		hud.show_menu("PAUSED", [["RESUME", "resume"], ["RETRY", "retry"], ["EDITOR_RETURN", "editor_return"]])
+		hud.show_menu("PAUSED", [["RESUME", "resume"], ["RETRY", "retry"], ["GUIDE", "guide"], ["EDITOR_RETURN", "editor_return"]])
 
 func handle_action(action: String) -> void:
 	audio_manager.play("ui")
@@ -184,6 +189,23 @@ func handle_action(action: String) -> void:
 		return
 	match action:
 		"tutorial": start_game("tutorial", 0)
+		"guide":
+			guide_return = "pause" if screen == "pause" else "menu"
+			show_guide()
+		"guide_home": show_guide()
+		"guide_bonuses":
+			guide_page = 0
+			show_bonus_guide()
+		"guide_next":
+			guide_page = 1
+			show_bonus_guide()
+		"guide_prev":
+			guide_page = 0
+			show_bonus_guide()
+		"guide_enemies": show_enemy_guide()
+		"guide_back":
+			if guide_return == "pause": pause_game()
+			else: show_main_menu()
 		"campaign_menu":
 			state.paused = true
 			screen = "campaign_menu"
@@ -356,6 +378,7 @@ func on_finished(result: String) -> void:
 			details += "\n" + SecretDefinition.active().localized("reward")
 	if save_error:
 		details += "\n" + tr("SAVE_ERROR")
+	if result == "DEFEAT" and not state.defeat_reason.is_empty(): details += "\n" + tr(state.defeat_reason)
 	hud.show_menu(result, buttons, details)
 	if state.secrets.awarded:
 		hud.add_relic_badge()
@@ -365,7 +388,7 @@ func save_profile() -> void:
 	save_error = error != OK
 	if save_error:
 		push_warning("Profile write failed: %s" % error_string(error))
-		hud.toast.text = tr("SAVE_ERROR")
+		hud.notify_message(tr("SAVE_ERROR"))
 
 func apply_display_mode() -> void:
 	if DisplayServer.get_name() != "headless":
@@ -534,7 +557,7 @@ func show_loaded_map() -> void:
 	map_mode = 0
 	hud.set_map(state, 0)
 	view.build(state)
-	hud.toast.text = ""
+	hud.clear_pickup()
 	hud.overlay.hide()
 	hud.set_playing_visible(true)
 	screen = "playing"
@@ -574,7 +597,7 @@ func finish_map(result: String) -> void:
 	screen = "result"
 	state.paused = true
 	var details := tr("SCORE") + ": %d · " % state.score + tr("TIME") + ": " + ArcadeRun.format_time(state.level_ticks) + "\n" + (stage_name(state.level + 1) if state.mode == "official_arcade" else str(state.map_data.title))
-	var buttons: Array = [["RETRY", "retry"]]
+	var buttons: Array = [[tr("RETRY") + " · R / X", "retry"]]
 	if state.mode == "official_arcade":
 		if result == "MAP_CLEAR":
 			if official.complete(state) != OK:
@@ -584,7 +607,7 @@ func finish_map(result: String) -> void:
 			else:
 				details += "\n" + tr("CONTENT_END")
 		var record := official.save.record_for(official.key_for(state.map_data))
-		details += "\n" + tr("BEST_SCORE") % record.score + " · " + tr("BEST_TIME") % ArcadeRun.format_time(record.best_ticks)
+		details += "\n" + tr("BEST_SCORE") % record.score + " · " + tr("BEST_TIME") % (ArcadeRun.format_time(record.best_ticks) if int(record.best_ticks)>0 else tr("NO_RECORD"))
 		buttons.append(["ARCADE", "official_menu"])
 		buttons.append(["MENU", "menu"])
 	else:
@@ -596,12 +619,52 @@ func finish_map(result: String) -> void:
 			if custom_records.write_profile() != OK:
 				details += "\n" + tr("SAVE_ERROR")
 			var record := custom_records.record_for(key)
-			details += "\n" + tr("BEST_SCORE") % record.score + " · " + tr("BEST_TIME") % ArcadeRun.format_time(record.best_ticks)
+			details += "\n" + tr("BEST_SCORE") % record.score + " · " + tr("BEST_TIME") % (ArcadeRun.format_time(record.best_ticks) if int(record.best_ticks)>0 else tr("NO_RECORD"))
 		else:
 			details += ""
 		buttons.append(["EDITOR_RETURN", "editor_return"])
-	hud.show_menu(result, buttons, details)
+	if state.scoring_mode(): details += "\n\n" + attempt_summary()
+	if result == "DEFEAT" and not state.defeat_reason.is_empty(): details += "\n" + tr(state.defeat_reason)
+	hud.show_menu(result, buttons, details, true)
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		achievements.flush()
+
+func attempt_summary() -> String:
+	var lines: Array[String] = []
+	for entry in [["CRATES_BROKEN", state.activity.crates, state.config.score_crate], ["DEFEATED", state.activity.kills, state.config.score_enemy], ["PICKUPS_COLLECTED", state.activity.pickups, state.config.score_pickup]]:
+		lines.append(tr(entry[0]) + ": %d (+%d)" % [entry[1], int(entry[1])*int(entry[2])])
+	if state.result == "MAP_CLEAR":
+		lines.append(tr("CLEAR_BONUS") + ": +%d" % state.config.score_stage_clear)
+		lines.append(tr("TIME_BONUS") + ": +%d" % state.time_bonus)
+	return "\n".join(lines)
+
+func show_guide() -> void:
+	state.paused = true
+	screen = "guide"
+	var buttons: Array = [["GUIDE_BONUSES", "guide_bonuses"], ["GUIDE_ENEMIES", "guide_enemies"]]
+	if guide_return == "menu": buttons.push_front(["TUTORIAL", "tutorial"])
+	buttons.append(["BACK", "guide_back"])
+	hud.show_menu("GUIDE", buttons, tr("DYNAMIC_CONTROLS") % InputRouter.player_hint(1))
+
+func show_bonus_guide() -> void:
+	screen = "guide_bonuses"
+	state.paused = true
+	var buttons: Array = []
+	buttons.append(["PAGE_NEXT" if guide_page == 0 else "PAGE_PREV", "guide_next" if guide_page == 0 else "guide_prev"])
+	buttons.append(["BACK", "guide_home"])
+	hud.show_menu("GUIDE_BONUSES", buttons)
+	var entries: Array = []
+	for kind in MapValidationService.POWERS.slice(guide_page*4, guide_page*4+4):
+		entries.append({"kind":kind,"title":tr("POWER_"+kind.to_upper()),"description":tr("INFO_"+kind.to_upper())})
+	hud.add_guide_rows(entries, true)
+
+func show_enemy_guide() -> void:
+	screen = "guide_enemies"
+	state.paused = true
+	hud.show_menu("GUIDE_ENEMIES", [["BACK", "guide_home"]])
+	var entries: Array = []
+	for kind in MapValidationService.ENEMIES:
+		entries.append({"kind":kind,"title":tr("WS_"+kind.to_upper()),"description":tr("ENEMY_"+kind.to_upper())})
+	hud.add_guide_rows(entries, false)

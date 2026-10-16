@@ -3,7 +3,7 @@
 | Resource | Origin | Status |
 | --- | --- | --- |
 | Prototype 0.1 code | Owner-supplied ZIP, imported unchanged | Preserved in initial commit |
-| 0.2–0.7.0 code, docs, procedural meshes and palettes | Created with AI assistance in this development session | No external game assets copied |
+| 0.2–0.7.2 code, docs, procedural meshes and palettes | Created with AI assistance in this development session | No external game assets copied |
 | Seventeen milestone SVG badges | Original geometric vectors generated in this session; locked state uses tint | Temporary original UI assets; no external icon pack |
 | Ten WAV effects in assets/audio | Original mathematical synthesis via tools/generate_audio.py, deterministic noise, no sampled external recordings | Created with AI assistance; provisional sound design |
 | Master prompts 1, 2.0, 2.3 and 2.4 | Owner-supplied texts | Exact archives retained; consolidated 2.5 with privacy and 0.6.0 addenda active |
@@ -31,3 +31,5 @@ assets/fonts/OFL-CJK.txt. https://github.com/notofonts/noto-cjk/tree/main/Sans
 Reproduction: tools/subset_ui_fonts.py --source-dir <official regular OTF directory>.
 Hashes: docs/qa/font_sources.json. Subsets do not cover arbitrary user CJK text.
 Include both OFL notices in player archives alongside Godot notices.
+
+GuideBadge vector silhouettes (0.7.2) are original code-native drawings based on this project's procedural item/monster shapes; created with AI assistance, no external icon pack.

@@ -542,4 +542,34 @@ PASS: chapter: every stage record survives restart
 PASS: chapter: every stage record survives restart
 PASS: chapter UI: ten stage tiles; saved first-three clear opens fourth only
 PASS: chapter UI: new stage tile enters actual stage four
-RESULT: 542 passed, 0 failed
+PASS: feedback: blast cause comes from actual fatal damage
+PASS: feedback: contact cause differs from blast
+PASS: feedback: actual custom timer expiry reports time limit
+PASS: feedback: restart resets attempt diagnostics
+PASS: feedback: repeated same-kind pickups count individually
+PASS: feedback: player two contributes shared pickup count
+PASS: coop: pursuit follows surviving player instead of dead player one
+PASS: feedback: restart clears stale pickup panel and timeout
+PASS: feedback: official Arcade never advertises a hidden exit
+PASS: feedback: custom remote key accepted for prompt test
+PASS: feedback: Arcade shows remote ability and current detonation binding
+PASS: guide: browsing from pause preserves the complete attempt
+PASS: en: guide headings and descriptions use current language
+PASS: ru: guide headings and descriptions use current language
+PASS: ja: guide headings and descriptions use current language
+PASS: ko: guide headings and descriptions use current language
+PASS: zh_CN: guide headings and descriptions use current language
+PASS: hi: guide headings and descriptions use current language
+PASS: id: guide headings and descriptions use current language
+PASS: th: guide headings and descriptions use current language
+PASS: vi: guide headings and descriptions use current language
+PASS: fr: guide headings and descriptions use current language
+PASS: it: guide headings and descriptions use current language
+PASS: de: guide headings and descriptions use current language
+PASS: ar: guide headings and descriptions use current language
+PASS: tr: guide headings and descriptions use current language
+PASS: feedback: fatal simulation reaches explanatory result screen
+PASS: feedback: absent record never appears as a zero-time personal best
+PASS: quick retry: second controller cannot reset the solo player's attempt
+PASS: quick retry: player one X starts same stage with clean attempt
+RESULT: 572 passed, 0 failed

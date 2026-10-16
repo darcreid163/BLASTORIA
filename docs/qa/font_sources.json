@@ -1,17 +1,17 @@
 {
   "jp": {
     "source_sha256": "68a3fc98800b2a27b371f2fb79991daf3633bd89309d4ffaa6946fd587f375b5",
-    "subset_sha256": "8ea787095716e46297863dfe1df171f70dd071c0c55b55d884b07dc5a6674b35",
-    "bytes": 512616
+    "subset_sha256": "592ec5344025fea26b1d4fd8e241d80dffcd17ba269944ae43d60a4bd59f438c",
+    "bytes": 536412
   },
   "kr": {
     "source_sha256": "6bcb2a0703aa137e874fc2dffa85f6c21ba9a67fa329e81b8c801663af7e992a",
-    "subset_sha256": "cff5521d6672156df463fbcfab1d1daec2a530f49195f1f88615408757276e33",
-    "bytes": 509468
+    "subset_sha256": "238b6631de9e18b90b4be91921005b49a53c5bed93ce6416db56ebcfc4e09eb0",
+    "bytes": 532792
   },
   "sc": {
     "source_sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
-    "subset_sha256": "33e2fe7c006ee2cdc6b94b8d6de2ff3f49b47eea96237316307637d567b8a334",
-    "bytes": 508824
+    "subset_sha256": "a5ec6d67f82f403c96fb4fe3b2f51b77c77084591b68d0f1b59932e02faa57ee",
+    "bytes": 532160
   }
 }

@@ -1,0 +1,23 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+PASS: en: shipped guide and vector badges load
+PASS: ru: shipped guide and vector badges load
+PASS: ja: shipped guide and vector badges load
+PASS: ko: shipped guide and vector badges load
+PASS: zh_CN: shipped guide and vector badges load
+PASS: hi: shipped guide and vector badges load
+PASS: id: shipped guide and vector badges load
+PASS: th: shipped guide and vector badges load
+PASS: vi: shipped guide and vector badges load
+PASS: fr: shipped guide and vector badges load
+PASS: it: shipped guide and vector badges load
+PASS: de: shipped guide and vector badges load
+PASS: ar: shipped guide and vector badges load
+PASS: tr: shipped guide and vector badges load
+PASS: release: remote key can be rebound
+PASS: release: active ability and rebound detonation prompt are visible
+PASS: release: help browsing does not consume or reset active attempt
+PASS: release: real death opens explanatory result
+PASS: release: reason and score breakdown reach actual result UI
+PASS: release: X repeats same stage with clean state and notifications
+FEEDBACK EXPORT: PASS
