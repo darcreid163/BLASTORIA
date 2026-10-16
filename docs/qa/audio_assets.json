@@ -1,0 +1,62 @@
+{
+  "crate": {
+    "duration": 0.16,
+    "peak": 0.1187,
+    "rms": 0.0256,
+    "sha256": "af6bb13d6a7843d2037f4c81a9b6bae79e1117868dd7bae543215c1c0a05755b"
+  },
+  "death": {
+    "duration": 0.32,
+    "peak": 0.2671,
+    "rms": 0.0727,
+    "sha256": "2be2e6ee1327ffd5bf4f9c373e58686897a3640a4ce31bc18f4df7d99f00d9e2"
+  },
+  "defeat": {
+    "duration": 0.64,
+    "peak": 0.218,
+    "rms": 0.108,
+    "sha256": "2c5e7c7afe011c5302113a3a2abd327a20972fb39814673631bc39175a3a4e42"
+  },
+  "explosion": {
+    "duration": 0.56,
+    "peak": 0.4447,
+    "rms": 0.0975,
+    "sha256": "fff2331bd285426f58fe815590fd19b0b97d86b44938cfaebf667a1a0d98ea61"
+  },
+  "fuse": {
+    "duration": 0.14,
+    "peak": 0.2156,
+    "rms": 0.0409,
+    "sha256": "764123bc7a12ddb4af47a0ff7345f3d54ac497afd9f35e20178e3d89b0f619dc"
+  },
+  "pickup": {
+    "duration": 0.32,
+    "peak": 0.2182,
+    "rms": 0.1078,
+    "sha256": "2b531a1fd223250d35f3dd037c384a0975640f39ae4c39bc54f22a7cd2f8f0b2"
+  },
+  "place": {
+    "duration": 0.12,
+    "peak": 0.1504,
+    "rms": 0.0312,
+    "sha256": "5628be8b43627c872802162cdb87b44b31dc2ce0c50a1e543ef91953c8529f1d"
+  },
+  "step": {
+    "duration": 0.045,
+    "peak": 0.0547,
+    "rms": 0.0125,
+    "sha256": "93b83721f22e3dc3690fab9614abd3a9a3f5bfdb5f46164cf0c13f9e4996708b"
+  },
+  "ui": {
+    "duration": 0.065,
+    "peak": 0.1215,
+    "rms": 0.0347,
+    "sha256": "a07be7fbbfac30611f4bde0353eae51f0d94c9bd4bc1c34f50bfdb52c6c994e8"
+  },
+  "victory": {
+    "duration": 0.78,
+    "peak": 0.2271,
+    "rms": 0.1123,
+    "sha256": "fa0c9438717818f708e848d8c2a9540ce3df3efc065e0e36a3e77234860adbf9"
+  }
+}

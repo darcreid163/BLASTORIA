@@ -1,3 +1,25 @@
+# 0.7.3 view and audio cues
+
+All new cues are presentation-only. GameState, BombSystem, authored maps, seeds,
+score and official fingerprints remain unchanged. BombView derives four fuse
+markers from due - tick and config.fuse_ticks; remote bombs keep a separate antenna
+and steady markers, regardless of their unused due value. Signal materials are
+unshaded and do not bleach warning colors under the scene light.
+
+BoardView creates fire only for BombSystem.fire keys and removes it when the key
+expires. Raised cores/sparks stay inside their cell. Destruction/death transitions
+and the existing pickup signal spawn at most 24 four-piece groups; older groups
+are detached before replacement. Trajectories, bobbing and durations use model ticks,
+so paused time cannot advance them. Rebuild clears all references with the old world.
+No full-screen flash, camera shake, collision nodes or random gameplay calls added.
+
+AudioManager keeps eight voices and ranks semantic cues, replacing the oldest of
+the least important voices only when the incoming priority permits it. All voices
+use existing UI/SFX volume buses. Deterministic mathematical synthesis produces ten
+PCM assets; verify_audio.py checks bytes, format, duration, signal, headroom and fade
+boundaries. These checks are not speaker/listener acceptance or proof of final mix
+quality. Music, ambience, quality presets, smoke and complete animation remain plans.
+
 # 0.7.2 feedback and guide
 
 GameState adds attempt-only pickup count and defeat_reason. Fatal fire/contact and

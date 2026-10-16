@@ -228,5 +228,6 @@ func run() -> void:
 	await load("res://tests/test_modes_i18n.gd").new().run(self)
 	await preload("res://tests/test_arcade_chapter.gd").new().run(self)
 	await preload("res://tests/test_feedback.gd").new().run(self)
+	await preload("res://tests/test_hazard_feedback.gd").new().run(self)
 	print("RESULT: %d passed, %d failed" % [passed, failed])
 	quit(1 if failed > 0 else 0)
