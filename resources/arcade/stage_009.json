@@ -1,0 +1,148 @@
+{
+  "format": 2,
+  "id": "arcade_009",
+  "revision": 1,
+  "title": "Эстафета",
+  "author": "BLASTORIA",
+  "description": "Авторская карта первой главы",
+  "created": "2026-10-16",
+  "modified": "2026-10-16",
+  "mode": "solo",
+  "theme": "green_maze",
+  "width": 25,
+  "height": 17,
+  "seed": 23009,
+  "generator_version": 0,
+  "rows": [
+    "#########################",
+    "#.......................#",
+    "#.......................#",
+    "#....#.....#.....#......#",
+    "#....#..C..#.....#..C...#",
+    "#....#.....#.....#......#",
+    "#....C...........C......#",
+    "#....#.....#.....#......#",
+    "#....#.....#..C..#....C.#",
+    "#..C.#.....#.....#......#",
+    "#..........C............#",
+    "#....#.....#.....#......#",
+    "#....#..C..#.....#..C...#",
+    "#....#.....#.....#......#",
+    "#.............C.........#",
+    "#.......................#",
+    "#########################"
+  ],
+  "spawns": [
+    [
+      1,
+      1
+    ]
+  ],
+  "enemies": [
+    {
+      "cell": [
+        8,
+        2
+      ],
+      "kind": "patrol",
+      "step": 39,
+      "required": true
+    },
+    {
+      "cell": [
+        8,
+        9
+      ],
+      "kind": "chaser",
+      "step": 48,
+      "required": true
+    },
+    {
+      "cell": [
+        14,
+        4
+      ],
+      "kind": "bomber",
+      "step": 42,
+      "required": true
+    },
+    {
+      "cell": [
+        14,
+        12
+      ],
+      "kind": "patrol",
+      "step": 39,
+      "required": true
+    },
+    {
+      "cell": [
+        21,
+        8
+      ],
+      "kind": "warden",
+      "step": 60,
+      "required": true
+    },
+    {
+      "cell": [
+        21,
+        14
+      ],
+      "kind": "patrol",
+      "step": 42,
+      "required": true
+    }
+  ],
+  "powerups": [
+    {
+      "cell": [
+        3,
+        1
+      ],
+      "kind": "capacity",
+      "hidden": false
+    },
+    {
+      "cell": [
+        3,
+        9
+      ],
+      "kind": "range",
+      "hidden": true
+    },
+    {
+      "cell": [
+        8,
+        4
+      ],
+      "kind": "speed",
+      "hidden": true
+    },
+    {
+      "cell": [
+        14,
+        8
+      ],
+      "kind": "capacity",
+      "hidden": true
+    },
+    {
+      "cell": [
+        20,
+        12
+      ],
+      "kind": "invulnerability",
+      "hidden": true
+    }
+  ],
+  "rules": {
+    "capacity": 1,
+    "range": 2,
+    "fuse_ticks": 150,
+    "remote": false,
+    "time_limit": 0,
+    "goal": "eliminate"
+  },
+  "generation": {}
+}

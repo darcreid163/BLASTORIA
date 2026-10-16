@@ -1,3 +1,13 @@
+# 0.7.1-dev — 2026-10-16
+
+- Seven new fixed authored Arcade maps complete chapter one (stages 1–10).
+- Existing stages 1–3 are byte-for-byte preserved; record keys remain compatible.
+- Stage selection is a ten-tile grid with locked progression and focus on the latest available stage.
+- All ten titles localized into 14 languages; bundled CJK coverage regenerated.
+- Seven successful ordinary-input replays with live enemy AI verify reachability, exact score/time,
+  independent records, replay determinism and progression; no actor/board mutations during replay.
+- Automated completion is not a human balance or target-device acceptance claim.
+
 # 0.7.0-dev — 2026-10-16
 
 - Three primary modes: Arcade, Arena, Adventure; saved Journey inside Adventure.

@@ -455,7 +455,7 @@ func show_achievements() -> void:
 	hud.add_achievement_rows(rows.slice(achievement_page * 5, achievement_page * 5 + 5), profile.language)
 
 func stage_name(number: int) -> String:
-	return tr("STAGE") % number
+	return tr("STAGE") % number + " · " + tr("ARCADE_NAME_%02d" % number)
 
 func show_official_records() -> void:
 	state.paused = true
@@ -471,15 +471,10 @@ func show_official_records() -> void:
 func show_official_menu() -> void:
 	state.paused = true
 	screen = "official_menu"
-	var buttons: Array = []
+	var stages: Array = []
 	for number in range(1, ArcadeLevelRegistry.playable_count() + 1):
-		var data := ArcadeLevelRegistry.load_stage(number)
-		if official.available(number):
-			var record := official.save.record_for(official.key_for(data))
-			buttons.append([stage_name(number) + " · " + tr("BEST_SCORE") % record.score, "official:%d" % number])
-	buttons.append(["STAGE_RECORDS", "records"])
-	buttons.append(["MENU", "menu"])
-	hud.show_menu("ARCADE", buttons, tr("OFFICIAL_RULES") + "\n" + tr("CONTENT_STATUS") % [ArcadeLevelRegistry.playable_count(), ReleasePlan.LAUNCH_STAGES])
+		stages.append([stage_name(number), "official:%d" % number, official.available(number)])
+	hud.show_stages(stages, tr("OFFICIAL_RULES") + "\n" + tr("CONTENT_STATUS") % [ArcadeLevelRegistry.playable_count(), ReleasePlan.LAUNCH_STAGES])
 
 func show_language_list() -> void:
 	state.paused = true

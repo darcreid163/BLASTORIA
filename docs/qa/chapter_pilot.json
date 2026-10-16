@@ -1,0 +1,72 @@
+{
+  "10": [
+    {
+      "enemies_left": 3,
+      "result": "DEFEAT",
+      "score": 325,
+      "ticks": 3217,
+      "trial": 1
+    },
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1840,
+      "ticks": 3140,
+      "trial": 2
+    }
+  ],
+  "4": [
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1640,
+      "ticks": 1882,
+      "trial": 1
+    }
+  ],
+  "5": [
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1390,
+      "ticks": 5564,
+      "trial": 1
+    }
+  ],
+  "6": [
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1795,
+      "ticks": 1392,
+      "trial": 1
+    }
+  ],
+  "7": [
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1450,
+      "ticks": 6450,
+      "trial": 1
+    }
+  ],
+  "8": [
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1910,
+      "ticks": 1763,
+      "trial": 1
+    }
+  ],
+  "9": [
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1705,
+      "ticks": 4712,
+      "trial": 1
+    }
+  ]
+}

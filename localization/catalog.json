@@ -171,7 +171,17 @@
     "PICKUP_BOMB_PASS": "Walk through bombs",
     "PICKUP_FLAME_PASS": "Flame protection",
     "PICKUP_INVULNERABILITY": "Invulnerability",
-    "NO_RECORD": "-"
+    "NO_RECORD": "-",
+    "ARCADE_NAME_01": "Gardener's Court",
+    "ARCADE_NAME_02": "Twin Paths",
+    "ARCADE_NAME_03": "Chain Garden",
+    "ARCADE_NAME_04": "Crossroads",
+    "ARCADE_NAME_05": "Detours",
+    "ARCADE_NAME_06": "Fuse Gallery",
+    "ARCADE_NAME_07": "Warden's Ring",
+    "ARCADE_NAME_08": "Twin Courtyards",
+    "ARCADE_NAME_09": "Relay",
+    "ARCADE_NAME_10": "Maze Heart"
   },
   "ru": {
     "TITLE": "Выбери экспедицию",
@@ -345,7 +355,17 @@
     "PICKUP_BOMB_PASS": "Проход сквозь бомбы",
     "PICKUP_FLAME_PASS": "Защита от огня",
     "PICKUP_INVULNERABILITY": "Неуязвимость",
-    "NO_RECORD": "-"
+    "NO_RECORD": "-",
+    "ARCADE_NAME_01": "Двор садовника",
+    "ARCADE_NAME_02": "Две тропы",
+    "ARCADE_NAME_03": "Цепной сад",
+    "ARCADE_NAME_04": "Перекрёсток",
+    "ARCADE_NAME_05": "Обходные пути",
+    "ARCADE_NAME_06": "Галерея фитилей",
+    "ARCADE_NAME_07": "Кольцо Стража",
+    "ARCADE_NAME_08": "Два двора",
+    "ARCADE_NAME_09": "Эстафета",
+    "ARCADE_NAME_10": "Сердце лабиринта"
   },
   "ja": {
     "TITLE": "冒険を選ぼう",
@@ -519,7 +539,17 @@
     "PICKUP_BOMB_PASS": "爆弾すり抜け",
     "PICKUP_FLAME_PASS": "炎への耐性",
     "PICKUP_INVULNERABILITY": "無敵",
-    "NO_RECORD": "-"
+    "NO_RECORD": "-",
+    "ARCADE_NAME_01": "庭師の中庭",
+    "ARCADE_NAME_02": "二つの道",
+    "ARCADE_NAME_03": "連鎖の庭",
+    "ARCADE_NAME_04": "交差路",
+    "ARCADE_NAME_05": "回り道",
+    "ARCADE_NAME_06": "導火線の回廊",
+    "ARCADE_NAME_07": "ウォーデンの環",
+    "ARCADE_NAME_08": "二つの中庭",
+    "ARCADE_NAME_09": "リレー",
+    "ARCADE_NAME_10": "迷路の心臓"
   },
   "ko": {
     "TITLE": "모험을 선택하세요",
@@ -693,7 +723,17 @@
     "PICKUP_BOMB_PASS": "폭탄 통과",
     "PICKUP_FLAME_PASS": "화염 보호",
     "PICKUP_INVULNERABILITY": "무적",
-    "NO_RECORD": "-"
+    "NO_RECORD": "-",
+    "ARCADE_NAME_01": "정원사의 뜰",
+    "ARCADE_NAME_02": "두 갈래 길",
+    "ARCADE_NAME_03": "연쇄의 정원",
+    "ARCADE_NAME_04": "교차로",
+    "ARCADE_NAME_05": "우회로",
+    "ARCADE_NAME_06": "도화선 회랑",
+    "ARCADE_NAME_07": "수호자의 고리",
+    "ARCADE_NAME_08": "두 개의 뜰",
+    "ARCADE_NAME_09": "이어달리기",
+    "ARCADE_NAME_10": "미로의 심장"
   },
   "zh_CN": {
     "TITLE": "选择你的旅程",
@@ -867,7 +907,17 @@
     "PICKUP_BOMB_PASS": "穿越炸弹",
     "PICKUP_FLAME_PASS": "火焰防护",
     "PICKUP_INVULNERABILITY": "无敌",
-    "NO_RECORD": "-"
+    "NO_RECORD": "-",
+    "ARCADE_NAME_01": "园丁庭院",
+    "ARCADE_NAME_02": "双岔小径",
+    "ARCADE_NAME_03": "连锁花园",
+    "ARCADE_NAME_04": "十字路口",
+    "ARCADE_NAME_05": "迂回小径",
+    "ARCADE_NAME_06": "引信长廊",
+    "ARCADE_NAME_07": "守卫之环",
+    "ARCADE_NAME_08": "双庭院",
+    "ARCADE_NAME_09": "接力",
+    "ARCADE_NAME_10": "迷宫之心"
   },
   "hi": {
     "TITLE": "अपना सफ़र चुनें",
@@ -1041,7 +1091,17 @@
     "PICKUP_BOMB_PASS": "बमों के आर-पार",
     "PICKUP_FLAME_PASS": "आग से सुरक्षा",
     "PICKUP_INVULNERABILITY": "अजेयता",
-    "NO_RECORD": "-"
+    "NO_RECORD": "-",
+    "ARCADE_NAME_01": "माली का आँगन",
+    "ARCADE_NAME_02": "दो रास्ते",
+    "ARCADE_NAME_03": "श्रृंखला का बगीचा",
+    "ARCADE_NAME_04": "चौराहा",
+    "ARCADE_NAME_05": "घुमावदार रास्ते",
+    "ARCADE_NAME_06": "फ़्यूज़ गलियारा",
+    "ARCADE_NAME_07": "रक्षक का घेरा",
+    "ARCADE_NAME_08": "दो आँगन",
+    "ARCADE_NAME_09": "रिले",
+    "ARCADE_NAME_10": "भूलभुलैया का हृदय"
   },
   "id": {
     "TITLE": "Pilih petualanganmu",
@@ -1215,7 +1275,17 @@
     "PICKUP_BOMB_PASS": "Tembus bom",
     "PICKUP_FLAME_PASS": "Perlindungan api",
     "PICKUP_INVULNERABILITY": "Kebal",
-    "NO_RECORD": "-"
+    "NO_RECORD": "-",
+    "ARCADE_NAME_01": "Halaman Tukang Kebun",
+    "ARCADE_NAME_02": "Dua Jalur",
+    "ARCADE_NAME_03": "Taman Berantai",
+    "ARCADE_NAME_04": "Persimpangan",
+    "ARCADE_NAME_05": "Jalan Memutar",
+    "ARCADE_NAME_06": "Galeri Sumbu",
+    "ARCADE_NAME_07": "Lingkaran Penjaga",
+    "ARCADE_NAME_08": "Dua Halaman",
+    "ARCADE_NAME_09": "Estafet",
+    "ARCADE_NAME_10": "Jantung Labirin"
   },
   "th": {
     "TITLE": "เลือกการผจญภัย",
@@ -1389,7 +1459,17 @@
     "PICKUP_BOMB_PASS": "เดินผ่านระเบิด",
     "PICKUP_FLAME_PASS": "ป้องกันไฟ",
     "PICKUP_INVULNERABILITY": "อมตะ",
-    "NO_RECORD": "-"
+    "NO_RECORD": "-",
+    "ARCADE_NAME_01": "ลานคนสวน",
+    "ARCADE_NAME_02": "สองเส้นทาง",
+    "ARCADE_NAME_03": "สวนลูกโซ่",
+    "ARCADE_NAME_04": "ทางแยก",
+    "ARCADE_NAME_05": "ทางอ้อม",
+    "ARCADE_NAME_06": "ระเบียงชนวน",
+    "ARCADE_NAME_07": "วงแหวนผู้พิทักษ์",
+    "ARCADE_NAME_08": "สองลาน",
+    "ARCADE_NAME_09": "ผลัด",
+    "ARCADE_NAME_10": "หัวใจเขาวงกต"
   },
   "vi": {
     "TITLE": "Chọn hành trình",
@@ -1563,7 +1643,17 @@
     "PICKUP_BOMB_PASS": "Đi xuyên bom",
     "PICKUP_FLAME_PASS": "Chống lửa",
     "PICKUP_INVULNERABILITY": "Bất tử",
-    "NO_RECORD": "-"
+    "NO_RECORD": "-",
+    "ARCADE_NAME_01": "Sân người làm vườn",
+    "ARCADE_NAME_02": "Hai lối đi",
+    "ARCADE_NAME_03": "Vườn dây chuyền",
+    "ARCADE_NAME_04": "Ngã tư",
+    "ARCADE_NAME_05": "Đường vòng",
+    "ARCADE_NAME_06": "Hành lang ngòi nổ",
+    "ARCADE_NAME_07": "Vòng hộ vệ",
+    "ARCADE_NAME_08": "Hai sân trong",
+    "ARCADE_NAME_09": "Tiếp sức",
+    "ARCADE_NAME_10": "Trái tim mê cung"
   },
   "fr": {
     "TITLE": "Choisissez votre expédition",
@@ -1737,7 +1827,17 @@
     "PICKUP_BOMB_PASS": "Traverser les bombes",
     "PICKUP_FLAME_PASS": "Protection contre les flammes",
     "PICKUP_INVULNERABILITY": "Invulnérabilité",
-    "NO_RECORD": "-"
+    "NO_RECORD": "-",
+    "ARCADE_NAME_01": "Cour du jardinier",
+    "ARCADE_NAME_02": "Deux sentiers",
+    "ARCADE_NAME_03": "Jardin des réactions",
+    "ARCADE_NAME_04": "Carrefour",
+    "ARCADE_NAME_05": "Détours",
+    "ARCADE_NAME_06": "Galerie des mèches",
+    "ARCADE_NAME_07": "Anneau du gardien",
+    "ARCADE_NAME_08": "Deux cours",
+    "ARCADE_NAME_09": "Relais",
+    "ARCADE_NAME_10": "Cœur du labyrinthe"
   },
   "it": {
     "TITLE": "Scegli la tua spedizione",
@@ -1911,7 +2011,17 @@
     "PICKUP_BOMB_PASS": "Attraversa bombe",
     "PICKUP_FLAME_PASS": "Protezione dalle fiamme",
     "PICKUP_INVULNERABILITY": "Invulnerabilità",
-    "NO_RECORD": "-"
+    "NO_RECORD": "-",
+    "ARCADE_NAME_01": "Cortile del giardiniere",
+    "ARCADE_NAME_02": "Due sentieri",
+    "ARCADE_NAME_03": "Giardino delle catene",
+    "ARCADE_NAME_04": "Crocevia",
+    "ARCADE_NAME_05": "Deviazioni",
+    "ARCADE_NAME_06": "Galleria delle micce",
+    "ARCADE_NAME_07": "Anello del guardiano",
+    "ARCADE_NAME_08": "Due cortili",
+    "ARCADE_NAME_09": "Staffetta",
+    "ARCADE_NAME_10": "Cuore del labirinto"
   },
   "de": {
     "TITLE": "Wähle deine Expedition",
@@ -2085,7 +2195,17 @@
     "PICKUP_BOMB_PASS": "Durch Bomben gehen",
     "PICKUP_FLAME_PASS": "Feuerschutz",
     "PICKUP_INVULNERABILITY": "Unverwundbarkeit",
-    "NO_RECORD": "-"
+    "NO_RECORD": "-",
+    "ARCADE_NAME_01": "Gärtnerhof",
+    "ARCADE_NAME_02": "Zwei Pfade",
+    "ARCADE_NAME_03": "Kettengarten",
+    "ARCADE_NAME_04": "Kreuzung",
+    "ARCADE_NAME_05": "Umwege",
+    "ARCADE_NAME_06": "Zündergalerie",
+    "ARCADE_NAME_07": "Ring des Wächters",
+    "ARCADE_NAME_08": "Zwei Höfe",
+    "ARCADE_NAME_09": "Staffellauf",
+    "ARCADE_NAME_10": "Herz des Labyrinths"
   },
   "ar": {
     "TITLE": "اختر رحلتك",
@@ -2259,7 +2379,17 @@
     "PICKUP_BOMB_PASS": "المرور عبر القنابل",
     "PICKUP_FLAME_PASS": "حماية من اللهب",
     "PICKUP_INVULNERABILITY": "حصانة",
-    "NO_RECORD": "-"
+    "NO_RECORD": "-",
+    "ARCADE_NAME_01": "ساحة البستاني",
+    "ARCADE_NAME_02": "مساران",
+    "ARCADE_NAME_03": "حديقة السلاسل",
+    "ARCADE_NAME_04": "مفترق الطرق",
+    "ARCADE_NAME_05": "طرق التفافية",
+    "ARCADE_NAME_06": "رواق الفتائل",
+    "ARCADE_NAME_07": "حلقة الحارس",
+    "ARCADE_NAME_08": "ساحتان",
+    "ARCADE_NAME_09": "التتابع",
+    "ARCADE_NAME_10": "قلب المتاهة"
   },
   "tr": {
     "TITLE": "Yolculuğunu seç",
@@ -2433,6 +2563,16 @@
     "PICKUP_BOMB_PASS": "Bombalardan geçiş",
     "PICKUP_FLAME_PASS": "Alev koruması",
     "PICKUP_INVULNERABILITY": "Dokunulmazlık",
-    "NO_RECORD": "-"
+    "NO_RECORD": "-",
+    "ARCADE_NAME_01": "Bahçıvanın Avlusu",
+    "ARCADE_NAME_02": "İki Patika",
+    "ARCADE_NAME_03": "Zincir Bahçesi",
+    "ARCADE_NAME_04": "Kavşak",
+    "ARCADE_NAME_05": "Dolambaçlı Yollar",
+    "ARCADE_NAME_06": "Fitil Galerisi",
+    "ARCADE_NAME_07": "Muhafızın Halkası",
+    "ARCADE_NAME_08": "İki Avlu",
+    "ARCADE_NAME_09": "Bayrak Yarışı",
+    "ARCADE_NAME_10": "Labirentin Kalbi"
   }
 }

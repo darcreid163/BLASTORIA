@@ -3,9 +3,9 @@ extends RefCounted
 func run(test: SceneTree) -> void:
 	var registry := ArcadeLevelRegistry.catalog()
 	test.check(registry.themes.size() == 10 and registry.levels.size() == 100, "official: ten themes and one hundred explicitly statused slots")
-	test.check(ArcadeLevelRegistry.playable_count() == 3 and ArcadeLevelRegistry.load_stage(4).is_empty(), "official: only three authored playable stages; planned stages cannot start")
+	test.check(ArcadeLevelRegistry.playable_count() == 10 and ArcadeLevelRegistry.load_stage(11).is_empty(), "official: ten authored playable stages; planned stages cannot start")
 	var hashes: Array[String] = []
-	for number in range(1, 4):
+	for number in range(1, 11):
 		var data := ArcadeLevelRegistry.load_stage(number)
 		test.check(not data.is_empty() and MapValidationService.validate(data).is_empty(), "official: stage %d validates authored geometry, objects and escape routes" % number)
 		if data.is_empty(): return

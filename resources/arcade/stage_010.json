@@ -1,0 +1,165 @@
+{
+  "format": 2,
+  "id": "arcade_010",
+  "revision": 1,
+  "title": "Сердце лабиринта",
+  "author": "BLASTORIA",
+  "description": "Авторская карта первой главы",
+  "created": "2026-10-16",
+  "modified": "2026-10-16",
+  "mode": "solo",
+  "theme": "green_maze",
+  "width": 25,
+  "height": 17,
+  "seed": 23010,
+  "generator_version": 0,
+  "rows": [
+    "#########################",
+    "#.......................#",
+    "#.............C.........#",
+    "#....C............C.....#",
+    "#......###.....###..C...#",
+    "#..#...###..C..###...#..#",
+    "#..#...###.....###...#..#",
+    "#..#.................#..#",
+    "#.....C...........C.....#",
+    "#..#.................#..#",
+    "#..#...###.....###...#..#",
+    "#..#...###..C..###...#..#",
+    "#...C..###.....###......#",
+    "#.....C............C....#",
+    "#.........C.............#",
+    "#.......................#",
+    "#########################"
+  ],
+  "spawns": [
+    [
+      1,
+      1
+    ]
+  ],
+  "enemies": [
+    {
+      "cell": [
+        11,
+        4
+      ],
+      "kind": "chaser",
+      "step": 48,
+      "required": true
+    },
+    {
+      "cell": [
+        13,
+        12
+      ],
+      "kind": "warden",
+      "step": 60,
+      "required": true
+    },
+    {
+      "cell": [
+        5,
+        8
+      ],
+      "kind": "bomber",
+      "step": 42,
+      "required": true
+    },
+    {
+      "cell": [
+        19,
+        8
+      ],
+      "kind": "bomber",
+      "step": 42,
+      "required": true
+    },
+    {
+      "cell": [
+        11,
+        14
+      ],
+      "kind": "patrol",
+      "step": 39,
+      "required": true
+    },
+    {
+      "cell": [
+        19,
+        2
+      ],
+      "kind": "chaser",
+      "step": 51,
+      "required": true
+    },
+    {
+      "cell": [
+        5,
+        14
+      ],
+      "kind": "patrol",
+      "step": 39,
+      "required": true
+    }
+  ],
+  "powerups": [
+    {
+      "cell": [
+        3,
+        1
+      ],
+      "kind": "capacity",
+      "hidden": false
+    },
+    {
+      "cell": [
+        5,
+        3
+      ],
+      "kind": "range",
+      "hidden": true
+    },
+    {
+      "cell": [
+        6,
+        8
+      ],
+      "kind": "speed",
+      "hidden": true
+    },
+    {
+      "cell": [
+        12,
+        11
+      ],
+      "kind": "remote",
+      "hidden": true
+    },
+    {
+      "cell": [
+        19,
+        13
+      ],
+      "kind": "capacity",
+      "hidden": true
+    },
+    {
+      "cell": [
+        10,
+        14
+      ],
+      "kind": "wall_pass",
+      "hidden": true
+    }
+  ],
+  "rules": {
+    "capacity": 1,
+    "range": 2,
+    "fuse_ticks": 150,
+    "remote": false,
+    "time_limit": 0,
+    "goal": "eliminate"
+  },
+  "generation": {}
+}
