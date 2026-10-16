@@ -12,7 +12,16 @@ func _initialize() -> void:
 	var active: Dictionary = source.duplicate(true)
 	active.view = codec.seal(active.text, "display").hex_encode()
 	active.erase("text")
-	var envelope := {"payload": {"active": active, "milestones": {"schema_version": 1, "entries": entries}}, "padding": ""}
+	var encounters := {}
+	var encounter_source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tools/private_encounters.json"))
+	for definition in encounter_source.entries:
+		var item: Dictionary = definition.duplicate(true)
+		item.view = codec.seal(item.text, "display").hex_encode()
+		item.erase("text")
+		var id: String = item.id
+		item.erase("id")
+		encounters[id] = item
+	var envelope := {"payload": {"active": active, "encounters": encounters, "milestones": {"schema_version": 1, "entries": entries}}, "padding": ""}
 	var size := JSON.stringify(envelope).to_utf8_buffer().size()
 	var target := ceili(float(size) / 16384.0) * 16384
 	var count := target - size

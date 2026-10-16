@@ -1,3 +1,18 @@
+# 0.7.0-dev — 2026-10-16
+
+- Three primary modes: Arcade, Arena, Adventure; saved Journey inside Adventure.
+- Separate Workshop: solo, co-op, duel and solo vs bots; public format 2 without private
+  fields; legacy map reads and exports remain compatible. Shared co-op scoring/contact.
+- Fourteen text languages, searchable native/localized names, persistent choice, RTL,
+  Noto font subsets and localized file picker; no map text/undo reset on language change.
+- Original miner and four monster role models, eight distinct item shapes, light/shadows,
+  three-card home menu and styled HUD. Procedural prototype, not final production art.
+- Official local discoveries now function in all three modes; Workshop isolated.
+- 431 checks and actual Linux exported-package QA pass; Windows export succeeds.
+  Native Windows/controller and linguistic acceptance remain pending.
+- Steam market comparison, price proposal and launch checklist are documentation;
+  no Steam publication or pricing change performed.
+
 # 0.6.1-dev — 2026-10-16
 
 - Решение владельца: 51 уровень в первом релизе, оставшиеся 49 — последующие обновления.

@@ -211,7 +211,7 @@ func advance(commands: Dictionary = {}) -> void:
 			feedback.emit("fuse")
 			break
 	for cell in destroyed:
-		if bombs.credited(cell, 0):
+		if human_credit(cell):
 			activity.crates += 1
 			if scoring_mode(): score += config.score_crate
 		if mode == "tutorial" and cell == TUTORIAL.lesson_crate:
@@ -278,7 +278,7 @@ func apply_damage() -> void:
 		if actor.alive and bombs.fire.has(actor.cell) and not actor.flame_pass and tick >= actor.invulnerable_until:
 			actor.alive = false
 			feedback.emit("death")
-			if actor.enemy and bombs.credited(actor.cell, 0):
+			if actor.enemy and human_credit(actor.cell):
 				activity.kills += 1
 				if scoring_mode(): score += config.score_enemy
 			if not actor.enemy:
@@ -304,9 +304,9 @@ func check_end() -> void:
 	if not result.is_empty():
 		return
 	if mode not in ["arena", "custom_arena"]:
-		if not actors[0].alive:
+		if not actors.any(func(actor): return actor.alive and not actor.enemy):
 			result = "DEFEAT"
-		elif mode in ["official_arcade", "custom"] and required_enemies() == 0:
+		elif mode in ["official_arcade", "custom", "custom_coop"] and required_enemies() == 0:
 			time_bonus = maxi(0, config.arcade_par_seconds - ceili(float(level_ticks) / config.tick_rate)) * config.score_per_second
 			score += config.score_stage_clear + time_bonus
 			result = "MAP_CLEAR"
@@ -340,7 +340,9 @@ func check_end() -> void:
 		for actor in actors:
 			if actor.alive:
 				living.append(actor.id)
-		if living.size() <= 1:
+		if map_data.get("mode") == "arena_bot" and not actors[0].alive:
+			result = "DRAW" if living.is_empty() else "DEFEAT"
+		elif living.size() <= 1:
 			result = "DRAW" if living.is_empty() else "P%d_WINS" % (living[0] + 1)
 		elif not map_data.is_empty() and config.level_seconds > 0 and remaining_seconds() == 0:
 			result = "DRAW"
@@ -380,7 +382,7 @@ func tutorial_hint() -> String:
 	return "TUT_EXIT"
 
 func scoring_mode() -> bool:
-	return mode in ["arcade", "classic", "adventure", "official_arcade", "custom"]
+	return mode in ["arcade", "classic", "adventure", "official_arcade", "custom", "custom_coop"]
 
 func remaining_seconds() -> int:
 	return maxi(0, config.level_seconds - int(level_ticks / maxi(1, config.ticks_per_game_second)))
@@ -398,14 +400,23 @@ func can_enter(actor: Dictionary, cell: Vector2i) -> bool:
 	return true
 
 func apply_contact() -> void:
-	if not config.contact_damage or not actors[0].alive or tick < actors[0].invulnerable_until:
-		return
-	for enemy in actors:
-		if enemy.enemy and enemy.alive and enemy.cell == actors[0].cell:
-			actors[0].alive = false
-			secrets.damaged = true
-			feedback.emit("death")
-			return
+	if not config.contact_damage: return
+	for actor in actors:
+		if actor.enemy or not actor.alive or tick < actor.invulnerable_until: continue
+		for enemy in actors:
+			if enemy.enemy and enemy.alive and enemy.cell == actor.cell:
+				actor.alive = false
+				secrets.damaged = true
+				feedback.emit("death")
+				break
+
+func human_credit(cell: Vector2i) -> bool:
+	return bombs.credited(cell, 0) or (mode == "custom_coop" and bombs.credited(cell, 1))
+
+func followed_actor() -> Dictionary:
+	for actor in actors:
+		if not actor.enemy and actor.alive: return actor
+	return actors[0]
 
 func spawn_penalties() -> void:
 	if pending_penalty <= 0:
@@ -441,8 +452,8 @@ func start_map(data: Dictionary, official_number: int = 0) -> String:
 	rules.initial_range = int(data.rules.range)
 	rules.fuse_ticks = int(data.rules.fuse_ticks)
 	rules.level_seconds = int(data.rules.time_limit)
-	rules.contact_damage = data.mode == "solo"
+	rules.contact_damage = data.mode in ["solo", "coop"]
 	rules.drop_chance = 0.0 # Only authored/selected bonuses. Never inject unrequested types.
-	var selected_mode := "official_arcade" if official_number > 0 else ("custom" if data.mode == "solo" else "custom_arena")
+	var selected_mode := "official_arcade" if official_number > 0 else ("custom" if data.mode == "solo" else ("custom_coop" if data.mode == "coop" else "custom_arena"))
 	start(rules, selected_mode, maxi(0, official_number - 1), int(data.seed), data)
 	return ""

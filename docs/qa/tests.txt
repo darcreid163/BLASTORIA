@@ -336,4 +336,99 @@ PASS: UI: achievement page shows public labels without API IDs/hidden entries
 PASS: UI: achievements support paginated controller-friendly navigation
 PASS: UI: achievement pagination returns to first page
 PASS: UI: real unlock displays localized achievement notification
-RESULT: 336 passed, 0 failed
+PASS: workshop: format 2 solo has no private fields
+PASS: workshop: rejects injected field solo
+PASS: workshop: format 2 coop has no private fields
+PASS: workshop: rejects injected field coop
+PASS: coop: player two continues when player one dies
+PASS: coop: both dead ends passage
+PASS: coop: contact checks player two
+PASS: coop: player two blast earns shared score once
+PASS: workshop: format 2 versus has no private fields
+PASS: workshop: rejects injected field versus
+PASS: workshop: format 2 arena_bot has no private fields
+PASS: workshop: rejects injected field arena_bot
+PASS: bot arena: human loss ends match
+PASS: bot arena: simultaneous all-dead is draw
+PASS: bot arena: last human wins
+PASS: legacy custom map exports through current schema
+PASS: legacy export removes private field without changing gameplay
+PASS: en: active translation installed
+PASS: en: complete bundled glyph coverage
+PASS: en: language selection writes
+PASS: en: selected language survives restart
+PASS: en: achievement display follows locale
+PASS: ru: active translation installed
+PASS: ru: complete bundled glyph coverage
+PASS: ru: language selection writes
+PASS: ru: selected language survives restart
+PASS: ru: achievement display follows locale
+PASS: ja: active translation installed
+PASS: ja: complete bundled glyph coverage
+PASS: ja: language selection writes
+PASS: ja: selected language survives restart
+PASS: ja: achievement display follows locale
+PASS: ko: active translation installed
+PASS: ko: complete bundled glyph coverage
+PASS: ko: language selection writes
+PASS: ko: selected language survives restart
+PASS: ko: achievement display follows locale
+PASS: zh_CN: active translation installed
+PASS: zh_CN: complete bundled glyph coverage
+PASS: zh_CN: language selection writes
+PASS: zh_CN: selected language survives restart
+PASS: zh_CN: achievement display follows locale
+PASS: hi: active translation installed
+PASS: hi: complete bundled glyph coverage
+PASS: hi: language selection writes
+PASS: hi: selected language survives restart
+PASS: hi: achievement display follows locale
+PASS: id: active translation installed
+PASS: id: complete bundled glyph coverage
+PASS: id: language selection writes
+PASS: id: selected language survives restart
+PASS: id: achievement display follows locale
+PASS: th: active translation installed
+PASS: th: complete bundled glyph coverage
+PASS: th: language selection writes
+PASS: th: selected language survives restart
+PASS: th: achievement display follows locale
+PASS: vi: active translation installed
+PASS: vi: complete bundled glyph coverage
+PASS: vi: language selection writes
+PASS: vi: selected language survives restart
+PASS: vi: achievement display follows locale
+PASS: fr: active translation installed
+PASS: fr: complete bundled glyph coverage
+PASS: fr: language selection writes
+PASS: fr: selected language survives restart
+PASS: fr: achievement display follows locale
+PASS: it: active translation installed
+PASS: it: complete bundled glyph coverage
+PASS: it: language selection writes
+PASS: it: selected language survives restart
+PASS: it: achievement display follows locale
+PASS: de: active translation installed
+PASS: de: complete bundled glyph coverage
+PASS: de: language selection writes
+PASS: de: selected language survives restart
+PASS: de: achievement display follows locale
+PASS: ar: active translation installed
+PASS: ar: complete bundled glyph coverage
+PASS: ar: language selection writes
+PASS: ar: selected language survives restart
+PASS: ar: achievement display follows locale
+PASS: tr: active translation installed
+PASS: tr: complete bundled glyph coverage
+PASS: tr: language selection writes
+PASS: tr: selected language survives restart
+PASS: tr: achievement display follows locale
+PASS: official Arcade terminal gameplay qualifies for discovery
+PASS: late Arcade clear does not qualify
+PASS: imported identical geometry cannot grant official discoveries
+PASS: official Arena draw qualifies without score reward
+PASS: discovery collection persists and deduplicates
+PASS: language search accepts localized, native and English names
+PASS: language switch preserves edited map, user text and undo
+PASS: file picker refuses invalid destination instead of reusing old folder
+RESULT: 431 passed, 0 failed

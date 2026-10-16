@@ -33,16 +33,23 @@ static func active() -> SecretDefinition:
 	return cached
 
 func localized(field: String, locale: String = "") -> String:
-	var language := TranslationServer.get_locale().left(2) if locale.is_empty() else locale
+	var language := LanguageCatalog.normalize(TranslationServer.get_locale() if locale.is_empty() else locale)
 	var text := SealedData.open_hex(display_cipher, "display")
 	return str(text.get(field, {}).get(language, text.get(field, {}).get("en", "")))
 
 static func normalize_id(value: Variant) -> String:
 	if not value is String or not active().valid: return ""
-	if value == active().id: return value
+	if value == active().id or RuntimeBundle.section("encounters").has(value): return value
 	# Legacy migration accepts only the old known identifier, without a readable alias in runtime code.
 	if value.sha256_text() == "4619a142b1e8bfc35bd395089b56fd3638e4bcc09caa072f0963ae3f1b1bd1cd": return active().id
 	return ""
 
 static func integer(value: Variant, low: int, high: int) -> bool:
 	return (value is int or value is float) and is_finite(float(value)) and value == floor(value) and value >= low and value <= high
+
+static func public_text(owned_id: String, field: String, locale: String = "") -> String:
+	if owned_id == active().id: return active().localized(field, locale)
+	var item: Dictionary = RuntimeBundle.section("encounters").get(owned_id, {})
+	var text := SealedData.open_hex(item.get("view", ""), "display")
+	var language := LanguageCatalog.normalize(TranslationServer.get_locale() if locale.is_empty() else locale)
+	return str(text.get(field, {}).get(language, text.get(field, {}).get("en", "")))

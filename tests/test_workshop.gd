@@ -82,7 +82,7 @@ func run(test: SceneTree) -> void:
 	var bad := data.duplicate(true)
 	bad.id = "../../profile"
 	invalid_cases.append(bad)
-	bad = data.duplicate(true); bad.format = 2; invalid_cases.append(bad)
+	bad = data.duplicate(true); bad.format = 3; invalid_cases.append(bad)
 	bad = data.duplicate(true); bad.width = 999999; invalid_cases.append(bad)
 	bad = data.duplicate(true); bad.rules.range = NAN; invalid_cases.append(bad)
 	bad = data.duplicate(true); bad.script = "res://main.gd"; invalid_cases.append(bad)

@@ -56,12 +56,12 @@ func grant(id: String) -> void:
 			progress.earned[id] = int(Time.get_unix_time_from_system())
 			if not progress.pending.has(id): progress.pending.append(id)
 			dirty = true
-			var locale := TranslationServer.get_locale().left(2)
+			var locale := LanguageCatalog.normalize(TranslationServer.get_locale())
 			unlocked.emit(str(item.title.get(locale, item.title.en)))
 			return
 
 func observe(state: GameState) -> void:
-	if not enabled() or state.mode in ["custom", "custom_arena"] or state.attempt_id.is_empty(): return
+	if not enabled() or state.mode in ["custom", "custom_coop", "custom_arena"] or state.attempt_id.is_empty(): return
 	if not progress.attempts.has(state.attempt_id):
 		if progress.attempts.size() >= 64: progress.attempts.erase(progress.attempts.keys()[0])
 		progress.attempts[state.attempt_id] = {"kills": 0, "crates": 0, "done": false}
@@ -120,7 +120,7 @@ func map_event(kind: String, data: Dictionary) -> void:
 	flush()
 
 func custom_complete(state: GameState, ranked_play: bool) -> void:
-	if not enabled() or not ranked_play or state.mode != "custom" or state.result != "MAP_CLEAR" or not state.actors[0].alive: return
+	if not enabled() or not ranked_play or state.mode not in ["custom", "custom_coop"] or state.result != "MAP_CLEAR" or not state.actors.any(func(actor): return actor.alive and not actor.enemy): return
 	var signature := map_signature(state.map_data)
 	if progress.owned.has(signature): grant("ACH_EDITOR_PLAY")
 	if progress.imported.has(signature): grant("ACH_EDITOR_IMPORT")

@@ -19,7 +19,7 @@ func read_file(path: String) -> Dictionary:
 		error = "Повреждённый JSON."
 		return {}
 	error = MapValidationService.validate(parser.data)
-	return parser.data if error.is_empty() else {}
+	return public_map(parser.data) if error.is_empty() else {}
 
 func store_map(data: Dictionary, notify: bool = true) -> Error:
 	error = MapValidationService.validate(data)
@@ -37,7 +37,7 @@ func write_file(path: String, data: Dictionary) -> Error:
 	error = MapValidationService.validate(data)
 	if not error.is_empty():
 		return ERR_INVALID_DATA
-	var body := JSON.stringify(data, "\t", true)
+	var body := JSON.stringify(public_map(data), "\t", true)
 	if body.to_utf8_buffer().size() > MapValidationService.MAX_BYTES:
 		error = "Карта превышает 256 КиБ."
 		return ERR_OUT_OF_MEMORY
@@ -94,4 +94,10 @@ func remove_map(id: String) -> Error:
 func export_map(path: String, data: Dictionary) -> Error:
 	var result := write_file(path, data)
 	if result == OK: exported.emit(data.duplicate(true))
+	return result
+
+static func public_map(data: Dictionary) -> Dictionary:
+	var result := data.duplicate(true)
+	result.format = 2
+	result.erase("secrets")
 	return result

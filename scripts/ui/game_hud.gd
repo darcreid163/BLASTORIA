@@ -3,6 +3,9 @@ extends CanvasLayer
 
 signal action_requested(action: String)
 signal volume_changed(bus: String, value: float)
+var play_frame: Control
+var top_frame: PanelContainer
+var hint_frame: PanelContainer
 var map_view: ExplorationMap
 var status: Label
 var hint: Label
@@ -15,6 +18,7 @@ var achievement_notice: Label
 var achievement_time: float = 0.0
 
 func _ready() -> void:
+	add_to_group("localized_surfaces")
 	var margin := MarginContainer.new()
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	margin.add_theme_constant_override("margin_left", 24)
@@ -23,20 +27,26 @@ func _ready() -> void:
 	margin.add_theme_constant_override("margin_bottom", 14)
 	margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(margin)
+	play_frame = margin
 	var layout := VBoxContainer.new()
 	layout.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	margin.add_child(layout)
+	top_frame = PanelContainer.new()
+	layout.add_child(top_frame)
+	var top := VBoxContainer.new()
+	top_frame.add_child(top)
 	status = Label.new()
 	status.add_theme_font_size_override("font_size", 24)
 	status.add_theme_color_override("font_color", Color("ffda8b"))
 	status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	layout.add_child(status)
+	top.add_child(status)
 	metrics = Label.new()
 	metrics.add_theme_font_size_override("font_size", 22)
-	layout.add_child(metrics)
+	top.add_child(metrics)
 	toast = Label.new()
 	toast.add_theme_font_size_override("font_size", 20)
 	layout.add_child(toast)
+	toast.hide()
 	var spacer := Control.new()
 	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -44,7 +54,9 @@ func _ready() -> void:
 	hint = Label.new()
 	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	hint.add_theme_font_size_override("font_size", 16)
-	layout.add_child(hint)
+	hint_frame = PanelContainer.new()
+	layout.add_child(hint_frame)
+	hint_frame.add_child(hint)
 	map_view = ExplorationMap.new()
 	map_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	map_view.hide()
@@ -62,7 +74,7 @@ func _ready() -> void:
 	center.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.add_child(center)
 	column = VBoxContainer.new()
-	column.custom_minimum_size.x = 460
+	column.custom_minimum_size.x = 720
 	column.add_theme_constant_override("separation", 10)
 	center.add_child(column)
 	achievement_notice = Label.new()
@@ -78,6 +90,9 @@ func _ready() -> void:
 	add_child(achievement_notice)
 
 func show_menu(title: String, buttons: Array, details: String = "") -> void:
+	set_playing_visible(false)
+	retranslate()
+	column.custom_minimum_size.x = 720
 	for child in column.get_children():
 		column.remove_child(child)
 		child.queue_free()
@@ -88,13 +103,13 @@ func show_menu(title: String, buttons: Array, details: String = "") -> void:
 	heading.add_theme_color_override("font_color", Color("ffda8b"))
 	column.add_child(heading)
 	var subtitle := Label.new()
-	subtitle.text = "BLASTORIA  •  Worlds of Chaos  •  " + str(ProjectSettings.get_setting("application/config/version"))
+	subtitle.text = "BLASTORIA" if title != "BLASTORIA" else ""
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	column.add_child(subtitle)
 	if not details.is_empty():
 		var description := Label.new()
 		description.text = details
-		description.custom_minimum_size.x = 460
+		description.custom_minimum_size.x = 720
 		description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		description.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		description.add_theme_font_size_override("font_size", 18)
@@ -102,7 +117,7 @@ func show_menu(title: String, buttons: Array, details: String = "") -> void:
 	for item in buttons:
 		var button := Button.new()
 		button.text = tr(item[0])
-		button.custom_minimum_size.y = 42
+		button.custom_minimum_size.y = 44
 		button.add_theme_font_size_override("font_size", 20)
 		var action: String = item[1]
 		button.pressed.connect(func(): action_requested.emit(action))
@@ -115,18 +130,13 @@ func show_menu(title: String, buttons: Array, details: String = "") -> void:
 
 func update_state(state: GameState, arcade: ArcadeRun = null, classic_lives: int = 1) -> void:
 	var actor: Dictionary = state.actors[0]
-	status.text = "%s  |  %s %d  |  %s %d  |  B %d / R %d" % ["BLASTORIA", tr(state.mode.to_upper()), state.level + 1, tr("ENEMIES"), state.alive_enemies(), actor.capacity, actor.radius]
-	if state.mode == "classic" and not state.stage_profile.is_empty():
-		var chapter_title: String = str(state.stage_profile.get("title", ""))
-		if TranslationServer.get_locale().begins_with("en"):
-			chapter_title = str(state.stage_profile.get("title_en", chapter_title))
-		if not chapter_title.is_empty():
-			status.text += "  |  " + chapter_title
+	var mode_label := "ADVENTURE" if state.mode in ["classic", "campaign", "adventure"] else ("ARCADE" if state.mode in ["official_arcade", "arcade"] else ("WORKSHOP" if state.mode.begins_with("custom") else state.mode.to_upper()))
+	status.text = tr(mode_label) + " · " + tr("STAGE") % (state.level + 1) + " · " + tr("ENEMIES") + ": %d" % state.alive_enemies()
 	metrics.text = ""
 	if state.mode == "arcade" and arcade != null:
-		metrics.text = tr("ARCADE_METRICS") % [arcade.live_score(state), ArcadeRun.format_time(arcade.live_ticks(state))]
+		metrics.text = tr("SCORE") + ": %d · " % arcade.live_score(state) + tr("TIME") + ": " + ArcadeRun.format_time(arcade.live_ticks(state))
 	if state.mode in ["classic", "adventure"]:
-		metrics.text = tr("SOLO_METRICS") % [state.score, str(state.remaining_seconds()) if state.config.level_seconds > 0 else "∞"]
+		metrics.text = tr("SCORE") + ": %d · " % state.score + tr("TIME_LEFT") + ": " + (str(state.remaining_seconds()) if state.config.level_seconds > 0 else "∞")
 		metrics.text += "  |  " + tr("LIVES") + ": " + str(classic_lives if state.mode == "classic" else (1 if actor.alive else 0))
 		if state.penalty_phase:
 			metrics.text += "  |  " + tr("PENALTY_PHASE")
@@ -139,30 +149,32 @@ func update_state(state: GameState, arcade: ArcadeRun = null, classic_lives: int
 		if not active.is_empty():
 			metrics.text += "\n" + " • ".join(active)
 	if not state.map_data.is_empty():
-		metrics.text = "%d очков · %s · %s" % [state.score, ArcadeRun.format_time(state.level_ticks), state.map_data.title]
-		if state.config.level_seconds > 0: metrics.text += " · осталось %d с" % state.remaining_seconds()
+		metrics.text = tr("SCORE") + ": %d · " % state.score + tr("TIME") + ": " + ArcadeRun.format_time(state.level_ticks)
+		if state.mode != "official_arcade": metrics.text += " · " + str(state.map_data.title)
+		if state.config.level_seconds > 0: metrics.text += " · " + tr("TIME_LEFT") + ": %d" % state.remaining_seconds()
 	if map_view.visible:
 		map_view.queue_redraw()
 	hint.text = tr("DYNAMIC_CONTROLS") % InputRouter.player_hint(1)
-	if state.mode in ["arena", "custom_arena"]:
+	if state.mode in ["arena", "custom_coop"] or state.map_data.get("mode") == "versus":
 		hint.text += " | " + tr("PLAYER_TWO_KEYS") % InputRouter.player_hint(2)
 	if state.mode == "tutorial":
 		hint.text += "\n" + tr(state.tutorial_hint())
 	elif state.mode in ["classic", "adventure"]:
-		hint.text += " | " + tr("REMOTE_KEY") % InputRouter.key_label("p1_detonate")
+		hint.text += " | " + tr("KEY_DETONATE") + ": " + InputRouter.key_label("p1_detonate") + " / B"
 		hint.text += "\n" + tr("HIDDEN_GOAL")
 		if state.mode == "adventure":
 			hint.text += " | " + tr("MAP_KEY")
 		if state.completion_walk:
 			hint.text = SecretDefinition.active().localized("return")
 	elif not state.map_data.is_empty():
-		hint.text += "\nУничтожьте обязательных врагов — выход не требуется." if state.mode != "custom_arena" else "\nПобеждает последний оставшийся игрок."
+		hint.text += "\n" + tr("OFFICIAL_RULES" if state.mode != "custom_arena" else "ARENA_DESC")
 	elif state.mode != "arena":
 		hint.text += "\n" + tr("GOAL")
 
 func notify_pickup(kind: String) -> void:
 	toast.text = tr("PICKUP_" + kind.to_upper())
 	toast_time = 2.0
+	toast.show()
 
 func _process(delta: float) -> void:
 	if achievement_time > 0:
@@ -172,6 +184,7 @@ func _process(delta: float) -> void:
 		toast_time -= delta
 		if toast_time <= 0:
 			toast.text = ""
+			toast.hide()
 
 func add_volume_sliders(settings: GameSettings) -> void:
 	var position_index := 2
@@ -227,11 +240,11 @@ func add_relic_badge() -> void:
 	column.move_child(badge, 2)
 
 func notify_achievement(title: String) -> void:
-	achievement_notice.text = "✦ " + title
+	achievement_notice.text = title
 	achievement_notice.show()
 	achievement_time = 4.0
 
-func add_achievement_rows(rows: Array[Dictionary], locale: String) -> void:
+func add_achievement_rows(rows: Array[Dictionary], _locale: String) -> void:
 	var index := 2
 	for item in rows:
 		var row := HBoxContainer.new()
@@ -244,7 +257,7 @@ func add_achievement_rows(rows: Array[Dictionary], locale: String) -> void:
 		icon.modulate = Color.WHITE if item.earned else Color(0.45, 0.5, 0.5)
 		row.add_child(icon)
 		var label := Label.new()
-		var status_text: String = ("Получено локально · " if locale == "ru" else "Earned locally · ") + item.date if item.earned else ("В процессе" if locale == "ru" else "In progress") + (" · " + item.progress if not item.progress.is_empty() else "")
+		var status_text: String = tr("EARNED") + " · " + item.date if item.earned else tr("IN_PROGRESS") + (" · " + item.progress if not item.progress.is_empty() else "")
 		label.text = item.title + "\n" + item.description + "\n" + status_text
 		label.custom_minimum_size.x = 380
 		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -253,3 +266,65 @@ func add_achievement_rows(rows: Array[Dictionary], locale: String) -> void:
 		column.add_child(row)
 		column.move_child(row, index)
 		index += 1
+
+func retranslate() -> void:
+	var locale := LanguageCatalog.normalize(TranslationServer.get_locale())
+	var theme := InterfaceTheme.create(locale)
+	if is_instance_valid(column):
+		column.theme = theme
+		column.layout_direction = Control.LAYOUT_DIRECTION_RTL if locale == "ar" else Control.LAYOUT_DIRECTION_LTR
+	if is_instance_valid(play_frame):
+		play_frame.theme = theme
+		play_frame.layout_direction = Control.LAYOUT_DIRECTION_RTL if locale == "ar" else Control.LAYOUT_DIRECTION_LTR
+	if is_instance_valid(achievement_notice):
+		achievement_notice.add_theme_font_override("font", LanguageCatalog.font_for(locale))
+		achievement_notice.hide()
+	if is_instance_valid(toast): toast.text = ""; toast.hide()
+
+func set_playing_visible(value: bool) -> void:
+	play_frame.visible = value
+
+func show_home(warning: String = "") -> void:
+	show_menu("BLASTORIA", [], tr("TITLE") + ("\n" + warning if not warning.is_empty() else ""))
+	column.custom_minimum_size.x = 1000
+	var cards := HBoxContainer.new()
+	cards.add_theme_constant_override("separation", 16)
+	column.add_child(cards)
+	for item in [["ARCADE", "official_menu"], ["ARENA", "arena_menu"], ["ADVENTURE", "adventure_menu"]]:
+		var card := Button.new()
+		card.custom_minimum_size = Vector2(320, 230)
+		card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		card.set_meta("mode", item[0])
+		var contents := VBoxContainer.new()
+		contents.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		contents.offset_left = 20; contents.offset_right = -20
+		contents.offset_top = 24; contents.offset_bottom = -24
+		contents.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		card.add_child(contents)
+		var title := Label.new()
+		title.text = tr(item[0])
+		title.add_theme_font_size_override("font_size", 26)
+		title.add_theme_color_override("font_color", Color("ffce91"))
+		title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		contents.add_child(title)
+		var description := Label.new()
+		description.text = tr(item[0] + "_DESC")
+		description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		description.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		description.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		description.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		contents.add_child(description)
+		card.pressed.connect(func(): action_requested.emit(item[1]))
+		cards.add_child(card)
+	var secondary := GridContainer.new()
+	secondary.columns = 2
+	secondary.add_theme_constant_override("h_separation", 16)
+	secondary.add_theme_constant_override("v_separation", 10)
+	column.add_child(secondary)
+	for item in [["WORKSHOP", "workshop"], ["COLLECTION", "collection"], ["TUTORIAL", "tutorial"], ["SETTINGS", "settings"], ["LANGUAGE", "language"], ["QUIT", "quit"]]:
+		var button := Button.new()
+		button.text = tr(item[0]); button.custom_minimum_size = Vector2(490, 46)
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.pressed.connect(func(): action_requested.emit(item[1]))
+		secondary.add_child(button)
+	cards.get_child(0).grab_focus()

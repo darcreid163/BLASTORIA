@@ -1,4 +1,3 @@
-Run from empty directory outside source tree.
 Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
 
 PASS: developer secret registry absent from player package
@@ -7,6 +6,7 @@ PASS: plaintext content source absent from player package
 PASS: old semantic resource filename absent
 PASS: developer specification absent from player package
 PASS: new spoiler and art documents absent from player package
+PASS: private encounter sources and obsolete strings excluded
 PASS: encrypted active content readable in actual export
 PASS: implemented public milestones readable in actual export
 PASS: old separate containers absent

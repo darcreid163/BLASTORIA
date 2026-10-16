@@ -10,11 +10,35 @@
       "status": "local",
       "title": {
         "en": "First blast",
-        "ru": "Первый взрыв"
+        "ru": "Первый взрыв",
+        "ja": "初めての爆発",
+        "ko": "첫 폭발",
+        "zh_CN": "初次爆破",
+        "hi": "पहला धमाका",
+        "id": "Ledakan pertama",
+        "th": "ระเบิดครั้งแรก",
+        "vi": "Vụ nổ đầu tiên",
+        "fr": "Première explosion",
+        "it": "Prima esplosione",
+        "de": "Erste Explosion",
+        "ar": "الانفجار الأول",
+        "tr": "İlk patlama"
       },
       "description": {
-        "en": "Detonate your first bomb",
-        "ru": "Взорвать первую бомбу"
+        "en": "Detonate your first bomb.",
+        "ru": "Взорви первую бомбу.",
+        "ja": "初めて爆弾を爆発させる。",
+        "ko": "첫 폭탄을 터뜨리세요.",
+        "zh_CN": "引爆第一颗炸弹。",
+        "hi": "अपना पहला बम फोड़ें।",
+        "id": "Ledakkan bom pertamamu.",
+        "th": "จุดระเบิดลูกแรก",
+        "vi": "Kích nổ quả bom đầu tiên.",
+        "fr": "Faites exploser votre première bombe.",
+        "it": "Fai esplodere la prima bomba.",
+        "de": "Zünde deine erste Bombe.",
+        "ar": "فجّر قنبلتك الأولى.",
+        "tr": "İlk bombanı patlat."
       },
       "icon": "res://assets/milestones/ach_first_blast.svg"
     },
@@ -25,11 +49,35 @@
       "status": "local",
       "title": {
         "en": "First step",
-        "ru": "Первый шаг"
+        "ru": "Первый шаг",
+        "ja": "最初の一歩",
+        "ko": "첫걸음",
+        "zh_CN": "第一步",
+        "hi": "पहला क़दम",
+        "id": "Langkah pertama",
+        "th": "ก้าวแรก",
+        "vi": "Bước đầu",
+        "fr": "Premier pas",
+        "it": "Primo passo",
+        "de": "Erster Schritt",
+        "ar": "الخطوة الأولى",
+        "tr": "İlk adım"
       },
       "description": {
-        "en": "Complete the first campaign stage",
-        "ru": "Завершить первый этап кампании"
+        "en": "Complete the first journey stage.",
+        "ru": "Пройди первый этап путешествия.",
+        "ja": "旅の最初のステージをクリアする。",
+        "ko": "여정의 첫 스테이지를 완료하세요.",
+        "zh_CN": "完成旅程的第一关。",
+        "hi": "सफ़र का पहला चरण पूरा करें।",
+        "id": "Selesaikan tahap pertama perjalanan.",
+        "th": "ผ่านด่านแรกของการเดินทาง",
+        "vi": "Hoàn thành màn đầu của hành trình.",
+        "fr": "Terminez la première étape du voyage.",
+        "it": "Completa il primo livello del viaggio.",
+        "de": "Schließe die erste Stufe der Reise ab.",
+        "ar": "أكمل المرحلة الأولى من الرحلة.",
+        "tr": "Yolculuğun ilk bölümünü tamamla."
       },
       "icon": "res://assets/milestones/ach_first_victory.svg"
     },
@@ -40,11 +88,35 @@
       "status": "local",
       "title": {
         "en": "Maze explorer",
-        "ru": "Исследователь"
+        "ru": "Исследователь",
+        "ja": "迷路の探検家",
+        "ko": "미로 탐험가",
+        "zh_CN": "迷宫探索者",
+        "hi": "भूलभुलैया खोजी",
+        "id": "Penjelajah labirin",
+        "th": "นักสำรวจเขาวงกต",
+        "vi": "Nhà thám hiểm mê cung",
+        "fr": "Explorateur de labyrinthes",
+        "it": "Esploratore di labirinti",
+        "de": "Labyrinthforscher",
+        "ar": "مستكشف المتاهة",
+        "tr": "Labirent kâşifi"
       },
       "description": {
-        "en": "Explore 90 percent of one large level",
-        "ru": "Исследовать 90% одного большого уровня"
+        "en": "Explore 90% of one large area.",
+        "ru": "Исследуй 90% большой области.",
+        "ja": "大きなエリアを90%探索する。",
+        "ko": "넓은 지역의 90%를 탐험하세요.",
+        "zh_CN": "探索一个大型区域的90%。",
+        "hi": "एक बड़े क्षेत्र का 90% खोजें।",
+        "id": "Jelajahi 90% satu area besar.",
+        "th": "สำรวจพื้นที่ใหญ่หนึ่งแห่งให้ได้ 90%",
+        "vi": "Khám phá 90% một khu vực lớn.",
+        "fr": "Explorez 90 % d'une grande zone.",
+        "it": "Esplora il 90% di un'area grande.",
+        "de": "Erkunde 90 % eines großen Gebiets.",
+        "ar": "استكشف 90% من منطقة كبيرة.",
+        "tr": "Büyük bir alanın %90'ını keşfet."
       },
       "icon": "res://assets/milestones/ach_maze_explorer.svg"
     },
@@ -237,11 +309,35 @@
       "status": "local",
       "title": {
         "en": "Chain reaction",
-        "ru": "Цепная реакция"
+        "ru": "Цепная реакция",
+        "ja": "連鎖反応",
+        "ko": "연쇄 반응",
+        "zh_CN": "连锁反应",
+        "hi": "श्रृंखला प्रतिक्रिया",
+        "id": "Reaksi berantai",
+        "th": "ปฏิกิริยาลูกโซ่",
+        "vi": "Phản ứng dây chuyền",
+        "fr": "Réaction en chaîne",
+        "it": "Reazione a catena",
+        "de": "Kettenreaktion",
+        "ar": "تفاعل متسلسل",
+        "tr": "Zincirleme tepki"
       },
       "description": {
-        "en": "Chain five bombs",
-        "ru": "Взорвать цепочкой пять бомб"
+        "en": "Chain five bombs.",
+        "ru": "Взорви цепочкой пять бомб.",
+        "ja": "5個の爆弾を連鎖爆発させる。",
+        "ko": "폭탄 5개를 연쇄 폭발시키세요.",
+        "zh_CN": "连锁引爆5颗炸弹。",
+        "hi": "पाँच बमों को श्रृंखला में फोड़ें।",
+        "id": "Ledakkan lima bom secara berantai.",
+        "th": "จุดระเบิดต่อเนื่อง 5 ลูก",
+        "vi": "Kích nổ dây chuyền 5 quả bom.",
+        "fr": "Faites exploser cinq bombes en chaîne.",
+        "it": "Fai esplodere cinque bombe a catena.",
+        "de": "Zünde fünf Bomben in einer Kette.",
+        "ar": "فجّر خمس قنابل بتفاعل متسلسل.",
+        "tr": "Beş bombayı zincirleme patlat."
       },
       "icon": "res://assets/milestones/ach_chain_5.svg"
     },
@@ -280,11 +376,35 @@
       "status": "local",
       "title": {
         "en": "Hunter",
-        "ru": "Охотник"
+        "ru": "Охотник",
+        "ja": "ハンター",
+        "ko": "사냥꾼",
+        "zh_CN": "猎手",
+        "hi": "शिकारी",
+        "id": "Pemburu",
+        "th": "นักล่า",
+        "vi": "Thợ săn",
+        "fr": "Chasseur",
+        "it": "Cacciatore",
+        "de": "Jäger",
+        "ar": "الصياد",
+        "tr": "Avcı"
       },
       "description": {
-        "en": "Defeat 100 enemies",
-        "ru": "Уничтожить 100 врагов"
+        "en": "Defeat 100 enemies.",
+        "ru": "Уничтожь 100 врагов.",
+        "ja": "敵を100体倒す。",
+        "ko": "적 100명을 물리치세요.",
+        "zh_CN": "击败100个敌人。",
+        "hi": "100 दुश्मन हराएँ।",
+        "id": "Kalahkan 100 musuh.",
+        "th": "กำจัดศัตรู 100 ตัว",
+        "vi": "Hạ 100 kẻ địch.",
+        "fr": "Battez 100 ennemis.",
+        "it": "Sconfiggi 100 nemici.",
+        "de": "Besiege 100 Gegner.",
+        "ar": "اهزم 100 عدو.",
+        "tr": "100 düşmanı yen."
       },
       "icon": "res://assets/milestones/ach_enemies_100.svg"
     },
@@ -295,11 +415,35 @@
       "status": "local",
       "title": {
         "en": "Maze terror",
-        "ru": "Гроза лабиринтов"
+        "ru": "Гроза лабиринтов",
+        "ja": "迷路の恐怖",
+        "ko": "미로의 공포",
+        "zh_CN": "迷宫克星",
+        "hi": "भूलभुलैया का आतंक",
+        "id": "Momok labirin",
+        "th": "จอมเขาวงกต",
+        "vi": "Nỗi kinh hoàng mê cung",
+        "fr": "Terreur des labyrinthes",
+        "it": "Terrore del labirinto",
+        "de": "Schrecken des Labyrinths",
+        "ar": "رعب المتاهة",
+        "tr": "Labirentin korkusu"
       },
       "description": {
-        "en": "Defeat 1000 enemies",
-        "ru": "Уничтожить 1000 врагов"
+        "en": "Defeat 1000 enemies.",
+        "ru": "Уничтожь 1000 врагов.",
+        "ja": "敵を1000体倒す。",
+        "ko": "적 1000명을 물리치세요.",
+        "zh_CN": "击败1000个敌人。",
+        "hi": "1000 दुश्मन हराएँ।",
+        "id": "Kalahkan 1000 musuh.",
+        "th": "กำจัดศัตรู 1000 ตัว",
+        "vi": "Hạ 1000 kẻ địch.",
+        "fr": "Battez 1000 ennemis.",
+        "it": "Sconfiggi 1000 nemici.",
+        "de": "Besiege 1000 Gegner.",
+        "ar": "اهزم 1000 عدو.",
+        "tr": "1000 düşmanı yen."
       },
       "icon": "res://assets/milestones/ach_enemies_1000.svg"
     },
@@ -310,11 +454,35 @@
       "status": "local",
       "title": {
         "en": "Destroyer",
-        "ru": "Разрушитель"
+        "ru": "Разрушитель",
+        "ja": "破壊者",
+        "ko": "파괴자",
+        "zh_CN": "破坏者",
+        "hi": "विध्वंसक",
+        "id": "Penghancur",
+        "th": "ผู้ทำลาย",
+        "vi": "Kẻ phá hủy",
+        "fr": "Destructeur",
+        "it": "Distruttore",
+        "de": "Zerstörer",
+        "ar": "المدمّر",
+        "tr": "Yıkıcı"
       },
       "description": {
-        "en": "Destroy 1000 blocks",
-        "ru": "Разрушить 1000 блоков"
+        "en": "Destroy 1000 crates.",
+        "ru": "Разрушь 1000 ящиков.",
+        "ja": "木箱を1000個壊す。",
+        "ko": "상자 1000개를 파괴하세요.",
+        "zh_CN": "摧毁1000个木箱。",
+        "hi": "1000 पेटियाँ तोड़ें।",
+        "id": "Hancurkan 1000 peti.",
+        "th": "ทำลายลัง 1000 ใบ",
+        "vi": "Phá 1000 thùng.",
+        "fr": "Détruisez 1000 caisses.",
+        "it": "Distruggi 1000 casse.",
+        "de": "Zerstöre 1000 Kisten.",
+        "ar": "دمّر 1000 صندوق.",
+        "tr": "1000 sandığı kır."
       },
       "icon": "res://assets/milestones/ach_blocks_1000.svg"
     },
@@ -325,11 +493,35 @@
       "status": "local",
       "title": {
         "en": "Full arsenal",
-        "ru": "Полный арсенал"
+        "ru": "Полный арсенал",
+        "ja": "万全の装備",
+        "ko": "완벽한 무장",
+        "zh_CN": "完整装备",
+        "hi": "पूरा शस्त्रागार",
+        "id": "Persenjataan lengkap",
+        "th": "คลังแสงครบชุด",
+        "vi": "Kho vũ khí đầy đủ",
+        "fr": "Arsenal complet",
+        "it": "Arsenale completo",
+        "de": "Volles Arsenal",
+        "ar": "ترسانة كاملة",
+        "tr": "Tam cephanelik"
       },
       "description": {
-        "en": "Find every primary powerup category",
-        "ru": "Получить все основные категории усилений"
+        "en": "Collect every powerup type in one attempt.",
+        "ru": "Собери все типы усилений за одну попытку.",
+        "ja": "1回の挑戦ですべての強化アイテムを集める。",
+        "ko": "한 번의 시도에서 모든 강화 종류를 모으세요.",
+        "zh_CN": "在一次挑战中收集所有类型的强化道具。",
+        "hi": "एक प्रयास में हर तरह का पावरअप लें।",
+        "id": "Kumpulkan semua jenis penguat dalam satu percobaan.",
+        "th": "เก็บพลังเสริมทุกชนิดในการเล่นครั้งเดียว",
+        "vi": "Thu thập mọi loại cường hóa trong một lượt.",
+        "fr": "Ramassez chaque type d'amélioration en une tentative.",
+        "it": "Raccogli ogni tipo di potenziamento in un tentativo.",
+        "de": "Sammle alle Verstärkungen in einem Versuch.",
+        "ar": "اجمع كل أنواع التعزيزات في محاولة واحدة.",
+        "tr": "Tek denemede her güçlendirme türünü topla."
       },
       "icon": "res://assets/milestones/ach_powerup_master.svg"
     },
@@ -340,11 +532,35 @@
       "status": "local",
       "title": {
         "en": "First duel",
-        "ru": "Первая дуэль"
+        "ru": "Первая дуэль",
+        "ja": "初めての決闘",
+        "ko": "첫 결투",
+        "zh_CN": "首场决斗",
+        "hi": "पहला द्वंद्व",
+        "id": "Duel pertama",
+        "th": "ดวลครั้งแรก",
+        "vi": "Trận đấu đầu tiên",
+        "fr": "Premier duel",
+        "it": "Primo duello",
+        "de": "Erstes Duell",
+        "ar": "المبارزة الأولى",
+        "tr": "İlk düello"
       },
       "description": {
-        "en": "Finish a qualifying arena match",
-        "ru": "Завершить квалифицируемый матч"
+        "en": "Finish a qualifying arena match.",
+        "ru": "Заверши матч Арены, отвечающий условиям зачёта.",
+        "ja": "条件を満たすアリーナ戦を完了する。",
+        "ko": "인정 조건을 충족하는 아레나 경기를 완료하세요.",
+        "zh_CN": "完成一场符合计入条件的竞技场比赛。",
+        "hi": "अरीना का एक पात्र मैच पूरा करें।",
+        "id": "Selesaikan pertandingan arena yang memenuhi syarat.",
+        "th": "เล่นแมตช์อารีนาที่เข้าเกณฑ์ให้จบ",
+        "vi": "Hoàn thành trận đấu trường đủ điều kiện.",
+        "fr": "Terminez un match d'arène admissible.",
+        "it": "Completa una partita arena valida.",
+        "de": "Beende ein gültiges Arenamatch.",
+        "ar": "أكمل مباراة ساحة مستوفية للشروط.",
+        "tr": "Koşulları sağlayan bir arena maçını bitir."
       },
       "icon": "res://assets/milestones/ach_arena_first.svg"
     },
@@ -355,11 +571,35 @@
       "status": "local",
       "title": {
         "en": "Arena victor",
-        "ru": "Победитель арены"
+        "ru": "Победитель арены",
+        "ja": "アリーナの勝者",
+        "ko": "아레나 승자",
+        "zh_CN": "竞技场胜者",
+        "hi": "अरीना विजेता",
+        "id": "Pemenang arena",
+        "th": "ผู้ชนะอารีนา",
+        "vi": "Người thắng đấu trường",
+        "fr": "Vainqueur de l'arène",
+        "it": "Vincitore dell'arena",
+        "de": "Arenasieger",
+        "ar": "منتصر الساحة",
+        "tr": "Arena galibi"
       },
       "description": {
-        "en": "Win a qualifying arena match",
-        "ru": "Выиграть квалифицируемый матч"
+        "en": "Win a qualifying arena match.",
+        "ru": "Выиграй зачётный матч Арены.",
+        "ja": "条件を満たすアリーナ戦で勝つ。",
+        "ko": "인정 조건을 충족하는 아레나 경기에서 승리하세요.",
+        "zh_CN": "赢得一场符合计入条件的竞技场比赛。",
+        "hi": "अरीना का एक पात्र मैच जीतें।",
+        "id": "Menangkan pertandingan arena yang memenuhi syarat.",
+        "th": "ชนะแมตช์อารีนาที่เข้าเกณฑ์",
+        "vi": "Thắng một trận đấu trường đủ điều kiện.",
+        "fr": "Gagnez un match d'arène admissible.",
+        "it": "Vinci una partita arena valida.",
+        "de": "Gewinne ein gültiges Arenamatch.",
+        "ar": "فز بمباراة ساحة مستوفية للشروط.",
+        "tr": "Koşulları sağlayan bir arena maçını kazan."
       },
       "icon": "res://assets/milestones/ach_arena_win.svg"
     },
@@ -370,11 +610,35 @@
       "status": "local",
       "title": {
         "en": "Duel veteran",
-        "ru": "Опытный дуэлянт"
+        "ru": "Опытный дуэлянт",
+        "ja": "決闘の達人",
+        "ko": "결투 베테랑",
+        "zh_CN": "决斗老手",
+        "hi": "द्वंद्व अनुभवी",
+        "id": "Veteran duel",
+        "th": "นักดวลผู้ช่ำชอง",
+        "vi": "Đấu sĩ kỳ cựu",
+        "fr": "Vétéran des duels",
+        "it": "Veterano dei duelli",
+        "de": "Duellveteran",
+        "ar": "مخضرم المبارزة",
+        "tr": "Düello ustası"
       },
       "description": {
-        "en": "Win ten qualifying arena matches",
-        "ru": "Победить в десяти квалифицируемых матчах"
+        "en": "Win 10 qualifying arena matches.",
+        "ru": "Выиграй 10 зачётных матчей Арены.",
+        "ja": "条件を満たすアリーナ戦で10勝する。",
+        "ko": "인정 조건을 충족하는 아레나 경기에서 10승 하세요.",
+        "zh_CN": "赢得10场符合计入条件的竞技场比赛。",
+        "hi": "अरीना के 10 पात्र मैच जीतें।",
+        "id": "Menangkan 10 pertandingan arena yang memenuhi syarat.",
+        "th": "ชนะแมตช์อารีนาที่เข้าเกณฑ์ 10 ครั้ง",
+        "vi": "Thắng 10 trận đấu trường đủ điều kiện.",
+        "fr": "Gagnez 10 matchs d'arène admissibles.",
+        "it": "Vinci 10 partite arena valide.",
+        "de": "Gewinne 10 gültige Arenamatches.",
+        "ar": "فز بعشر مباريات ساحة مستوفية للشروط.",
+        "tr": "Koşulları sağlayan 10 arena maçını kazan."
       },
       "icon": "res://assets/milestones/ach_arena_10.svg"
     },
@@ -385,11 +649,35 @@
       "status": "local",
       "title": {
         "en": "Arena legend",
-        "ru": "Легенда арены"
+        "ru": "Легенда арены",
+        "ja": "アリーナの伝説",
+        "ko": "아레나의 전설",
+        "zh_CN": "竞技场传奇",
+        "hi": "अरीना की किंवदंती",
+        "id": "Legenda arena",
+        "th": "ตำนานอารีนา",
+        "vi": "Huyền thoại đấu trường",
+        "fr": "Légende de l'arène",
+        "it": "Leggenda dell'arena",
+        "de": "Arenalegende",
+        "ar": "أسطورة الساحة",
+        "tr": "Arena efsanesi"
       },
       "description": {
-        "en": "Win fifty qualifying arena matches",
-        "ru": "Победить в пятидесяти квалифицируемых матчах"
+        "en": "Win 50 qualifying arena matches.",
+        "ru": "Выиграй 50 зачётных матчей Арены.",
+        "ja": "条件を満たすアリーナ戦で50勝する。",
+        "ko": "인정 조건을 충족하는 아레나 경기에서 50승 하세요.",
+        "zh_CN": "赢得50场符合计入条件的竞技场比赛。",
+        "hi": "अरीना के 50 पात्र मैच जीतें।",
+        "id": "Menangkan 50 pertandingan arena yang memenuhi syarat.",
+        "th": "ชนะแมตช์อารีนาที่เข้าเกณฑ์ 50 ครั้ง",
+        "vi": "Thắng 50 trận đấu trường đủ điều kiện.",
+        "fr": "Gagnez 50 matchs d'arène admissibles.",
+        "it": "Vinci 50 partite arena valide.",
+        "de": "Gewinne 50 gültige Arenamatches.",
+        "ar": "فز بخمسين مباراة ساحة مستوفية للشروط.",
+        "tr": "Koşulları sağlayan 50 arena maçını kazan."
       },
       "icon": "res://assets/milestones/ach_arena_50.svg"
     },
@@ -414,11 +702,35 @@
       "status": "local",
       "title": {
         "en": "Architect",
-        "ru": "Архитектор"
+        "ru": "Архитектор",
+        "ja": "建築家",
+        "ko": "건축가",
+        "zh_CN": "建筑师",
+        "hi": "वास्तुकार",
+        "id": "Arsitek",
+        "th": "สถาปนิก",
+        "vi": "Kiến trúc sư",
+        "fr": "Architecte",
+        "it": "Architetto",
+        "de": "Architekt",
+        "ar": "المعماري",
+        "tr": "Mimar"
       },
       "description": {
-        "en": "Save the first custom map",
-        "ru": "Сохранить первую пользовательскую карту"
+        "en": "Save your first custom map.",
+        "ru": "Сохрани первую свою карту.",
+        "ja": "初めて自作マップを保存する。",
+        "ko": "첫 직접 만든 맵을 저장하세요.",
+        "zh_CN": "保存第一张自制地图。",
+        "hi": "अपना पहला नक्शा सहेजें।",
+        "id": "Simpan peta buatanmu yang pertama.",
+        "th": "บันทึกแผนที่ที่สร้างเองครั้งแรก",
+        "vi": "Lưu bản đồ tự tạo đầu tiên.",
+        "fr": "Sauvegardez votre première carte.",
+        "it": "Salva la tua prima mappa.",
+        "de": "Speichere deine erste eigene Karte.",
+        "ar": "احفظ خريطتك الأولى.",
+        "tr": "İlk özel haritanı kaydet."
       },
       "icon": "res://assets/milestones/ach_editor_first.svg"
     },
@@ -429,11 +741,35 @@
       "status": "local",
       "title": {
         "en": "Self challenge",
-        "ru": "Собственное испытание"
+        "ru": "Собственное испытание",
+        "ja": "自分への挑戦",
+        "ko": "나만의 도전",
+        "zh_CN": "自我挑战",
+        "hi": "अपनी चुनौती",
+        "id": "Tantangan sendiri",
+        "th": "ท้าทายตัวเอง",
+        "vi": "Thử thách bản thân",
+        "fr": "Défi personnel",
+        "it": "Sfida personale",
+        "de": "Eigene Herausforderung",
+        "ar": "تحدٍ ذاتي",
+        "tr": "Kendi mücadelen"
       },
       "description": {
-        "en": "Clear a validated custom map",
-        "ru": "Пройти проверенную пользовательскую карту"
+        "en": "Complete one of your saved maps using Play.",
+        "ru": "Пройди свою сохранённую карту через «Играть».",
+        "ja": "保存した自作マップを「プレイ」でクリアする。",
+        "ko": "저장한 직접 만든 맵을 '플레이'로 완료하세요.",
+        "zh_CN": "通过“游玩”完成一张已保存的自制地图。",
+        "hi": "अपना सहेजा नक्शा खेलें विकल्प से पूरा करें।",
+        "id": "Selesaikan petamu yang tersimpan lewat Main.",
+        "th": "ผ่านแผนที่ที่บันทึกเองด้วยปุ่มเล่น",
+        "vi": "Hoàn thành bản đồ tự lưu bằng Chơi.",
+        "fr": "Terminez une de vos cartes sauvegardées avec Jouer.",
+        "it": "Completa una tua mappa salvata con Gioca.",
+        "de": "Schließe eine eigene gespeicherte Karte über Spielen ab.",
+        "ar": "أكمل إحدى خرائطك المحفوظة عبر «العب».",
+        "tr": "Kaydettiğin haritalardan birini Oyna ile tamamla."
       },
       "icon": "res://assets/milestones/ach_editor_play.svg"
     },
@@ -444,11 +780,35 @@
       "status": "local",
       "title": {
         "en": "Cartographer",
-        "ru": "Картограф"
+        "ru": "Картограф",
+        "ja": "地図職人",
+        "ko": "지도 제작자",
+        "zh_CN": "制图师",
+        "hi": "मानचित्रकार",
+        "id": "Kartografer",
+        "th": "นักทำแผนที่",
+        "vi": "Người vẽ bản đồ",
+        "fr": "Cartographe",
+        "it": "Cartografo",
+        "de": "Kartograf",
+        "ar": "رسّام الخرائط",
+        "tr": "Haritacı"
       },
       "description": {
-        "en": "Create ten distinct valid maps",
-        "ru": "Создать десять разных корректных карт"
+        "en": "Save 10 distinct valid maps.",
+        "ru": "Сохрани 10 разных корректных карт.",
+        "ja": "異なる有効なマップを10個保存する。",
+        "ko": "서로 다른 유효한 맵 10개를 저장하세요.",
+        "zh_CN": "保存10张不同的有效地图。",
+        "hi": "10 अलग वैध नक्शे सहेजें।",
+        "id": "Simpan 10 peta valid yang berbeda.",
+        "th": "บันทึกแผนที่ที่ถูกต้องต่างกัน 10 แผนที่",
+        "vi": "Lưu 10 bản đồ hợp lệ khác nhau.",
+        "fr": "Sauvegardez 10 cartes valides distinctes.",
+        "it": "Salva 10 mappe valide diverse.",
+        "de": "Speichere 10 unterschiedliche gültige Karten.",
+        "ar": "احفظ 10 خرائط صالحة مختلفة.",
+        "tr": "10 farklı geçerli harita kaydet."
       },
       "icon": "res://assets/milestones/ach_editor_10.svg"
     },
@@ -459,11 +819,35 @@
       "status": "local",
       "title": {
         "en": "Share the world",
-        "ru": "Поделиться миром"
+        "ru": "Поделиться миром",
+        "ja": "世界を分かち合う",
+        "ko": "세상 공유",
+        "zh_CN": "分享世界",
+        "hi": "दुनिया बाँटें",
+        "id": "Bagikan dunia",
+        "th": "แบ่งปันโลก",
+        "vi": "Chia sẻ thế giới",
+        "fr": "Partager le monde",
+        "it": "Condividi il mondo",
+        "de": "Die Welt teilen",
+        "ar": "شارك العالم",
+        "tr": "Dünyayı paylaş"
       },
       "description": {
-        "en": "Export a map to share with another player",
-        "ru": "Экспортировать карту для передачи другому игроку"
+        "en": "Export a map to share with a friend.",
+        "ru": "Экспортируй карту для друга.",
+        "ja": "友達に渡すためにマップを書き出す。",
+        "ko": "친구와 공유할 맵을 내보내세요.",
+        "zh_CN": "导出地图以分享给朋友。",
+        "hi": "दोस्त को देने के लिए नक्शा निर्यात करें।",
+        "id": "Ekspor peta untuk dibagikan ke teman.",
+        "th": "ส่งออกแผนที่เพื่อแบ่งปันให้เพื่อน",
+        "vi": "Xuất bản đồ để chia sẻ với bạn.",
+        "fr": "Exportez une carte à partager avec un ami.",
+        "it": "Esporta una mappa da condividere con un amico.",
+        "de": "Exportiere eine Karte zum Teilen mit Freunden.",
+        "ar": "صدّر خريطة لمشاركتها مع صديق.",
+        "tr": "Bir arkadaşınla paylaşmak için harita dışa aktar."
       },
       "icon": "res://assets/milestones/ach_editor_share.svg"
     },
@@ -474,11 +858,35 @@
       "status": "local",
       "title": {
         "en": "Visiting explorer",
-        "ru": "Гость другого мира"
+        "ru": "Гость другого мира",
+        "ja": "訪れた探検家",
+        "ko": "방문 탐험가",
+        "zh_CN": "异界访客",
+        "hi": "मेहमान खोजी",
+        "id": "Penjelajah tamu",
+        "th": "นักสำรวจต่างถิ่น",
+        "vi": "Nhà thám hiểm ghé thăm",
+        "fr": "Explorateur en visite",
+        "it": "Esploratore ospite",
+        "de": "Fremder Entdecker",
+        "ar": "مستكشف زائر",
+        "tr": "Konuk kâşif"
       },
       "description": {
-        "en": "Import and clear a compatible custom map",
-        "ru": "Импортировать и пройти совместимую карту"
+        "en": "Import and complete a compatible map using Play.",
+        "ru": "Импортируй совместимую карту и пройди через «Играть».",
+        "ja": "互換マップを読み込み、「プレイ」でクリアする。",
+        "ko": "호환 맵을 가져와 '플레이'로 완료하세요.",
+        "zh_CN": "导入兼容地图并通过“游玩”完成。",
+        "hi": "संगत नक्शा आयात करें और खेलें से पूरा करें।",
+        "id": "Impor peta yang kompatibel lalu tuntaskan lewat Main.",
+        "th": "นำเข้าแผนที่ที่รองรับแล้วผ่านด้วยปุ่มเล่น",
+        "vi": "Nhập bản đồ tương thích rồi hoàn thành bằng Chơi.",
+        "fr": "Importez une carte compatible et terminez-la avec Jouer.",
+        "it": "Importa una mappa compatibile e completala con Gioca.",
+        "de": "Importiere eine kompatible Karte und schließe sie über Spielen ab.",
+        "ar": "استورد خريطة متوافقة وأكملها عبر «العب».",
+        "tr": "Uyumlu bir harita içe aktar ve Oyna ile tamamla."
       },
       "icon": "res://assets/milestones/ach_editor_import.svg"
     },

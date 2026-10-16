@@ -1,2 +1,3 @@
-PASS: independent Python cryptography AES/HMAC verification of runtime bundle and separately sealed display.
-PASS: padded file size; runtime includes implemented public milestones only, no hidden/future definitions.
+Python cryptography independent AES-256-CBC / PKCS7 / HMAC-SHA256: PASS
+Runtime authentication, 17 implemented public milestones only, three sealed active display records, 14 locales per display: PASS
+Not a server trust boundary.
