@@ -4,6 +4,7 @@ extends RefCounted
 const MAX_BYTES := 262144
 const POWERS := ["capacity", "range", "speed", "remote", "wall_pass", "bomb_pass", "flame_pass", "invulnerability"]
 const ENEMIES := ["patrol", "chaser", "bomber", "warden"]
+const MODES := ["solo", "coop", "versus", "arena_bot"]
 const ROOT_KEYS := ["format", "id", "revision", "title", "author", "description", "created", "modified", "mode", "theme", "width", "height", "seed", "generator_version", "rows", "spawns", "enemies", "powerups", "rules", "secrets", "generation"]
 
 static func integer(value: Variant, low: int, high: int) -> bool:
@@ -32,9 +33,11 @@ static func cell(value: Array) -> Vector2i:
 	return Vector2i(int(value[0]), int(value[1]))
 
 static func validate(data: Variant) -> String:
-	if not exact_keys(data, ROOT_KEYS):
+	var keys := ROOT_KEYS.duplicate()
+	if data is Dictionary and data.get("format") == 2: keys.erase("secrets")
+	if not exact_keys(data, keys):
 		return "Неверный набор полей карты. Скрипты и пути ресурсов не поддерживаются."
-	if not integer(data.format, 1, 1):
+	if not integer(data.format, 1, 2):
 		return "Версия .blastmap не поддерживается."
 	if not valid_id(data.id) or not integer(data.revision, 1, 1000000):
 		return "Неверный ID или версия карты."
@@ -45,12 +48,12 @@ static func validate(data: Variant) -> String:
 		return "Введите название карты."
 	if not integer(data.width, 11, 41) or not integer(data.height, 11, 31):
 		return "Размер карты: от 11×11 до 41×31."
-	if data.mode not in ["solo", "versus"] or data.theme != "green_maze":
+	if data.mode not in MODES or data.theme != "green_maze":
 		return "Поддерживаются Зелёный лабиринт и режимы соло / дуэль."
 	var generation_error := validate_options(data.generation)
 	if not generation_error.is_empty():
 		return generation_error
-	if not integer(data.seed, 0, 2147483647) or not integer(data.generator_version, 0, 1):
+	if not integer(data.seed, 0, 2147483647) or not integer(data.generator_version, 0, 2):
 		return "Неверный seed или версия генератора."
 	if not data.rows is Array or data.rows.size() != int(data.height):
 		return "Неверная высота геометрии."
@@ -68,9 +71,9 @@ static func validate(data: Variant) -> String:
 	var rules: Dictionary = data.rules
 	if not integer(rules.capacity, 1, 5) or not integer(rules.range, 1, 6) or not integer(rules.fuse_ticks, 90, 600) or not rules.remote is bool or not integer(rules.time_limit, 0, 1800):
 		return "Бомбы: 1–5, дальность: 1–6, фитиль: 90–600 тиков, время: 0–1800 секунд."
-	if rules.goal != ("eliminate" if data.mode == "solo" else "last_player"):
+	if rules.goal != ("eliminate" if data.mode in ["solo", "coop"] else "last_player"):
 		return "Цель не соответствует режиму."
-	if not data.spawns is Array or data.spawns.size() != (1 if data.mode == "solo" else 2):
+	if not data.spawns is Array or data.spawns.size() != (1 if data.mode in ["solo", "arena_bot"] else 2):
 		return "Нужен один старт для соло или два для дуэли."
 	var occupied: Dictionary = {}
 	var board := GridBoard.new()
@@ -96,7 +99,7 @@ static func validate(data: Variant) -> String:
 	for p in data.spawns:
 		if not reachable.has(cell(p)):
 			return "Старты игроков изолированы стенами."
-	if not data.enemies is Array or data.enemies.size() > 32 or (data.mode == "solo" and data.enemies.is_empty()) or (data.mode == "versus" and not data.enemies.is_empty()):
+	if not data.enemies is Array or data.enemies.size() > 32 or (data.mode != "versus" and data.enemies.is_empty()) or (data.mode == "versus" and not data.enemies.is_empty()):
 		return "Соло: 1–32 врага. Дуэль: без ИИ."
 	var required_count := 0
 	for enemy in data.enemies:
@@ -111,7 +114,7 @@ static func validate(data: Variant) -> String:
 		occupied[at] = true
 		if enemy.required:
 			required_count += 1
-	if data.mode == "solo" and required_count == 0:
+	if data.mode in ["solo", "coop"] and required_count == 0:
 		return "Для победы нужен хотя бы один обязательный враг."
 	if not data.powerups is Array or data.powerups.size() > 128:
 		return "Допускается до 128 бонусов."
@@ -122,14 +125,14 @@ static func validate(data: Variant) -> String:
 		if occupied.has(at) or not reachable.has(at) or board.kind(at) != (GridBoard.Cell.CRATE if power.hidden else GridBoard.Cell.FLOOR):
 			return "Бонус должен быть достижим и соответствовать клетке / скрытию."
 		occupied[at] = true
-	if not data.secrets is Array or not data.secrets.is_empty():
+	if data.format == 1 and (not data.secrets is Array or not data.secrets.is_empty()):
 		return "Пользовательские секретные испытания ещё не поддерживаются форматом 1."
 	return ""
 
 static func fingerprint(data: Dictionary) -> String:
 	var gameplay := {}
 	for key in ["mode", "theme", "width", "height", "seed", "generator_version", "rows", "spawns", "enemies", "powerups", "rules", "secrets"]:
-		gameplay[key] = data[key]
+		gameplay[key] = data.get(key, [])
 	return JSON.stringify(normalize_numbers(gameplay), "", true).sha256_text()
 
 # JSON parses all numbers as floats. Normalize validated integral gameplay values before hashing.
@@ -157,7 +160,7 @@ static func validate_options(options: Variant) -> String:
 		elif key in ["hidden", "crates", "walls", "remote"]:
 			if not options[key] is bool: return "Ожидается переключатель: " + str(key)
 		elif key == "mode":
-			if options[key] not in ["solo", "versus"]: return "Неподдерживаемый режим."
+			if options[key] not in MODES: return "Неподдерживаемый режим."
 		elif key == "enemy_kind":
 			if options[key] not in ENEMIES: return "Неподдерживаемый тип врага."
 		elif key == "bonus_kind":

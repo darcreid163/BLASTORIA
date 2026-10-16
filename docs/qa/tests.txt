@@ -336,4 +336,19 @@ PASS: UI: achievement page shows public labels without API IDs/hidden entries
 PASS: UI: achievements support paginated controller-friendly navigation
 PASS: UI: achievement pagination returns to first page
 PASS: UI: real unlock displays localized achievement notification
-RESULT: 336 passed, 0 failed
+PASS: workshop: format 2 solo has no private fields
+PASS: workshop: rejects injected field solo
+PASS: workshop: format 2 coop has no private fields
+PASS: workshop: rejects injected field coop
+PASS: coop: player two continues when player one dies
+PASS: coop: both dead ends passage
+PASS: coop: contact checks player two
+PASS: coop: player two blast earns shared score once
+PASS: workshop: format 2 versus has no private fields
+PASS: workshop: rejects injected field versus
+PASS: workshop: format 2 arena_bot has no private fields
+PASS: workshop: rejects injected field arena_bot
+PASS: bot arena: human loss ends match
+PASS: bot arena: simultaneous all-dead is draw
+PASS: bot arena: last human wins
+RESULT: 351 passed, 0 failed

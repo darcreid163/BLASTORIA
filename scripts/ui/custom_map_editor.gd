@@ -45,7 +45,7 @@ func _ready() -> void:
 	author_field.text = "Игрок"
 	author_field.max_length = 80
 	left.add_child(author_field)
-	mode_select = option(left, ["Соло: уничтожить врагов", "Дуэль: последний игрок"])
+	mode_select = option(left, ["WS_SOLO", "WS_COOP", "WS_DUEL", "WS_BOTS"])
 	add_number(left, "width", "Ширина", 11, 41, 2, 25)
 	add_number(left, "height", "Высота", 11, 31, 2, 17)
 	add_number(left, "enemy_count", "Врагов", 1, 32, 1, 3)
@@ -165,8 +165,8 @@ func options() -> Dictionary:
 	var result := {}
 	for key in settings:
 		result[key] = settings[key].button_pressed if settings[key] is CheckBox else int(settings[key].value)
-	result.mode = "solo" if mode_select.selected == 0 else "versus"
-	result.enemy_kind = MapValidationService.ENEMIES[enemy_select.selected]
+	result.mode = MapValidationService.MODES[mode_select.selected]
+	result.enemy_kind = "bomber" if result.mode == "arena_bot" else MapValidationService.ENEMIES[enemy_select.selected]
 	result.bonus_kind = MapValidationService.POWERS[bonus_select.selected]
 	result.hidden = hidden_check.button_pressed
 	return result
@@ -253,7 +253,7 @@ func sync_fields() -> void:
 		return
 	title_field.text = document.data.title
 	author_field.text = document.data.author
-	mode_select.select(0 if document.data.mode == "solo" else 1)
+	mode_select.select(MapValidationService.MODES.find(document.data.mode))
 	settings.width.value = int(document.data.width)
 	settings.height.value = int(document.data.height)
 	for key in ["capacity", "range", "fuse_ticks", "time_limit"]:

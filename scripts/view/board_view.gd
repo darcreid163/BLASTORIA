@@ -142,7 +142,7 @@ func build(state: GameState) -> void:
 		var needle := box(artifact, Vector3(0, 0.07, 0), Vector3(0.12, 0.12, 0.55), "ffe395", true)
 		needle.rotation.y = PI * 0.25
 		artifact.hide()
-		follow.update(camera, pos(state.actors[0].cell), config.width, config.height, 0, true)
+		follow.update(camera, pos(state.followed_actor().cell), config.width, config.height, 0, true)
 	else:
 		camera.size = maxf(19, config.height * 1.3)
 		camera.position = FollowCamera.OFFSET
@@ -152,11 +152,11 @@ func build(state: GameState) -> void:
 		exit_mesh.visible = state.exit_revealed
 
 	if state.mode == "classic" or (not state.map_data.is_empty() and state.mode != "custom_arena"):
-		follow.update(camera, pos(state.actors[0].cell), config.width, config.height, 0, true)
+		follow.update(camera, pos(state.followed_actor().cell), config.width, config.height, 0, true)
 
 func sync(state: GameState, delta: float) -> void:
 	if state.mode in ["adventure", "classic"] or (not state.map_data.is_empty() and state.mode != "custom_arena"):
-		follow.update(camera, pos(state.actors[0].cell), config.width, config.height, delta)
+		follow.update(camera, pos(state.followed_actor().cell), config.width, config.height, delta)
 		if is_instance_valid(artifact):
 			artifact.visible = state.secrets.revealed and not state.secrets.awarded
 			artifact.rotation.y += delta * 0.7

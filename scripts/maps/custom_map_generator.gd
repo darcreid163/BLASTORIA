@@ -16,7 +16,7 @@ static func generate(options: Dictionary, seed_value: int) -> Dictionary:
 	var power: String = options.get("bonus_kind", "range")
 	if width < 11 or width > 41 or height < 11 or height > 31 or width % 2 == 0 or height % 2 == 0:
 		return {"error": "Выберите нечётные размеры 11–41 × 11–31."}
-	if count < 1 or count > 32 or bonuses < 0 or bonuses > 128 or kind not in MapValidationService.ENEMIES or power not in MapValidationService.POWERS or mode not in ["solo", "versus"]:
+	if count < 1 or count > 32 or bonuses < 0 or bonuses > 128 or kind not in MapValidationService.ENEMIES or power not in MapValidationService.POWERS or mode not in MapValidationService.MODES:
 		return {"error": "Неподдерживаемые настройки врагов, бонусов или режима."}
 	var allowed := ["width", "height", "enemy_count", "bonus_count", "mode", "enemy_kind", "bonus_kind", "enemy_step", "hidden", "crates", "walls", "capacity", "range", "fuse_ticks", "remote", "time_limit"]
 	for key in options:
@@ -24,7 +24,7 @@ static func generate(options: Dictionary, seed_value: int) -> Dictionary:
 			return {"error": "Настройка не поддерживается: " + str(key)}
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_value
-	var spawns: Array = [[1, 1]] if mode == "solo" else [[1, 1], [width - 2, height - 2]]
+	var spawns: Array = [[1, 1]] if mode in ["solo", "arena_bot"] else [[1, 1], [width - 2, height - 2]]
 	var rows: Array = []
 	var candidates: Array[Vector2i] = []
 	for y in range(height):
@@ -52,7 +52,7 @@ static func generate(options: Dictionary, seed_value: int) -> Dictionary:
 		var swap := candidates[i]
 		candidates[i] = candidates[j]
 		candidates[j] = swap
-	var actual_count := count if mode == "solo" else 0
+	var actual_count := count if mode != "versus" else 0
 	if candidates.size() < actual_count + bonuses:
 		return {"error": "Недостаточно места. Увеличьте карту или уменьшите число объектов."}
 	if bonuses > 0 and options.get("hidden", true) and not options.get("crates", true):
@@ -67,6 +67,6 @@ static func generate(options: Dictionary, seed_value: int) -> Dictionary:
 			enemies.append({"cell": [at.x, at.y], "kind": kind, "step": options.get("enemy_step", 36), "required": true})
 		else:
 			powers.append({"cell": [at.x, at.y], "kind": power, "hidden": hidden})
-	var data := {"format": 1, "generation": options.duplicate(true), "id": "custom_%d" % seed_value, "revision": 1, "title": "Моя карта", "author": "Игрок", "description": "", "created": "", "modified": "", "mode": mode, "theme": "green_maze", "width": width, "height": height, "seed": seed_value, "generator_version": 1, "rows": rows, "spawns": spawns, "enemies": enemies, "powerups": powers, "secrets": [], "rules": {"capacity": options.get("capacity", 1), "range": options.get("range", 2), "fuse_ticks": options.get("fuse_ticks", 150), "remote": options.get("remote", false), "time_limit": options.get("time_limit", 0), "goal": "eliminate" if mode == "solo" else "last_player"}}
+	var data := {"format": 2, "generation": options.duplicate(true), "id": "custom_%d" % seed_value, "revision": 1, "title": "Моя карта", "author": "Игрок", "description": "", "created": "", "modified": "", "mode": mode, "theme": "green_maze", "width": width, "height": height, "seed": seed_value, "generator_version": 2, "rows": rows, "spawns": spawns, "enemies": enemies, "powerups": powers, "rules": {"capacity": options.get("capacity", 1), "range": options.get("range", 2), "fuse_ticks": options.get("fuse_ticks", 150), "remote": options.get("remote", false), "time_limit": options.get("time_limit", 0), "goal": "eliminate" if mode in ["solo", "coop"] else "last_player"}}
 	var error := MapValidationService.validate(data)
 	return {"data": data} if error.is_empty() else {"error": error}

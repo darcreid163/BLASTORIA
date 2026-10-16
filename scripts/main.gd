@@ -158,7 +158,7 @@ func pause_game() -> void:
 	screen = "pause"
 	hud.show_menu("PAUSED", [["RESUME", "resume"], ["RESTART_RUN" if state.mode == "arcade" else "RETRY", "retry"], ["SETTINGS", "settings"], ["MENU", "menu"]], tr("ARCADE_RESTART_NOTE") if state.mode == "arcade" else "")
 
-	if state.mode in ["custom", "custom_arena"]:
+	if state.mode in ["custom", "custom_coop", "custom_arena"]:
 		hud.show_menu("PAUSED", [["RESUME", "resume"], ["RETRY", "retry"], ["Вернуться в редактор", "editor_return"]])
 
 func handle_action(action: String) -> void:
@@ -248,7 +248,7 @@ func handle_action(action: String) -> void:
 					classic_carry = {"capacity": classic_progress.carry.get("capacity", CLASSIC.initial_capacity), "radius": classic_progress.carry.get("radius", CLASSIC.initial_range)}
 					classic_score = classic_progress.score
 					start_game("classic", classic_progress.stage - 1)
-			elif state.mode in ["custom", "custom_arena"]:
+			elif state.mode in ["custom", "custom_coop", "custom_arena"]:
 				start_custom(state.map_data, custom_record_result)
 			elif state.mode == "arcade":
 				handle_action("arcade_start")
