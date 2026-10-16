@@ -131,7 +131,9 @@ func show_menu(title: String, buttons: Array, details: String = "") -> void:
 func update_state(state: GameState, arcade: ArcadeRun = null, classic_lives: int = 1) -> void:
 	var actor: Dictionary = state.actors[0]
 	var mode_label := "ADVENTURE" if state.mode in ["classic", "campaign", "adventure"] else ("ARCADE" if state.mode in ["official_arcade", "arcade"] else ("WORKSHOP" if state.mode.begins_with("custom") else state.mode.to_upper()))
-	status.text = tr(mode_label) + " · " + tr("STAGE") % (state.level + 1) + " · " + tr("ENEMIES") + ": %d" % state.alive_enemies()
+	status.text = tr(mode_label) + " · " + tr("STAGE") % (state.level + 1)
+	if state.mode == "official_arcade": status.text += " · " + tr("ARCADE_NAME_%02d" % (state.level + 1))
+	status.text += " · " + tr("ENEMIES") + ": %d" % state.alive_enemies()
 	metrics.text = ""
 	if state.mode == "arcade" and arcade != null:
 		metrics.text = tr("SCORE") + ": %d · " % arcade.live_score(state) + tr("TIME") + ": " + ArcadeRun.format_time(arcade.live_ticks(state))
@@ -328,3 +330,25 @@ func show_home(warning: String = "") -> void:
 		button.pressed.connect(func(): action_requested.emit(item[1]))
 		secondary.add_child(button)
 	cards.get_child(0).grab_focus()
+
+func show_stages(stages: Array, details: String) -> void:
+	show_menu("ARCADE", [["STAGE_RECORDS", "records"], ["MENU", "menu"]], details)
+	column.custom_minimum_size.x = 960
+	var grid := GridContainer.new()
+	grid.columns = 2
+	grid.add_theme_constant_override("h_separation", 12)
+	grid.add_theme_constant_override("v_separation", 10)
+	column.add_child(grid)
+	column.move_child(grid, 3)
+	var preferred: Button
+	for item in stages:
+		var button := Button.new()
+		button.text = item[0]
+		button.custom_minimum_size = Vector2(470, 50)
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.disabled = not item[2]
+		button.set_meta("stage_action", item[1])
+		button.pressed.connect(func(): action_requested.emit(item[1]))
+		grid.add_child(button)
+		if not button.disabled: preferred = button
+	if preferred != null: preferred.grab_focus()

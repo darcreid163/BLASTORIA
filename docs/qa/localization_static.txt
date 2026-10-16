@@ -1,2 +1,2 @@
-14 locales; 172 active keys per locale; nonempty values, identical key sets and format placeholders: PASS
-Native-speaker linguistic review: pending.
+14 locales; 182 active keys per locale; identical keys, nonempty text and format parity: PASS
+New authored stage titles included. Native-speaker review pending.

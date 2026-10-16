@@ -1,3 +1,17 @@
+# 0.7.1 Arcade chapter
+
+Official registry enables fixed JSON stages 1–10. Stages 1–3 are untouched; later
+records keep the same id/fingerprint namespace. tools/build_arcade_chapter.py is an
+authoring helper with explicit geometry and placements, never runtime generation.
+Seven stored input streams replay through GameState.advance with live enemy AI;
+tests compare exact score/ticks and stage-by-stage persisted progression. Inputs are
+QA fixtures, not an in-game replay feature, and are excluded from exports.
+
+Stage selection uses a two-column grid of available/locked authored tiles and focuses
+the latest playable stage. Stage titles use fourteen-language keys; gameplay metadata
+and fingerprints do not depend on language. Normal completion remains enemy elimination,
+not an exit objective. The planned next chapter cannot be launched.
+
 # Active 0.7 architecture
 
 LanguageCatalog installs 14 JSON dictionaries before any UI, normalizes locale aliases,

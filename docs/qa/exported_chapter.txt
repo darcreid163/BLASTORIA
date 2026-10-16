@@ -1,0 +1,27 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+PASS: release: ten authored stages and planned next stage blocked
+PASS: release: menu progression loads stage 4
+PASS: release: real inputs clear stage 4 with exact score/time
+PASS: release: result screen persists stage 4 record
+PASS: release: menu progression loads stage 5
+PASS: release: real inputs clear stage 5 with exact score/time
+PASS: release: result screen persists stage 5 record
+PASS: release: menu progression loads stage 6
+PASS: release: real inputs clear stage 6 with exact score/time
+PASS: release: result screen persists stage 6 record
+PASS: release: menu progression loads stage 7
+PASS: release: real inputs clear stage 7 with exact score/time
+PASS: release: result screen persists stage 7 record
+PASS: release: menu progression loads stage 8
+PASS: release: real inputs clear stage 8 with exact score/time
+PASS: release: result screen persists stage 8 record
+PASS: release: menu progression loads stage 9
+PASS: release: real inputs clear stage 9 with exact score/time
+PASS: release: result screen persists stage 9 record
+PASS: release: menu progression loads stage 10
+PASS: release: real inputs clear stage 10 with exact score/time
+PASS: release: result screen persists stage 10 record
+PASS: release: chapter reload preserves all records without enabling planned content
+PASS: release: QA input driver and replays are excluded from player package
+CHAPTER EXPORT: PASS

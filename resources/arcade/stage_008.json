@@ -1,0 +1,139 @@
+{
+  "format": 2,
+  "id": "arcade_008",
+  "revision": 1,
+  "title": "Два двора",
+  "author": "BLASTORIA",
+  "description": "Авторская карта первой главы",
+  "created": "2026-10-16",
+  "modified": "2026-10-16",
+  "mode": "solo",
+  "theme": "green_maze",
+  "width": 25,
+  "height": 17,
+  "seed": 23008,
+  "generator_version": 0,
+  "rows": [
+    "#########################",
+    "#.......................#",
+    "#...........#...........#",
+    "#...........#...........#",
+    "#..C........C...........#",
+    "#....####...#...C.......#",
+    "#....#......#...........#",
+    "#....#......#...........#",
+    "#....#..C..........#.C..#",
+    "#...........#......#....#",
+    "#...........#......#....#",
+    "#......C....#...####....#",
+    "#..C........C...........#",
+    "#...........#...C.......#",
+    "#........C..#...........#",
+    "#.......................#",
+    "#########################"
+  ],
+  "spawns": [
+    [
+      1,
+      1
+    ]
+  ],
+  "enemies": [
+    {
+      "cell": [
+        9,
+        3
+      ],
+      "kind": "chaser",
+      "step": 51,
+      "required": true
+    },
+    {
+      "cell": [
+        8,
+        12
+      ],
+      "kind": "patrol",
+      "step": 39,
+      "required": true
+    },
+    {
+      "cell": [
+        16,
+        3
+      ],
+      "kind": "bomber",
+      "step": 42,
+      "required": true
+    },
+    {
+      "cell": [
+        21,
+        13
+      ],
+      "kind": "chaser",
+      "step": 51,
+      "required": true
+    },
+    {
+      "cell": [
+        16,
+        9
+      ],
+      "kind": "patrol",
+      "step": 42,
+      "required": true
+    }
+  ],
+  "powerups": [
+    {
+      "cell": [
+        3,
+        1
+      ],
+      "kind": "capacity",
+      "hidden": false
+    },
+    {
+      "cell": [
+        3,
+        4
+      ],
+      "kind": "range",
+      "hidden": true
+    },
+    {
+      "cell": [
+        8,
+        8
+      ],
+      "kind": "bomb_pass",
+      "hidden": true
+    },
+    {
+      "cell": [
+        16,
+        5
+      ],
+      "kind": "remote",
+      "hidden": true
+    },
+    {
+      "cell": [
+        16,
+        13
+      ],
+      "kind": "speed",
+      "hidden": true
+    }
+  ],
+  "rules": {
+    "capacity": 1,
+    "range": 2,
+    "fuse_ticks": 150,
+    "remote": false,
+    "time_limit": 0,
+    "goal": "eliminate"
+  },
+  "generation": {}
+}

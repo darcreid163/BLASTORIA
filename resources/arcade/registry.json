@@ -8,7 +8,7 @@
       "design": "wood, stone, loops; warm moss green",
       "first": 1,
       "last": 10,
-      "status": "first_three"
+      "status": "authored_chapter"
     },
     {
       "id": "flooded_ruins",
@@ -105,44 +105,44 @@
     {
       "number": 4,
       "map_id": "green_maze",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_004.json"
     },
     {
       "number": 5,
       "map_id": "green_maze",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_005.json"
     },
     {
       "number": 6,
       "map_id": "green_maze",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_006.json"
     },
     {
       "number": 7,
       "map_id": "green_maze",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_007.json"
     },
     {
       "number": 8,
       "map_id": "green_maze",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_008.json"
     },
     {
       "number": 9,
       "map_id": "green_maze",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_009.json"
     },
     {
       "number": 10,
       "map_id": "green_maze",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_010.json"
     },
     {
       "number": 11,

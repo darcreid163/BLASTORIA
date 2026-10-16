@@ -184,7 +184,7 @@ PASS: UI: classic retry retains Bomb/Fire Up and resets special powers
 PASS: UI: reinforcement actors receive real 3D views
 PASS: UI: expanded main menu fits base viewport height
 PASS: official: ten themes and one hundred explicitly statused slots
-PASS: official: only three authored playable stages; planned stages cannot start
+PASS: official: ten authored playable stages; planned stages cannot start
 PASS: official: stage 1 validates authored geometry, objects and escape routes
 PASS: official: repeat stage 1 reconstructs identical instance
 PASS: official: stage 1 wins without exit
@@ -196,6 +196,34 @@ PASS: official: clear freezes time and awards once
 PASS: official: stage 3 validates authored geometry, objects and escape routes
 PASS: official: repeat stage 3 reconstructs identical instance
 PASS: official: stage 3 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 4 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 4 reconstructs identical instance
+PASS: official: stage 4 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 5 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 5 reconstructs identical instance
+PASS: official: stage 5 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 6 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 6 reconstructs identical instance
+PASS: official: stage 6 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 7 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 7 reconstructs identical instance
+PASS: official: stage 7 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 8 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 8 reconstructs identical instance
+PASS: official: stage 8 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 9 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 9 reconstructs identical instance
+PASS: official: stage 9 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 10 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 10 reconstructs identical instance
+PASS: official: stage 10 wins without exit
 PASS: official: clear freezes time and awards once
 PASS: official: three different authored topologies, not just enemy counts
 PASS: secrets: fixed ten-stage distribution and final prerequisite; implementation honestly planned
@@ -431,4 +459,87 @@ PASS: discovery collection persists and deduplicates
 PASS: language search accepts localized, native and English names
 PASS: language switch preserves edited map, user text and undo
 PASS: file picker refuses invalid destination instead of reusing old folder
-RESULT: 431 passed, 0 failed
+PASS: chapter: original stage 1 bytes and record identity preserved
+PASS: chapter: original stage 2 bytes and record identity preserved
+PASS: chapter: original stage 3 bytes and record identity preserved
+PASS: chapter: authored stage 4 validates
+PASS: chapter: stage 4 has a unique topology
+PASS: chapter: replay belongs to exact stage 4 revision
+PASS: chapter: stage 4 cleared with ordinary inputs and live enemy AI
+PASS: chapter: stage 4 score and active ticks replay exactly
+PASS: chapter: stage 4 actual pickups, kills, crates and time bonus match score
+PASS: chapter: stage 4 result cannot tick or score twice
+PASS: chapter: stage 4 normal victory persists and opens progression
+PASS: chapter: stage 4 record is independent
+PASS: chapter: stage 4 defeat cannot replace clear record
+PASS: chapter: authored stage 5 validates
+PASS: chapter: stage 5 has a unique topology
+PASS: chapter: replay belongs to exact stage 5 revision
+PASS: chapter: stage 5 cleared with ordinary inputs and live enemy AI
+PASS: chapter: stage 5 score and active ticks replay exactly
+PASS: chapter: stage 5 actual pickups, kills, crates and time bonus match score
+PASS: chapter: stage 5 result cannot tick or score twice
+PASS: chapter: stage 5 normal victory persists and opens progression
+PASS: chapter: stage 5 record is independent
+PASS: chapter: stage 5 defeat cannot replace clear record
+PASS: chapter: authored stage 6 validates
+PASS: chapter: stage 6 has a unique topology
+PASS: chapter: replay belongs to exact stage 6 revision
+PASS: chapter: stage 6 cleared with ordinary inputs and live enemy AI
+PASS: chapter: stage 6 score and active ticks replay exactly
+PASS: chapter: stage 6 actual pickups, kills, crates and time bonus match score
+PASS: chapter: stage 6 result cannot tick or score twice
+PASS: chapter: stage 6 normal victory persists and opens progression
+PASS: chapter: stage 6 record is independent
+PASS: chapter: stage 6 defeat cannot replace clear record
+PASS: chapter: authored stage 7 validates
+PASS: chapter: stage 7 has a unique topology
+PASS: chapter: replay belongs to exact stage 7 revision
+PASS: chapter: stage 7 cleared with ordinary inputs and live enemy AI
+PASS: chapter: stage 7 score and active ticks replay exactly
+PASS: chapter: stage 7 actual pickups, kills, crates and time bonus match score
+PASS: chapter: stage 7 result cannot tick or score twice
+PASS: chapter: stage 7 normal victory persists and opens progression
+PASS: chapter: stage 7 record is independent
+PASS: chapter: stage 7 defeat cannot replace clear record
+PASS: chapter: authored stage 8 validates
+PASS: chapter: stage 8 has a unique topology
+PASS: chapter: replay belongs to exact stage 8 revision
+PASS: chapter: stage 8 cleared with ordinary inputs and live enemy AI
+PASS: chapter: stage 8 score and active ticks replay exactly
+PASS: chapter: stage 8 actual pickups, kills, crates and time bonus match score
+PASS: chapter: stage 8 result cannot tick or score twice
+PASS: chapter: stage 8 normal victory persists and opens progression
+PASS: chapter: stage 8 record is independent
+PASS: chapter: stage 8 defeat cannot replace clear record
+PASS: chapter: authored stage 9 validates
+PASS: chapter: stage 9 has a unique topology
+PASS: chapter: replay belongs to exact stage 9 revision
+PASS: chapter: stage 9 cleared with ordinary inputs and live enemy AI
+PASS: chapter: stage 9 score and active ticks replay exactly
+PASS: chapter: stage 9 actual pickups, kills, crates and time bonus match score
+PASS: chapter: stage 9 result cannot tick or score twice
+PASS: chapter: stage 9 normal victory persists and opens progression
+PASS: chapter: stage 9 record is independent
+PASS: chapter: stage 9 defeat cannot replace clear record
+PASS: chapter: authored stage 10 validates
+PASS: chapter: stage 10 has a unique topology
+PASS: chapter: replay belongs to exact stage 10 revision
+PASS: chapter: stage 10 cleared with ordinary inputs and live enemy AI
+PASS: chapter: stage 10 score and active ticks replay exactly
+PASS: chapter: stage 10 actual pickups, kills, crates and time bonus match score
+PASS: chapter: stage 10 result cannot tick or score twice
+PASS: chapter: stage 10 normal victory persists and opens progression
+PASS: chapter: stage 10 record is independent
+PASS: chapter: stage 10 defeat cannot replace clear record
+PASS: chapter: first chapter reloads completed; planned stage 11 stays blocked
+PASS: chapter: every stage record survives restart
+PASS: chapter: every stage record survives restart
+PASS: chapter: every stage record survives restart
+PASS: chapter: every stage record survives restart
+PASS: chapter: every stage record survives restart
+PASS: chapter: every stage record survives restart
+PASS: chapter: every stage record survives restart
+PASS: chapter UI: ten stage tiles; saved first-three clear opens fourth only
+PASS: chapter UI: new stage tile enters actual stage four
+RESULT: 542 passed, 0 failed
