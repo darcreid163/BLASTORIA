@@ -36,6 +36,22 @@ func run() -> void:
 	valid = valid and scene.state.mode == "custom" and scene.state.map_data.rows == rows
 	scene.show_workshop()
 	valid = valid and scene.workshop.document.data.rows == rows
+	var final_state := GameState.new()
+	final_state.start(load("res://resources/game_rules/classic.tres"), "classic", 50, 731)
+	for actor in final_state.actors:
+		if actor.enemy: actor.alive = false
+	final_state.exit_revealed = true
+	final_state.board.cells[final_state.board.exit_cell] = GridBoard.Cell.FLOOR
+	final_state.actors[0].cell = final_state.board.exit_cell
+	final_state.check_end()
+	valid = valid and final_state.result == "CLASSIC_DONE"
+	final_state.start(load("res://resources/game_rules/classic.tres"), "classic", 51, 731)
+	valid = valid and final_state.result == "INVALID_LEVEL" and ArcadeLevelRegistry.load_stage(52).is_empty()
+	scene.classic_progress.stage = 80
+	var before := FileAccess.get_file_as_string(scene.classic_progress.path)
+	scene.start_classic_campaign(false)
+	valid = valid and scene.classic_progress.stage == 80 and FileAccess.get_file_as_string(scene.classic_progress.path) == before
+	print("EXPORTED RELEASE 51: ", "PASS" if valid else "FAIL")
 	scene.queue_free()
 	await process_frame
 	if not valid:

@@ -252,8 +252,12 @@ PASS: catalog: claiming a hidden API ID cannot disclose an unavailable definitio
 PASS: classic100: valid fixed hundred-stage catalog
 PASS: classic100: every owner-specified prize on stages 1-50 stays fixed
 PASS: classic100: map sizes, timers and enemy counts follow progressive plan
-PASS: classic100: stage 100 has 61x41 board and nine enemies
-PASS: classic100: only stage 100 completes full Classic Campaign
+PASS: release51: final stage follows its preserved catalog configuration
+PASS: release51: stage 51 completes launch Campaign without stage 52
+PASS: release51: official launch boundary is enforced
+PASS: release51: future plan retained without enabling future gameplay
+PASS: release51: direct simulation cannot start stage 52
+PASS: release51: official Arcade refuses future stages
 PASS: classic100: first blast reveals prize without penalty
 PASS: classic100: rebombing exposed reward removes it and spawns aggressive reinforcements
 PASS: classic100: fire persists but never double-spawns reward penalty
@@ -263,6 +267,10 @@ PASS: classic100: each first clear unlocks next stage and awards one life
 PASS: classic100: duplicate clear cannot farm extra lives
 PASS: classic100: completed stage, lives, powers and score survive reload
 PASS: classic100: death costs a life and removes temporary/special powers
+PASS: release51: final clear persists completion and never unlocks 52
+PASS: release51: launch completion survives reload
+PASS: release51: future profile cannot record an unavailable stage
+PASS: release51: legacy future progress is retained without truncation
 PASS: ch1: ten different authored, reachable Classic topologies
 PASS: ch1: ten distinct stage layouts, pinned prizes, exits and enemy positions
 PASS: ch1: stage three drops only its predefined remote detonator
@@ -328,4 +336,4 @@ PASS: UI: achievement page shows public labels without API IDs/hidden entries
 PASS: UI: achievements support paginated controller-friendly navigation
 PASS: UI: achievement pagination returns to first page
 PASS: UI: real unlock displays localized achievement notification
-RESULT: 328 passed, 0 failed
+RESULT: 336 passed, 0 failed

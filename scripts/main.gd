@@ -69,7 +69,7 @@ func start_game(mode: String, level: int) -> void:
 		map_seed = CONFIG.arcade_seeds[level]
 	elif mode == "classic":
 		var stage_data := ClassicStagePlan.stage(level + 1)
-		if stage_data.is_empty():
+		if not ReleasePlan.stage_available(level + 1) or stage_data.is_empty():
 			push_error("Unknown Classic Campaign stage: %d" % (level + 1))
 			return
 		map_seed = int(stage_data.seed)
@@ -94,6 +94,10 @@ func start_classic_campaign(reset: bool) -> void:
 		var error := classic_progress.reset_run()
 		if error != OK:
 			push_warning("Classic profile save failed: %s" % error_string(error))
+	if not ReleasePlan.stage_available(classic_progress.stage):
+		hud.show_menu("Кампания", [["NEW_CAMPAIGN", "campaign"], ["MENU", "menu"]],
+			"Сохранение относится к будущему обновлению. Оно сохранено; сейчас доступны этапы 1–%d." % ReleasePlan.LAUNCH_STAGES)
+		return
 	if classic_progress.completed or classic_progress.lives <= 0:
 		show_main_menu()
 		return
@@ -339,7 +343,7 @@ func on_finished(result: String) -> void:
 	if state.mode in ["classic", "adventure"]:
 		details = tr("SOLO_RESULT") % state.score
 		if state.mode == "classic":
-			details += "\nЖизней: %d · этап: %d/100" % [classic_progress.lives, state.level + 1]
+			details += "\nЖизней: %d · этап: %d/%d" % [classic_progress.lives, state.level + 1, ReleasePlan.LAUNCH_STAGES]
 			details += classic_save_warning
 		if state.secrets.awarded:
 			details += "\n" + SecretDefinition.active().localized("reward")
@@ -487,7 +491,7 @@ func show_official_menu() -> void:
 	buttons.append(["Рекорды уровней" if profile.language == "ru" else "Stage records", "records"])
 	buttons.append(["Аркада v1 — архив прототипа", "arcade_menu"])
 	buttons.append(["MENU", "menu"])
-	hud.show_menu("ARCADE", buttons, "Официальная Аркада 2.3 · готовы 3 из 100 этапов.\nЦель: уничтожить обязательных врагов. Выход не нужен.\nСледующий этап открывается после победы; повторы сохраняют карту.")
+	hud.show_menu("ARCADE", buttons, "Официальная Аркада · готовы %d этапа; план первого релиза — %d.\nЦель: уничтожить обязательных врагов. Выход не нужен.\nСледующий этап открывается после победы; повторы сохраняют карту." % [ArcadeLevelRegistry.playable_count(), ReleasePlan.LAUNCH_STAGES])
 
 func start_official(number: int) -> void:
 	achievements.flush()

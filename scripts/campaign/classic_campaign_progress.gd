@@ -114,7 +114,7 @@ func write_profile() -> Error:
 	return error
 
 func record_clear(number: int, actor: Dictionary, new_score: int) -> Error:
-	if not writable or completed or number != stage or cleared.has(number):
+	if not writable or completed or not ReleasePlan.stage_available(number) or number != stage or cleared.has(number):
 		return ERR_INVALID_DATA
 	if new_score < 0 or new_score > 1000000000:
 		return ERR_INVALID_DATA
@@ -125,7 +125,7 @@ func record_clear(number: int, actor: Dictionary, new_score: int) -> Error:
 	for key in KEYS:
 		if actor.has(key):
 			carry[key] = actor[key]
-	if number == 100:
+	if number == ReleasePlan.LAUNCH_STAGES:
 		completed = true
 	else:
 		stage = number + 1

@@ -9,7 +9,7 @@ static func catalog() -> Dictionary:
 
 static func load_stage(number: int) -> Dictionary:
 	var registry := catalog()
-	if number < 1 or number > 100 or registry.is_empty():
+	if not ReleasePlan.stage_available(number) or registry.is_empty():
 		return {}
 	var entry: Dictionary = registry.levels[number - 1]
 	if entry.status != "playable":
@@ -22,6 +22,6 @@ static func load_stage(number: int) -> Dictionary:
 static func playable_count() -> int:
 	var count := 0
 	for entry in catalog().get("levels", []):
-		if entry.status == "playable":
+		if ReleasePlan.stage_available(int(entry.number)) and entry.status == "playable":
 			count += 1
 	return count

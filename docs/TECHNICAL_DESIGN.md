@@ -151,3 +151,14 @@ Progress is sealed separately, backup recovery and future-version write protecti
 Full developer definitions stay in source; RuntimeBundle includes only implemented public entries.
 Secret display text is nested encrypted data and not cached as plaintext by SecretDefinition.
 See ACHIEVEMENTS_LOCAL.md and SECRET_HARDENING_060.md.
+
+## 0.6.1 — release scope
+
+ReleasePlan provides launch bound 51 / development plan 100. Classic result and progress
+use the launch bound, while ClassicStagePlan keeps future balance entries for development.
+Direct simulation rejects unavailable Classic stages; main entry points and Arcade loading
+also gate them. v1 Classic profiles retain future stage/carry/cleared data; unavailable
+continuation displays a message rather than silently truncating or resetting. No save file
+schema change. Updating launch bound later requires reopening completed launch profiles
+with an explicit migration. Visual and secret proposals in docs/design are not executable
+content and remain excluded by existing docs/* export filters.

@@ -33,8 +33,8 @@ func run(test: SceneTree) -> void:
 		previous_enemies = d.enemy_count
 	test.check(all_rules, "classic100: map sizes, timers and enemy counts follow progressive plan")
 	var state := GameState.new()
-	state.start(CLASSIC, "classic", 99, 731)
-	test.check(state.config.width == 61 and state.config.height == 41 and state.actors.size() == 10, "classic100: stage 100 has 61x41 board and nine enemies")
+	state.start(CLASSIC, "classic", 50, 731)
+	test.check(state.config.width == ClassicStagePlan.stage(51).width and state.config.height == ClassicStagePlan.stage(51).height and state.actors.size() == int(ClassicStagePlan.stage(51).enemy_count) + 1, "release51: final stage follows its preserved catalog configuration")
 	for actor in state.actors:
 		if actor.enemy:
 			actor.alive = false
@@ -42,7 +42,13 @@ func run(test: SceneTree) -> void:
 	state.board.cells[state.board.exit_cell] = GridBoard.Cell.FLOOR
 	state.actors[0].cell = state.board.exit_cell
 	state.check_end()
-	test.check(state.result == "CLASSIC_DONE", "classic100: only stage 100 completes full Classic Campaign")
+	test.check(state.result == "CLASSIC_DONE", "release51: stage 51 completes launch Campaign without stage 52")
+
+	test.check(ReleasePlan.stage_available(51) and not ReleasePlan.stage_available(52) and not ReleasePlan.stage_available(0), "release51: official launch boundary is enforced")
+	test.check(not ClassicStagePlan.stage(100).is_empty(), "release51: future plan retained without enabling future gameplay")
+	state.start(CLASSIC, "classic", 51, 731)
+	test.check(state.result == "INVALID_LEVEL" and state.actors.is_empty(), "release51: direct simulation cannot start stage 52")
+	test.check(ArcadeLevelRegistry.load_stage(52).is_empty() and ArcadeLevelRegistry.load_stage(100).is_empty(), "release51: official Arcade refuses future stages")
 
 	state.start(CLASSIC, "classic", 0, 731)
 	var prize := ClassicStagePlan.PRIZE_CELL
@@ -79,4 +85,17 @@ func run(test: SceneTree) -> void:
 	restored.load_profile()
 	test.check(restored.stage == 2 and restored.lives == 4 and restored.carry.get("remote") == true, "classic100: completed stage, lives, powers and score survive reload")
 	test.check(restored.record_loss() == OK and restored.lives == 3 and not restored.carry.has("remote") and restored.carry.get("capacity") == 3, "classic100: death costs a life and removes temporary/special powers")
+	progress.stage = 51
+	progress.completed = false
+	test.check(progress.record_clear(51, hero, 900) == OK and progress.completed and progress.stage == 51, "release51: final clear persists completion and never unlocks 52")
+	restored.load_profile()
+	test.check(restored.completed and restored.stage == 51 and restored.cleared.has(51), "release51: launch completion survives reload")
+	progress.completed = false
+	progress.stage = 52
+	test.check(progress.record_clear(52, hero, 1000) != OK, "release51: future profile cannot record an unavailable stage")
+	progress.stage = 80
+	progress.score = 12345
+	progress.write_profile()
+	restored.load_profile()
+	test.check(restored.stage == 80 and restored.score == 12345, "release51: legacy future progress is retained without truncation")
 	clean(progress.path)

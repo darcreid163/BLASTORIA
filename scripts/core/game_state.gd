@@ -68,6 +68,9 @@ func start(settings: GameConfig, new_mode: String, level_index: int, map_seed: i
 	actors.clear()
 	powerups.clear()
 	board = GridBoard.new()
+	if mode == "classic" and not ReleasePlan.stage_available(level_index + 1):
+		result = "INVALID_LEVEL"
+		return
 	if not map_data.is_empty():
 		board.load_map(map_data)
 	elif mode == "tutorial":
@@ -329,7 +332,7 @@ func check_end() -> void:
 					result = "ADVENTURE_DONE"
 			elif mode == "classic":
 				score += config.score_stage_clear
-				result = "CLASSIC_DONE" if level + 1 == ClassicStagePlan.MAX_STAGES else "LEVEL_CLEAR"
+				result = "CLASSIC_DONE" if level + 1 == ReleasePlan.LAUNCH_STAGES else "LEVEL_CLEAR"
 			else:
 				result = "CAMPAIGN_DONE" if level + 1 == config.campaign_seeds.size() else "LEVEL_CLEAR"
 	else:
