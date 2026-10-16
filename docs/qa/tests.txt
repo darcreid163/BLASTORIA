@@ -244,11 +244,11 @@ PASS: UI: playtest loads shared simulation and hides editor
 PASS: UI: playtest clear opens result
 PASS: UI: return to editor preserves authored geometry
 PASS: UI: playtest changes neither campaign, artifacts, legacy records nor official Arcade progress
-PASS: v2.4: 37 unique localized achievements with four hidden, planned only
-PASS: v2.4: achievement catalog loads from JSON
-PASS: v2.4: unknown secret achievements do not appear in player UI data
-PASS: v2.4: no locked secret metadata leaked via visible catalog
-PASS: v2.4: only an unlocked hidden achievement becomes visible
+PASS: v2.4: complete developer-only design catalog retained
+PASS: catalog: runtime public definitions validate
+PASS: catalog: only seventeen implemented public milestones shipped
+PASS: catalog: future/hidden conditions completely absent from runtime bundle
+PASS: catalog: claiming a hidden API ID cannot disclose an unavailable definition
 PASS: classic100: valid fixed hundred-stage catalog
 PASS: classic100: every owner-specified prize on stages 1-50 stays fixed
 PASS: classic100: map sizes, timers and enemy counts follow progressive plan
@@ -287,4 +287,45 @@ PASS: privacy: unavailable private content never grants a secret reward
 PASS: privacy: empty discovery screen exposes no hidden name, total or technical ID
 PASS: privacy: owned screen reveals public name only, without total/index/ID
 PASS: privacy: offline world hall does not invent discoveries or expose hidden metadata
-RESULT: 287 passed, 0 failed
+PASS: achievements: debug-disabled manager cannot grant even directly
+PASS: achievements: local manager cannot grant server/hidden achievement
+PASS: achievements: entering a mode is not an achievement event
+PASS: achievements: rejected duplicate bomb not counted; placement alone not sufficient
+PASS: achievements: actual player bomb detonation unlocks First blast
+PASS: achievements: same event never duplicates date or Steam pending item
+PASS: achievements: offline unlock and pending sync survive reload
+PASS: achievements: public presentation includes icons/localized names, no API IDs or future definitions
+PASS: chain metrics: five independent same-tick fuses are not a five-bomb chain
+PASS: chain metrics: five causally triggered bombs count as one chain
+PASS: achievements: causal chain metric unlocks Chain reaction
+PASS: achievement stats: actual player flame receives enemy kill credit
+PASS: achievement stats: polling same kill does not increment twice
+PASS: achievement stats: enemy suicide does not count as player kill
+PASS: achievements: custom/test map cannot farm official mastery counters
+PASS: achievements: cumulative kill/crate thresholds unlock correctly
+PASS: achievements: persisted attempt cursor prevents replayed counter delta after reload
+PASS: achievements: all power categories in one eligible attempt unlock Full arsenal
+PASS: achievements: first Classic Campaign clear unlocks First step
+PASS: achievements: actual exploration state unlocks Explorer independently of rare secret conditions
+PASS: arena achievements: instant/idle match cannot qualify
+PASS: arena achievements: qualifying wins count once per match and reach ten/fifty thresholds
+PASS: arena achievements: player two victory does not count as local player one win
+PASS: workshop achievements: successful validated save unlocks Architect
+PASS: workshop achievements: ID/title/seed-only copies are not distinct creations
+PASS: workshop achievements: invalid save cannot grant or count creation
+PASS: workshop achievements: editor playtest never grants rewards
+PASS: workshop achievements: completed owned map in regular play unlocks Self challenge
+PASS: workshop achievements: actual successful file export unlocks Share the world
+PASS: workshop achievements: import does not count as authoring
+PASS: workshop achievements: imported map requires successful play before award
+PASS: workshop achievements: ten distinct geometries unlock Cartographer
+PASS: achievements: repeat result cannot re-award completed milestones
+PASS: achievements: corrupted progress recovers authenticated backup
+PASS: achievements: recovery save preserves valid backup
+PASS: achievements: future encrypted progress format is never overwritten
+PASS: achievements: disk failure retains pending unlock in memory for retry
+PASS: UI: achievement page shows public labels without API IDs/hidden entries
+PASS: UI: achievements support paginated controller-friendly navigation
+PASS: UI: achievement pagination returns to first page
+PASS: UI: real unlock displays localized achievement notification
+RESULT: 328 passed, 0 failed

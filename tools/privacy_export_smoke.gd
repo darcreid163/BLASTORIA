@@ -16,7 +16,14 @@ func run() -> void:
 	require(not FileAccess.file_exists("res://resources/secrets/ghost_compass.tres"), "old semantic resource filename absent")
 	require(not FileAccess.file_exists("res://docs/MASTER_SPEC.md"), "developer specification absent from player package")
 	require(SecretDefinition.active().valid, "encrypted active content readable in actual export")
-	require(AchievementCatalog.validate(), "encrypted milestone catalog readable in actual export")
+	require(AchievementCatalog.validate(), "implemented public milestones readable in actual export")
+	require(not FileAccess.file_exists("res://resources/private/content.dat") and not FileAccess.file_exists("res://resources/private/milestones.dat"), "old separate containers absent")
+	var active_only := true
+	for entry in AchievementCatalog.entries():
+		if entry.hidden or entry.status != "local" or entry.category == "secret": active_only = false
+	require(active_only, "future and hidden definitions never shipped in runtime catalog")
+	require((FileAccess.get_file_as_bytes(RuntimeBundle.PATH).size() - 72) % 16384 == 0, "runtime file length uses padded size buckets")
+	require(SecretDefinition.active().display_cipher.length() > 0, "artifact public description stays separately sealed until display")
 	var scene = load("res://scenes/main.tscn").instantiate()
 	root.add_child(scene)
 	await process_frame

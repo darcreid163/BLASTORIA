@@ -1,1 +1,2 @@
-PASS: independent Python cryptography AES-256-CBC decryption, PKCS7 padding and HMAC-SHA256 verification of both Godot containers.
+PASS: independent Python cryptography AES/HMAC verification of runtime bundle and separately sealed display.
+PASS: padded file size; runtime includes implemented public milestones only, no hidden/future definitions.

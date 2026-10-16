@@ -1,6 +1,10 @@
 class_name CustomMapLibrary
 extends RefCounted
 
+signal saved(data: Dictionary)
+signal imported(data: Dictionary)
+signal exported(data: Dictionary)
+
 var directory: String = "user://maps"
 var error: String = ""
 
@@ -17,7 +21,7 @@ func read_file(path: String) -> Dictionary:
 	error = MapValidationService.validate(parser.data)
 	return parser.data if error.is_empty() else {}
 
-func store_map(data: Dictionary) -> Error:
+func store_map(data: Dictionary, notify: bool = true) -> Error:
 	error = MapValidationService.validate(data)
 	if not error.is_empty():
 		return ERR_INVALID_DATA
@@ -25,7 +29,9 @@ func store_map(data: Dictionary) -> Error:
 	if result != OK:
 		error = "Не удалось создать папку карт."
 		return result
-	return write_file(directory.path_join(data.id + ".blastmap"), data)
+	result = write_file(directory.path_join(data.id + ".blastmap"), data)
+	if result == OK and notify: saved.emit(data.duplicate(true))
+	return result
 
 func write_file(path: String, data: Dictionary) -> Error:
 	error = MapValidationService.validate(data)
@@ -57,7 +63,9 @@ func import_map(path: String) -> Dictionary:
 	data.id = new_id()
 	data.created = Time.get_datetime_string_from_system(true)
 	data.modified = data.created
-	return data if store_map(data) == OK else {}
+	if store_map(data, false) != OK: return {}
+	imported.emit(data.duplicate(true))
+	return data
 
 static func new_id() -> String:
 	return "map_" + Crypto.new().generate_random_bytes(16).hex_encode()
@@ -82,3 +90,8 @@ func remove_map(id: String) -> Error:
 	if not MapValidationService.valid_id(id):
 		return ERR_INVALID_PARAMETER
 	return DirAccess.remove_absolute(directory.path_join(id + ".blastmap"))
+
+func export_map(path: String, data: Dictionary) -> Error:
+	var result := write_file(path, data)
+	if result == OK: exported.emit(data.duplicate(true))
+	return result

@@ -1,21 +1,19 @@
 extends RefCounted
 
 func run(test: SceneTree) -> void:
-	test.check(AchievementCatalog.validate(), "v2.4: 37 unique localized achievements with four hidden, planned only")
-	var catalog := AchievementCatalog.entries()
-	test.check(catalog.size() == 37, "v2.4: achievement catalog loads from JSON")
-	var locked: Array[String] = []
-	var visible := AchievementCatalog.player_visible_entries(locked)
-	test.check(visible.size() == 33, "v2.4: unknown secret achievements do not appear in player UI data")
+	var source = JSON.parse_string(FileAccess.get_file_as_string("res://resources/achievements/registry.json"))
+	var ids := {}
+	var hidden := 0
+	for entry in source.entries:
+		ids[entry.id] = true
+		if entry.hidden: hidden += 1
+	test.check(source.entries.size() == 37 and ids.size() == 37 and hidden == 4, "v2.4: complete developer-only design catalog retained")
+	test.check(AchievementCatalog.validate(), "catalog: runtime public definitions validate")
+	var active := AchievementCatalog.entries()
+	test.check(active.size() == 17, "catalog: only seventeen implemented public milestones shipped")
 	var leak := false
-	for item in visible:
-		if item.category == "secret":
-			leak = true
-	test.check(not leak, "v2.4: no locked secret metadata leaked via visible catalog")
-	locked.append("ACH_SECRET_FIRST")
-	var discovered := AchievementCatalog.player_visible_entries(locked)
-	var found := false
-	for item in discovered:
-		if item.id == "ACH_SECRET_FIRST":
-			found = true
-	test.check(discovered.size() == 34 and found, "v2.4: only an unlocked hidden achievement becomes visible")
+	for entry in active:
+		if entry.hidden or entry.category == "secret" or entry.status != "local": leak = true
+	test.check(not leak, "catalog: future/hidden conditions completely absent from runtime bundle")
+	var forged: Array[String] = ["ACH_SECRET_FIRST", "ACH_SECRET_DISCOVERER"]
+	test.check(AchievementCatalog.player_visible_entries(forged).size() == active.size(), "catalog: claiming a hidden API ID cannot disclose an unavailable definition")

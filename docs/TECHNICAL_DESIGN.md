@@ -139,3 +139,15 @@ before replacement. Missing content prevents new rewards and blocks writes to an
 Player export excludes plaintext source registries, old semantic Resource and developer docs.
 Keys reside in the offline client; this is not a trust boundary against the owner of the client.
 See SECRET_PRIVACY.md for the threat model and empty-cwd exported-package verification.
+
+## 0.6.0 — event-derived local achievements
+
+GameState.activity contains deterministic counters; random attempt_id is account metadata and
+is excluded from simulation snapshots. BombSystem tracks causal chain roots separately from
+independent simultaneous fuses. AchievementManager observes stable counter deltas and terminal
+state once per bounded attempt cursor. CustomMapLibrary emits success events only after writes.
+The editor uses an explicit export method, avoiding treating every local save as a share.
+Progress is sealed separately, backup recovery and future-version write protection are enforced.
+Full developer definitions stay in source; RuntimeBundle includes only implemented public entries.
+Secret display text is nested encrypted data and not cached as plaintext by SecretDefinition.
+See ACHIEVEMENTS_LOCAL.md and SECRET_HARDENING_060.md.

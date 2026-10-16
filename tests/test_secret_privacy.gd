@@ -56,13 +56,13 @@ func run(test: SceneTree) -> void:
 	test.check(unavailable.write_profile() == ERR_UNAVAILABLE, "privacy: missing content cannot overwrite an existing encrypted collection")
 	SecretDefinition.cached = cached
 	cleanup(path)
-	var saved_definition: SecretDefinition = SecretManager.COMPASS
-	SecretManager.COMPASS = SecretDefinition.new()
+	var saved_definition: SecretDefinition = SecretManager.DEFINITION
+	SecretManager.DEFINITION = SecretDefinition.new()
 	var manager := SecretManager.new()
 	manager.enabled = true
 	manager.revealed = true
 	test.check(manager.collect(Vector2i(-1, -1)) == 0 and not manager.awarded and not manager.finish(100, 100), "privacy: unavailable private content never grants a secret reward")
-	SecretManager.COMPASS = saved_definition
+	SecretManager.DEFINITION = saved_definition
 	var scene = load("res://scenes/main.tscn").instantiate()
 	test.root.add_child(scene)
 	await test.process_frame

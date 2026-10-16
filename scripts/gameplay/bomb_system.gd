@@ -7,6 +7,8 @@ var fire_owners: Dictionary = {} # Cell -> {owner ID: exclusive expiry tick}.
 var next_id: int = 1
 var detonations_this_tick: int = 0
 var hit_cells: Dictionary = {}
+var player_detonations_this_tick: int = 0
+var max_player_chain_this_tick: int = 0
 
 func at(cell: Vector2i) -> int:
 	for id in bombs:
@@ -29,6 +31,8 @@ func place(cell: Vector2i, owner: int, radius: int, capacity: int, now: int, fus
 
 func advance(now: int, board: GridBoard, fire_duration: int) -> Array[Vector2i]:
 	detonations_this_tick = 0
+	player_detonations_this_tick = 0
+	max_player_chain_this_tick = 0
 	hit_cells.clear()
 	for cell in fire.keys():
 		if fire[cell] <= now:
@@ -44,6 +48,11 @@ func advance(now: int, board: GridBoard, fire_duration: int) -> Array[Vector2i]:
 		if (not bombs[id].get("remote", false) and bombs[id].due <= now) or fire.has(bombs[id].cell):
 			queue.append(id)
 	queue.sort()
+	var root_for := {}
+	var roots := {}
+	for id in queue:
+		root_for[id] = id
+		roots[id] = {"owner": bombs[id].owner, "count": 0}
 	var processed: Dictionary = {}
 	var destroyed: Array[Vector2i] = []
 	var index := 0
@@ -56,6 +65,11 @@ func advance(now: int, board: GridBoard, fire_duration: int) -> Array[Vector2i]:
 		processed[id] = true
 		detonations_this_tick += 1
 		var b: Dictionary = bombs[id]
+		var root_id: int = root_for[id]
+		roots[root_id].count += 1
+		if b.owner == 0: player_detonations_this_tick += 1
+		if roots[root_id].owner == 0:
+			max_player_chain_this_tick = maxi(max_player_chain_this_tick, int(roots[root_id].count))
 		bombs.erase(id)
 		for cell in board.blast(b.cell, b.radius):
 			hit_cells[cell] = true
@@ -66,7 +80,8 @@ func advance(now: int, board: GridBoard, fire_duration: int) -> Array[Vector2i]:
 			if board.kind(cell) == GridBoard.Cell.CRATE and not destroyed.has(cell):
 				destroyed.append(cell)
 			var chained := at(cell)
-			if chained != -1 and not processed.has(chained):
+			if chained != -1 and not processed.has(chained) and not root_for.has(chained):
+				root_for[chained] = root_id
 				queue.append(chained)
 	for cell in destroyed:
 		board.cells[cell] = GridBoard.Cell.FLOOR

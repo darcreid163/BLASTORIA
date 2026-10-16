@@ -12,7 +12,7 @@ var drops: Dictionary = {}
 var exit_mesh: MeshInstance3D
 var materials: Dictionary = {}
 var follow := FollowCamera.new()
-var compass: Node3D
+var artifact: Node3D
 var static_batches: Dictionary = {}
 
 func _ready() -> void:
@@ -89,7 +89,7 @@ func build(state: GameState) -> void:
 	drops.clear()
 	exit_mesh = null
 	static_batches.clear()
-	compass = null
+	artifact = null
 	var floor_colors := ["34544e", "2d4946"]
 	var wall_colors := ["53736c", "90ac8c"]
 	var crate_colors := ["ae7950", "e3b575"]
@@ -132,16 +132,16 @@ func build(state: GameState) -> void:
 			# Original rune columns with one/two/three inlays hint at an ordering.
 			for n in range(i + 1):
 				box(world, pos(cell) + Vector3(-0.22 + n * 0.22, 0.05, 0), Vector3(0.12, 0.1, 0.5), "bfa9d5", true)
-		compass = Node3D.new()
-		world.add_child(compass)
-		compass.position = pos(SecretManager.COMPASS.niche) + Vector3(0, 0.4, 0)
+		artifact = Node3D.new()
+		world.add_child(artifact)
+		artifact.position = pos(SecretManager.DEFINITION.niche) + Vector3(0, 0.4, 0)
 		for i in range(8):
 			var angle := i * TAU / 8
-			var piece := box(compass, Vector3(cos(angle), 0, sin(angle)) * 0.35, Vector3(0.16, 0.08, 0.16), "89ebed", true)
+			var piece := box(artifact, Vector3(cos(angle), 0, sin(angle)) * 0.35, Vector3(0.16, 0.08, 0.16), "89ebed", true)
 			piece.rotation.y = angle
-		var needle := box(compass, Vector3(0, 0.07, 0), Vector3(0.12, 0.12, 0.55), "ffe395", true)
+		var needle := box(artifact, Vector3(0, 0.07, 0), Vector3(0.12, 0.12, 0.55), "ffe395", true)
 		needle.rotation.y = PI * 0.25
-		compass.hide()
+		artifact.hide()
 		follow.update(camera, pos(state.actors[0].cell), config.width, config.height, 0, true)
 	else:
 		camera.size = maxf(19, config.height * 1.3)
@@ -157,9 +157,9 @@ func build(state: GameState) -> void:
 func sync(state: GameState, delta: float) -> void:
 	if state.mode in ["adventure", "classic"] or (not state.map_data.is_empty() and state.mode != "custom_arena"):
 		follow.update(camera, pos(state.actors[0].cell), config.width, config.height, delta)
-		if is_instance_valid(compass):
-			compass.visible = state.secrets.revealed and not state.secrets.awarded
-			compass.rotation.y += delta * 0.7
+		if is_instance_valid(artifact):
+			artifact.visible = state.secrets.revealed and not state.secrets.awarded
+			artifact.rotation.y += delta * 0.7
 	for cell in crates.keys():
 		if state.board.kind(cell) != GridBoard.Cell.CRATE:
 			crates[cell].queue_free()

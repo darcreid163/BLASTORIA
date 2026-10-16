@@ -1,3 +1,13 @@
+# 0.6.0-dev — 2026-10-16
+
+- Add seventeen event-derived local achievements, original SVG badges, paged UI and notifications.
+- Save encrypted offline progress/pending sync queue with delta deduplication and recovery.
+- Track actual player actions/credit and causal bomb chains; independent fuses are separate chains.
+- Qualify Arena matches and separate user-map/test events from official mastery counters.
+- Ship active public definitions only; future/hidden definitions remain in developer sources.
+- Combine runtime content into a padded encrypted bundle; seal display text separately and remove semantic item hints from runtime names.
+- Preserve v5 collection and Campaign/Arcade/Workshop behavior. Steam/server remain unconnected.
+
 # 0.5.5-dev — 2026-10-16
 
 - Continue from 0.5.4, preserving ten authored Campaign stages and rules 2.5.
