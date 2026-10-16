@@ -318,7 +318,7 @@ func export_dialog() -> void:
 		return
 	var dialog := file_dialog(true)
 	dialog.file_selected.connect(func(path: String):
-		notice.text = "Карта экспортирована. Файл можно передать другу." if library.write_file(path, document.data) == OK else library.error
+		notice.text = "Карта экспортирована. Файл можно передать другу." if library.export_map(path, document.data) == OK else library.error
 		dialog.queue_free())
 
 func import_dialog() -> void:

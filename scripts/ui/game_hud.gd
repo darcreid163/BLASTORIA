@@ -11,6 +11,8 @@ var toast: Label
 var overlay: ColorRect
 var column: VBoxContainer
 var toast_time: float = 0.0
+var achievement_notice: Label
+var achievement_time: float = 0.0
 
 func _ready() -> void:
 	var margin := MarginContainer.new()
@@ -63,6 +65,17 @@ func _ready() -> void:
 	column.custom_minimum_size.x = 460
 	column.add_theme_constant_override("separation", 10)
 	center.add_child(column)
+	achievement_notice = Label.new()
+	achievement_notice.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
+	achievement_notice.offset_top = 8
+	achievement_notice.offset_bottom = 62
+	achievement_notice.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	achievement_notice.add_theme_font_size_override("font_size", 22)
+	achievement_notice.add_theme_color_override("font_color", Color("ffda8b"))
+	achievement_notice.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	achievement_notice.z_index = 10
+	achievement_notice.hide()
+	add_child(achievement_notice)
 
 func show_menu(title: String, buttons: Array, details: String = "") -> void:
 	for child in column.get_children():
@@ -152,6 +165,9 @@ func notify_pickup(kind: String) -> void:
 	toast_time = 2.0
 
 func _process(delta: float) -> void:
+	if achievement_time > 0:
+		achievement_time -= delta
+		if achievement_time <= 0: achievement_notice.hide()
 	if toast_time > 0:
 		toast_time -= delta
 		if toast_time <= 0:
@@ -203,9 +219,37 @@ func set_map(state: GameState, mode: int) -> void:
 		map_view.offset_bottom = 360
 	map_view.queue_redraw()
 
-func add_compass_badge() -> void:
-	var badge := CompassBadge.new()
+func add_relic_badge() -> void:
+	var badge := RelicBadge.new()
 	badge.custom_minimum_size.y = 64
 	badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	column.add_child(badge)
 	column.move_child(badge, 2)
+
+func notify_achievement(title: String) -> void:
+	achievement_notice.text = "✦ " + title
+	achievement_notice.show()
+	achievement_time = 4.0
+
+func add_achievement_rows(rows: Array[Dictionary], locale: String) -> void:
+	var index := 2
+	for item in rows:
+		var row := HBoxContainer.new()
+		row.custom_minimum_size.y = 82
+		var icon := TextureRect.new()
+		icon.texture = load(item.icon)
+		icon.custom_minimum_size = Vector2(52, 52)
+		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		icon.modulate = Color.WHITE if item.earned else Color(0.45, 0.5, 0.5)
+		row.add_child(icon)
+		var label := Label.new()
+		var status_text: String = ("Получено локально · " if locale == "ru" else "Earned locally · ") + item.date if item.earned else ("В процессе" if locale == "ru" else "In progress") + (" · " + item.progress if not item.progress.is_empty() else "")
+		label.text = item.title + "\n" + item.description + "\n" + status_text
+		label.custom_minimum_size.x = 380
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		row.add_child(label)
+		column.add_child(row)
+		column.move_child(row, index)
+		index += 1

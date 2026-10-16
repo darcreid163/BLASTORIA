@@ -1,4 +1,4 @@
-class_name CompassBadge
+class_name RelicBadge
 extends Control
 
 var angle: float = -0.7

@@ -19,12 +19,15 @@ var audio_manager: AudioManager
 var settings_return: String = "menu"
 var waiting_binding: String = ""
 var controls_player: int = 1
+var achievements := AchievementManager.new()
+var achievement_page: int = 0
 var official := ArcadeProgressionManager.new()
 var workshop: CustomMapEditor
 var custom_records := SaveManager.new()
 var custom_record_result: bool = false
 
 func _ready() -> void:
+	achievements.read_progress()
 	profile.read_profile(CONFIG.campaign_seeds.size() - 1)
 	classic_progress.load_profile()
 	official.read_progress()
@@ -42,6 +45,10 @@ func _ready() -> void:
 	hud = GameHUD.new()
 	add_child(hud)
 	hud.action_requested.connect(handle_action)
+	achievements.unlocked.connect(func(title: String):
+		hud.notify_achievement(title)
+		audio_manager.play("pickup"))
+	achievements.save_failed.connect(func(): hud.notify_achievement("Не удалось сохранить достижения"))
 	hud.volume_changed.connect(func(bus: String, value: float):
 		profile.settings.set(bus, value)
 		audio_manager.apply_settings(profile.settings))
@@ -55,6 +62,7 @@ func _ready() -> void:
 	show_main_menu()
 
 func start_game(mode: String, level: int) -> void:
+	achievements.flush()
 	audio_manager.stop_effects()
 	var map_seed: int = arena_seed if mode == "arena" else CONFIG.campaign_seeds[mini(level, CONFIG.campaign_seeds.size() - 1)]
 	if mode == "arcade":
@@ -95,6 +103,7 @@ func start_classic_campaign(reset: bool) -> void:
 
 
 func show_main_menu() -> void:
+	achievements.flush()
 	audio_manager.stop_effects()
 	state.paused = true
 	if is_instance_valid(workshop): workshop.hide()
@@ -106,6 +115,7 @@ func _physics_process(_delta: float) -> void:
 	if screen != "playing":
 		return
 	state.advance(InputRouter.commands())
+	achievements.observe(state)
 	hud.update_state(state, arcade, classic_progress.lives)
 
 func _process(delta: float) -> void:
@@ -137,6 +147,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			handle_action("resume")
 
 func pause_game() -> void:
+	achievements.flush()
 	audio_manager.stop_effects()
 	state.paused = true
 	hud.map_view.hide()
@@ -184,7 +195,15 @@ func handle_action(action: String) -> void:
 		"collection": show_collection_menu()
 		"discoveries": show_discoveries()
 		"secret_hall": show_secret_hall()
-		"achievements": show_achievements()
+		"achievements":
+			achievement_page = 0
+			show_achievements()
+		"achievements_prev":
+			achievement_page = maxi(0, achievement_page - 1)
+			show_achievements()
+		"achievements_next":
+			achievement_page += 1
+			show_achievements()
 		"records": show_official_records()
 		"settings":
 			settings_return = "pause" if screen == "pause" else "menu"
@@ -263,7 +282,9 @@ func handle_action(action: String) -> void:
 			if screen == "settings":
 				show_settings()
 		"quit": hud.show_menu("QUIT_CONFIRM", [["YES_QUIT", "quit_yes"], ["MENU", "menu"]])
-		"quit_yes": get_tree().quit()
+		"quit_yes":
+			achievements.flush()
+			get_tree().quit()
 
 func show_arcade_menu() -> void:
 	state.paused = true
@@ -277,6 +298,7 @@ func record_text() -> String:
 	return tr("RECORDS") % [record.score, best]
 
 func on_finished(result: String) -> void:
+	achievements.observe(state)
 	if not state.map_data.is_empty():
 		finish_map(result)
 		return
@@ -325,7 +347,7 @@ func on_finished(result: String) -> void:
 		details += "\n" + tr("SAVE_ERROR")
 	hud.show_menu(result, buttons, details)
 	if state.secrets.awarded:
-		hud.add_compass_badge()
+		hud.add_relic_badge()
 
 func save_profile() -> void:
 	var error := profile.write_profile()
@@ -404,7 +426,7 @@ func show_discoveries() -> void:
 	hud.show_menu("Мои находки" if profile.language == "ru" else "My discoveries",
 		[["COLLECTION", "collection"], ["MENU", "menu"]], details)
 	if profile.artifacts.has(SecretDefinition.active().id):
-		hud.add_compass_badge()
+		hud.add_relic_badge()
 
 
 func show_secret_hall() -> void:
@@ -419,9 +441,18 @@ func show_secret_hall() -> void:
 func show_achievements() -> void:
 	state.paused = true
 	screen = "achievements"
-	var details := "Каталог достижений подготовлен. Выдача достижений Steam ещё не подключена." if profile.language == "ru" else "The achievement catalog has been prepared. Steam achievement unlocks are not yet connected."
-	hud.show_menu("Достижения" if profile.language == "ru" else "Achievements",
-		[["COLLECTION", "collection"], ["MENU", "menu"]], details)
+	var rows := achievements.display_rows(profile.language)
+	var last := maxi(0, ceili(float(rows.size()) / 5.0) - 1)
+	achievement_page = clampi(achievement_page, 0, last)
+	var buttons: Array = []
+	if achievement_page > 0: buttons.append(["Предыдущие" if profile.language == "ru" else "Previous", "achievements_prev"])
+	if achievement_page < last: buttons.append(["Следующие" if profile.language == "ru" else "Next", "achievements_next"])
+	buttons.append(["COLLECTION", "collection"])
+	buttons.append(["MENU", "menu"])
+	var details := "Локальные достижения. Steam пока не подключён." if profile.language == "ru" else "Local achievements. Steam is not connected yet."
+	if not achievements.award_enabled: details += "\n" + ("Отладочная сборка: получение отключено." if profile.language == "ru" else "Debug build: earning is disabled.")
+	hud.show_menu("Достижения" if profile.language == "ru" else "Achievements", buttons, details)
+	hud.add_achievement_rows(rows.slice(achievement_page * 5, achievement_page * 5 + 5), profile.language)
 
 
 func show_official_records() -> void:
@@ -459,6 +490,7 @@ func show_official_menu() -> void:
 	hud.show_menu("ARCADE", buttons, "Официальная Аркада 2.3 · готовы 3 из 100 этапов.\nЦель: уничтожить обязательных врагов. Выход не нужен.\nСледующий этап открывается после победы; повторы сохраняют карту.")
 
 func start_official(number: int) -> void:
+	achievements.flush()
 	if not official.available(number):
 		show_official_menu()
 		return
@@ -489,11 +521,15 @@ func show_workshop() -> void:
 		workshop = CustomMapEditor.new()
 		add_child(workshop)
 		workshop.play_requested.connect(start_custom)
+		workshop.library.saved.connect(func(data: Dictionary): achievements.map_event("saved", data))
+		workshop.library.imported.connect(func(data: Dictionary): achievements.map_event("imported", data))
+		workshop.library.exported.connect(func(data: Dictionary): achievements.map_event("exported", data))
 		workshop.closed.connect(show_main_menu)
 	workshop.show()
 	workshop.focus_button.grab_focus()
 
 func start_custom(data: Dictionary, record_result: bool) -> void:
+	achievements.flush()
 	var error := state.start_map(data)
 	if not error.is_empty():
 		show_workshop()
@@ -504,6 +540,7 @@ func start_custom(data: Dictionary, record_result: bool) -> void:
 	show_loaded_map()
 
 func finish_map(result: String) -> void:
+	achievements.custom_complete(state, custom_record_result)
 	screen = "result"
 	state.paused = true
 	var details := "%d очков · %s\n%s" % [state.score, ArcadeRun.format_time(state.level_ticks), state.map_data.title]
@@ -534,3 +571,7 @@ func finish_map(result: String) -> void:
 			details += "\nПроверка карты: официальные результаты не изменены."
 		buttons.append(["Вернуться в редактор", "editor_return"])
 	hud.show_menu("Уровень пройден" if result == "MAP_CLEAR" else result, buttons, details)
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		achievements.flush()

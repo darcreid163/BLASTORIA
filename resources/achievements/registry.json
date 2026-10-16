@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "source_spec": "Master Prompt 2.4",
-  "note": "Design-only catalog. Do not claim Steam unlocks are integrated.",
+  "note": "Full developer catalog; player bundle includes implemented public definitions only. Steam not connected.",
   "entries": [
     {
       "id": "ACH_FIRST_BLAST",
       "category": "campaign",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "First blast",
         "ru": "Первый взрыв"
@@ -15,13 +15,14 @@
       "description": {
         "en": "Detonate your first bomb",
         "ru": "Взорвать первую бомбу"
-      }
+      },
+      "icon": "res://assets/milestones/ach_first_blast.svg"
     },
     {
       "id": "ACH_FIRST_VICTORY",
       "category": "campaign",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "First step",
         "ru": "Первый шаг"
@@ -29,13 +30,14 @@
       "description": {
         "en": "Complete the first campaign stage",
         "ru": "Завершить первый этап кампании"
-      }
+      },
+      "icon": "res://assets/milestones/ach_first_victory.svg"
     },
     {
       "id": "ACH_MAZE_EXPLORER",
       "category": "campaign",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "Maze explorer",
         "ru": "Исследователь"
@@ -43,7 +45,8 @@
       "description": {
         "en": "Explore 90 percent of one large level",
         "ru": "Исследовать 90% одного большого уровня"
-      }
+      },
+      "icon": "res://assets/milestones/ach_maze_explorer.svg"
     },
     {
       "id": "ACH_JUNGLE_MASTER",
@@ -231,7 +234,7 @@
       "id": "ACH_CHAIN_5",
       "category": "mastery",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "Chain reaction",
         "ru": "Цепная реакция"
@@ -239,7 +242,8 @@
       "description": {
         "en": "Chain five bombs",
         "ru": "Взорвать цепочкой пять бомб"
-      }
+      },
+      "icon": "res://assets/milestones/ach_chain_5.svg"
     },
     {
       "id": "ACH_CHAIN_10",
@@ -273,7 +277,7 @@
       "id": "ACH_ENEMIES_100",
       "category": "mastery",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "Hunter",
         "ru": "Охотник"
@@ -281,13 +285,14 @@
       "description": {
         "en": "Defeat 100 enemies",
         "ru": "Уничтожить 100 врагов"
-      }
+      },
+      "icon": "res://assets/milestones/ach_enemies_100.svg"
     },
     {
       "id": "ACH_ENEMIES_1000",
       "category": "mastery",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "Maze terror",
         "ru": "Гроза лабиринтов"
@@ -295,13 +300,14 @@
       "description": {
         "en": "Defeat 1000 enemies",
         "ru": "Уничтожить 1000 врагов"
-      }
+      },
+      "icon": "res://assets/milestones/ach_enemies_1000.svg"
     },
     {
       "id": "ACH_BLOCKS_1000",
       "category": "mastery",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "Destroyer",
         "ru": "Разрушитель"
@@ -309,13 +315,14 @@
       "description": {
         "en": "Destroy 1000 blocks",
         "ru": "Разрушить 1000 блоков"
-      }
+      },
+      "icon": "res://assets/milestones/ach_blocks_1000.svg"
     },
     {
       "id": "ACH_POWERUP_MASTER",
       "category": "mastery",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "Full arsenal",
         "ru": "Полный арсенал"
@@ -323,13 +330,14 @@
       "description": {
         "en": "Find every primary powerup category",
         "ru": "Получить все основные категории усилений"
-      }
+      },
+      "icon": "res://assets/milestones/ach_powerup_master.svg"
     },
     {
       "id": "ACH_ARENA_FIRST",
       "category": "arena",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "First duel",
         "ru": "Первая дуэль"
@@ -337,13 +345,14 @@
       "description": {
         "en": "Finish a qualifying arena match",
         "ru": "Завершить квалифицируемый матч"
-      }
+      },
+      "icon": "res://assets/milestones/ach_arena_first.svg"
     },
     {
       "id": "ACH_ARENA_WIN",
       "category": "arena",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "Arena victor",
         "ru": "Победитель арены"
@@ -351,13 +360,14 @@
       "description": {
         "en": "Win a qualifying arena match",
         "ru": "Выиграть квалифицируемый матч"
-      }
+      },
+      "icon": "res://assets/milestones/ach_arena_win.svg"
     },
     {
       "id": "ACH_ARENA_10",
       "category": "arena",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "Duel veteran",
         "ru": "Опытный дуэлянт"
@@ -365,13 +375,14 @@
       "description": {
         "en": "Win ten qualifying arena matches",
         "ru": "Победить в десяти квалифицируемых матчах"
-      }
+      },
+      "icon": "res://assets/milestones/ach_arena_10.svg"
     },
     {
       "id": "ACH_ARENA_50",
       "category": "arena",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "Arena legend",
         "ru": "Легенда арены"
@@ -379,7 +390,8 @@
       "description": {
         "en": "Win fifty qualifying arena matches",
         "ru": "Победить в пятидесяти квалифицируемых матчах"
-      }
+      },
+      "icon": "res://assets/milestones/ach_arena_50.svg"
     },
     {
       "id": "ACH_ARENA_TEAM",
@@ -399,7 +411,7 @@
       "id": "ACH_EDITOR_FIRST",
       "category": "workshop",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "Architect",
         "ru": "Архитектор"
@@ -407,13 +419,14 @@
       "description": {
         "en": "Save the first custom map",
         "ru": "Сохранить первую пользовательскую карту"
-      }
+      },
+      "icon": "res://assets/milestones/ach_editor_first.svg"
     },
     {
       "id": "ACH_EDITOR_PLAY",
       "category": "workshop",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "Self challenge",
         "ru": "Собственное испытание"
@@ -421,13 +434,14 @@
       "description": {
         "en": "Clear a validated custom map",
         "ru": "Пройти проверенную пользовательскую карту"
-      }
+      },
+      "icon": "res://assets/milestones/ach_editor_play.svg"
     },
     {
       "id": "ACH_EDITOR_10",
       "category": "workshop",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "Cartographer",
         "ru": "Картограф"
@@ -435,13 +449,14 @@
       "description": {
         "en": "Create ten distinct valid maps",
         "ru": "Создать десять разных корректных карт"
-      }
+      },
+      "icon": "res://assets/milestones/ach_editor_10.svg"
     },
     {
       "id": "ACH_EDITOR_SHARE",
       "category": "workshop",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "Share the world",
         "ru": "Поделиться миром"
@@ -449,13 +464,14 @@
       "description": {
         "en": "Export a map to share with another player",
         "ru": "Экспортировать карту для передачи другому игроку"
-      }
+      },
+      "icon": "res://assets/milestones/ach_editor_share.svg"
     },
     {
       "id": "ACH_EDITOR_IMPORT",
       "category": "workshop",
       "hidden": false,
-      "status": "planned",
+      "status": "local",
       "title": {
         "en": "Visiting explorer",
         "ru": "Гость другого мира"
@@ -463,7 +479,8 @@
       "description": {
         "en": "Import and clear a compatible custom map",
         "ru": "Импортировать и пройти совместимую карту"
-      }
+      },
+      "icon": "res://assets/milestones/ach_editor_import.svg"
     },
     {
       "id": "ACH_SECRET_FIRST",

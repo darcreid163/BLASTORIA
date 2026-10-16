@@ -34,9 +34,13 @@ var hidden_powerups: Dictionary = {}
 var sealed_prize_cell := Vector2i(-1, -1)
 var stage_profile: Dictionary = {}
 var map_data: Dictionary = {}
+var attempt_id: String = ""
+var activity: Dictionary = {}
 
 
 func start(settings: GameConfig, new_mode: String, level_index: int, map_seed: int, definition: Dictionary = {}) -> void:
+	attempt_id = Crypto.new().generate_random_bytes(16).hex_encode()
+	activity = {"bombs": 0, "detonations": 0, "kills": 0, "crates": 0, "max_chain": 0, "powers": [], "steps": [0, 0], "placements": [0, 0]}
 	map_data = definition.duplicate(true)
 	stage_profile = ClassicStagePlan.stage(level_index + 1) if new_mode == "classic" else {}
 	config = ClassicStagePlan.rules_for(settings, level_index + 1) if not stage_profile.is_empty() else settings
@@ -189,6 +193,8 @@ func advance(commands: Dictionary = {}) -> void:
 	var exposed_prize := mode == "classic" and powerups.has(sealed_prize_cell)
 	# Resolve hazards before movement so stepping away at the detonation tick cannot dodge damage.
 	var destroyed := bombs.advance(tick, board, config.fire_ticks)
+	activity.detonations += bombs.player_detonations_this_tick
+	activity.max_chain = maxi(int(activity.max_chain), bombs.max_player_chain_this_tick)
 	if config.hidden_exit and board.kind(board.exit_cell) == GridBoard.Cell.FLOOR:
 		exit_revealed = true
 	if mode == "classic" and was_revealed and bombs.hit_cells.has(board.exit_cell):
@@ -202,8 +208,9 @@ func advance(commands: Dictionary = {}) -> void:
 			feedback.emit("fuse")
 			break
 	for cell in destroyed:
-		if scoring_mode() and bombs.credited(cell, 0):
-			score += config.score_crate
+		if bombs.credited(cell, 0):
+			activity.crates += 1
+			if scoring_mode(): score += config.score_crate
 		if mode == "tutorial" and cell == TUTORIAL.lesson_crate:
 			powerups[cell] = "range"
 		elif hidden_powerups.has(cell):
@@ -226,12 +233,15 @@ func advance(commands: Dictionary = {}) -> void:
 		# Placement precedes movement, consistently for human and AI commands.
 		if command.get("bomb", false) and not completion_walk and board.kind(actor.cell) == GridBoard.Cell.FLOOR:
 			if bombs.place(actor.cell, actor.id, actor.radius, actor.capacity, tick, config.fuse_ticks, actor.remote):
+				if actor.id == 0: activity.bombs += 1
+				if actor.id < 2 and not actor.enemy: activity.placements[actor.id] += 1
 				feedback.emit("place")
 		var direction: Vector2i = command.get("move", Vector2i.ZERO)
 		if GridBoard.DIRS.has(direction) and tick >= actor.ready:
 			var next: Vector2i = actor.cell + direction
 			if can_enter(actor, next):
 				actor.cell = next
+				if actor.id < 2 and not actor.enemy: activity.steps[actor.id] += 1
 				apply_contact()
 				if not actor.enemy:
 					feedback.emit("step")
@@ -256,7 +266,7 @@ func advance(commands: Dictionary = {}) -> void:
 		var reward := secrets.collect(actors[0].cell)
 		if reward > 0:
 			score += reward
-			secret_found.emit(SecretManager.COMPASS.id)
+			secret_found.emit(SecretManager.DEFINITION.id)
 			feedback.emit("pickup")
 	check_end()
 
@@ -265,13 +275,15 @@ func apply_damage() -> void:
 		if actor.alive and bombs.fire.has(actor.cell) and not actor.flame_pass and tick >= actor.invulnerable_until:
 			actor.alive = false
 			feedback.emit("death")
-			if scoring_mode() and actor.enemy and bombs.credited(actor.cell, 0):
-				score += config.score_enemy
+			if actor.enemy and bombs.credited(actor.cell, 0):
+				activity.kills += 1
+				if scoring_mode(): score += config.score_enemy
 			if not actor.enemy:
 				secrets.damaged = true
 	apply_contact()
 
 func collect(actor: Dictionary, kind: String) -> void:
+	if actor.id == 0 and not actor.enemy and MapValidationService.POWERS.has(kind) and not activity.powers.has(kind): activity.powers.append(kind)
 	match kind:
 		"capacity": actor.capacity = mini(actor.capacity + 1, config.max_capacity)
 		"range": actor.radius = mini(actor.radius + 1, config.max_range)
@@ -341,7 +353,7 @@ func alive_enemies() -> int:
 	return count
 
 func snapshot() -> Dictionary:
-	return {"tick": tick, "actors": actors.duplicate(true), "bombs": bombs.bombs.duplicate(true),
+	return {"activity": activity.duplicate(true), "tick": tick, "actors": actors.duplicate(true), "bombs": bombs.bombs.duplicate(true),
 		"fire": bombs.fire.duplicate(), "cells": board.cells.duplicate(), "powerups": powerups.duplicate(),
 		"result": result, "rng_state": rng.state, "score": score, "time_bonus": time_bonus,
 		"fire_owners": bombs.fire_owners.duplicate(true), "level_ticks": level_ticks,

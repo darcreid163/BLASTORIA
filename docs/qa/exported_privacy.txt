@@ -1,4 +1,4 @@
-Run from an empty directory outside source tree.
+Run from empty directory outside source tree.
 Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
 
 PASS: developer secret registry absent from player package
@@ -7,7 +7,11 @@ PASS: plaintext content source absent from player package
 PASS: old semantic resource filename absent
 PASS: developer specification absent from player package
 PASS: encrypted active content readable in actual export
-PASS: encrypted milestone catalog readable in actual export
+PASS: implemented public milestones readable in actual export
+PASS: old separate containers absent
+PASS: future and hidden definitions never shipped in runtime catalog
+PASS: runtime file length uses padded size buckets
+PASS: artifact public description stays separately sealed until display
 PASS: unfound collection reveals no name, identifier or total
 PASS: found collection shows only public description
 PRIVACY EXPORT: PASS

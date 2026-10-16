@@ -142,13 +142,13 @@ func run(test: SceneTree) -> void:
 		var reachable := state.board.reachable(Vector2i(1, 1), true)
 		for cell in state.board.cells:
 			if state.board.kind(cell) != GridBoard.Cell.WALL and not reachable.has(cell): maps_ok = false
-		for cell in state.board.landmarks + [SecretManager.COMPASS.niche, state.board.exit_cell]:
+		for cell in state.board.landmarks + [SecretManager.DEFINITION.niche, state.board.exit_cell]:
 			maps_ok = maps_ok and reachable.has(cell)
 		abilities_ok = abilities_ok and state.hidden_powerups.size() == 8
 		for cell in state.hidden_powerups:
 			abilities_ok = abilities_ok and state.board.kind(cell) == GridBoard.Cell.CRATE
 	test.check(maps_ok and state.board.width == 41 and state.board.height == 31, "large worlds: 40 seeds connect all traversable cells, landmarks, niche and exit")
-	test.check(abilities_ok and state.board.kind(SecretManager.COMPASS.niche) == GridBoard.Cell.FLOOR, "large worlds: eight powers guaranteed under crates; starting niche empty")
+	test.check(abilities_ok and state.board.kind(SecretManager.DEFINITION.niche) == GridBoard.Cell.FLOOR, "large worlds: eight powers guaranteed under crates; starting niche empty")
 	state = fresh("adventure")
 	var far_cell := Vector2i(35, 25)
 	state.board.cells[far_cell] = GridBoard.Cell.FLOOR
@@ -187,7 +187,7 @@ func run(test: SceneTree) -> void:
 
 	var secret := qualified()
 	test.check(not secret.finish(89, 100) and secret.finish(90, 100), "secret: exact exploration threshold and completion required")
-	test.check(secret.collect(Vector2i(9, 9)) == 0 and secret.collect(SecretManager.COMPASS.niche) == 50000 and secret.collect(SecretManager.COMPASS.niche) == 0, "secret: physical niche pickup awards 50000 exactly once")
+	test.check(secret.collect(Vector2i(9, 9)) == 0 and secret.collect(SecretManager.DEFINITION.niche) == 50000 and secret.collect(SecretManager.DEFINITION.niche) == 0, "secret: physical niche pickup awards 50000 exactly once")
 	secret = qualified()
 	secret.map_used = true
 	test.check(not secret.finish(100, 100), "secret: any map use disqualifies compass")
@@ -215,7 +215,7 @@ func run(test: SceneTree) -> void:
 	state.advance()
 	var completion_tick := state.level_ticks
 	test.check(state.completion_walk and state.result.is_empty() and state.secrets.revealed, "secret integration: eligible completion opens a playable return to the niche")
-	state.actors[0].cell = SecretManager.COMPASS.niche
+	state.actors[0].cell = SecretManager.DEFINITION.niche
 	state.advance()
 	test.check(state.result == "ADVENTURE_DONE" and state.score == 50500 and state.level_ticks == completion_tick, "secret integration: collection completes level, score includes reward, epilogue excludes timer")
 	state.start(ADVENTURE, "adventure", 0, 731)

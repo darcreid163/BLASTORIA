@@ -1,4 +1,4 @@
-Run from an empty directory outside source tree.
+Run from empty directory outside source tree.
 Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
 
 EXPORTED MODES: PASS

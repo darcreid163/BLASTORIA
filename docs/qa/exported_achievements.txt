@@ -1,0 +1,10 @@
+Run from empty directory outside source tree.
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+PASS: release export enables earning without debug override
+PASS: placing alone does not unlock
+PASS: actual placement/retreat/detonation earns milestone in shipped simulation
+PASS: release unlock and offline queue persist
+PASS: achievement page imports vector icons and excludes API IDs
+PASS: exported pagination works
+ACHIEVEMENTS EXPORT: PASS

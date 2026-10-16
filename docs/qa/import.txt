@@ -9,10 +9,43 @@ Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
 [  83% ] first_scan_filesystem | Starting file scan...
 [ DONE ] first_scan_filesystem
 
-[   0% ] update_scripts_classes | Started Registering global classes... (3 steps)
-[   0% ] update_scripts_classes | GridBoard
-[  25% ] update_scripts_classes | SaveManager
-[  50% ] update_scripts_classes |
+[   0% ] update_scripts_classes | Started Registering global classes... (36 steps)
+[   0% ] update_scripts_classes | AchievementCatalog
+[   2% ] update_scripts_classes | AchievementManager
+[   5% ] update_scripts_classes | AudioManager
+[   8% ] update_scripts_classes | ClassicCampaignProgress
+[  10% ] update_scripts_classes | ClassicChapterOneMap
+[  13% ] update_scripts_classes | ClassicStagePlan
+[  16% ] update_scripts_classes | ArcadeRun
+[  18% ] update_scripts_classes | GameConfig
+[  21% ] update_scripts_classes | GameSettings
+[  24% ] update_scripts_classes | GameState
+[  27% ] update_scripts_classes | BombSystem
+[  29% ] update_scripts_classes | EnemyAI
+[  32% ] update_scripts_classes | Exploration
+[  35% ] update_scripts_classes | GridBoard
+[  37% ] update_scripts_classes | LevelDefinition
+[  40% ] update_scripts_classes | ArcadeLevelRegistry
+[  43% ] update_scripts_classes | ArcadeProgressionManager
+[  45% ] update_scripts_classes | CustomMapDocument
+[  48% ] update_scripts_classes | CustomMapGenerator
+[  51% ] update_scripts_classes | CustomMapLibrary
+[  54% ] update_scripts_classes | MapValidationService
+[  56% ] update_scripts_classes | RuntimeBundle
+[  59% ] update_scripts_classes | SaveManager
+[  62% ] update_scripts_classes | SealedData
+[  64% ] update_scripts_classes | SecretDefinition
+[  67% ] update_scripts_classes | SecretManager
+[  70% ] update_scripts_classes | CustomMapEditor
+[  72% ] update_scripts_classes | ExplorationMap
+[  75% ] update_scripts_classes | GameHUD
+[  78% ] update_scripts_classes | InputRouter
+[  81% ] update_scripts_classes | MapPreviewRenderer
+[  83% ] update_scripts_classes | RelicBadge
+[  86% ] update_scripts_classes | BoardView
+[  89% ] update_scripts_classes | FollowCamera
+[  91% ] update_scripts_classes |
+[  94% ] update_scripts_classes |
 [ DONE ] update_scripts_classes
 
 [   0% ] loading_editor_layout | Started Loading editor (5 steps)

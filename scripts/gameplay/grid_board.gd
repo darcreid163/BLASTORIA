@@ -46,8 +46,8 @@ func generate(config: GameConfig, rng: RandomNumberGenerator, arena: bool) -> vo
 			cells[Vector2i(5, y)] = Cell.FLOOR
 			cells[Vector2i(width - 6, y)] = Cell.FLOOR
 		landmarks.assign([Vector2i(11, 5), Vector2i(width - 6, 15), Vector2i(11, height - 6)])
-		if SecretManager.COMPASS.valid:
-			cells[SecretManager.COMPASS.niche] = Cell.FLOOR
+		if SecretManager.DEFINITION.valid:
+			cells[SecretManager.DEFINITION.niche] = Cell.FLOOR
 		cells[Vector2i(3, 2)] = Cell.FLOOR
 		cells[Vector2i(2, 3)] = Cell.FLOOR
 	if config.full_powerups:

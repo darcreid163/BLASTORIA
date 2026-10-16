@@ -6,29 +6,35 @@ extends Resource
 @export var explored_percent: int = 101
 @export var landmark_order: Array[int] = []
 @export var niche: Vector2i = Vector2i(-1, -1)
-var text: Dictionary = {}
+var display_cipher: String = ""
 var valid: bool = false
 static var cached: SecretDefinition
 
 static func active() -> SecretDefinition:
 	if cached != null: return cached
 	cached = SecretDefinition.new()
-	var path := "res://resources/private/content.dat"
-	if not FileAccess.file_exists(path): return cached
-	var data := SealedData.open_bytes(FileAccess.get_file_as_bytes(path), "content")
-	if not data.get("id") is String or not data.get("text") is Dictionary or not data.get("order") is Array or not data.get("niche") is Array: return cached
-	if data.niche.size() != 2 or data.order != [0.0, 1.0, 2.0] or data.get("percent") != 90 or data.get("reward") != 50000: return cached
+	var data := RuntimeBundle.section("active")
+	if not data.get("id") is String or not data.get("view") is String or not data.get("order") is Array or not data.get("niche") is Array: return cached
+	if data.id.length() != 32 or data.niche.size() != 2 or data.order.is_empty() or data.order.size() > 32: return cached
+	if not integer(data.get("percent"), 1, 100) or not integer(data.get("reward"), 1, 1000000): return cached
+	for coordinate in data.niche:
+		if not integer(coordinate, 1, 4096): return cached
+	var seen := {}
+	for index in data.order:
+		if not integer(index, 0, 31) or seen.has(int(index)): return cached
+		seen[int(index)] = true
 	cached.id = data.id
 	cached.reward = int(data.reward)
 	cached.explored_percent = int(data.percent)
-	cached.landmark_order.assign([0, 1, 2])
+	for index in data.order: cached.landmark_order.append(int(index))
 	cached.niche = Vector2i(int(data.niche[0]), int(data.niche[1]))
-	cached.text = data.text
+	cached.display_cipher = data.view
 	cached.valid = true
 	return cached
 
 func localized(field: String, locale: String = "") -> String:
 	var language := TranslationServer.get_locale().left(2) if locale.is_empty() else locale
+	var text := SealedData.open_hex(display_cipher, "display")
 	return str(text.get(field, {}).get(language, text.get(field, {}).get("en", "")))
 
 static func normalize_id(value: Variant) -> String:
@@ -37,3 +43,6 @@ static func normalize_id(value: Variant) -> String:
 	# Legacy migration accepts only the old known identifier, without a readable alias in runtime code.
 	if value.sha256_text() == "4619a142b1e8bfc35bd395089b56fd3638e4bcc09caa072f0963ae3f1b1bd1cd": return active().id
 	return ""
+
+static func integer(value: Variant, low: int, high: int) -> bool:
+	return (value is int or value is float) and is_finite(float(value)) and value == floor(value) and value >= low and value <= high
