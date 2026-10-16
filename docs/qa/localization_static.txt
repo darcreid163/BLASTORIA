@@ -1,0 +1,2 @@
+14 locales; 172 active keys per locale; nonempty values, identical key sets and format placeholders: PASS
+Native-speaker linguistic review: pending.

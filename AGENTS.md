@@ -1,6 +1,6 @@
 # BLASTORIA development
 
-Read docs/MASTER_SPEC.md (active consolidated master prompt 2.5 + secret privacy), docs/ARCADE_ADDENDUM_RU.md, docs/TECHNICAL_DESIGN.md and docs/QA_REPORT.md before changes.
+Read docs/MASTER_SPEC.md (active consolidated master prompt 2.5 + 2026-10-16 three-mode/language decisions), docs/ARCADE_ADDENDUM_RU.md, docs/TECHNICAL_DESIGN.md and docs/QA_REPORT.md before changes.
 The master prompt is the approved product specification, not a claim of implemented features.
 Keep archived docs/specs/* and docs/MASTER_PROMPT_RU.md original bytes unchanged. MASTER_SPEC.md is the consolidated effective specification; record implementation scope separately.
 Use actual tools and evidence; do not claim Windows runtime or visual QA from headless tests.

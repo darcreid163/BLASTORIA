@@ -1,0 +1,39 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+PASS: export enables official discovery earning
+PASS: en: shipped UI and achievements use selected locale
+PASS: en: shipped owned discovery display is localized
+PASS: ru: shipped UI and achievements use selected locale
+PASS: ru: shipped owned discovery display is localized
+PASS: ja: shipped UI and achievements use selected locale
+PASS: ja: shipped owned discovery display is localized
+PASS: ko: shipped UI and achievements use selected locale
+PASS: ko: shipped owned discovery display is localized
+PASS: zh_CN: shipped UI and achievements use selected locale
+PASS: zh_CN: shipped owned discovery display is localized
+PASS: hi: shipped UI and achievements use selected locale
+PASS: hi: shipped owned discovery display is localized
+PASS: id: shipped UI and achievements use selected locale
+PASS: id: shipped owned discovery display is localized
+PASS: th: shipped UI and achievements use selected locale
+PASS: th: shipped owned discovery display is localized
+PASS: vi: shipped UI and achievements use selected locale
+PASS: vi: shipped owned discovery display is localized
+PASS: fr: shipped UI and achievements use selected locale
+PASS: fr: shipped owned discovery display is localized
+PASS: it: shipped UI and achievements use selected locale
+PASS: it: shipped owned discovery display is localized
+PASS: de: shipped UI and achievements use selected locale
+PASS: de: shipped owned discovery display is localized
+PASS: ar: shipped UI and achievements use selected locale
+PASS: ar: shipped owned discovery display is localized
+PASS: tr: shipped UI and achievements use selected locale
+PASS: tr: shipped owned discovery display is localized
+PASS: custom solo: no official discovery access
+PASS: custom coop: no official discovery access
+PASS: custom versus: no official discovery access
+PASS: custom arena_bot: no official discovery access
+PASS: actual release Arena result persists discovery through main without score reward
+PASS: terminal recheck cannot duplicate discovery
+PASS: release Arcade official qualification reads sealed criteria
+MODES I18N EXPORT: PASS

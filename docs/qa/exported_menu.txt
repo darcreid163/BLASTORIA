@@ -1,18 +1,75 @@
-Run from empty directory outside source tree.
 Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
 
-PASS: Russian menu labels and order: Обучение / Кампания / Приключение / Аркада / Мастерская / Арена / Коллекция секретов / Настройки / Выйти
-PASS: Training opens tutorial
-PASS: Campaign opens its submenu
-PASS: Continue resumes saved 100-stage Classic Campaign
-PASS: New campaign starts classic stage one
-PASS: Adventure heading translated
-PASS: Arcade opens official stage selection
-PASS: Workshop opens editor
-PASS: Arena starts local match
-PASS: Secret collection heading translated
-PASS: Settings opens
-PASS: Exit opens confirmation
-PASS: English columns no longer reversed
-PASS: Nine menu entries fit base viewport height
+PASS: en: exactly three main modes
+PASS: en: mode route 0
+PASS: en: mode route 1
+PASS: en: mode route 2
+PASS: en: four workshop formats
+PASS: ru: exactly three main modes
+PASS: ru: mode route 0
+PASS: ru: mode route 1
+PASS: ru: mode route 2
+PASS: ru: four workshop formats
+PASS: ja: exactly three main modes
+PASS: ja: mode route 0
+PASS: ja: mode route 1
+PASS: ja: mode route 2
+PASS: ja: four workshop formats
+PASS: ko: exactly three main modes
+PASS: ko: mode route 0
+PASS: ko: mode route 1
+PASS: ko: mode route 2
+PASS: ko: four workshop formats
+PASS: zh_CN: exactly three main modes
+PASS: zh_CN: mode route 0
+PASS: zh_CN: mode route 1
+PASS: zh_CN: mode route 2
+PASS: zh_CN: four workshop formats
+PASS: hi: exactly three main modes
+PASS: hi: mode route 0
+PASS: hi: mode route 1
+PASS: hi: mode route 2
+PASS: hi: four workshop formats
+PASS: id: exactly three main modes
+PASS: id: mode route 0
+PASS: id: mode route 1
+PASS: id: mode route 2
+PASS: id: four workshop formats
+PASS: th: exactly three main modes
+PASS: th: mode route 0
+PASS: th: mode route 1
+PASS: th: mode route 2
+PASS: th: four workshop formats
+PASS: vi: exactly three main modes
+PASS: vi: mode route 0
+PASS: vi: mode route 1
+PASS: vi: mode route 2
+PASS: vi: four workshop formats
+PASS: fr: exactly three main modes
+PASS: fr: mode route 0
+PASS: fr: mode route 1
+PASS: fr: mode route 2
+PASS: fr: four workshop formats
+PASS: it: exactly three main modes
+PASS: it: mode route 0
+PASS: it: mode route 1
+PASS: it: mode route 2
+PASS: it: four workshop formats
+PASS: de: exactly three main modes
+PASS: de: mode route 0
+PASS: de: mode route 1
+PASS: de: mode route 2
+PASS: de: four workshop formats
+PASS: ar: exactly three main modes
+PASS: ar: mode route 0
+PASS: ar: mode route 1
+PASS: ar: mode route 2
+PASS: ar: four workshop formats
+PASS: tr: exactly three main modes
+PASS: tr: mode route 0
+PASS: tr: mode route 1
+PASS: tr: mode route 2
+PASS: tr: four workshop formats
+PASS: saved journey remains accessible inside Adventure
+PASS: official Arena has two local players
 MENU SMOKE: PASS
