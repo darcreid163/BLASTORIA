@@ -1,7 +1,7 @@
 class_name SaveManager
 extends RefCounted
 
-const VERSION := 4
+const VERSION := 5
 var max_bytes: int = 16384
 var path: String = "user://profile.json"
 var unlocked: int = 0
@@ -34,6 +34,20 @@ func read_profile(last_level: int) -> void:
 			return
 		if not valid_int(version, 1, VERSION) or not valid_int(data.get("unlocked"), 0, last_level):
 			continue
+		var owned: Array[String] = []
+		if version >= 5:
+			var private_data := SealedData.open_hex(data.get("vault"), "collection")
+			if not private_data.get("items") is Array:
+				continue # Corrupt collection: recover whole previous profile, never turn corruption into grants.
+			if not private_data.items.is_empty() and not SecretDefinition.active().valid:
+				writable = false
+				return # Preserve known discoveries when private content is unavailable.
+			owned = normalize_artifacts(private_data.items)
+		elif version >= 4 and data.get("artifacts") is Array:
+			if not data.artifacts.is_empty() and not SecretDefinition.active().valid:
+				writable = false
+				return
+			owned = normalize_artifacts(data.artifacts)
 		unlocked = int(data.unlocked)
 		language = "en" if data.get("language") == "en" else "ru"
 		arcade_records.clear()
@@ -45,11 +59,7 @@ func read_profile(last_level: int) -> void:
 					arcade_records[key] = {"score": int(record.score), "score_ticks": int(record.score_ticks), "best_ticks": int(record.best_ticks)}
 		if version >= 3:
 			settings.read_data(data.get("settings"))
-		artifacts.clear()
-		if version >= 4 and data.get("artifacts") is Array:
-			for id in data.artifacts:
-				if id == "ghost_compass" and not artifacts.has(id):
-					artifacts.append(id)
+		artifacts = owned
 		recovered_from_backup = candidate.ends_with(".bak")
 		return
 
@@ -86,7 +96,12 @@ func write_profile() -> Error:
 	var file := FileAccess.open(temporary, FileAccess.WRITE)
 	if file == null:
 		return FileAccess.get_open_error()
-	file.store_string(JSON.stringify({"version": VERSION, "unlocked": unlocked, "language": language, "arcade_records": arcade_records, "settings": settings.to_data(), "artifacts": artifacts}))
+	var payload := {"version": VERSION, "unlocked": unlocked, "language": language, "arcade_records": arcade_records, "settings": settings.to_data(), "vault": SealedData.seal({"items": artifacts}, "collection").hex_encode()}
+	var body := JSON.stringify(payload)
+	if body.to_utf8_buffer().size() > max_bytes:
+		file.close()
+		return ERR_OUT_OF_MEMORY
+	file.store_string(body)
 	file.flush()
 	var error := file.get_error()
 	file.close()
@@ -94,9 +109,12 @@ func write_profile() -> Error:
 		return error
 	if FileAccess.file_exists(path):
 		if not recovered_from_backup:
-			error = DirAccess.copy_absolute(path, path + ".bak")
+			error = prepare_backup(path, path + ".bak")
 			if error != OK:
 				return error
+		elif FileAccess.file_exists(path + ".bak"):
+			error = prepare_backup(path + ".bak", path + ".bak")
+			if error != OK: return error
 		error = DirAccess.remove_absolute(path)
 		if error != OK:
 			return error
@@ -105,8 +123,40 @@ func write_profile() -> Error:
 		recovered_from_backup = false
 	return error
 
+static func normalize_artifacts(values: Array) -> Array[String]:
+	var result: Array[String] = []
+	for value in values:
+		var normalized := SecretDefinition.normalize_id(value)
+		if not normalized.is_empty() and not result.has(normalized): result.append(normalized)
+	return result
+
 func record_secret(id: String) -> bool:
-	if not writable or id != "ghost_compass" or artifacts.has(id):
+	var normalized := SecretDefinition.normalize_id(id)
+	if not writable or normalized.is_empty() or artifacts.has(normalized):
 		return false
-	artifacts.append(id)
+	artifacts.append(normalized)
 	return true
+
+func prepare_backup(source: String, target: String) -> Error:
+	var input := FileAccess.open(source, FileAccess.READ)
+	if input == null or input.get_length() > max_bytes: return ERR_FILE_CORRUPT
+	var bytes := input.get_buffer(input.get_length())
+	input.close()
+	var parser := JSON.new()
+	if parser.parse(bytes.get_string_from_utf8()) != OK or not parser.data is Dictionary:
+		return ERR_FILE_CORRUPT
+	var data: Dictionary = parser.data
+	# Preserve old no-secret backups exactly. Migrate only legacy clear-text collection fields.
+	if valid_int(data.get("version"), 1, 4) and data.get("artifacts") is Array:
+		data.vault = SealedData.seal({"items": normalize_artifacts(data.artifacts)}, "collection").hex_encode()
+		data.erase("artifacts")
+		data.version = VERSION
+		bytes = JSON.stringify(data).to_utf8_buffer()
+	var output := FileAccess.open(target + ".tmp", FileAccess.WRITE)
+	if output == null: return FileAccess.get_open_error()
+	output.store_buffer(bytes)
+	output.flush()
+	var error := output.get_error()
+	output.close()
+	if error != OK: return error
+	return DirAccess.rename_absolute(target + ".tmp", target)

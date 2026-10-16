@@ -127,3 +127,15 @@ and playtest requests. main.gd owns transitioning to the common simulation and r
 editor document. No unimplemented Steam adapter or secret manager stub is advertised as working.
 Future sharing adapters will call the same validated serialization boundary; no Steam-specific data is
 required for a .blastmap file. Format 1 rejects secret payloads until their runtime is implemented.
+
+## 0.5.5 — secret privacy
+
+SealedData uses native AESContext (256-bit CBC + PKCS7), independent HMAC-SHA256 key, random IV,
+and purpose separation; authentication precedes decryption. SecretDefinition loads the encrypted
+active definition and public display fields; AchievementCatalog loads an encrypted planned catalog.
+SaveManager v5 keeps ordinary settings/records in JSON and seals the owned-artifact array in vault.
+Legacy identifiers normalize to an opaque token; legacy collection-bearing backups are sanitized
+before replacement. Missing content prevents new rewards and blocks writes to an existing collection.
+Player export excludes plaintext source registries, old semantic Resource and developer docs.
+Keys reside in the offline client; this is not a trust boundary against the owner of the client.
+See SECRET_PRIVACY.md for the threat model and empty-cwd exported-package verification.

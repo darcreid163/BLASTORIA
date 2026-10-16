@@ -245,7 +245,7 @@ func run(test: SceneTree) -> void:
 	var loaded := SaveManager.new()
 	loaded.path = path
 	loaded.read_profile(2)
-	test.check(loaded.artifacts == ["ghost_compass"] and loaded.settings.bindings == save.settings.bindings, "save v4: collection and migrated controls reload")
+	test.check(loaded.artifacts == [SecretDefinition.active().id] and loaded.settings.bindings == save.settings.bindings, "save v4: collection and migrated controls reload")
 
 	var scene = load("res://scenes/main.tscn").instantiate()
 	test.root.add_child(scene)

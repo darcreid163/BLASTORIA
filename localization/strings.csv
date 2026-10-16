@@ -79,12 +79,7 @@ ADVENTURE_DONE,Ruins cleared,Руины исследованы
 CLASSIC_RULES,"Three test stages. One bomb, range 1. Uncover the exit and defeat every enemy. Contact is dangerous. After 200 game seconds, Wardens arrive. Bombing an exposed exit summons reinforcements.","Три тестовых уровня. Одна бомба, радиус 1. Найдите выход под блоком и победите всех врагов. Контакт с врагом опасен. 200 игровых секунд; затем появятся Стражи. Взрыв по открытому выходу вызывает подкрепление."
 ADVENTURE_RULES,"Ancient ruins: a 41×31 maze, six enemies and a hidden exit. Explore side paths and unusual markings. Tab cycles map: hidden / mini / large. No time limit. Continue restarts the level.","Древние руины: большой лабиринт 41×31, шесть противников и скрытый выход. Исследуйте ответвления и необычные узоры. Tab переключает карту: скрыта / мини / большая. Время не ограничено. Продолжение начинает уровень заново."
 COLLECTION,Secret collection,Коллекция секретов
-COLLECTION_EMPTY,No artifacts found yet. Ancient ruins hold traces of forgotten travelers.,Артефакты ещё не найдены. Древние руины хранят следы забытых путешественников.
-COLLECTION_FOUND,"Ghost Compass
-Legendary artifact. Its needle remembers the explorer’s path.
-Found: 1 / 10. Other artifacts will arrive with future worlds.","Призрачный компас
-Легендарный артефакт. Его стрелка помнит путь исследователя.
-Найдено: 1 / 10. Остальные артефакты появятся в будущих мирах."
+COLLECTION_EMPTY,Here will appear traces of what you manage to discover.,"Здесь появятся следы того, что тебе удалось открыть."
 MAP_TITLE,Explored: %d%%,Исследовано: %d%%
 MAP_KEY,Tab / Select — map,Tab / Select — карта
 HIDDEN_GOAL,Find the exit under a block and defeat all enemies.,Найдите выход под блоком и уничтожьте всех противников.
@@ -93,8 +88,6 @@ SOLO_RESULT,Final score: %d,Итоговый счёт: %d
 PENALTY_PHASE,Time is up! Wardens are in the maze,Время вышло! Стражи в лабиринте
 REMOTE_KEY,%s / B — detonate with RC,%s / B — подрыв при наличии RC
 KEY_DETONATE,Remote detonation,Дистанционный подрыв
-COMPASS_RETURN,"The ruins fall silent. Something glows in the starting alcove… Return for it, or re-enter the exit to finish.","Руины затихли. В стартовой нише что-то светится… Вернитесь за находкой или снова войдите в выход, чтобы завершить уровень."
-COMPASS_REWARD,"✦ Ghost Compass found! +50,000 points. Artifact added to the collection.",✦ Призрачный компас найден! +50 000 очков. Артефакт добавлен в коллекцию.
 PICKUP_REMOTE,Remote detonator acquired,Дистанционный подрыв получено
 POWER_REMOTE,Remote detonator,Дистанционный подрыв
 PICKUP_WALL_PASS,Wall pass acquired,Проход сквозь блоки получено

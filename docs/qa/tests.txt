@@ -144,8 +144,9 @@ PASS: powerups: Flame Pass protects against active fire
 PASS: powerups: Flame Pass does not protect against contact
 PASS: powerups: temporary invulnerability protects through last valid tick
 PASS: powerups: temporary invulnerability expires exactly at boundary
-PASS: powerups: all eight guaranteed drops are revealed by actual destruction
-PASS: powerups: all eight effects coexist after real pickup collection
+PASS: classic100: stage one has exactly one sealed Fire Up prize
+PASS: classic100: blast exposes exactly one stage-specific prize
+PASS: classic100: collectible Fire Up changes only blast radius
 PASS: large worlds: 40 seeds connect all traversable cells, landmarks, niche and exit
 PASS: large worlds: eight powers guaranteed under crates; starting niche empty
 PASS: large worlds: off-screen bomb detonates without a camera
@@ -243,4 +244,47 @@ PASS: UI: playtest loads shared simulation and hides editor
 PASS: UI: playtest clear opens result
 PASS: UI: return to editor preserves authored geometry
 PASS: UI: playtest changes neither campaign, artifacts, legacy records nor official Arcade progress
-RESULT: 243 passed, 0 failed
+PASS: v2.4: 37 unique localized achievements with four hidden, planned only
+PASS: v2.4: achievement catalog loads from JSON
+PASS: v2.4: unknown secret achievements do not appear in player UI data
+PASS: v2.4: no locked secret metadata leaked via visible catalog
+PASS: v2.4: only an unlocked hidden achievement becomes visible
+PASS: classic100: valid fixed hundred-stage catalog
+PASS: classic100: every owner-specified prize on stages 1-50 stays fixed
+PASS: classic100: map sizes, timers and enemy counts follow progressive plan
+PASS: classic100: stage 100 has 61x41 board and nine enemies
+PASS: classic100: only stage 100 completes full Classic Campaign
+PASS: classic100: first blast reveals prize without penalty
+PASS: classic100: rebombing exposed reward removes it and spawns aggressive reinforcements
+PASS: classic100: fire persists but never double-spawns reward penalty
+PASS: classic100: timeout upgrades surviving foes and spawns aggressive reinforcements
+PASS: classic100: new run starts at stage one with three lives
+PASS: classic100: each first clear unlocks next stage and awards one life
+PASS: classic100: duplicate clear cannot farm extra lives
+PASS: classic100: completed stage, lives, powers and score survive reload
+PASS: classic100: death costs a life and removes temporary/special powers
+PASS: ch1: ten different authored, reachable Classic topologies
+PASS: ch1: ten distinct stage layouts, pinned prizes, exits and enemy positions
+PASS: ch1: stage three drops only its predefined remote detonator
+PASS: ch1: campaign continues at stage eight and orthographic 2.5D camera follows on multi-screen board
+PASS: privacy: active definition decrypts and preserves gameplay reward
+PASS: privacy: each encryption uses a fresh IV
+PASS: privacy: authenticated encrypted data roundtrips
+PASS: privacy: containers cannot be substituted across purposes
+PASS: privacy: modified IV rejected before decryption
+PASS: privacy: modified ciphertext rejected
+PASS: privacy: modified authentication tag rejected
+PASS: privacy: truncated/malformed containers rejected without grants
+PASS: privacy: legacy secret identifier migrates to opaque token without losing progress
+PASS: privacy: migrated profile writes encrypted collection
+PASS: privacy: current JSON contains neither semantic IDs nor plaintext opaque tokens
+PASS: privacy: migrated backup also removes plaintext secret IDs
+PASS: privacy: encrypted collection survives reload
+PASS: privacy: tampered primary recovers authenticated backup
+PASS: privacy: recovered profile can save without replacing valid backup with corruption
+PASS: privacy: missing content cannot overwrite an existing encrypted collection
+PASS: privacy: unavailable private content never grants a secret reward
+PASS: privacy: empty discovery screen exposes no hidden name, total or technical ID
+PASS: privacy: owned screen reveals public name only, without total/index/ID
+PASS: privacy: offline world hall does not invent discoveries or expose hidden metadata
+RESULT: 287 passed, 0 failed
