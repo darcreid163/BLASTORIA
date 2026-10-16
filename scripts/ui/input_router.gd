@@ -33,7 +33,8 @@ static func commands() -> Dictionary:
 static func key_label(action: String) -> String:
 	for event in InputMap.action_get_events(action):
 		if event is InputEventKey:
-			return OS.get_keycode_string(event.physical_keycode)
+			var translated: String = {KEY_UP: "KEY_UP", KEY_DOWN: "KEY_DOWN", KEY_LEFT: "KEY_LEFT", KEY_RIGHT: "KEY_RIGHT"}.get(event.physical_keycode, "")
+			return TranslationServer.translate(translated) if not translated.is_empty() else OS.get_keycode_string(event.physical_keycode)
 	return "?"
 
 static func player_hint(player: int) -> String:

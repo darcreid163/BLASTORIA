@@ -16,10 +16,12 @@ window/size/viewport_height=800
 window/size/window_width_override=1280
 window/size/window_height_override=800
 window/stretch/mode="canvas_items"
+window/subwindows/embed_subwindows=true
 
 [physics]
 common/physics_ticks_per_second=60
 
 [internationalization]
-locale/translations=PackedStringArray("res://localization/strings.en.translation", "res://localization/strings.ru.translation")
+locale/translations=PackedStringArray()
+locale/include_text_server_data=true
 locale/fallback="en"

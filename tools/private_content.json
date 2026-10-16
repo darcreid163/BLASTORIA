@@ -13,20 +13,68 @@
   ],
   "text": {
     "name": {
-      "ru": "Призрачный компас",
-      "en": "Ghost Compass"
+      "en": "Context Compass",
+      "ru": "Компас контекста",
+      "ja": "文脈のコンパス",
+      "ko": "맥락의 나침반",
+      "zh_CN": "上下文罗盘",
+      "hi": "संदर्भ का कम्पास",
+      "id": "Kompas Konteks",
+      "th": "เข็มทิศบริบท",
+      "vi": "La bàn ngữ cảnh",
+      "fr": "Boussole du contexte",
+      "it": "Bussola del contesto",
+      "de": "Kontextkompass",
+      "ar": "بوصلة السياق",
+      "tr": "Bağlam Pusulası"
     },
     "description": {
-      "ru": "Легендарный артефакт. Его стрелка помнит путь исследователя.",
-      "en": "Legendary artifact. Its needle remembers the explorer’s path."
+      "en": "Its rings preserve the path of an attentive explorer.",
+      "ru": "Его кольца хранят путь внимательного исследователя.",
+      "ja": "その輪は注意深い探検家の道を記憶している。",
+      "ko": "고리가 주의 깊은 탐험가의 길을 기억합니다.",
+      "zh_CN": "圆环记住了细心探索者的足迹。",
+      "hi": "इसके छल्ले सजग खोजी का रास्ता सँजोते हैं।",
+      "id": "Cincinnya menyimpan jejak penjelajah yang teliti.",
+      "th": "วงแหวนจดจำเส้นทางของนักสำรวจผู้ช่างสังเกต",
+      "vi": "Các vòng giữ lại đường đi của người khám phá tinh ý.",
+      "fr": "Ses anneaux conservent le chemin de l'explorateur attentif.",
+      "it": "I suoi anelli custodiscono il cammino di un esploratore attento.",
+      "de": "Seine Ringe bewahren den Weg eines aufmerksamen Entdeckers.",
+      "ar": "تحفظ حلقاتها مسار المستكشف اليقظ.",
+      "tr": "Halkaları dikkatli bir kâşifin yolunu saklar."
     },
     "return": {
-      "ru": "Руины затихли. В стартовой нише что-то светится… Вернитесь за находкой или снова войдите в выход, чтобы завершить уровень.",
-      "en": "The ruins fall silent. Something glows in the starting alcove… Return for it, or re-enter the exit to finish."
+      "en": "The ruins fall silent. Something glows in the starting alcove. Return for it or re-enter the exit.",
+      "ru": "Руины затихли. В стартовой нише что-то светится. Вернись за находкой или снова войди в выход.",
+      "ja": "遺跡が静まった。開始地点のくぼみに光が見える。取りに戻るか、再び出口に入ろう。",
+      "ko": "유적이 조용해졌습니다. 시작 지점의 벽감에서 빛이 납니다. 돌아가거나 출구로 다시 들어가세요.",
+      "zh_CN": "遗迹归于寂静，起点壁龛中有光。返回拾取，或再次进入出口。",
+      "hi": "खंडहर शांत हैं। शुरुआती आले में कुछ चमक रहा है। उसे लेने लौटें या निकास में फिर जाएँ।",
+      "id": "Reruntuhan sunyi. Sesuatu bersinar di ceruk awal. Kembali mengambilnya atau masuk lagi ke pintu keluar.",
+      "th": "ซากปรักหักพังเงียบลง มีแสงในซุ้มเริ่มต้น กลับไปเก็บหรือเข้าทางออกอีกครั้ง",
+      "vi": "Tàn tích yên lặng. Có ánh sáng ở hốc đầu đường. Quay lại lấy hoặc bước vào lối ra lần nữa.",
+      "fr": "Les ruines se taisent. Une lueur brille dans l'alcôve du départ. Revenez la chercher ou reprenez la sortie.",
+      "it": "Le rovine tacciono. Qualcosa brilla nella nicchia iniziale. Torna a prenderlo o rientra nell'uscita.",
+      "de": "Die Ruinen verstummen. In der Startnische leuchtet etwas. Kehre zurück oder betrete den Ausgang erneut.",
+      "ar": "سكنت الأطلال. شيء يلمع في تجويف البداية. عُد لأخذه أو ادخل المخرج مجددًا.",
+      "tr": "Harabeler sessizleşti. Başlangıç oyuğunda bir şey parlıyor. Geri dön veya çıkışa yeniden gir."
     },
     "reward": {
-      "ru": "✦ Призрачный компас найден! +50 000 очков. Артефакт добавлен в коллекцию.",
-      "en": "✦ Ghost Compass found! +50,000 points. Artifact added to your collection."
+      "en": "Context Compass found! +50,000 points. Added to your collection.",
+      "ru": "Компас контекста найден! +50 000 очков. Добавлен в коллекцию.",
+      "ja": "文脈のコンパスを発見！50,000点獲得。コレクションに追加。",
+      "ko": "맥락의 나침반 발견! 50,000점 획득. 수집품에 추가되었습니다.",
+      "zh_CN": "发现上下文罗盘！获得50,000分，已加入收藏。",
+      "hi": "संदर्भ का कम्पास मिला! +50,000 अंक। संग्रह में जोड़ा गया।",
+      "id": "Kompas Konteks ditemukan! +50.000 poin. Ditambahkan ke koleksi.",
+      "th": "พบเข็มทิศบริบท! +50,000 คะแนน เพิ่มในคอลเลกชันแล้ว",
+      "vi": "Đã tìm thấy La bàn ngữ cảnh! +50.000 điểm. Đã thêm vào bộ sưu tập.",
+      "fr": "Boussole du contexte trouvée ! +50 000 points. Ajoutée à la collection.",
+      "it": "Bussola del contesto trovata! +50.000 punti. Aggiunta alla collezione.",
+      "de": "Kontextkompass gefunden! +50.000 Punkte. Zur Sammlung hinzugefügt.",
+      "ar": "عُثر على بوصلة السياق! +50,000 نقطة. أُضيفت إلى المجموعة.",
+      "tr": "Bağlam Pusulası bulundu! +50.000 puan. Koleksiyona eklendi."
     }
   }
 }

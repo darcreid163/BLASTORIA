@@ -1,0 +1,86 @@
+{
+  "entries": [
+    {
+      "id": "9145fb008be67a27aa0db280397fc481",
+      "kind": "arcade_clear",
+      "stage": 3,
+      "min_powers": 3,
+      "max_ticks": 7200,
+      "text": {
+        "name": {
+          "en": "Neural Seed",
+          "ru": "Зерно нейросети",
+          "ja": "ニューラルシード",
+          "ko": "신경망의 씨앗",
+          "zh_CN": "神经网络种子",
+          "hi": "न्यूरल बीज",
+          "id": "Benih Neural",
+          "th": "เมล็ดนิวรัล",
+          "vi": "Hạt giống nơ-ron",
+          "fr": "Graine neuronale",
+          "it": "Seme neurale",
+          "de": "Neuronensamen",
+          "ar": "البذرة العصبية",
+          "tr": "Sinir Ağı Tohumu"
+        },
+        "description": {
+          "en": "Three abilities have taken root in one crystal. A reminder that learning begins with connections.",
+          "ru": "Три способности проросли в одном кристалле. Обучение начинается со связей.",
+          "ja": "3つの能力が1つの結晶に根を下ろした。学びはつながりから始まる。",
+          "ko": "세 능력이 하나의 수정에 뿌리내렸습니다. 배움은 연결에서 시작됩니다.",
+          "zh_CN": "三种能力在同一晶体中生根。学习始于连接。",
+          "hi": "तीन क्षमताएँ एक क्रिस्टल में जड़ें जमा चुकी हैं। सीखना संबंधों से शुरू होता है।",
+          "id": "Tiga kemampuan berakar dalam satu kristal. Pembelajaran dimulai dari koneksi.",
+          "th": "สามความสามารถหยั่งรากในผลึกเดียว การเรียนรู้เริ่มจากการเชื่อมโยง",
+          "vi": "Ba năng lực bén rễ trong một tinh thể. Học hỏi bắt đầu từ kết nối.",
+          "fr": "Trois capacités ont pris racine dans un cristal. Apprendre commence par des liens.",
+          "it": "Tre abilità hanno messo radici in un cristallo. Imparare inizia dalle connessioni.",
+          "de": "Drei Fähigkeiten wurzeln in einem Kristall. Lernen beginnt mit Verbindungen.",
+          "ar": "تجذّرت ثلاث قدرات في بلورة واحدة. يبدأ التعلّم بالروابط.",
+          "tr": "Üç yetenek tek kristalde kök saldı. Öğrenme bağlantılarla başlar."
+        }
+      }
+    },
+    {
+      "id": "fe2b1a027ecb303963f257f10a662c91",
+      "kind": "arena_draw",
+      "min_ticks": 1800,
+      "min_steps": 12,
+      "min_placements": 3,
+      "text": {
+        "name": {
+          "en": "Twin Mirror",
+          "ru": "Двойное зеркало",
+          "ja": "双子の鏡",
+          "ko": "쌍둥이 거울",
+          "zh_CN": "双生之镜",
+          "hi": "जुड़वाँ दर्पण",
+          "id": "Cermin Kembar",
+          "th": "กระจกคู่",
+          "vi": "Gương song sinh",
+          "fr": "Miroir jumeau",
+          "it": "Specchio gemello",
+          "de": "Zwillingsspiegel",
+          "ar": "المرآة التوأم",
+          "tr": "İkiz Ayna"
+        },
+        "description": {
+          "en": "Two independent paths ended in one flash. The mirrored crystal remembers both players.",
+          "ru": "Два независимых пути завершились одной вспышкой. Зеркальный кристалл помнит обоих игроков.",
+          "ja": "別々の道が1つの閃光で終わった。鏡の結晶は両者を記憶している。",
+          "ko": "서로 다른 두 길이 하나의 섬광으로 끝났습니다. 거울 수정은 두 플레이어를 기억합니다.",
+          "zh_CN": "两条独立的道路结束于同一道闪光，镜面晶体记住了两位玩家。",
+          "hi": "दो स्वतंत्र रास्ते एक चमक में मिले। दर्पण क्रिस्टल दोनों खिलाड़ियों को याद रखता है।",
+          "id": "Dua jalur mandiri berakhir dalam satu kilatan. Kristal cermin mengingat kedua pemain.",
+          "th": "สองเส้นทางแยกกันจบลงด้วยแสงเดียว ผลึกกระจกจดจำผู้เล่นทั้งคู่",
+          "vi": "Hai con đường độc lập kết thúc trong một chớp sáng. Tinh thể gương ghi nhớ cả hai người.",
+          "fr": "Deux chemins indépendants se sont achevés dans un éclair. Le cristal garde la mémoire des deux joueurs.",
+          "it": "Due percorsi indipendenti sono finiti in un lampo. Il cristallo ricorda entrambi i giocatori.",
+          "de": "Zwei unabhängige Wege endeten in einem Blitz. Der Spiegelkristall erinnert sich an beide Spieler.",
+          "ar": "انتهى مساران مستقلان بومضة واحدة. تتذكر البلورة العاكسة كلا اللاعبين.",
+          "tr": "İki bağımsız yol tek parıltıda bitti. Ayna kristali iki oyuncuyu da hatırlar."
+        }
+      }
+    }
+  ]
+}

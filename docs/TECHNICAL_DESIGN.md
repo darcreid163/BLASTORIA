@@ -1,3 +1,32 @@
+# Active 0.7 architecture
+
+LanguageCatalog installs 14 JSON dictionaries before any UI, normalizes locale aliases,
+persists the choice in profile v6 and owns FontVariation wrappers. Never shallow-clone
+FontFile caches: switching fallback lists on clones corrupted glyph atlases in graphical QA.
+InterfaceTheme applies explicit themes to CanvasLayer surfaces. MapFilePicker avoids
+unlocalized engine FileDialog labels. Editor metadata retranslation leaves map/undo/user
+text intact. CJK subsets cover bundled content; arbitrary user text can exceed that set.
+
+Home has three main mode cards; old Classic progress is the Journey inside Adventure.
+Custom format 2 removes the private field. Validator still reads format 1 with an empty
+legacy array, but library reads/writes normalize it to public format 2; fingerprints remain
+compatible. solo/coop use elimination, versus/arena_bot last-survivor. Co-op checks all
+humans for contact, continues with either alive, shares P2 destruction score and uses a
+whole-board camera. Workshop counters never feed official mastery/discoveries.
+
+EncounterManager only accepts official terminal states and registry-verified Arcade maps;
+criteria and localized views come from the padded, authenticated runtime bundle. Arena
+has no custom map payload. Discovery ownership persists in the sealed v6 collection;
+older v5 readers refuse future profiles. Only owned display text reaches the collection.
+No Steam/global first-discoverer authority is claimed. Release earning is disabled in debug.
+
+Procedural models remain view-only. Accepted cell changes rotate silhouettes; enemy role
+changes rebuild appearance. Eight item shapes replace abbreviations. Warm light, stone
+caps and crate braces preserve the discrete 2.5D grid. Animation/VFX/performance still
+need production work and hardware profiling.
+
+The sections below are historical implementation details retained for reference.
+
 # Technical Design — 0.5.0
 
 The retained 0.4 systems are described first; active 0.5 architecture is in the additions section.

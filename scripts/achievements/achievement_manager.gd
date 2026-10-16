@@ -56,7 +56,7 @@ func grant(id: String) -> void:
 			progress.earned[id] = int(Time.get_unix_time_from_system())
 			if not progress.pending.has(id): progress.pending.append(id)
 			dirty = true
-			var locale := TranslationServer.get_locale().left(2)
+			var locale := LanguageCatalog.normalize(TranslationServer.get_locale())
 			unlocked.emit(str(item.title.get(locale, item.title.en)))
 			return
 

@@ -1,11 +1,11 @@
 class_name SaveManager
 extends RefCounted
 
-const VERSION := 5
+const VERSION := 6
 var max_bytes: int = 16384
 var path: String = "user://profile.json"
 var unlocked: int = 0
-var language: String = "ru"
+var language: String = LanguageCatalog.normalize(OS.get_locale())
 var recovered_from_backup: bool = false
 var arcade_records: Dictionary = {}
 var writable: bool = true
@@ -49,7 +49,7 @@ func read_profile(last_level: int) -> void:
 				return
 			owned = normalize_artifacts(data.artifacts)
 		unlocked = int(data.unlocked)
-		language = "en" if data.get("language") == "en" else "ru"
+		language = LanguageCatalog.normalize(str(data.get("language", "en")))
 		arcade_records.clear()
 		# v1 has no arcade data. Migrate in memory and write current schema only on the next save.
 		if version >= 2 and data.get("arcade_records") is Dictionary:
