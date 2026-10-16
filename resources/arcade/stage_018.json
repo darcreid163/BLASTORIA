@@ -1,0 +1,165 @@
+{
+  "format": 2,
+  "id": "arcade_018",
+  "revision": 1,
+  "title": "Дальний причал",
+  "author": "BLASTORIA",
+  "description": "Авторская карта второй главы",
+  "created": "2026-10-16",
+  "modified": "2026-10-16",
+  "mode": "solo",
+  "theme": "flooded_ruins",
+  "width": 25,
+  "height": 17,
+  "seed": 24018,
+  "generator_version": 0,
+  "rows": [
+    "#########################",
+    "#.........~~............#",
+    "#.........~~............#",
+    "#.........C.............#",
+    "#..###....~~..C.........#",
+    "#..###....~~............#",
+    "#.........~~.........C..#",
+    "#.........~~............#",
+    "#~~~~C~~~~~~~~~~~~.~~~~~#",
+    "#~~~~.~~~~~~~~~~~~C~~~~~#",
+    "#.........~~............#",
+    "#.........~~....####....#",
+    "#.......C.~~....####....#",
+    "#.............C.........#",
+    "#.....C...~~..........C.#",
+    "#.........~~............#",
+    "#########################"
+  ],
+  "spawns": [
+    [
+      1,
+      1
+    ]
+  ],
+  "enemies": [
+    {
+      "cell": [
+        7,
+        3
+      ],
+      "kind": "chaser",
+      "step": 48,
+      "required": true
+    },
+    {
+      "cell": [
+        18,
+        3
+      ],
+      "kind": "bomber",
+      "step": 39,
+      "required": true
+    },
+    {
+      "cell": [
+        7,
+        12
+      ],
+      "kind": "patrol",
+      "step": 36,
+      "required": true
+    },
+    {
+      "cell": [
+        14,
+        12
+      ],
+      "kind": "warden",
+      "step": 57,
+      "required": true
+    },
+    {
+      "cell": [
+        21,
+        13
+      ],
+      "kind": "bomber",
+      "step": 42,
+      "required": true
+    },
+    {
+      "cell": [
+        19,
+        6
+      ],
+      "kind": "chaser",
+      "step": 45,
+      "required": true
+    },
+    {
+      "cell": [
+        3,
+        13
+      ],
+      "kind": "patrol",
+      "step": 39,
+      "required": true
+    }
+  ],
+  "powerups": [
+    {
+      "cell": [
+        3,
+        1
+      ],
+      "kind": "capacity",
+      "hidden": false
+    },
+    {
+      "cell": [
+        8,
+        12
+      ],
+      "kind": "range",
+      "hidden": true
+    },
+    {
+      "cell": [
+        14,
+        4
+      ],
+      "kind": "remote",
+      "hidden": true
+    },
+    {
+      "cell": [
+        21,
+        6
+      ],
+      "kind": "bomb_pass",
+      "hidden": true
+    },
+    {
+      "cell": [
+        6,
+        14
+      ],
+      "kind": "speed",
+      "hidden": true
+    },
+    {
+      "cell": [
+        22,
+        14
+      ],
+      "kind": "invulnerability",
+      "hidden": true
+    }
+  ],
+  "rules": {
+    "capacity": 1,
+    "range": 2,
+    "fuse_ticks": 150,
+    "remote": false,
+    "time_limit": 0,
+    "goal": "eliminate"
+  },
+  "generation": {}
+}

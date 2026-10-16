@@ -38,7 +38,7 @@ func run(test: SceneTree) -> void:
 		state.result="DEFEAT"
 		test.check(progress.complete(state)==ERR_INVALID_DATA and progress.save.record_for(key)==record, "chapter: stage %d defeat cannot replace clear record" % number)
 	var loaded := ArcadeProgressionManager.new();loaded.save.path=progress.save.path;loaded.read_progress()
-	test.check(loaded.save.unlocked==10 and loaded.save.arcade_records.size()==7 and not loaded.available(11), "chapter: first chapter reloads completed; planned stage 11 stays blocked")
+	test.check(loaded.save.unlocked==10 and loaded.save.arcade_records.size()==7 and loaded.available(11) and not loaded.available(12), "chapter: first chapter reloads completed; stage 11 opens while stage 12 stays locked")
 	for key in keys:test.check(loaded.save.record_for(key)==progress.save.record_for(key), "chapter: every stage record survives restart")
 	for suffix in ["", ".bak", ".tmp"]:
 		if FileAccess.file_exists(progress.save.path+suffix):DirAccess.remove_absolute(progress.save.path+suffix)

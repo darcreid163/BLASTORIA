@@ -1,6 +1,6 @@
 Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
 
-PASS: release: ten authored stages and planned next stage blocked
+PASS: release: twenty authored stages and planned next stage blocked
 PASS: release: menu progression loads stage 4
 PASS: release: real inputs clear stage 4 with exact score/time
 PASS: release: result screen persists stage 4 record
@@ -22,6 +22,36 @@ PASS: release: result screen persists stage 9 record
 PASS: release: menu progression loads stage 10
 PASS: release: real inputs clear stage 10 with exact score/time
 PASS: release: result screen persists stage 10 record
+PASS: release: menu progression loads stage 11
+PASS: release: real inputs clear stage 11 with exact score/time
+PASS: release: result screen persists stage 11 record
+PASS: release: menu progression loads stage 12
+PASS: release: real inputs clear stage 12 with exact score/time
+PASS: release: result screen persists stage 12 record
+PASS: release: menu progression loads stage 13
+PASS: release: real inputs clear stage 13 with exact score/time
+PASS: release: result screen persists stage 13 record
+PASS: release: menu progression loads stage 14
+PASS: release: real inputs clear stage 14 with exact score/time
+PASS: release: result screen persists stage 14 record
+PASS: release: menu progression loads stage 15
+PASS: release: real inputs clear stage 15 with exact score/time
+PASS: release: result screen persists stage 15 record
+PASS: release: menu progression loads stage 16
+PASS: release: real inputs clear stage 16 with exact score/time
+PASS: release: result screen persists stage 16 record
+PASS: release: menu progression loads stage 17
+PASS: release: real inputs clear stage 17 with exact score/time
+PASS: release: result screen persists stage 17 record
+PASS: release: menu progression loads stage 18
+PASS: release: real inputs clear stage 18 with exact score/time
+PASS: release: result screen persists stage 18 record
+PASS: release: menu progression loads stage 19
+PASS: release: real inputs clear stage 19 with exact score/time
+PASS: release: result screen persists stage 19 record
+PASS: release: menu progression loads stage 20
+PASS: release: real inputs clear stage 20 with exact score/time
+PASS: release: result screen persists stage 20 record
 PASS: release: chapter reload preserves all records without enabling planned content
 PASS: release: QA input driver and replays are excluded from player package
 CHAPTER EXPORT: PASS

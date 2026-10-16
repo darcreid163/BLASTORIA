@@ -39,7 +39,7 @@ func paint(from: Vector2i, to: Vector2i, tool: String, properties: Dictionary) -
 				for i in range(collection.size() - 1, -1, -1):
 					if MapValidationService.cell(collection[i].cell) == Vector2i(x, y):
 						collection.remove_at(i)
-			data.rows[y][x] = {"floor": ".", "wall": "#", "crate": "C"}.get(tool, ".")
+			data.rows[y][x] = {"floor": ".", "wall": "#", "crate": "C", "water": "~"}.get(tool, ".")
 			if tool.begins_with("spawn"):
 				var index := 0 if tool == "spawn1" else 1
 				if index < data.spawns.size():
@@ -58,4 +58,4 @@ func sample(at: Vector2i) -> String:
 	for power in data.powerups:
 		if MapValidationService.cell(power.cell) == at:
 			return power.kind
-	return {".": "floor", "#": "wall", "C": "crate"}[data.rows[at.y][at.x]]
+	return {".": "floor", "#": "wall", "C": "crate", "~": "water"}[data.rows[at.y][at.x]]

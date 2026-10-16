@@ -1,7 +1,7 @@
 class_name GridBoard
 extends RefCounted
 
-enum Cell { FLOOR, WALL, CRATE }
+enum Cell { FLOOR, WALL, CRATE, WATER }
 const DIRS: Array[Vector2i] = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
 var width: int
 var height: int
@@ -68,7 +68,7 @@ func blast(origin: Vector2i, radius: int) -> Array[Vector2i]:
 		for distance in range(1, radius + 1):
 			var p := origin + direction * distance
 			var cell := kind(p)
-			if cell == Cell.WALL:
+			if cell in [Cell.WALL, Cell.WATER]:
 				break
 			result.append(p)
 			if cell == Cell.CRATE:
@@ -84,7 +84,7 @@ func reachable(start: Vector2i, crates_breakable: bool = false) -> Dictionary:
 		index += 1
 		for d in DIRS:
 			var next := p + d
-			if visited.has(next) or kind(next) == Cell.WALL:
+			if visited.has(next) or kind(next) in [Cell.WALL, Cell.WATER]:
 				continue
 			if kind(next) == Cell.CRATE and not crates_breakable:
 				continue
@@ -114,4 +114,4 @@ func load_map(data: Dictionary) -> void:
 	guaranteed_drops.clear()
 	for y in range(height):
 		for x in range(width):
-			cells[Vector2i(x, y)] = {".": Cell.FLOOR, "#": Cell.WALL, "C": Cell.CRATE}[data.rows[y][x]]
+			cells[Vector2i(x, y)] = {".": Cell.FLOOR, "#": Cell.WALL, "C": Cell.CRATE, "~": Cell.WATER}[data.rows[y][x]]

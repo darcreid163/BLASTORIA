@@ -1,2 +1,2 @@
-14 locales; 207 active keys each; identical keys, nonempty values and format parity: PASS
-Guide, result breakdown, defeat reasons and page navigation included. Native-speaker review pending.
+14 locales; 222 active keys each; identical keys, nonempty values and format parity: PASS
+Chapter navigation, ten ruins titles, water brush and water rule included. Native-speaker review pending.

@@ -394,7 +394,7 @@ func remaining_seconds() -> int:
 
 func can_enter(actor: Dictionary, cell: Vector2i) -> bool:
 	var kind := board.kind(cell)
-	if kind == GridBoard.Cell.WALL or (kind == GridBoard.Cell.CRATE and not actor.wall_pass):
+	if kind in [GridBoard.Cell.WALL, GridBoard.Cell.WATER] or (kind == GridBoard.Cell.CRATE and not actor.wall_pass):
 		return false
 	if bombs.at(cell) != -1 and not actor.bomb_pass:
 		return false

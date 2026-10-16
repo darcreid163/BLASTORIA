@@ -1,0 +1,24 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+PASS: water: authored channel and bridge load as distinct logical terrain
+PASS: water: passage powers do not permit swimming; bridge stays passable
+PASS: water: ordinary movement cannot enter the channel
+PASS: water: blast stops before channel and cannot damage the far bank
+PASS: water: fire travels across a floor bridge normally
+PASS: water: real detonation neither destroys nor ignites the channel
+PASS: water: reachability excludes water and reaches the far bank by bridges
+PASS: water validation: enemy cannot spawn in channel
+PASS: water validation: item cannot be placed in channel
+PASS: water validation: removing every crossing rejects unreachable mandatory enemies
+PASS: workshop: water brush and eyedropper preserve water terrain
+PASS: workshop: undo restores exact map before water painting
+PASS: workshop: redo restores water brush edit
+PASS: workshop: water map survives JSON roundtrip and validation
+PASS: chapters: first-chapter save automatically selects newly available chapter
+PASS: chapters: previous page returns to stages one through ten
+PASS: records: chapter two page contains its own ten stages
+PASS: records: navigation switches chapter without changing progress
+PASS: records: returning to Arcade preserves viewed chapter even when it is locked
+PASS: chapters: out-of-range page clamps without unlocking content
+PASS: water: actual level HUD explains bridge and blast rule
+RUINS EXPORT: 21 passed / 0 failed

@@ -19,8 +19,8 @@ var hidden_check: CheckBox
 var rectangle_check: CheckBox
 var focus_button: Button
 var root: PanelContainer
-var tools_list := ["floor", "wall", "crate", "spawn1", "spawn2"] + MapValidationService.ENEMIES + MapValidationService.POWERS
-const LABELS := {"floor": "WS_FLOOR", "wall": "WS_WALL", "crate": "WS_CRATE", "spawn1": "WS_SPAWN1", "spawn2": "WS_SPAWN2", "patrol": "WS_PATROL", "chaser": "WS_CHASER", "bomber": "WS_BOMBER", "warden": "WS_WARDEN", "capacity": "POWER_CAPACITY", "range": "POWER_RANGE", "speed": "POWER_SPEED", "remote": "POWER_REMOTE", "wall_pass": "POWER_WALL_PASS", "bomb_pass": "POWER_BOMB_PASS", "flame_pass": "POWER_FLAME_PASS", "invulnerability": "POWER_INVULNERABILITY"}
+var tools_list := ["floor", "wall", "crate", "water", "spawn1", "spawn2"] + MapValidationService.ENEMIES + MapValidationService.POWERS
+const LABELS := {"floor": "WS_FLOOR", "water": "WS_WATER", "wall": "WS_WALL", "crate": "WS_CRATE", "spawn1": "WS_SPAWN1", "spawn2": "WS_SPAWN2", "patrol": "WS_PATROL", "chaser": "WS_CHASER", "bomber": "WS_BOMBER", "warden": "WS_WARDEN", "capacity": "POWER_CAPACITY", "range": "POWER_RANGE", "speed": "POWER_SPEED", "remote": "POWER_REMOTE", "wall_pass": "POWER_WALL_PASS", "bomb_pass": "POWER_BOMB_PASS", "flame_pass": "POWER_FLAME_PASS", "invulnerability": "POWER_INVULNERABILITY"}
 
 func _ready() -> void:
 	add_to_group("localized_surfaces")

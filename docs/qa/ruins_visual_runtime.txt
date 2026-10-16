@@ -1,0 +1,10 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+
+HERO CLEARANCE: (1, 1) head=236.680419921875 feet=265.514556884766 top=210.0 bottom=623.0
+HERO CLEARANCE: (23, 1) head=236.680419921875 feet=265.514556884766 top=210.0 bottom=623.0
+HERO CLEARANCE: (1, 15) head=505.651306152344 feet=534.485473632812 top=210.0 bottom=623.0
+HERO CLEARANCE: (23, 15) head=505.651306152344 feet=534.485473632812 top=210.0 bottom=623.0
+RUINS GRAPHICAL: { "en": true, "ru": true, "ja": true, "ko": true, "zh_CN": true, "hi": true, "id": true, "th": true, "vi": true, "fr": true, "it": true, "de": true, "ar": true, "tr": true, "ar_max_powers_corners": true }
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)

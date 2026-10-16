@@ -1,0 +1,148 @@
+{
+  "format": 2,
+  "id": "arcade_017",
+  "revision": 1,
+  "title": "Ворота Стража",
+  "author": "BLASTORIA",
+  "description": "Авторская карта второй главы",
+  "created": "2026-10-16",
+  "modified": "2026-10-16",
+  "mode": "solo",
+  "theme": "flooded_ruins",
+  "width": 25,
+  "height": 17,
+  "seed": 24017,
+  "generator_version": 0,
+  "rows": [
+    "#########################",
+    "#.....~~..........~~....#",
+    "#.....~~..........~~....#",
+    "#.....~~.C........~~....#",
+    "#.................C.....#",
+    "#.....~~..#####...~~....#",
+    "#.....~~..........~~....#",
+    "#.....~~..........~~.C..#",
+    "#.....~~..C...C...~~....#",
+    "#.....~~..........~~....#",
+    "#..C..~~..........~~....#",
+    "#.....~~..#####...~~....#",
+    "#.....C.................#",
+    "#.....~~.......C..~~....#",
+    "#.....~~..........~~....#",
+    "#.....~~..........~~....#",
+    "#########################"
+  ],
+  "spawns": [
+    [
+      1,
+      1
+    ]
+  ],
+  "enemies": [
+    {
+      "cell": [
+        11,
+        3
+      ],
+      "kind": "warden",
+      "step": 57,
+      "required": true
+    },
+    {
+      "cell": [
+        13,
+        13
+      ],
+      "kind": "warden",
+      "step": 57,
+      "required": true
+    },
+    {
+      "cell": [
+        9,
+        8
+      ],
+      "kind": "bomber",
+      "step": 39,
+      "required": true
+    },
+    {
+      "cell": [
+        15,
+        8
+      ],
+      "kind": "patrol",
+      "step": 36,
+      "required": true
+    },
+    {
+      "cell": [
+        21,
+        4
+      ],
+      "kind": "chaser",
+      "step": 45,
+      "required": true
+    },
+    {
+      "cell": [
+        21,
+        13
+      ],
+      "kind": "chaser",
+      "step": 48,
+      "required": true
+    }
+  ],
+  "powerups": [
+    {
+      "cell": [
+        3,
+        1
+      ],
+      "kind": "capacity",
+      "hidden": false
+    },
+    {
+      "cell": [
+        3,
+        10
+      ],
+      "kind": "range",
+      "hidden": true
+    },
+    {
+      "cell": [
+        10,
+        8
+      ],
+      "kind": "flame_pass",
+      "hidden": true
+    },
+    {
+      "cell": [
+        14,
+        8
+      ],
+      "kind": "remote",
+      "hidden": true
+    },
+    {
+      "cell": [
+        15,
+        13
+      ],
+      "kind": "speed",
+      "hidden": true
+    }
+  ],
+  "rules": {
+    "capacity": 1,
+    "range": 2,
+    "fuse_ticks": 150,
+    "remote": false,
+    "time_limit": 0,
+    "goal": "eliminate"
+  },
+  "generation": {}
+}

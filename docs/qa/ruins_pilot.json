@@ -1,0 +1,141 @@
+{
+  "11": [
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1575,
+      "ticks": 4478,
+      "trial": 1
+    }
+  ],
+  "12": [
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1545,
+      "ticks": 5482,
+      "trial": 1
+    }
+  ],
+  "13": [
+    {
+      "enemies_left": 3,
+      "result": "DEFEAT",
+      "score": 70,
+      "ticks": 2929,
+      "trial": 1
+    },
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1375,
+      "ticks": 6973,
+      "trial": 2
+    }
+  ],
+  "14": [
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1495,
+      "ticks": 5949,
+      "trial": 1
+    }
+  ],
+  "15": [
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1965,
+      "ticks": 2740,
+      "trial": 1
+    }
+  ],
+  "16": [
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1925,
+      "ticks": 3234,
+      "trial": 1
+    }
+  ],
+  "17": [
+    {
+      "enemies_left": 6,
+      "result": "DEFEAT",
+      "score": 55,
+      "ticks": 685,
+      "trial": 1
+    },
+    {
+      "enemies_left": 6,
+      "result": "DEFEAT",
+      "score": 55,
+      "ticks": 685,
+      "trial": 2
+    },
+    {
+      "enemies_left": 6,
+      "result": "DEFEAT",
+      "score": 65,
+      "ticks": 1189,
+      "trial": 3
+    },
+    {
+      "enemies_left": 6,
+      "result": "DEFEAT",
+      "score": 55,
+      "ticks": 685,
+      "trial": 4
+    },
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1895,
+      "ticks": 1820,
+      "trial": 5
+    }
+  ],
+  "18": [
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1890,
+      "ticks": 4468,
+      "trial": 1
+    }
+  ],
+  "19": [
+    {
+      "enemies_left": 6,
+      "result": "DEFEAT",
+      "score": 185,
+      "ticks": 4591,
+      "trial": 1
+    },
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1890,
+      "ticks": 4589,
+      "trial": 2
+    }
+  ],
+  "20": [
+    {
+      "enemies_left": 7,
+      "result": "DEFEAT",
+      "score": 105,
+      "ticks": 1597,
+      "trial": 1
+    },
+    {
+      "enemies_left": 0,
+      "result": "MAP_CLEAR",
+      "score": 1930,
+      "ticks": 4500,
+      "trial": 2
+    }
+  ]
+}

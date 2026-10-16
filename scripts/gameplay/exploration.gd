@@ -11,7 +11,7 @@ func setup(board: GridBoard) -> void:
 	total = 0
 	last_cell = Vector2i(-999, -999)
 	for cell in board.cells:
-		if board.kind(cell) != GridBoard.Cell.WALL:
+		if board.kind(cell) not in [GridBoard.Cell.WALL, GridBoard.Cell.WATER]:
 			total += 1
 
 func reveal(board: GridBoard, origin: Vector2i, force: bool = false) -> void:
@@ -36,7 +36,7 @@ func reveal(board: GridBoard, origin: Vector2i, force: bool = false) -> void:
 func explored_count() -> int:
 	var count := 0
 	for cell in known:
-		if known[cell] != GridBoard.Cell.WALL:
+		if known[cell] not in [GridBoard.Cell.WALL, GridBoard.Cell.WATER]:
 			count += 1
 	return count
 

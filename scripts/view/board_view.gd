@@ -109,6 +109,10 @@ func build(state: GameState) -> void:
 	var floor_colors := ["34544e", "2d4946"]
 	var wall_colors := ["53736c", "78938b"]
 	var crate_colors := ["ae7950", "c49a70"]
+	if state.map_data.get("theme") == "flooded_ruins":
+		floor_colors = ["3d5963", "354e59"]
+		wall_colors = ["617d8e", "a2bcc3"]
+		crate_colors = ["a8835d", "d6bd8e"]
 	if state.mode == "classic" and state.level < 10:
 		var palettes: Array = [
 			["34544e", "53736c", "ae7950"], ["375568", "678b9c", "b58d67"],
@@ -124,7 +128,16 @@ func build(state: GameState) -> void:
 	box(world, Vector3(0, -0.5, 0), Vector3(config.width + 0.6, 0.6, config.height + 0.6), "182e33")
 	for cell in state.board.cells:
 		var color: String = floor_colors[(cell.x + cell.y) % 2]
+		if state.board.kind(cell) == GridBoard.Cell.WATER:
+			static_box(pos(cell) + Vector3(0, -0.21, 0), Vector3(0.98, 0.16, 0.98), "18384a")
+			static_box(pos(cell) + Vector3(0, -0.07, 0), Vector3(0.98, 0.08, 0.98), "326f89")
+			for z in [-0.24, 0.19]:
+				static_box(pos(cell) + Vector3(0.06 * sin(cell.x + cell.y), -0.02, z), Vector3(0.47, 0.012, 0.035), "6ba4b3")
+			continue
 		static_box(pos(cell) + Vector3(0, -0.13, 0), Vector3(0.98, 0.2, 0.98), color)
+		if state.board.kind(cell) == GridBoard.Cell.FLOOR and ((state.board.kind(cell + Vector2i.LEFT) == GridBoard.Cell.WATER and state.board.kind(cell + Vector2i.RIGHT) == GridBoard.Cell.WATER) or (state.board.kind(cell + Vector2i.UP) == GridBoard.Cell.WATER and state.board.kind(cell + Vector2i.DOWN) == GridBoard.Cell.WATER)):
+			for z in [-0.3, 0.0, 0.3]:
+				static_box(pos(cell) + Vector3(0, 0, z), Vector3(0.9, 0.06, 0.25), "aaa089")
 		match state.board.kind(cell):
 			GridBoard.Cell.WALL:
 				var wall_height := 0.24 if cell.y == config.height - 1 else 0.55

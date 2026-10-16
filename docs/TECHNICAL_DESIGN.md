@@ -1,3 +1,26 @@
+# 0.7.4 second Arcade chapter
+
+The registry enables fixed stages 11–20 in flooded_ruins; the authoring script
+build_ruins_chapter.py has explicit geometry/placements and never writes 1–10.
+GridBoard.Cell.WATER is appended to preserve old numeric cell values. The ~ map
+character is accepted by validation/load_map; reachable, blast and can_enter block
+water. Blast rays stop before it, while bridges are regular floor. Existing maps
+contain no water and their bytes/fingerprints and recorded command outcomes persist.
+
+Validator requires all spawns, enemies and items on reachable valid terrain.
+Workshop documents/preview support water with full undo/redo and roundtrip. No
+runtime generation, swimming, currents, electrical propagation or new secret data.
+Rendered recessed water/ripple marks and bridge planks use batched static geometry.
+
+Main owns stage_page. Chapter navigation clamps to the published stage count;
+availability is still checked by ArcadeProgressionManager for each tile and launch.
+Ten rows per records page avoid clipping long localized names. Returning to Arcade
+from records preserves the selected chapter, even when its stages are locked.
+
+Recorded QA inputs for 11–20 go through the same advance/AI paths as normal play;
+they never rewrite health, cells, score or result. Source and release replay tests
+check exact scores/ticks, independent records, profile reload and the stage-21 gate.
+
 # 0.7.3 view and audio cues
 
 All new cues are presentation-only. GameState, BombSystem, authored maps, seeds,

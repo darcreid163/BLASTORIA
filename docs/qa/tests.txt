@@ -184,7 +184,7 @@ PASS: UI: classic retry retains Bomb/Fire Up and resets special powers
 PASS: UI: reinforcement actors receive real 3D views
 PASS: UI: expanded main menu fits base viewport height
 PASS: official: ten themes and one hundred explicitly statused slots
-PASS: official: ten authored playable stages; planned stages cannot start
+PASS: official: twenty authored playable stages; planned stages cannot start
 PASS: official: stage 1 validates authored geometry, objects and escape routes
 PASS: official: repeat stage 1 reconstructs identical instance
 PASS: official: stage 1 wins without exit
@@ -224,6 +224,46 @@ PASS: official: clear freezes time and awards once
 PASS: official: stage 10 validates authored geometry, objects and escape routes
 PASS: official: repeat stage 10 reconstructs identical instance
 PASS: official: stage 10 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 11 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 11 reconstructs identical instance
+PASS: official: stage 11 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 12 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 12 reconstructs identical instance
+PASS: official: stage 12 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 13 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 13 reconstructs identical instance
+PASS: official: stage 13 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 14 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 14 reconstructs identical instance
+PASS: official: stage 14 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 15 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 15 reconstructs identical instance
+PASS: official: stage 15 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 16 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 16 reconstructs identical instance
+PASS: official: stage 16 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 17 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 17 reconstructs identical instance
+PASS: official: stage 17 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 18 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 18 reconstructs identical instance
+PASS: official: stage 18 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 19 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 19 reconstructs identical instance
+PASS: official: stage 19 wins without exit
+PASS: official: clear freezes time and awards once
+PASS: official: stage 20 validates authored geometry, objects and escape routes
+PASS: official: repeat stage 20 reconstructs identical instance
+PASS: official: stage 20 wins without exit
 PASS: official: clear freezes time and awards once
 PASS: official: three different authored topologies, not just enemy counts
 PASS: secrets: fixed ten-stage distribution and final prerequisite; implementation honestly planned
@@ -532,7 +572,7 @@ PASS: chapter: stage 10 result cannot tick or score twice
 PASS: chapter: stage 10 normal victory persists and opens progression
 PASS: chapter: stage 10 record is independent
 PASS: chapter: stage 10 defeat cannot replace clear record
-PASS: chapter: first chapter reloads completed; planned stage 11 stays blocked
+PASS: chapter: first chapter reloads completed; stage 11 opens while stage 12 stays locked
 PASS: chapter: every stage record survives restart
 PASS: chapter: every stage record survives restart
 PASS: chapter: every stage record survives restart
@@ -591,4 +631,148 @@ PASS: view: mass destruction cannot exceed 24 transient groups
 PASS: view: transient groups expire and detach after their duration
 PASS: view: no decorative flame remains after the last hazardous tick
 PASS: view: restart clears all old transient and hazard models
-RESULT: 591 passed, 0 failed
+PASS: ruins: original stage 1 bytes and record identity preserved
+PASS: ruins: original stage 2 bytes and record identity preserved
+PASS: ruins: original stage 3 bytes and record identity preserved
+PASS: ruins: original stage 4 bytes and record identity preserved
+PASS: ruins: original stage 5 bytes and record identity preserved
+PASS: ruins: original stage 6 bytes and record identity preserved
+PASS: ruins: original stage 7 bytes and record identity preserved
+PASS: ruins: original stage 8 bytes and record identity preserved
+PASS: ruins: original stage 9 bytes and record identity preserved
+PASS: ruins: original stage 10 bytes and record identity preserved
+PASS: ruins: authored stage 11 validates
+PASS: ruins: stage 11 has a unique topology
+PASS: ruins: replay belongs to exact stage 11 revision
+PASS: ruins: stage 11 cleared with ordinary inputs and live enemy AI
+PASS: ruins: stage 11 score and active ticks replay exactly
+PASS: ruins: stage 11 actual pickups, kills, crates and time bonus match score
+PASS: ruins: stage 11 result cannot tick or score twice
+PASS: ruins: stage 11 normal victory persists and opens progression
+PASS: ruins: stage 11 record is independent
+PASS: ruins: stage 11 defeat cannot replace clear record
+PASS: ruins: authored stage 12 validates
+PASS: ruins: stage 12 has a unique topology
+PASS: ruins: replay belongs to exact stage 12 revision
+PASS: ruins: stage 12 cleared with ordinary inputs and live enemy AI
+PASS: ruins: stage 12 score and active ticks replay exactly
+PASS: ruins: stage 12 actual pickups, kills, crates and time bonus match score
+PASS: ruins: stage 12 result cannot tick or score twice
+PASS: ruins: stage 12 normal victory persists and opens progression
+PASS: ruins: stage 12 record is independent
+PASS: ruins: stage 12 defeat cannot replace clear record
+PASS: ruins: authored stage 13 validates
+PASS: ruins: stage 13 has a unique topology
+PASS: ruins: replay belongs to exact stage 13 revision
+PASS: ruins: stage 13 cleared with ordinary inputs and live enemy AI
+PASS: ruins: stage 13 score and active ticks replay exactly
+PASS: ruins: stage 13 actual pickups, kills, crates and time bonus match score
+PASS: ruins: stage 13 result cannot tick or score twice
+PASS: ruins: stage 13 normal victory persists and opens progression
+PASS: ruins: stage 13 record is independent
+PASS: ruins: stage 13 defeat cannot replace clear record
+PASS: ruins: authored stage 14 validates
+PASS: ruins: stage 14 has a unique topology
+PASS: ruins: replay belongs to exact stage 14 revision
+PASS: ruins: stage 14 cleared with ordinary inputs and live enemy AI
+PASS: ruins: stage 14 score and active ticks replay exactly
+PASS: ruins: stage 14 actual pickups, kills, crates and time bonus match score
+PASS: ruins: stage 14 result cannot tick or score twice
+PASS: ruins: stage 14 normal victory persists and opens progression
+PASS: ruins: stage 14 record is independent
+PASS: ruins: stage 14 defeat cannot replace clear record
+PASS: ruins: authored stage 15 validates
+PASS: ruins: stage 15 has a unique topology
+PASS: ruins: replay belongs to exact stage 15 revision
+PASS: ruins: stage 15 cleared with ordinary inputs and live enemy AI
+PASS: ruins: stage 15 score and active ticks replay exactly
+PASS: ruins: stage 15 actual pickups, kills, crates and time bonus match score
+PASS: ruins: stage 15 result cannot tick or score twice
+PASS: ruins: stage 15 normal victory persists and opens progression
+PASS: ruins: stage 15 record is independent
+PASS: ruins: stage 15 defeat cannot replace clear record
+PASS: ruins: authored stage 16 validates
+PASS: ruins: stage 16 has a unique topology
+PASS: ruins: replay belongs to exact stage 16 revision
+PASS: ruins: stage 16 cleared with ordinary inputs and live enemy AI
+PASS: ruins: stage 16 score and active ticks replay exactly
+PASS: ruins: stage 16 actual pickups, kills, crates and time bonus match score
+PASS: ruins: stage 16 result cannot tick or score twice
+PASS: ruins: stage 16 normal victory persists and opens progression
+PASS: ruins: stage 16 record is independent
+PASS: ruins: stage 16 defeat cannot replace clear record
+PASS: ruins: authored stage 17 validates
+PASS: ruins: stage 17 has a unique topology
+PASS: ruins: replay belongs to exact stage 17 revision
+PASS: ruins: stage 17 cleared with ordinary inputs and live enemy AI
+PASS: ruins: stage 17 score and active ticks replay exactly
+PASS: ruins: stage 17 actual pickups, kills, crates and time bonus match score
+PASS: ruins: stage 17 result cannot tick or score twice
+PASS: ruins: stage 17 normal victory persists and opens progression
+PASS: ruins: stage 17 record is independent
+PASS: ruins: stage 17 defeat cannot replace clear record
+PASS: ruins: authored stage 18 validates
+PASS: ruins: stage 18 has a unique topology
+PASS: ruins: replay belongs to exact stage 18 revision
+PASS: ruins: stage 18 cleared with ordinary inputs and live enemy AI
+PASS: ruins: stage 18 score and active ticks replay exactly
+PASS: ruins: stage 18 actual pickups, kills, crates and time bonus match score
+PASS: ruins: stage 18 result cannot tick or score twice
+PASS: ruins: stage 18 normal victory persists and opens progression
+PASS: ruins: stage 18 record is independent
+PASS: ruins: stage 18 defeat cannot replace clear record
+PASS: ruins: authored stage 19 validates
+PASS: ruins: stage 19 has a unique topology
+PASS: ruins: replay belongs to exact stage 19 revision
+PASS: ruins: stage 19 cleared with ordinary inputs and live enemy AI
+PASS: ruins: stage 19 score and active ticks replay exactly
+PASS: ruins: stage 19 actual pickups, kills, crates and time bonus match score
+PASS: ruins: stage 19 result cannot tick or score twice
+PASS: ruins: stage 19 normal victory persists and opens progression
+PASS: ruins: stage 19 record is independent
+PASS: ruins: stage 19 defeat cannot replace clear record
+PASS: ruins: authored stage 20 validates
+PASS: ruins: stage 20 has a unique topology
+PASS: ruins: replay belongs to exact stage 20 revision
+PASS: ruins: stage 20 cleared with ordinary inputs and live enemy AI
+PASS: ruins: stage 20 score and active ticks replay exactly
+PASS: ruins: stage 20 actual pickups, kills, crates and time bonus match score
+PASS: ruins: stage 20 result cannot tick or score twice
+PASS: ruins: stage 20 normal victory persists and opens progression
+PASS: ruins: stage 20 record is independent
+PASS: ruins: stage 20 defeat cannot replace clear record
+PASS: ruins: second chapter reloads completed; planned stage 21 stays blocked
+PASS: ruins: every stage record survives restart
+PASS: ruins: every stage record survives restart
+PASS: ruins: every stage record survives restart
+PASS: ruins: every stage record survives restart
+PASS: ruins: every stage record survives restart
+PASS: ruins: every stage record survives restart
+PASS: ruins: every stage record survives restart
+PASS: ruins: every stage record survives restart
+PASS: ruins: every stage record survives restart
+PASS: ruins: every stage record survives restart
+PASS: ruins UI: ten stage tiles; saved first chapter opens stage eleven only
+PASS: ruins UI: new stage tile enters actual stage eleven
+PASS: water: authored channel and bridge load as distinct logical terrain
+PASS: water: passage powers do not permit swimming; bridge stays passable
+PASS: water: ordinary movement cannot enter the channel
+PASS: water: blast stops before channel and cannot damage the far bank
+PASS: water: fire travels across a floor bridge normally
+PASS: water: real detonation neither destroys nor ignites the channel
+PASS: water: reachability excludes water and reaches the far bank by bridges
+PASS: water validation: enemy cannot spawn in channel
+PASS: water validation: item cannot be placed in channel
+PASS: water validation: removing every crossing rejects unreachable mandatory enemies
+PASS: workshop: water brush and eyedropper preserve water terrain
+PASS: workshop: undo restores exact map before water painting
+PASS: workshop: redo restores water brush edit
+PASS: workshop: water map survives JSON roundtrip and validation
+PASS: chapters: first-chapter save automatically selects newly available chapter
+PASS: chapters: previous page returns to stages one through ten
+PASS: records: chapter two page contains its own ten stages
+PASS: records: navigation switches chapter without changing progress
+PASS: records: returning to Arcade preserves viewed chapter even when it is locked
+PASS: chapters: out-of-range page clamps without unlocking content
+PASS: water: actual level HUD explains bridge and blast rule
+RESULT: 775 passed, 0 failed
