@@ -24,6 +24,7 @@ var achievements := AchievementManager.new()
 var achievement_page: int = 0
 var guide_return: String = "menu"
 var guide_page: int = 0
+var stage_page: int = 0
 var official := ArcadeProgressionManager.new()
 var workshop: CustomMapEditor
 var custom_records := SaveManager.new()
@@ -176,7 +177,12 @@ func handle_action(action: String) -> void:
 		start_official(int(action.trim_prefix("official:")))
 		return
 	if action == "official_menu":
-		show_official_menu()
+		show_official_menu(stage_page if screen == "records" else -1)
+		return
+	if action in ["stages_prev", "stages_next", "records_prev", "records_next"]:
+		var page := stage_page + (-1 if action.ends_with("prev") else 1)
+		if action.begins_with("stages"): show_official_menu(page)
+		else: show_official_records(page)
 		return
 	if action == "workshop":
 		show_workshop()
@@ -482,24 +488,40 @@ func show_achievements() -> void:
 func stage_name(number: int) -> String:
 	return tr("STAGE") % number + " · " + tr("ARCADE_NAME_%02d" % number)
 
-func show_official_records() -> void:
+func chapter_label(page: int) -> String:
+	return tr("CHAPTER") % (page + 1) + " · " + tr("ARCADE_CHAPTER_%02d" % (page + 1))
+
+func chapter_navigation(prefix: String) -> Array:
+	var buttons: Array = []
+	if stage_page > 0: buttons.append(["PAGE_PREV", prefix + "_prev"])
+	if (stage_page + 1) * 10 < ArcadeLevelRegistry.playable_count(): buttons.append(["PAGE_NEXT", prefix + "_next"])
+	return buttons
+
+func show_official_records(page: int = -1) -> void:
 	state.paused = true
 	screen = "records"
+	stage_page = clampi(stage_page if page < 0 else page, 0, int((ArcadeLevelRegistry.playable_count() - 1) / 10))
 	var lines: Array[String] = []
-	for number in range(1, ArcadeLevelRegistry.playable_count() + 1):
+	lines.append(chapter_label(stage_page))
+	for number in range(stage_page * 10 + 1, mini((stage_page + 1) * 10, ArcadeLevelRegistry.playable_count()) + 1):
 		var data := ArcadeLevelRegistry.load_stage(number)
 		if data.is_empty(): continue
 		var record := official.save.record_for(official.key_for(data))
 		lines.append(stage_name(number) + " · " + tr("BEST_SCORE") % record.score + " · " + tr("BEST_TIME") % (ArcadeRun.format_time(record.best_ticks) if record.best_ticks > 0 else tr("NO_RECORD")))
-	hud.show_menu("STAGE_RECORDS", [["ARCADE", "official_menu"], ["MENU", "menu"]], "\n".join(lines))
+	var buttons := chapter_navigation("records")
+	buttons.append_array([["ARCADE", "official_menu"], ["MENU", "menu"]])
+	hud.show_menu("STAGE_RECORDS", buttons, "\n".join(lines), true)
 
-func show_official_menu() -> void:
+func show_official_menu(page: int = -1) -> void:
 	state.paused = true
 	screen = "official_menu"
+	var count := ArcadeLevelRegistry.playable_count()
+	var preferred := int((mini(count, official.save.unlocked + 1) - 1) / 10)
+	stage_page = clampi(preferred if page < 0 else page, 0, int((count - 1) / 10))
 	var stages: Array = []
-	for number in range(1, ArcadeLevelRegistry.playable_count() + 1):
+	for number in range(stage_page * 10 + 1, mini((stage_page + 1) * 10, count) + 1):
 		stages.append([stage_name(number), "official:%d" % number, official.available(number)])
-	hud.show_stages(stages, tr("OFFICIAL_RULES") + "\n" + tr("CONTENT_STATUS") % [ArcadeLevelRegistry.playable_count(), ReleasePlan.LAUNCH_STAGES])
+	hud.show_stages(stages, chapter_label(stage_page) + "\n" + tr("OFFICIAL_RULES") + "\n" + tr("CONTENT_STATUS") % [count, ReleasePlan.LAUNCH_STAGES], chapter_navigation("stages"))
 
 func show_language_list() -> void:
 	state.paused = true

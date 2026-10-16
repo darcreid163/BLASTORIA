@@ -1,3 +1,19 @@
+# 0.7.4-dev — Flooded Ruins
+
+- Added ten fixed authored Arcade stages 11–20: water channels, stone islands,
+  one-cell crossings and mixed enemy roles. Stages 1–10 remain byte-identical.
+- Water is a new non-traversable terrain type: it stops blast rays before the cell,
+  survives explosions and cannot be crossed with wall/bomb/flame passage powers.
+  Bridges remain ordinary floor; no moving water/electricity mechanics are claimed.
+- Added cyan stone/water/plank presentation and a water-rule HUD hint. Workshop
+  supports water painting, sampling, undo/redo and JSON import/export.
+- Stage selection and records use ten-stage chapter pages, follow the latest
+  available stage and preserve the chapter when returning from its records.
+- Added 15 keys per language (222 total) across 14 locales; refreshed CJK subsets.
+- Ten ordinary-input/live-AI victory fixtures verify exact score/ticks, progression
+  and persisted records. Stage 21 remains planned and blocked. No secret definitions,
+  first-chapter record identities or save-schema changes.
+
 # 0.7.3-dev — hazard and event feedback
 
 - Ordinary bombs display four remaining-fuse divisions; remote bombs have a distinct

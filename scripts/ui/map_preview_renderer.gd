@@ -25,7 +25,7 @@ func _draw() -> void:
 	var data := document.data
 	for y in range(int(data.height)):
 		for x in range(int(data.width)):
-			var color: Color = {"#": Color("59786a"), "C": Color("b7824a"), ".": Color("17382f")}[data.rows[y][x]]
+			var color: Color = {"#": Color("59786a"), "C": Color("b7824a"), ".": Color("17382f"), "~": Color("367f9b")}[data.rows[y][x]]
 			draw_rect(Rect2(Vector2(x, y) * cell_size, Vector2.ONE * (cell_size - 1)), color)
 	for power in data.powerups:
 		var at := Vector2(power.cell[0], power.cell[1]) * cell_size

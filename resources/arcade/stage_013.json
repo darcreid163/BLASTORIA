@@ -1,0 +1,131 @@
+{
+  "format": 2,
+  "id": "arcade_013",
+  "revision": 1,
+  "title": "Три переправы",
+  "author": "BLASTORIA",
+  "description": "Авторская карта второй главы",
+  "created": "2026-10-16",
+  "modified": "2026-10-16",
+  "mode": "solo",
+  "theme": "flooded_ruins",
+  "width": 25,
+  "height": 17,
+  "seed": 24013,
+  "generator_version": 0,
+  "rows": [
+    "#########################",
+    "#......~~.......~~......#",
+    "#......~~.......~~......#",
+    "#...............~~......#",
+    "#......~~...C...~~......#",
+    "#......~~.......C.......#",
+    "#......~~.......~~......#",
+    "#...C..~~..###..~~......#",
+    "#......~~..###..~~..C...#",
+    "#......~~.......~~......#",
+    "#......~~.......~~......#",
+    "#......C........~~......#",
+    "#......~~...C...~~......#",
+    "#......~~...............#",
+    "#......~~.......~~...C..#",
+    "#......~~.......~~......#",
+    "#########################"
+  ],
+  "spawns": [
+    [
+      1,
+      1
+    ]
+  ],
+  "enemies": [
+    {
+      "cell": [
+        11,
+        3
+      ],
+      "kind": "patrol",
+      "step": 39,
+      "required": true
+    },
+    {
+      "cell": [
+        13,
+        11
+      ],
+      "kind": "bomber",
+      "step": 42,
+      "required": true
+    },
+    {
+      "cell": [
+        20,
+        4
+      ],
+      "kind": "chaser",
+      "step": 48,
+      "required": true
+    },
+    {
+      "cell": [
+        20,
+        13
+      ],
+      "kind": "patrol",
+      "step": 39,
+      "required": true
+    },
+    {
+      "cell": [
+        4,
+        12
+      ],
+      "kind": "chaser",
+      "step": 51,
+      "required": true
+    }
+  ],
+  "powerups": [
+    {
+      "cell": [
+        3,
+        1
+      ],
+      "kind": "capacity",
+      "hidden": false
+    },
+    {
+      "cell": [
+        4,
+        7
+      ],
+      "kind": "range",
+      "hidden": true
+    },
+    {
+      "cell": [
+        12,
+        12
+      ],
+      "kind": "bomb_pass",
+      "hidden": true
+    },
+    {
+      "cell": [
+        20,
+        8
+      ],
+      "kind": "speed",
+      "hidden": true
+    }
+  ],
+  "rules": {
+    "capacity": 1,
+    "range": 2,
+    "fuse_ticks": 150,
+    "remote": false,
+    "time_limit": 0,
+    "goal": "eliminate"
+  },
+  "generation": {}
+}

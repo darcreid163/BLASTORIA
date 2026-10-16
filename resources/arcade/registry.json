@@ -16,7 +16,7 @@
       "design": "water channels, bridges; cyan stone",
       "first": 11,
       "last": 20,
-      "status": "planned"
+      "status": "authored_chapter"
     },
     {
       "id": "sand_citadel",
@@ -147,62 +147,62 @@
     {
       "number": 11,
       "map_id": "flooded_ruins",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_011.json"
     },
     {
       "number": 12,
       "map_id": "flooded_ruins",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_012.json"
     },
     {
       "number": 13,
       "map_id": "flooded_ruins",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_013.json"
     },
     {
       "number": 14,
       "map_id": "flooded_ruins",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_014.json"
     },
     {
       "number": 15,
       "map_id": "flooded_ruins",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_015.json"
     },
     {
       "number": 16,
       "map_id": "flooded_ruins",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_016.json"
     },
     {
       "number": 17,
       "map_id": "flooded_ruins",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_017.json"
     },
     {
       "number": 18,
       "map_id": "flooded_ruins",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_018.json"
     },
     {
       "number": 19,
       "map_id": "flooded_ruins",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_019.json"
     },
     {
       "number": 20,
       "map_id": "flooded_ruins",
-      "status": "planned",
-      "path": ""
+      "status": "playable",
+      "path": "res://resources/arcade/stage_020.json"
     },
     {
       "number": 21,

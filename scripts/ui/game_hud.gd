@@ -181,6 +181,7 @@ func update_state(state: GameState, arcade: ArcadeRun = null, classic_lives: int
 		hint.text += "\n" + tr("GOAL")
 	if actor.remote and state.mode not in ["classic", "adventure"]:
 		hint.text += "\n" + tr("KEY_DETONATE") + ": " + InputRouter.key_label("p%d_detonate" % (actor.id+1)) + " / B"
+	if state.map_data.get("theme") == "flooded_ruins": hint.text += "\n" + tr("WATER_RULES")
 
 func notify_pickup(kind: String) -> void:
 	toast.text = tr("PICKUP_" + kind.to_upper()) + " · " + tr("INFO_" + kind.to_upper())
@@ -343,8 +344,10 @@ func show_home(warning: String = "") -> void:
 		secondary.add_child(button)
 	cards.get_child(0).grab_focus()
 
-func show_stages(stages: Array, details: String) -> void:
-	show_menu("ARCADE", [["STAGE_RECORDS", "records"], ["MENU", "menu"]], details)
+func show_stages(stages: Array, details: String, navigation: Array = []) -> void:
+	var buttons := navigation.duplicate()
+	buttons.append_array([["STAGE_RECORDS", "records"], ["MENU", "menu"]])
+	show_menu("ARCADE", buttons, details)
 	column.custom_minimum_size.x = 960
 	var grid := GridContainer.new()
 	grid.columns = 2

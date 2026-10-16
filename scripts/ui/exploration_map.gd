@@ -12,7 +12,7 @@ func _draw() -> void:
 	var offset := Vector2((size.x - unit * state.board.width) * 0.5, 28)
 	for cell in state.exploration.known:
 		var kind: int = state.exploration.known[cell]
-		var color: Color = [Color("34544e"), Color("8caca2"), Color("9c704d")][kind]
+		var color: Color = [Color("34544e"), Color("8caca2"), Color("9c704d"), Color("367f9b")][kind]
 		draw_rect(Rect2(offset + Vector2(cell) * unit, Vector2.ONE * maxf(1, unit - 0.5)), color)
 	for landmark in state.board.landmarks:
 		if state.exploration.known.get(landmark) == GridBoard.Cell.FLOOR:

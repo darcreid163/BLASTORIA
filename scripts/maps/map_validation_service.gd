@@ -48,8 +48,8 @@ static func validate(data: Variant) -> String:
 		return "Введите название карты."
 	if not integer(data.width, 11, 41) or not integer(data.height, 11, 31):
 		return "Размер карты: от 11×11 до 41×31."
-	if data.mode not in MODES or data.theme != "green_maze":
-		return "Поддерживаются Зелёный лабиринт и режимы соло / дуэль."
+	if data.mode not in MODES or data.theme not in ["green_maze", "flooded_ruins"]:
+		return "Неподдерживаемая тема или режим карты."
 	var generation_error := validate_options(data.generation)
 	if not generation_error.is_empty():
 		return generation_error
@@ -62,7 +62,7 @@ static func validate(data: Variant) -> String:
 		if not row is String or row.length() != int(data.width):
 			return "Неверная ширина геометрии."
 		for x in range(int(data.width)):
-			if not row[x] in ".#C":
+			if not row[x] in ".#C~":
 				return "Неизвестный тип клетки."
 			if (x == 0 or y == 0 or x == int(data.width) - 1 or y == int(data.height) - 1) and row[x] != "#":
 				return "Граница карты должна быть закрыта стенами."

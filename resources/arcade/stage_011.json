@@ -1,0 +1,122 @@
+{
+  "format": 2,
+  "id": "arcade_011",
+  "revision": 1,
+  "title": "Первый мост",
+  "author": "BLASTORIA",
+  "description": "Авторская карта второй главы",
+  "created": "2026-10-16",
+  "modified": "2026-10-16",
+  "mode": "solo",
+  "theme": "flooded_ruins",
+  "width": 25,
+  "height": 17,
+  "seed": 24011,
+  "generator_version": 0,
+  "rows": [
+    "#########################",
+    "#.......~~..............#",
+    "#.......~~..............#",
+    "#.......~~..C...........#",
+    "#.....C.................#",
+    "#.......~~.....###......#",
+    "#.......~~.....###......#",
+    "#.......~~.....###......#",
+    "#.......~~..........C...#",
+    "#.......~~..............#",
+    "#.......~~..............#",
+    "#....C..~~.....###......#",
+    "#.........C....###......#",
+    "#.......~~.........C....#",
+    "#.......~~..............#",
+    "#.......~~..............#",
+    "#########################"
+  ],
+  "spawns": [
+    [
+      1,
+      1
+    ]
+  ],
+  "enemies": [
+    {
+      "cell": [
+        12,
+        5
+      ],
+      "kind": "patrol",
+      "step": 39,
+      "required": true
+    },
+    {
+      "cell": [
+        20,
+        3
+      ],
+      "kind": "chaser",
+      "step": 51,
+      "required": true
+    },
+    {
+      "cell": [
+        19,
+        12
+      ],
+      "kind": "bomber",
+      "step": 42,
+      "required": true
+    },
+    {
+      "cell": [
+        4,
+        13
+      ],
+      "kind": "patrol",
+      "step": 42,
+      "required": true
+    }
+  ],
+  "powerups": [
+    {
+      "cell": [
+        3,
+        1
+      ],
+      "kind": "capacity",
+      "hidden": false
+    },
+    {
+      "cell": [
+        6,
+        4
+      ],
+      "kind": "range",
+      "hidden": true
+    },
+    {
+      "cell": [
+        5,
+        11
+      ],
+      "kind": "speed",
+      "hidden": true
+    },
+    {
+      "cell": [
+        19,
+        13
+      ],
+      "kind": "capacity",
+      "hidden": true
+    }
+  ],
+  "rules": {
+    "capacity": 1,
+    "range": 2,
+    "fuse_ticks": 150,
+    "remote": false,
+    "time_limit": 0,
+    "goal": "eliminate"
+  },
+  "generation": {}
+}
