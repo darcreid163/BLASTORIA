@@ -72,7 +72,7 @@ static func classic_command(actor: Dictionary, state) -> Dictionary:
 		direction = actor.direction
 	elif actor.role in ["chaser", "warden"]:
 		# Bounded pursuit, only when movement is ready. No render/camera dependency.
-		var target: Vector2i = state.actors[0].cell
+		var target: Vector2i = state.followed_actor().cell
 		var queue: Array[Vector2i] = [actor.cell]
 		var first := {actor.cell: Vector2i.ZERO}
 		var index := 0

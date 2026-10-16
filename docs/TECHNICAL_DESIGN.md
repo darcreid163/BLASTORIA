@@ -1,3 +1,20 @@
+# 0.7.2 feedback and guide
+
+GameState adds attempt-only pickup count and defeat_reason. Fatal fire/contact and
+actual map timeout set the reason at the event, not by guessing from an end screenshot.
+Score, timers, authored maps and official fingerprints are unchanged. Existing full
+Arcade input replays retain exact score/time. Surviving co-op human is now the pursuit
+target; solo/official behavior remains the same.
+
+Field guide is public information only (eight powers and four current enemy roles).
+Code-native vector badges echo existing meshes. Pause browsing never advances/restarts
+simulation and omits the training launch action. Result compact layout and wrapped HUD
+accommodate Arabic. Pickup panels clear at restart/language change. Controller X is
+handled for device 0 on result only; existing retry path owns the reset.
+
+Verification import invokes --import, which waits for resource imports before exit,
+instead of combining --editor --quit with asynchronous asset work.
+
 # 0.7.1 Arcade chapter
 
 Official registry enables fixed JSON stages 1–10. Stages 1–3 are untouched; later

@@ -10,6 +10,7 @@ var map_view: ExplorationMap
 var status: Label
 var hint: Label
 var metrics: Label
+var toast_frame: PanelContainer
 var toast: Label
 var overlay: ColorRect
 var column: VBoxContainer
@@ -41,11 +42,15 @@ func _ready() -> void:
 	status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	top.add_child(status)
 	metrics = Label.new()
-	metrics.add_theme_font_size_override("font_size", 22)
+	metrics.add_theme_font_size_override("font_size", 18)
+	metrics.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	top.add_child(metrics)
 	toast = Label.new()
 	toast.add_theme_font_size_override("font_size", 20)
-	layout.add_child(toast)
+	toast_frame = PanelContainer.new()
+	layout.add_child(toast_frame)
+	toast_frame.add_child(toast)
+	toast_frame.hide()
 	toast.hide()
 	var spacer := Control.new()
 	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -57,6 +62,7 @@ func _ready() -> void:
 	hint_frame = PanelContainer.new()
 	layout.add_child(hint_frame)
 	hint_frame.add_child(hint)
+	layout.move_child(toast_frame, 2)
 	map_view = ExplorationMap.new()
 	map_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	map_view.hide()
@@ -89,36 +95,38 @@ func _ready() -> void:
 	achievement_notice.hide()
 	add_child(achievement_notice)
 
-func show_menu(title: String, buttons: Array, details: String = "") -> void:
+func show_menu(title: String, buttons: Array, details: String = "", compact: bool = false) -> void:
 	set_playing_visible(false)
 	retranslate()
 	column.custom_minimum_size.x = 720
+	column.add_theme_constant_override("separation", 8 if compact else 10)
 	for child in column.get_children():
 		column.remove_child(child)
 		child.queue_free()
 	var heading := Label.new()
 	heading.text = tr(title)
 	heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	heading.add_theme_font_size_override("font_size", 30)
+	heading.add_theme_font_size_override("font_size", 26 if compact else 30)
 	heading.add_theme_color_override("font_color", Color("ffda8b"))
 	column.add_child(heading)
 	var subtitle := Label.new()
 	subtitle.text = "BLASTORIA" if title != "BLASTORIA" else ""
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	column.add_child(subtitle)
+	subtitle.visible = not compact
 	if not details.is_empty():
 		var description := Label.new()
 		description.text = details
 		description.custom_minimum_size.x = 720
 		description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		description.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		description.add_theme_font_size_override("font_size", 18)
+		description.add_theme_font_size_override("font_size", 16 if compact else 18)
 		column.add_child(description)
 	for item in buttons:
 		var button := Button.new()
 		button.text = tr(item[0])
 		button.custom_minimum_size.y = 44
-		button.add_theme_font_size_override("font_size", 20)
+		button.add_theme_font_size_override("font_size", 18 if compact else 20)
 		var action: String = item[1]
 		button.pressed.connect(func(): action_requested.emit(action))
 		column.add_child(button)
@@ -129,7 +137,7 @@ func show_menu(title: String, buttons: Array, details: String = "") -> void:
 			break
 
 func update_state(state: GameState, arcade: ArcadeRun = null, classic_lives: int = 1) -> void:
-	var actor: Dictionary = state.actors[0]
+	var actor: Dictionary = state.followed_actor()
 	var mode_label := "ADVENTURE" if state.mode in ["classic", "campaign", "adventure"] else ("ARCADE" if state.mode in ["official_arcade", "arcade"] else ("WORKSHOP" if state.mode.begins_with("custom") else state.mode.to_upper()))
 	status.text = tr(mode_label) + " · " + tr("STAGE") % (state.level + 1)
 	if state.mode == "official_arcade": status.text += " · " + tr("ARCADE_NAME_%02d" % (state.level + 1))
@@ -142,18 +150,17 @@ func update_state(state: GameState, arcade: ArcadeRun = null, classic_lives: int
 		metrics.text += "  |  " + tr("LIVES") + ": " + str(classic_lives if state.mode == "classic" else (1 if actor.alive else 0))
 		if state.penalty_phase:
 			metrics.text += "  |  " + tr("PENALTY_PHASE")
-		var active: Array[String] = []
-		for power in ["remote", "wall_pass", "bomb_pass", "flame_pass"]:
-			if actor[power]:
-				active.append(tr("POWER_" + power.to_upper()))
-		if state.tick < actor.invulnerable_until:
-			active.append(tr("POWER_INVULNERABILITY") + " %ds" % ceili(float(actor.invulnerable_until - state.tick) / state.config.tick_rate))
-		if not active.is_empty():
-			metrics.text += "\n" + " • ".join(active)
 	if not state.map_data.is_empty():
 		metrics.text = tr("SCORE") + ": %d · " % state.score + tr("TIME") + ": " + ArcadeRun.format_time(state.level_ticks)
 		if state.mode != "official_arcade": metrics.text += " · " + str(state.map_data.title)
 		if state.config.level_seconds > 0: metrics.text += " · " + tr("TIME_LEFT") + ": %d" % state.remaining_seconds()
+	var active: Array[String] = []
+	for power in ["remote", "wall_pass", "bomb_pass", "flame_pass"]:
+		if actor[power]: active.append(tr("POWER_" + power.to_upper()))
+	if state.tick < actor.invulnerable_until:
+		active.append(tr("POWER_INVULNERABILITY") + " · " + ArcadeRun.format_time(actor.invulnerable_until-state.tick))
+	if not active.is_empty(): metrics.text += "\n" + " · ".join(active)
+	metrics.text += "\n" + tr("WS_CAPACITY") + ": %d · " % actor.capacity + tr("WS_RANGE") + ": %d" % actor.radius
 	if map_view.visible:
 		map_view.queue_redraw()
 	hint.text = tr("DYNAMIC_CONTROLS") % InputRouter.player_hint(1)
@@ -172,11 +179,15 @@ func update_state(state: GameState, arcade: ArcadeRun = null, classic_lives: int
 		hint.text += "\n" + tr("OFFICIAL_RULES" if state.mode != "custom_arena" else "ARENA_DESC")
 	elif state.mode != "arena":
 		hint.text += "\n" + tr("GOAL")
+	if actor.remote and state.mode not in ["classic", "adventure"]:
+		hint.text += "\n" + tr("KEY_DETONATE") + ": " + InputRouter.key_label("p%d_detonate" % (actor.id+1)) + " / B"
 
 func notify_pickup(kind: String) -> void:
-	toast.text = tr("PICKUP_" + kind.to_upper())
-	toast_time = 2.0
+	toast.text = tr("PICKUP_" + kind.to_upper()) + " · " + tr("INFO_" + kind.to_upper())
+	toast.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	toast_time = 4.0
 	toast.show()
+	toast_frame.show()
 
 func _process(delta: float) -> void:
 	if achievement_time > 0:
@@ -187,6 +198,7 @@ func _process(delta: float) -> void:
 		if toast_time <= 0:
 			toast.text = ""
 			toast.hide()
+			toast_frame.hide()
 
 func add_volume_sliders(settings: GameSettings) -> void:
 	var position_index := 2
@@ -281,7 +293,7 @@ func retranslate() -> void:
 	if is_instance_valid(achievement_notice):
 		achievement_notice.add_theme_font_override("font", LanguageCatalog.font_for(locale))
 		achievement_notice.hide()
-	if is_instance_valid(toast): toast.text = ""; toast.hide()
+	clear_pickup()
 
 func set_playing_visible(value: bool) -> void:
 	play_frame.visible = value
@@ -323,7 +335,7 @@ func show_home(warning: String = "") -> void:
 	secondary.add_theme_constant_override("h_separation", 16)
 	secondary.add_theme_constant_override("v_separation", 10)
 	column.add_child(secondary)
-	for item in [["WORKSHOP", "workshop"], ["COLLECTION", "collection"], ["TUTORIAL", "tutorial"], ["SETTINGS", "settings"], ["LANGUAGE", "language"], ["QUIT", "quit"]]:
+	for item in [["WORKSHOP", "workshop"], ["COLLECTION", "collection"], ["TUTORIAL", "guide"], ["SETTINGS", "settings"], ["LANGUAGE", "language"], ["QUIT", "quit"]]:
 		var button := Button.new()
 		button.text = tr(item[0]); button.custom_minimum_size = Vector2(490, 46)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -352,3 +364,40 @@ func show_stages(stages: Array, details: String) -> void:
 		grid.add_child(button)
 		if not button.disabled: preferred = button
 	if preferred != null: preferred.grab_focus()
+
+func add_guide_rows(entries: Array, bonuses: bool) -> void:
+	var index := 2
+	for entry in entries:
+		var row := HBoxContainer.new()
+		row.focus_mode = Control.FOCUS_ALL
+		row.draw.connect(func():
+			if row.has_focus(): row.draw_style_box(row.get_theme_stylebox("focus", "Button"), Rect2(Vector2.ZERO, row.size)))
+		row.focus_entered.connect(row.queue_redraw)
+		row.focus_exited.connect(row.queue_redraw)
+		row.custom_minimum_size.y = 104
+		var badge := GuideBadge.new()
+		badge.kind = entry.kind
+		badge.bonus = bonuses
+		badge.custom_minimum_size = Vector2(78, 78)
+		row.add_child(badge)
+		var label := Label.new()
+		label.text = entry.title + "\n" + entry.description
+		label.custom_minimum_size.x = 580
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		row.add_child(label)
+		column.add_child(row)
+		column.move_child(row,index)
+		if index == 2: row.grab_focus()
+		index += 1
+
+func clear_pickup() -> void:
+	toast_time = 0
+	if is_instance_valid(toast): toast.text = ""; toast.hide()
+	if is_instance_valid(toast_frame): toast_frame.hide()
+
+func notify_message(message: String) -> void:
+	toast.text = message
+	toast_time = 4.0
+	toast.show()
+	toast_frame.show()

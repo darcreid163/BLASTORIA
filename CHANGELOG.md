@@ -1,3 +1,18 @@
+# 0.7.2-dev — 2026-10-16
+
+- Field guide: eight bonus silhouettes/effects and four current enemy roles; available
+  from home Training and pause, preserving the active attempt.
+- Arcade HUD now displays active powers, capacity/range and the configured remote key;
+  pickup explanations use a readable panel, and retries clear old notifications.
+- Result breakdown shows actual destroyed crates, kills, pickups and completion/time
+  bonuses; real fatal events supply blast/contact/time-limit explanations.
+- Player-one controller X quickly repeats a result. Other controller input cannot
+  reset the solo attempt. This is synthetic event QA, not physical hardware approval.
+- Co-op chasers/wardens now pursue the surviving human after player one dies.
+- Import verification uses Godot --import to wait for asset jobs before quitting.
+- New texts covered in all 14 languages. Human balance/localization/Windows acceptance
+  remains pending. Authored stages, official score rules and record fingerprints unchanged.
+
 # 0.7.1-dev — 2026-10-16
 
 - Seven new fixed authored Arcade maps complete chapter one (stages 1–10).

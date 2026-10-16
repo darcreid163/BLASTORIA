@@ -354,6 +354,6 @@ func flush_static_batches() -> void:
 func shared_camera() -> void:
 	var viewport := camera.get_viewport().get_visible_rect().size
 	var aspect := viewport.x / maxf(1, viewport.y)
-	camera.size = maxf(17, maxf(config.height * 1.32, config.width / aspect * 1.22))
+	camera.size = maxf(19, maxf(config.height * 1.32, config.width / aspect * 1.22))
 	camera.position = FollowCamera.OFFSET
 	camera.look_at(Vector3.ZERO)
