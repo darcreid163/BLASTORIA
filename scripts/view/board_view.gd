@@ -14,6 +14,8 @@ var materials: Dictionary = {}
 var follow := FollowCamera.new()
 var artifact: Node3D
 var static_batches: Dictionary = {}
+const MAX_EFFECTS := 24
+var effects: Array[Dictionary] = []
 
 func _ready() -> void:
 	camera = Camera3D.new()
@@ -62,6 +64,16 @@ func box(parent: Node3D, position_value: Vector3, size: Vector3, color: String, 
 	parent.add_child(node)
 	return node
 
+func signal_material(color: String) -> StandardMaterial3D:
+	# Readable danger/remote colors must not bleach to white under scene lighting.
+	var key := "signal:" + color
+	if not materials.has(key):
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(color)
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		materials[key] = mat
+	return materials[key]
+
 func sphere(parent: Node3D, position_value: Vector3, radius: float, color: String) -> MeshInstance3D:
 	var node := MeshInstance3D.new()
 	var mesh := SphereMesh.new()
@@ -93,6 +105,7 @@ func build(state: GameState) -> void:
 	exit_mesh = null
 	static_batches.clear()
 	artifact = null
+	effects.clear()
 	var floor_colors := ["34544e", "2d4946"]
 	var wall_colors := ["53736c", "78938b"]
 	var crate_colors := ["ae7950", "c49a70"]
@@ -167,12 +180,15 @@ func sync(state: GameState, delta: float) -> void:
 			artifact.rotation.y += delta * 0.7
 	for cell in crates.keys():
 		if state.board.kind(cell) != GridBoard.Cell.CRATE:
+			spawn_effect("crate", pos(cell), state.tick, state.config.tick_rate)
 			crates[cell].queue_free()
 			crates.erase(cell)
 	for actor in state.actors:
 		if not actors.has(actor.id):
 			add_actor_view(actor)
 		var root: Node3D = actors[actor.id]
+		if root.visible and not actor.alive:
+			spawn_effect("enemy" if actor.enemy else "death", pos(actor.cell), state.tick, state.config.tick_rate)
 		root.visible = actor.alive
 		if root.get_meta("role") != actor.role:
 			var old: Node3D = root.get_meta("visual_body")
@@ -185,7 +201,11 @@ func sync(state: GameState, delta: float) -> void:
 			var direction: Vector2i = actor.cell - previous
 			root.rotation.y = atan2(float(direction.x), float(direction.y))
 			root.set_meta("last_cell", actor.cell)
+			root.set_meta("last_step", state.tick)
 		root.position = root.position.move_toward(pos(actor.cell), delta * 12.0)
+		var body: Node3D = root.get_meta("visual_body")
+		var moving: bool = state.tick - int(root.get_meta("last_step", -1000)) < actor.step
+		body.position.y = 0.045 * absf(sin(float(state.tick) * PI / maxf(1, actor.step))) if moving else 0.012 * sin(float(state.tick) * 0.06 + actor.id)
 	for id in bombs.keys():
 		if not state.bombs.bombs.has(id):
 			bombs[id].queue_free()
@@ -196,12 +216,9 @@ func sync(state: GameState, delta: float) -> void:
 			var root := Node3D.new()
 			world.add_child(root)
 			root.position = pos(b.cell)
-			sphere(root, Vector3(0, 0.29, 0), 0.29, "172937")
-			box(root, Vector3(0, 0.61, 0), Vector3(0.14, 0.16, 0.14), "ffd269", true)
+			make_bomb(root, bool(b.get("remote", false)))
 			bombs[id] = root
-		var remaining: int = b.due - state.tick
-		var pulse := 1.0 + 0.08 * sin(float(state.tick) * (0.8 if remaining < 45 else 0.25))
-		bombs[id].scale = Vector3.ONE * pulse
+		update_bomb(bombs[id], b, state.tick)
 	for cell in fire.keys():
 		if not state.bombs.fire.has(cell):
 			fire[cell].queue_free()
@@ -211,9 +228,17 @@ func sync(state: GameState, delta: float) -> void:
 			var root := Node3D.new()
 			world.add_child(root)
 			root.position = pos(cell)
-			box(root, Vector3(0, 0.14, 0), Vector3(0.94, 0.28, 0.94), "f28e39", true)
-			box(root, Vector3(0, 0.32, 0), Vector3(0.58, 0.12, 0.58), "ffdf89", true)
+			box(root, Vector3(0, 0.08, 0), Vector3(0.94, 0.16, 0.94), "e78142").material_override = signal_material("d5783d")
+			box(root, Vector3(0, 0.22, 0), Vector3(0.68, 0.19, 0.22), "ffdf89").material_override = signal_material("ffd488")
+			box(root, Vector3(0, 0.22, 0), Vector3(0.22, 0.19, 0.68), "ffdf89").material_override = signal_material("ffd488")
+			for x in [-0.22, 0.0, 0.22]:
+				var spark := box(root, Vector3(x, 0.4, -x), Vector3(0.085, 0.18, 0.085), "ffe4a6", true)
+				spark.material_override = signal_material("ffedbd")
+				spark.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 			fire[cell] = root
+		var remaining: int = int(state.bombs.fire[cell]) - state.tick
+		fire[cell].scale.y = 0.65 + 0.35 * clampf(float(remaining) / 8.0, 0, 1)
+		for n in range(3, 6): fire[cell].get_child(n).position.y = 0.38 + 0.07 * sin(float(state.tick) * 0.4 + n * 1.7)
 	for cell in drops.keys():
 		if not state.powerups.has(cell):
 			drops[cell].queue_free()
@@ -226,9 +251,70 @@ func sync(state: GameState, delta: float) -> void:
 			make_powerup(root, state.powerups[cell])
 			drops[cell] = root
 		drops[cell].visible = not state.bombs.fire.has(cell)
+		drops[cell].position.y = 0.035 * (1.0 + sin(float(state.tick) * 0.065 + cell.x + cell.y))
+		drops[cell].rotation.y = float(state.tick) * 0.012
 	if is_instance_valid(exit_mesh):
 		exit_mesh.visible = state.exit_revealed
 		exit_mesh.material_override = material("58e3ba" if state.exit_open() else "77775a", true)
+	update_effects(state.tick)
+
+func make_bomb(root: Node3D, remote: bool) -> void:
+	sphere(root, Vector3(0, 0.29, 0), 0.29, "172937")
+	box(root, Vector3(0, 0.5, 0), Vector3(0.18, 0.08, 0.18), "8399a2")
+	box(root, Vector3(0, 0.65 if remote else 0.6, 0), Vector3(0.055, 0.3 if remote else 0.16, 0.055), "8ddde0" if remote else "ffd269").material_override = signal_material("7ed7de" if remote else "edc06e")
+	if remote:
+		box(root, Vector3(0, 0.8, 0), Vector3(0.32, 0.045, 0.06), "8ddde0").material_override = signal_material("7ed7de")
+	var pips: Array[MeshInstance3D] = []
+	for i in range(4):
+		var at := Vector3(-0.3 + i * 0.2, 0.025, 0.4)
+		pips.append(box(root, at, Vector3(0.14, 0.045, 0.095), "8ddde0" if remote else "ffd269", true))
+	root.set_meta("pips", pips)
+	root.set_meta("remote", remote)
+
+func update_bomb(root: Node3D, bomb: Dictionary, tick: int) -> void:
+	var remote: bool = bomb.get("remote", false)
+	var remaining: int = int(bomb.due) - tick
+	var count := 4 if remote else clampi(ceili(4.0 * remaining / maxi(1, config.fuse_ticks)), 1, 4)
+	var pips: Array = root.get_meta("pips")
+	for i in range(4):
+		pips[i].visible = i < count
+		pips[i].material_override = signal_material("7ed7de" if remote else ("f5a179" if remaining <= 30 else "edc06e"))
+	# A remote bomb has no countdown; only ordinary fuses accelerate their breathing.
+	var phase := float(tick) * TAU / (20.0 if remaining <= 30 else 40.0)
+	root.scale = Vector3.ONE * (1.0 if remote else 1.04 + 0.04 * sin(phase))
+
+func notify_pickup(state: GameState, actor_id: int) -> void:
+	if is_instance_valid(world) and actor_id >= 0 and actor_id < state.actors.size():
+		spawn_effect("pickup", pos(state.actors[actor_id].cell), state.tick, state.config.tick_rate)
+
+func spawn_effect(kind: String, at: Vector3, tick: int, rate: int) -> void:
+	while effects.size() >= MAX_EFFECTS:
+		var oldest: Dictionary = effects.pop_front()
+		world.remove_child(oldest.node); oldest.node.queue_free()
+	var root := Node3D.new(); world.add_child(root); root.position = at
+	var color: String = {"crate": "bf9566", "pickup": "f3d990", "death": "eaa294", "enemy": "b7c7d0"}[kind]
+	for i in range(4):
+		var piece := box(root, Vector3.ZERO, Vector3(0.12, 0.1, 0.12) if kind == "crate" else Vector3(0.06, 0.18, 0.06), color, kind == "pickup")
+		piece.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var effect := {"node": root, "kind": kind, "start": tick, "duration": maxi(1, ceili(rate * 0.45))}
+	effects.append(effect)
+
+func update_effects(tick: int) -> void:
+	for i in range(effects.size() - 1, -1, -1):
+		var effect: Dictionary = effects[i]
+		var age := clampf(float(tick - effect.start) / effect.duration, 0, 1)
+		if age >= 1:
+			world.remove_child(effect.node); effect.node.queue_free(); effects.remove_at(i)
+			continue
+		var root: Node3D = effect.node
+		for n in range(4):
+			var piece: Node3D = root.get_child(n)
+			var angle := n * TAU / 4.0 + PI * 0.25
+			var spread := 0.08 + age * (0.33 if effect.kind == "crate" else 0.24)
+			piece.position = Vector3(cos(angle) * spread, 0.1 + sin(age * PI) * 0.4, sin(angle) * spread)
+			if effect.kind == "pickup": piece.position.y = 0.25 + age * 0.9
+			piece.rotation = Vector3(age * 3, angle, age * 2)
+			piece.scale = Vector3.ONE * (1 - age * 0.8)
 
 func add_actor_view(actor: Dictionary) -> void:
 	var root := Node3D.new()

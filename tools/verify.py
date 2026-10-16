@@ -12,6 +12,11 @@ args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
 logs = root / 'docs' / 'qa'
 logs.mkdir(exist_ok=True)
+audio = subprocess.run([sys.executable, str(root / 'tools/verify_audio.py')], capture_output=True, text=True)
+(logs / 'audio_checks.txt').write_text(audio.stdout + audio.stderr, encoding='utf-8')
+print(f'audio: {"PASS" if audio.returncode == 0 else "FAIL"}')
+if audio.returncode:
+    sys.exit(audio.stdout + audio.stderr)
 stages = [
     ('import', ['--import']),
     ('parse_tests', ['--check-only', '--script', 'tests/run_tests.gd']),

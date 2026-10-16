@@ -1,3 +1,18 @@
+# 0.7.3-dev — hazard and event feedback
+
+- Ordinary bombs display four remaining-fuse divisions; remote bombs have a distinct
+  cyan antenna and steady markers instead of a misleading countdown.
+- View-only animated fire stays exactly on logical hazardous cells and disappears
+  when those cells expire. Signal materials retain readable colors under lighting.
+- Short local crate/pickup/death cues are capped at 24 groups, freeze with simulation
+  time and clear on restart. Added restrained actor/item motion.
+- Re-synthesized ten original PCM effects with quieter steps, a double fuse tick,
+  clearer result/pickup phrases and checked fade boundaries. No third-party samples.
+- Eight-voice pool evicts the oldest least-important cue; steps/fuses cannot cut
+  higher-priority result/death/UI cues. Volume buses and settings remain effective.
+- No map/rule/save-schema changes. Existing chapter input replays retain exact score
+  and active ticks. Automated PCM format/headroom/reproducibility checks join verify.py.
+
 # 0.7.2-dev — 2026-10-16
 
 - Field guide: eight bonus silhouettes/effects and four current enemy roles; available

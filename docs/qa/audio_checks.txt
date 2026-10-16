@@ -1,0 +1,2 @@
+Verified 10 reproducible effects.
+Audio asset QA: 10 PCM assets PASS (headroom, signal, fade boundaries).

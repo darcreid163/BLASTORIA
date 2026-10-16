@@ -60,7 +60,9 @@ func _ready() -> void:
 		if profile.record_secret(id):
 			save_profile())
 	state.finished.connect(on_finished)
-	state.pickup.connect(func(_id: int, kind: String): hud.notify_pickup(kind))
+	state.pickup.connect(func(id: int, kind: String):
+		hud.notify_pickup(kind)
+		view.notify_pickup(state, id))
 	start_game("campaign", 0)
 	show_main_menu()
 

@@ -9,7 +9,7 @@ Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
 [  83% ] first_scan_filesystem | Starting file scan...
 [ DONE ] first_scan_filesystem
 
-[   0% ] update_scripts_classes | Started Registering global classes... (67 steps)
+[   0% ] update_scripts_classes | Started Registering global classes... (70 steps)
 [   0% ] update_scripts_classes | AchievementCatalog
 [   1% ] update_scripts_classes | AchievementManager
 [   2% ] update_scripts_classes | AudioManager
@@ -17,40 +17,42 @@ Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
 [   5% ] update_scripts_classes | ClassicChapterOneMap
 [   7% ] update_scripts_classes | ClassicStagePlan
 [   8% ] update_scripts_classes | ArcadeRun
-[  10% ] update_scripts_classes | GameConfig
+[   9% ] update_scripts_classes | GameConfig
 [  11% ] update_scripts_classes | GameSettings
-[  13% ] update_scripts_classes | GameState
+[  12% ] update_scripts_classes | GameState
 [  14% ] update_scripts_classes | ReleasePlan
-[  16% ] update_scripts_classes | BombSystem
-[  17% ] update_scripts_classes | EnemyAI
-[  19% ] update_scripts_classes | Exploration
-[  20% ] update_scripts_classes | GridBoard
-[  22% ] update_scripts_classes | LevelDefinition
-[  23% ] update_scripts_classes | ArcadeLevelRegistry
-[  25% ] update_scripts_classes | ArcadeProgressionManager
-[  26% ] update_scripts_classes | CustomMapDocument
-[  27% ] update_scripts_classes | CustomMapGenerator
-[  29% ] update_scripts_classes | CustomMapLibrary
-[  30% ] update_scripts_classes | MapValidationService
-[  32% ] update_scripts_classes | RuntimeBundle
-[  33% ] update_scripts_classes | SaveManager
-[  35% ] update_scripts_classes | SealedData
-[  36% ] update_scripts_classes | EncounterManager
-[  38% ] update_scripts_classes | SecretDefinition
-[  39% ] update_scripts_classes | SecretManager
-[  41% ] update_scripts_classes | CustomMapEditor
-[  42% ] update_scripts_classes | ExplorationMap
-[  44% ] update_scripts_classes | GameHUD
-[  45% ] update_scripts_classes | GuideBadge
-[  47% ] update_scripts_classes | InputRouter
-[  48% ] update_scripts_classes | InterfaceTheme
-[  50% ] update_scripts_classes | LanguageCatalog
-[  51% ] update_scripts_classes | MapFilePicker
-[  52% ] update_scripts_classes | MapPreviewRenderer
-[  54% ] update_scripts_classes | RelicBadge
-[  55% ] update_scripts_classes | BoardView
-[  57% ] update_scripts_classes | FollowCamera
-[  58% ] update_scripts_classes |
+[  15% ] update_scripts_classes | BombSystem
+[  16% ] update_scripts_classes | EnemyAI
+[  18% ] update_scripts_classes | Exploration
+[  19% ] update_scripts_classes | GridBoard
+[  21% ] update_scripts_classes | LevelDefinition
+[  22% ] update_scripts_classes | ArcadeLevelRegistry
+[  23% ] update_scripts_classes | ArcadeProgressionManager
+[  25% ] update_scripts_classes | CustomMapDocument
+[  26% ] update_scripts_classes | CustomMapGenerator
+[  28% ] update_scripts_classes | CustomMapLibrary
+[  29% ] update_scripts_classes | MapValidationService
+[  30% ] update_scripts_classes | RuntimeBundle
+[  32% ] update_scripts_classes | SaveManager
+[  33% ] update_scripts_classes | SealedData
+[  35% ] update_scripts_classes | EncounterManager
+[  36% ] update_scripts_classes | SecretDefinition
+[  38% ] update_scripts_classes | SecretManager
+[  39% ] update_scripts_classes | CustomMapEditor
+[  40% ] update_scripts_classes | ExplorationMap
+[  42% ] update_scripts_classes | GameHUD
+[  43% ] update_scripts_classes | GuideBadge
+[  45% ] update_scripts_classes | InputRouter
+[  46% ] update_scripts_classes | InterfaceTheme
+[  47% ] update_scripts_classes | LanguageCatalog
+[  49% ] update_scripts_classes | MapFilePicker
+[  50% ] update_scripts_classes | MapPreviewRenderer
+[  52% ] update_scripts_classes | RelicBadge
+[  53% ] update_scripts_classes | BoardView
+[  54% ] update_scripts_classes | FollowCamera
+[  56% ] update_scripts_classes |
+[  57% ] update_scripts_classes |
+[  59% ] update_scripts_classes |
 [  60% ] update_scripts_classes |
 [  61% ] update_scripts_classes |
 [  63% ] update_scripts_classes |
@@ -59,19 +61,20 @@ Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
 [  67% ] update_scripts_classes |
 [  69% ] update_scripts_classes |
 [  70% ] update_scripts_classes |
-[  72% ] update_scripts_classes |
+[  71% ] update_scripts_classes |
 [  73% ] update_scripts_classes |
-[  75% ] update_scripts_classes |
+[  74% ] update_scripts_classes |
 [  76% ] update_scripts_classes |
 [  77% ] update_scripts_classes |
-[  79% ] update_scripts_classes |
+[  78% ] update_scripts_classes |
 [  80% ] update_scripts_classes |
-[  82% ] update_scripts_classes |
+[  81% ] update_scripts_classes |
 [  83% ] update_scripts_classes |
+[  84% ] update_scripts_classes |
 [  85% ] update_scripts_classes |
-[  86% ] update_scripts_classes |
+[  87% ] update_scripts_classes |
 [  88% ] update_scripts_classes |
-[  89% ] update_scripts_classes |
+[  90% ] update_scripts_classes |
 [  91% ] update_scripts_classes |
 [  92% ] update_scripts_classes |
 [  94% ] update_scripts_classes |

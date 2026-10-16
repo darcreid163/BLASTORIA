@@ -572,4 +572,23 @@ PASS: feedback: fatal simulation reaches explanatory result screen
 PASS: feedback: absent record never appears as a zero-time personal best
 PASS: quick retry: second controller cannot reset the solo player's attempt
 PASS: quick retry: player one X starts same stage with clean attempt
-RESULT: 572 passed, 0 failed
+PASS: audio priority: movement and blast cannot cut a full result pool
+PASS: audio priority: fatal cue replaces oldest least-important sound
+PASS: audio priority: free voice is used before interrupting a sound
+PASS: audio priority: unsupported cue never reaches pool
+PASS: bomb view: four fuse divisions and distinct remote antenna
+PASS: bomb view: divisions follow actual remaining fuse ticks
+PASS: bomb view: final half-second keeps one visible warning
+PASS: bomb view: overdue remote bomb never presents a false countdown
+PASS: view: cues never mutate simulation, RNG or score
+PASS: view: actual chain removes both bomb models on the detonation tick
+PASS: view: fire footprint equals logical hazards and stops at destroyed crate
+PASS: view: actual destruction creates one bounded wood burst
+PASS: view: actual pickup event creates a local rising cue
+PASS: view: fatal damage creates one cue without respawning it on each frame
+PASS: view: pause freezes effect trajectories and logical time
+PASS: view: mass destruction cannot exceed 24 transient groups
+PASS: view: transient groups expire and detach after their duration
+PASS: view: no decorative flame remains after the last hazardous tick
+PASS: view: restart clears all old transient and hazard models
+RESULT: 591 passed, 0 failed
