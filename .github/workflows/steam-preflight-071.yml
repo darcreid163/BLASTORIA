@@ -1,0 +1,195 @@
+name: BLASTORIA 0.7.0 / Isolated Godot QA and PC builds
+
+on:
+  push:
+    branches:
+      - codex/steam-ci-and-packages-0.7.1
+    paths:
+      - '.github/workflows/steam-preflight-071.yml'
+      - 'tools/steam_preflight.py'
+      - 'scripts/**'
+      - 'resources/**'
+      - 'localization/**'
+      - 'scenes/**'
+      - 'assets/**'
+      - 'tests/**'
+      - 'project.godot'
+      - 'export_presets.cfg'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-qa:
+    name: Godot 4.5.1 import / 431 regression tests / source ZIP
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Checkout candidate (never production branch)
+        uses: actions/checkout@v4
+      - name: Install official Godot 4.5.1
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 4 --connect-timeout 30 \
+            https://github.com/godotengine/godot/releases/download/4.5.1-stable/Godot_v4.5.1-stable_linux.x86_64.zip \
+            -o /tmp/godot.zip
+          unzip -q /tmp/godot.zip -d /tmp
+          sudo install -m 755 /tmp/Godot_v4.5.1-stable_linux.x86_64 /usr/local/bin/godot
+          godot --headless --version
+      - name: Source hygiene and Steam release-gap report
+        run: python3 tools/steam_preflight.py --output steam_preflight_report.json
+      - name: Godot real importer, parser, full game tests and smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout 480s python3 tools/verify.py --godot /usr/local/bin/godot | tee candidate-qa.log
+          grep -Fq 'All verification stages passed.' candidate-qa.log
+          grep -Eq 'RESULT: [0-9]+ passed, 0 failed' docs/qa/tests.txt
+      - name: Developer-only Godot sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          git archive --format=zip --output=dist/BLASTORIA_0_7_0_Godot_Source_DEV_ONLY.zip HEAD
+          unzip -t dist/BLASTORIA_0_7_0_Godot_Source_DEV_ONLY.zip | tail -n 1
+          sha256sum dist/*.zip > dist/SHA256SUMS.txt
+      - name: Upload Godot sources (not for players)
+        uses: actions/upload-artifact@v4
+        with:
+          name: BLASTORIA-0.7.0-Godot-Developer-Project
+          path: |
+            dist/*
+            steam_preflight_report.json
+            candidate-qa.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload QA diagnostic logs on error
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: BLASTORIA-0.7.0-QA-Failure-Logs
+          path: |
+            candidate-qa.log
+            steam_preflight_report.json
+            docs/qa/import.txt
+            docs/qa/parse_tests.txt
+            docs/qa/tests.txt
+            docs/qa/smoke.txt
+          if-no-files-found: ignore
+          retention-days: 14
+
+  pc-release-candidates:
+    name: Windows x64 and Linux game-only candidate ZIPs
+    needs: source-qa
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install official Godot 4.5.1
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 4 --connect-timeout 30 \
+            https://github.com/godotengine/godot/releases/download/4.5.1-stable/Godot_v4.5.1-stable_linux.x86_64.zip \
+            -o /tmp/godot.zip
+          unzip -q /tmp/godot.zip -d /tmp
+          sudo install -m 755 /tmp/Godot_v4.5.1-stable_linux.x86_64 /usr/local/bin/godot
+      - name: Install official export templates (Windows and Linux only)
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 4 --retry-all-errors --connect-timeout 45 \
+            https://github.com/godotengine/godot-builds/releases/download/4.5.1-stable/Godot_v4.5.1-stable_export_templates.tpz \
+            -o /tmp/godot-export-templates.tpz
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+          source=Path('/tmp/godot-export-templates.tpz')
+          dest=Path.home()/'.local/share/godot/export_templates/4.5.1.stable'
+          dest.mkdir(parents=True,exist_ok=True)
+          requested={'windows_release_x86_64.exe','linux_release.x86_64'}
+          found=set()
+          with zipfile.ZipFile(source) as src:
+              for info in src.infolist():
+                  name=Path(info.filename).name
+                  if name in requested:
+                      with src.open(info) as inp, (dest/name).open('wb') as out:
+                          import shutil
+                          shutil.copyfileobj(inp,out)
+                      found.add(name)
+          assert found == requested, 'Release templates missing: '+str(requested-found)
+          (dest/'version.txt').write_text('4.5.1.stable\n',encoding='ascii')
+          print('Official release templates installed:', sorted(found))
+          PY
+          rm /tmp/godot-export-templates.tpz
+      - name: Clean asset import
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout 180s godot --headless --editor --path . --import > release-import.log 2>&1
+          if grep -E 'SCRIPT ERROR:|Parse Error:|ERROR: Failed to load script' release-import.log; then exit 1; fi
+      - name: Export Windows x64 and Linux releases
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p builds/windows builds/linux
+          timeout 300s godot --headless --path . --export-release 'Windows Desktop' builds/windows/BLASTORIA.exe > windows-export.log 2>&1
+          timeout 300s godot --headless --path . --export-release 'Linux QA' builds/linux/BLASTORIA.x86_64 > linux-export.log 2>&1
+          test -s builds/windows/BLASTORIA.exe
+          test -s builds/linux/BLASTORIA.x86_64
+          if grep -E 'SCRIPT ERROR:|Parse Error:|ERROR: Export failed' windows-export.log linux-export.log; then exit 1; fi
+          chmod +x builds/linux/BLASTORIA.x86_64
+      - name: Boot Linux release outside source directory
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/blastoria_clean_run /tmp/blastoria_player_data
+          cp builds/linux/BLASTORIA.x86_64 /tmp/blastoria_clean_run/
+          (cd /tmp/blastoria_clean_run && timeout 45s env XDG_DATA_HOME=/tmp/blastoria_player_data ./BLASTORIA.x86_64 --headless --quit-after 15) > linux-boot.log 2>&1
+          if grep -E 'SCRIPT ERROR:|Parse Error:|ERROR: Failed to load' linux-boot.log; then exit 1; fi
+      - name: Package player-only games and license notices
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist/windows dist/linux
+          cp builds/windows/BLASTORIA.exe dist/windows/
+          cp builds/linux/BLASTORIA.x86_64 dist/linux/
+          for dir in dist/windows dist/linux; do
+            cp LICENSES.md "$dir/"
+            cp third_party/GODOT_LICENSE.txt "$dir/"
+            cp third_party/GODOT_COPYRIGHT.txt "$dir/"
+            cp assets/fonts/OFL.txt "$dir/"
+            cp assets/fonts/OFL-CJK.txt "$dir/"
+          done
+          (cd dist/windows && zip -q -r ../BLASTORIA_0_7_0_Windows_x64_QA.zip .)
+          (cd dist/linux && zip -q -r ../BLASTORIA_0_7_0_Linux_x64_QA.zip .)
+          unzip -t dist/BLASTORIA_0_7_0_Windows_x64_QA.zip | tail -n 1
+          unzip -t dist/BLASTORIA_0_7_0_Linux_x64_QA.zip | tail -n 1
+          sha256sum builds/windows/BLASTORIA.exe builds/linux/BLASTORIA.x86_64 dist/*.zip > dist/SHA256SUMS.txt
+      - name: Upload Windows and Linux candidate ZIPs
+        uses: actions/upload-artifact@v4
+        with:
+          name: BLASTORIA-0.7.0-Windows-Linux-QA-Candidates
+          path: |
+            dist/BLASTORIA_0_7_0_Windows_x64_QA.zip
+            dist/BLASTORIA_0_7_0_Linux_x64_QA.zip
+            dist/SHA256SUMS.txt
+            windows-export.log
+            linux-export.log
+            linux-boot.log
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload export troubleshooting logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: BLASTORIA-0.7.0-Export-Failure-Logs
+          path: |
+            release-import.log
+            windows-export.log
+            linux-export.log
+            linux-boot.log
+          if-no-files-found: ignore
+          retention-days: 14
