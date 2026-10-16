@@ -3,7 +3,7 @@
 | Resource | Origin | Status |
 | --- | --- | --- |
 | Prototype 0.1 code | Owner-supplied ZIP, imported unchanged | Preserved in initial commit |
-| 0.2–0.5 code, docs, procedural meshes and palettes | Created with AI assistance in this development session | No external game assets copied |
+| 0.2–0.5.5 code, docs, procedural meshes and palettes | Created with AI assistance in this development session | No external game assets copied |
 | Ten WAV effects in assets/audio | Original mathematical synthesis via tools/generate_audio.py, deterministic noise, no sampled external recordings | Created with AI assistance; provisional sound design |
 | Master prompts 1, 2.0 and 2.3 | Owner-supplied texts | Exact archives retained; consolidated 2.3 active |
 | Godot 4.5.1 engine and export templates | Official godotengine/godot-builds release | Engine MIT notice in third_party/GODOT_LICENSE.txt |

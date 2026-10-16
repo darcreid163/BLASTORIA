@@ -71,7 +71,7 @@ func start_game(mode: String, level: int) -> void:
 		for key in classic_carry:
 			state.actors[0][key] = classic_carry[key]
 		state.score = classic_score
-	if mode == "adventure" and profile.artifacts.has("ghost_compass"):
+	if mode == "adventure" and profile.artifacts.has(SecretDefinition.active().id):
 		state.secrets.enabled = false
 	map_mode = 0
 	hud.set_map(state, 0)
@@ -320,7 +320,7 @@ func on_finished(result: String) -> void:
 			details += "\nЖизней: %d · этап: %d/100" % [classic_progress.lives, state.level + 1]
 			details += classic_save_warning
 		if state.secrets.awarded:
-			details += "\n" + tr("COMPASS_REWARD")
+			details += "\n" + SecretDefinition.active().localized("reward")
 	if save_error:
 		details += "\n" + tr("SAVE_ERROR")
 	hud.show_menu(result, buttons, details)
@@ -399,11 +399,11 @@ func show_collection_menu() -> void:
 func show_discoveries() -> void:
 	state.paused = true
 	screen = "discoveries"
-	var details := tr("COLLECTION_FOUND") if profile.artifacts.has("ghost_compass") else tr("COLLECTION_EMPTY")
+	var details := SecretDefinition.active().localized("name") + "\n" + SecretDefinition.active().localized("description") if profile.artifacts.has(SecretDefinition.active().id) else tr("COLLECTION_EMPTY")
 	# Only owned artifacts are shown. Do not reveal the hidden registry, count or placeholders.
 	hud.show_menu("Мои находки" if profile.language == "ru" else "My discoveries",
 		[["COLLECTION", "collection"], ["MENU", "menu"]], details)
-	if profile.artifacts.has("ghost_compass"):
+	if profile.artifacts.has(SecretDefinition.active().id):
 		hud.add_compass_badge()
 
 

@@ -3,10 +3,10 @@ extends RefCounted
 
 # The registry defines future achievements. It does not unlock Steam achievements.
 # The client must not enumerate unknown Easter eggs in any collection UI.
-const PATH := "res://resources/achievements/registry.json"
+const PATH := "res://resources/private/milestones.dat"
 
 static func entries() -> Array:
-	var parsed = JSON.parse_string(FileAccess.get_file_as_string(PATH))
+	var parsed = SealedData.open_bytes(FileAccess.get_file_as_bytes(PATH), "milestones")
 	if not parsed is Dictionary or parsed.get("schema_version") != 1:
 		return []
 	return parsed.get("entries", []) if parsed.get("entries") is Array else []

@@ -141,7 +141,7 @@ func update_state(state: GameState, arcade: ArcadeRun = null, classic_lives: int
 		if state.mode == "adventure":
 			hint.text += " | " + tr("MAP_KEY")
 		if state.completion_walk:
-			hint.text = tr("COMPASS_RETURN")
+			hint.text = SecretDefinition.active().localized("return")
 	elif not state.map_data.is_empty():
 		hint.text += "\nУничтожьте обязательных врагов — выход не требуется." if state.mode != "custom_arena" else "\nПобеждает последний оставшийся игрок."
 	elif state.mode != "arena":

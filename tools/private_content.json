@@ -1,0 +1,32 @@
+{
+  "id": "e586d82858b842c6b94e205a8dcf234f",
+  "reward": 50000,
+  "percent": 90,
+  "order": [
+    0,
+    1,
+    2
+  ],
+  "niche": [
+    3,
+    3
+  ],
+  "text": {
+    "name": {
+      "ru": "Призрачный компас",
+      "en": "Ghost Compass"
+    },
+    "description": {
+      "ru": "Легендарный артефакт. Его стрелка помнит путь исследователя.",
+      "en": "Legendary artifact. Its needle remembers the explorer’s path."
+    },
+    "return": {
+      "ru": "Руины затихли. В стартовой нише что-то светится… Вернитесь за находкой или снова войдите в выход, чтобы завершить уровень.",
+      "en": "The ruins fall silent. Something glows in the starting alcove… Return for it, or re-enter the exit to finish."
+    },
+    "reward": {
+      "ru": "✦ Призрачный компас найден! +50 000 очков. Артефакт добавлен в коллекцию.",
+      "en": "✦ Ghost Compass found! +50,000 points. Artifact added to your collection."
+    }
+  }
+}

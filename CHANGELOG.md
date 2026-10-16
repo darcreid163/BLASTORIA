@@ -1,3 +1,13 @@
+# 0.5.5-dev — 2026-10-16
+
+- Continue from 0.5.4, preserving ten authored Campaign stages and rules 2.5.
+- Consolidate full owner prompt 2.4 and anti-spoiler requirements with latest specification.
+- Encrypt active secret/milestone data and owned-artifact storage; migrate legacy collection IDs/backups.
+- Exclude plaintext secret/achievement registries and developer spoilers from player distribution.
+- Show only discovered public names/descriptions; remove pre-discovery localization metadata and totals.
+- Authenticate before decrypting; corrupted/missing data cannot grant awards or overwrite existing collection.
+- Independently check crypto interoperability and exported package from an empty folder.
+
 # 0.5.1-dev — 2026-10-15
 
 - Установлен согласованный порядок десяти пунктов главного меню.
